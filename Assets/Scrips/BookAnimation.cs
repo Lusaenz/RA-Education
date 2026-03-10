@@ -1,16 +1,29 @@
 using UnityEngine;
+using System.Collections;
 
 public class BookAnimation : MonoBehaviour
 {
-    private Animator animator;
+    public GameObject book;
+    public GameObject bookPage;
 
-    void Start()
+    public void TurnPage()
     {
-        animator = GetComponent<Animator>();
+        StartCoroutine(PageEffect());
     }
 
-    public void PlayPageTurn()
+    IEnumerator PageEffect()
     {
-        animator.SetTrigger("TurnPage");
+        // ocultar libro normal
+        book.SetActive(false);
+
+        // mostrar hoja levantándose
+        bookPage.SetActive(true);
+
+        // pequeño tiempo para que se vea la animación
+        yield return new WaitForSeconds(0.4f);
+
+        // volver al libro normal
+        bookPage.SetActive(false);
+        book.SetActive(true);
     }
 }
