@@ -10,16 +10,16 @@ public class GameManager : MonoBehaviour
 
     public int score = 0;
 
-    // puntos
+    
     public int puntosCorrecto = 10;
     public int puntosIncorrecto = -5;
 
-    // UI
+    
     public TMP_Text scoreText;
 
     public GameObject winPanel;
 
-    public int totalItems = 4; // cantidad de órganos
+    public int totalItems = 4; 
     private int correctItems = 0;
 
     void Awake()
