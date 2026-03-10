@@ -62,12 +62,12 @@ public class GameManager : MonoBehaviour
 
     IEnumerator MostrarVictoria()
     {
-        // ⏳ pequeña espera
+      
         yield return new WaitForSeconds(1f);
 
         winPanel.SetActive(true);
 
-        // escala inicial
+        
         winPanel.transform.localScale = Vector3.zero;
 
         float tiempo = 0f;

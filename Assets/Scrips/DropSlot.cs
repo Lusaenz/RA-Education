@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class DropSlot : MonoBehaviour, IDropHandler
 {
-    // 👉 aquí arrastras en el Inspector el ITEM correcto para este slot
+    
     public GameObject item;
 
    public void OnDrop(PointerEventData eventData)
@@ -20,7 +20,7 @@ public class DropSlot : MonoBehaviour, IDropHandler
         SoundManager.instance.PlayCorrect();
         Debug.Log("Correcto");
         
-         // ⭐ SUMAR PUNTOS
+         
             if (GameManager.instance != null)
                 GameManager.instance.RespuestaCorrecta();
 
@@ -33,7 +33,7 @@ public class DropSlot : MonoBehaviour, IDropHandler
         var cg = dragged.GetComponent<CanvasGroup>();
         if (cg != null) cg.blocksRaycasts = true;
 
-        // 🔥 avisar al item y pasarle este slot
+        
         DragHandler dragScript = dragged.GetComponent<DragHandler>();
         if (dragScript != null)
         {
@@ -45,7 +45,7 @@ public class DropSlot : MonoBehaviour, IDropHandler
         SoundManager.instance.PlayWrong();
         Debug.Log("Incorrecto");
         
-         // ❌ RESTAR PUNTOS
+         
             if (GameManager.instance != null)
                 GameManager.instance.RespuestaIncorrecta();
     }

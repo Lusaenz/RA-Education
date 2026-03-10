@@ -54,7 +54,7 @@ public class DragHandler : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndD
 
     canvasGroup.blocksRaycasts = true;
 
-    // 🛑 si ya fue colocado correctamente, NO regresar
+   
     if (yaSeUso) return;
 
     if (transform.parent == itemDraggerParent)
@@ -80,15 +80,15 @@ IEnumerator PlayAndDisappear()
     anim.ResetTrigger("Correct");
     anim.SetTrigger("Correct");
 
-    // esperar a que cambie de estado
+    
     yield return null;
     yield return null;
 
-    // esperar la animación
+    
     float duracion = anim.GetCurrentAnimatorStateInfo(0).length;
     yield return new WaitForSeconds(duracion);
 
-    // 🔥 ahora sí desaparecen ambos
+    
     if (slotParaDestruir != null)
         slotParaDestruir.SetActive(false);
 

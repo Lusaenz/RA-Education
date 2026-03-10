@@ -17,14 +17,14 @@ public class RandomizarOrganos : MonoBehaviour
             hijos.Add(hijo);
         }
 
-        // Fisher–Yates shuffle
+        
         for (int i = hijos.Count - 1; i > 0; i--)
         {
             int j = Random.Range(0, i + 1);
             (hijos[i], hijos[j]) = (hijos[j], hijos[i]);
         }
 
-        // Aplicar nuevo orden
+        
         for (int i = 0; i < hijos.Count; i++)
         {
             hijos[i].SetSiblingIndex(i);
