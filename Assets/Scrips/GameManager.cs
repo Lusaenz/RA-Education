@@ -10,16 +10,22 @@ public class GameManager : MonoBehaviour
 
     public int score = 0;
 
-    
+    // puntos
     public int puntosCorrecto = 10;
     public int puntosIncorrecto = -5;
 
-    
+    // UI
     public TMP_Text scoreText;
 
     public GameObject winPanel;
 
-    public int totalItems = 4; 
+    public UnityEngine.UI.Image[] estrellas;
+public Sprite estrellaLlena;
+public Sprite estrellaVacia;
+
+public int maxScore = 40;
+
+    public int totalItems = 4; // cantidad de órganos
     private int correctItems = 0;
 
     void Awake()
@@ -80,8 +86,23 @@ public class GameManager : MonoBehaviour
             winPanel.transform.localScale = new Vector3(escala, escala, escala);
             yield return null;
         }
-
+        ActualizarEstrellas();
         winPanel.transform.localScale = Vector3.one;
     }
+void ActualizarEstrellas()
+{
+    int estrellasGanadas = Mathf.RoundToInt((float)score / maxScore * estrellas.Length);
 
+    for (int i = 0; i < estrellas.Length; i++)
+    {
+        if (i < estrellasGanadas)
+        {
+            estrellas[i].sprite = estrellaLlena;
+        }
+        else
+        {
+            estrellas[i].sprite = estrellaVacia;
+        }
+    }
+}
 }
