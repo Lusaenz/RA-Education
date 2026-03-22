@@ -6,24 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SelectRole.unity
-    guid: 398ccd2527dc92540a5c9f5c5b0f257e
-  - enabled: 1
-    path: Assets/Scenes/LoginStudent.unity
-    guid: 1b6817311b4ccaf4a8798e64fdc8cb45
-  - enabled: 1
-    path: Assets/Scenes/LoginTeacher.unity
-    guid: fec32e6d9e3506b4fb5825036eebe259
-  - enabled: 1
-    path: Assets/Scenes/RegisterStuden.unity
-    guid: 8547fac78a2785d4c881a20540c979c7
-  - enabled: 1
-    path: Assets/Scenes/RegisterTeacher.unity
-    guid: 76506b7276d4e3345863c6153fa2447a
-  - enabled: 1
-    path: Assets/Scenes/TestInitialuserFlow.unity
-    guid: 3c19d020eb4bf48949b1713e37a89089
+    path: Assets/Scenes/SampleScene.unity
+    guid: 99c9720ab356a0642a771bea13969a05
   m_configObjects:
-    com.unity.dt.app-ui: {fileID: 11400000, guid: 1b1c20d82303e4b5781c3ef50ac1449f, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
