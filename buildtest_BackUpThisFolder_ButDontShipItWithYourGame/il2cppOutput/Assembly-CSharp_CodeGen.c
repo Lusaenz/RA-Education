@@ -1,0 +1,93 @@
+﻿#include "pch-c.h"
+
+
+#include "codegen/il2cpp-codegen-metadata.h"
+
+
+
+
+
+extern void BookAnimation_TurnPage_m1F6BAC6795EFE5BA8611473A39752970224C0CC2 (void);
+extern void BookAnimation_PageEffect_m6F10B21DADD3E1EEAB64443277B91F41BA80AB56 (void);
+extern void BookAnimation__ctor_mFAF7F9BD09901964669979A1B02F67A1FCCB12F3 (void);
+extern void U3CPageEffectU3Ed__3__ctor_m00D56F6A41E137B2DCA52C3F3EE9A3E2C49043C6 (void);
+extern void U3CPageEffectU3Ed__3_System_IDisposable_Dispose_mFE2F92C5C0CB73E4E2AE068C4F8CAB81BA73509F (void);
+extern void U3CPageEffectU3Ed__3_MoveNext_mA45F8FD7A3072FFDE66808324CAB7727E6CB4F0A (void);
+extern void U3CPageEffectU3Ed__3_System_Collections_Generic_IEnumeratorU3CSystem_ObjectU3E_get_Current_m20BAE0C8B2F66F2EBFB33488C2F45D1741BF4654 (void);
+extern void U3CPageEffectU3Ed__3_System_Collections_IEnumerator_Reset_mBCCF3AE4A733444713B56A7BA2C2E1D992281C4F (void);
+extern void U3CPageEffectU3Ed__3_System_Collections_IEnumerator_get_Current_m9B2344EB1CA8BFA1703C4D0E27B5F9E34836CBDF (void);
+extern void IslandInteraction_Update_m88004C8ECBE757773AF643DA8B98EDA043471FCF (void);
+extern void IslandInteraction_CheckHit_mE75A7688E88ECE595D20FF8ABBD39BF923030933 (void);
+extern void IslandInteraction_OpenBook_m1D09BC8F18182C8ADC38ED3ED0EA06832B53FDCA (void);
+extern void IslandInteraction__ctor_mFC106E41D69D687CBDC16111610610BBBF6CD231 (void);
+extern void Readme__ctor_m69C325C4C171DCB0312B646A9034AA91EA8C39C6 (void);
+extern void Section__ctor_m5F732533E4DFC0167D965E5F5DB332E46055399B (void);
+extern void VuforiaLicense_GetLicenseKey_m796D51E5EF1C53F3D62BA4EA8806AC1FB1A5E3C4 (void);
+extern void VuforiaLicense__ctor_m094B92B3323DFFD79ADB696474D5D158C95E291B (void);
+extern void UnitySourceGeneratedAssemblyMonoScriptTypes_v1_Get_mBEB95BEB954BB63E9710BBC7AD5E78C4CB0A0033 (void);
+extern void UnitySourceGeneratedAssemblyMonoScriptTypes_v1__ctor_mE70FB23ACC1EA12ABC948AA22C2E78B2D0AA39B1 (void);
+static Il2CppMethodPointer s_methodPointers[19] = 
+{
+	BookAnimation_TurnPage_m1F6BAC6795EFE5BA8611473A39752970224C0CC2,
+	BookAnimation_PageEffect_m6F10B21DADD3E1EEAB64443277B91F41BA80AB56,
+	BookAnimation__ctor_mFAF7F9BD09901964669979A1B02F67A1FCCB12F3,
+	U3CPageEffectU3Ed__3__ctor_m00D56F6A41E137B2DCA52C3F3EE9A3E2C49043C6,
+	U3CPageEffectU3Ed__3_System_IDisposable_Dispose_mFE2F92C5C0CB73E4E2AE068C4F8CAB81BA73509F,
+	U3CPageEffectU3Ed__3_MoveNext_mA45F8FD7A3072FFDE66808324CAB7727E6CB4F0A,
+	U3CPageEffectU3Ed__3_System_Collections_Generic_IEnumeratorU3CSystem_ObjectU3E_get_Current_m20BAE0C8B2F66F2EBFB33488C2F45D1741BF4654,
+	U3CPageEffectU3Ed__3_System_Collections_IEnumerator_Reset_mBCCF3AE4A733444713B56A7BA2C2E1D992281C4F,
+	U3CPageEffectU3Ed__3_System_Collections_IEnumerator_get_Current_m9B2344EB1CA8BFA1703C4D0E27B5F9E34836CBDF,
+	IslandInteraction_Update_m88004C8ECBE757773AF643DA8B98EDA043471FCF,
+	IslandInteraction_CheckHit_mE75A7688E88ECE595D20FF8ABBD39BF923030933,
+	IslandInteraction_OpenBook_m1D09BC8F18182C8ADC38ED3ED0EA06832B53FDCA,
+	IslandInteraction__ctor_mFC106E41D69D687CBDC16111610610BBBF6CD231,
+	Readme__ctor_m69C325C4C171DCB0312B646A9034AA91EA8C39C6,
+	Section__ctor_m5F732533E4DFC0167D965E5F5DB332E46055399B,
+	VuforiaLicense_GetLicenseKey_m796D51E5EF1C53F3D62BA4EA8806AC1FB1A5E3C4,
+	VuforiaLicense__ctor_m094B92B3323DFFD79ADB696474D5D158C95E291B,
+	UnitySourceGeneratedAssemblyMonoScriptTypes_v1_Get_mBEB95BEB954BB63E9710BBC7AD5E78C4CB0A0033,
+	UnitySourceGeneratedAssemblyMonoScriptTypes_v1__ctor_mE70FB23ACC1EA12ABC948AA22C2E78B2D0AA39B1,
+};
+static const int32_t s_InvokerIndices[19] = 
+{
+	15891,
+	15660,
+	15891,
+	11974,
+	15891,
+	15453,
+	15660,
+	15891,
+	15660,
+	15891,
+	12243,
+	15891,
+	15891,
+	15891,
+	15891,
+	26963,
+	15891,
+	27101,
+	15891,
+};
+IL2CPP_EXTERN_C const Il2CppCodeGenModule g_AssemblyU2DCSharp_CodeGenModule;
+const Il2CppCodeGenModule g_AssemblyU2DCSharp_CodeGenModule = 
+{
+	"Assembly-CSharp.dll",
+	19,
+	s_methodPointers,
+	0,
+	NULL,
+	s_InvokerIndices,
+	0,
+	NULL,
+	0,
+	NULL,
+	0,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+	NULL,
+};

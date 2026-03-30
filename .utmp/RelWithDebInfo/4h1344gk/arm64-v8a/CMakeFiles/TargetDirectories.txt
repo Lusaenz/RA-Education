@@ -1,0 +1,5 @@
+/Users/luisasaenz/Documents/Unity/RA-education/.utmp/RelWithDebInfo/4h1344gk/arm64-v8a/CMakeFiles/edit_cache.dir
+/Users/luisasaenz/Documents/Unity/RA-education/.utmp/RelWithDebInfo/4h1344gk/arm64-v8a/CMakeFiles/rebuild_cache.dir
+/Users/luisasaenz/Documents/Unity/RA-education/.utmp/RelWithDebInfo/4h1344gk/arm64-v8a/GameActivity/CMakeFiles/game.dir
+/Users/luisasaenz/Documents/Unity/RA-education/.utmp/RelWithDebInfo/4h1344gk/arm64-v8a/GameActivity/CMakeFiles/edit_cache.dir
+/Users/luisasaenz/Documents/Unity/RA-education/.utmp/RelWithDebInfo/4h1344gk/arm64-v8a/GameActivity/CMakeFiles/rebuild_cache.dir
