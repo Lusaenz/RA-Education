@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Organos
+  m_EditorClassIdentifier: Unity.Addressables.Editor::UnityEditor.AddressableAssets.Settings.AddressableAssetGroup
+  m_GroupName: Organos
+  m_GUID: 1407b260d726f454682adc42a562873b
+  m_SerializeEntries:
+  - m_GUID: 0942c134b7929c6478c96e339ad60c2f
+    m_Address: organos/boca
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 75d6c84aa7cf79a46bf96f6a76ef15ec
+    m_Address: organos/estomago
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cf3f339e7c6f582449f0c92aeb3b68b3
+    m_Address: organos/intestino
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f2563fbac39c18449b68ab1eba16afbc
+    m_Address: organos/higado
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 88301ab4ba09ae44fb731ff691edbe06, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: be5e4ffcf8bb26645817f7c563d275e2, type: 2}
+    - {fileID: 11400000, guid: b4539cec6b4912d45bb5894f9ef6c9a2, type: 2}

@@ -14,7 +14,7 @@ public void OnDrop(PointerEventData eventData)
 
             if(item != null)
             {
-                gameManager.EvaluarItem(item.id);
+                gameManager.EvaluarItem(item.itemId);
             }
         }
     }

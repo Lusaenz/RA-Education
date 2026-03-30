@@ -170,7 +170,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04d05461b9f6a2849b7884310d5decc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
-  item: {fileID: 178454581}
+  zoneId: 
+  labelText: {fileID: 0}
 --- !u!114 &24626103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -410,6 +411,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e1fd18c128731543a9f9209a07034df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DragHandler
+  itemId: 
+  correctZone: 
+  itemImage: {fileID: 0}
 --- !u!114 &178454585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -804,7 +808,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04d05461b9f6a2849b7884310d5decc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
-  item: {fileID: 622740289}
+  zoneId: 
+  labelText: {fileID: 0}
 --- !u!114 &392902118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1347,6 +1352,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e1fd18c128731543a9f9209a07034df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DragHandler
+  itemId: 
+  correctZone: 
+  itemImage: {fileID: 0}
 --- !u!114 &594409725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1472,6 +1480,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e1fd18c128731543a9f9209a07034df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DragHandler
+  itemId: 
+  correctZone: 
+  itemImage: {fileID: 622740293}
 --- !u!114 &622740293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2222,6 +2233,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e1fd18c128731543a9f9209a07034df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DragHandler
+  itemId: 
+  correctZone: 
+  itemImage: {fileID: 0}
 --- !u!114 &1092103925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2546,7 +2560,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04d05461b9f6a2849b7884310d5decc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
-  item: {fileID: 1092103921}
+  zoneId: 
+  labelText: {fileID: 0}
 --- !u!114 &1158101595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2750,7 +2765,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04d05461b9f6a2849b7884310d5decc7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
-  item: {fileID: 594409721}
+  zoneId: 
+  labelText: {fileID: 0}
 --- !u!114 &1429765810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2828,7 +2844,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 61.06299, y: 29.681885}
+  m_AnchoredPosition: {x: 61.06299, y: 29.68164}
   m_SizeDelta: {x: -79.8215, y: -407.09}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1469754691
@@ -4071,7 +4087,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2016400735}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e27209c14181b1544b8e6f3e00310a41, type: 3}
   m_Name: 
@@ -4079,8 +4095,9 @@ MonoBehaviour:
   score: 0
   puntosCorrecto: 10
   puntosIncorrecto: -5
+  maxScore: 40
   scoreText: {fileID: 0}
-  winPanel: {fileID: 1870339996}
+  WinPanel: {fileID: 0}
   estrellas:
   - {fileID: 434520286}
   - {fileID: 1886510584}
@@ -4089,8 +4106,17 @@ MonoBehaviour:
   - {fileID: 1079833097}
   estrellaLlena: {fileID: 21300000, guid: ae88574e085024f47b6ac8535f8fe948, type: 3}
   estrellaVacia: {fileID: 21300000, guid: 3d3ed98f60537ac42b2fe596b1245f9b, type: 3}
-  maxScore: 40
-  totalItems: 4
+  instructionText: {fileID: 0}
+  items:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  zones:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!4 &2016400737
 Transform:
   m_ObjectHideFlags: 0
