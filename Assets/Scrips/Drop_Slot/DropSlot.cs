@@ -22,7 +22,7 @@ public class DropSlot : MonoBehaviour, IDropHandler
         
          
             if (GameManager.instance != null)
-                GameManager.instance.RespuestaCorrecta();
+                GameManagerJuego.instance.RespuestaCorrecta();
 
             dragged.transform.SetParent(transform);
             dragged.transform.position = transform.position;
@@ -47,7 +47,7 @@ public class DropSlot : MonoBehaviour, IDropHandler
         
          
             if (GameManager.instance != null)
-                GameManager.instance.RespuestaIncorrecta();
+                GameManagerJuego.instance.RespuestaIncorrecta();
     }
 }
 

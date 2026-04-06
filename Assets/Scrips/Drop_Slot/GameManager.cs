@@ -1,79 +1,42 @@
 using UnityEngine;
-using TMPro;
-using System;
 using System.Collections;
-
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    public int score = 0;
-
-    // puntos
-    public int puntosCorrecto = 10;
-    public int puntosIncorrecto = -5;
-
-    // UI
-    public TMP_Text scoreText;
-
+    [Header("UI Global")]
     public GameObject winPanel;
 
-    public UnityEngine.UI.Image[] estrellas;
-public Sprite estrellaLlena;
-public Sprite estrellaVacia;
-
-public int maxScore = 40;
-
-    public int totalItems = 4; 
-    private int correctItems = 0;
+    [Header("Estrellas")]
+    public Image[] estrellas;
+    public Sprite estrellaLlena;
+    public Sprite estrellaVacia;
 
     void Awake()
+{
+    if (instance == null)
     {
         instance = this;
-        ActualizarUI();
+        DontDestroyOnLoad(gameObject); 
+    }
+    else
+    {
+        Destroy(gameObject);
+    }
+}
+
+    public void MostrarVictoria(int score, int maxScore)
+    {
+        StartCoroutine(Mostrar(score, maxScore));
     }
 
-    public void RespuestaCorrecta()
+    IEnumerator Mostrar(int score, int maxScore)
     {
-        score += puntosCorrecto;
-        correctItems++;
-
-        ActualizarUI();
-        VerificarVictoria();
-    }
-
-    public void RespuestaIncorrecta()
-    {
-        score += puntosIncorrecto;
-        ActualizarUI();
-    }
-
-    void ActualizarUI()
-    {
-        if (scoreText != null)
-        {
-            scoreText.text = ": " + score;
-            Debug.Log(score);
-        }
-    }
-    void VerificarVictoria()
-    {
-        if (correctItems >= totalItems)
-        {
-           StartCoroutine(MostrarVictoria());
-
-        }
-    }
-
-    IEnumerator MostrarVictoria()
-    {
-      
         yield return new WaitForSeconds(1f);
 
         winPanel.SetActive(true);
-
-        
         winPanel.transform.localScale = Vector3.zero;
 
         float tiempo = 0f;
@@ -86,23 +49,18 @@ public int maxScore = 40;
             winPanel.transform.localScale = new Vector3(escala, escala, escala);
             yield return null;
         }
-        ActualizarEstrellas();
+
+        ActualizarEstrellas(score, maxScore);
         winPanel.transform.localScale = Vector3.one;
     }
-void ActualizarEstrellas()
-{
-    int estrellasGanadas = Mathf.RoundToInt((float)score / maxScore * estrellas.Length);
 
-    for (int i = 0; i < estrellas.Length; i++)
+    void ActualizarEstrellas(int score, int maxScore)
     {
-        if (i < estrellasGanadas)
+        int estrellasGanadas = Mathf.RoundToInt((float)score / maxScore * estrellas.Length);
+
+        for (int i = 0; i < estrellas.Length; i++)
         {
-            estrellas[i].sprite = estrellaLlena;
-        }
-        else
-        {
-            estrellas[i].sprite = estrellaVacia;
+            estrellas[i].sprite = (i < estrellasGanadas) ? estrellaLlena : estrellaVacia;
         }
     }
-}
 }
