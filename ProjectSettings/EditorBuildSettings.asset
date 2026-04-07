@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/TestInitialuserFlow.unity
     guid: 3c19d020eb4bf48949b1713e37a89089
   - enabled: 1
+    path: Assets/Scenes/UserScreen.unity
+    guid: 17b8f41bbfd1c44babc23d499c41215f
+  - enabled: 1
     path: Assets/Scenes/GameSelection.unity
     guid: 9dd9a0d84968a46adbe2fb7caa551f81
   - enabled: 1
