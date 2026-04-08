@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// GameManager del minijuego DragAndDrop.
@@ -35,6 +36,11 @@ public class GameManager : MonoBehaviour
     // ── Instrucción ──────────────────────────────────────────────────────
     [Header("Instrucción")]
     public TMP_Text instructionText;
+    public TMP_Text titleIssueText;
+
+    // ── Fondo ────────────────────────────────────────────────────────────
+    [Header("Fondo")]
+    [SerializeField] private BackgroundLoader backgroundLoader;
 
     // ── Referencias a objetos en escena ──────────────────────────────────
     [Header("Items en escena (en orden a, b, c, d)")]
@@ -62,7 +68,7 @@ public class GameManager : MonoBehaviour
 
     private int attempts = 0;
     private int idActivity;
-    private int idUser = 1; // luego lo sacas de login
+    private int idUser = -1;
     private float _activityStartTime = 0f;
 
 
@@ -78,7 +84,19 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        ResolveLoggedUser();
         int GameActivityId = PlayerPrefs.GetInt("selected_activity_id", 1);
+        
+        // Cargar el fondo dinámicamente según el juego seleccionado
+        if (backgroundLoader != null)
+        {
+            backgroundLoader.LoadBackgroundForSelectedGame();
+        }
+        else
+        {
+            Debug.LogWarning("GameManager: BackgroundLoader no está asignado en Inspector");
+        }
+        
         StartCoroutine(LoadActivity(GameActivityId));
     }
 
@@ -108,6 +126,9 @@ public class GameManager : MonoBehaviour
         Debug.LogError("No se pudo cargar activity");
         yield break;
     }
+
+    if (titleIssueText != null)
+        titleIssueText.text = _activityData.type;
 
     DragDropConfig config = JsonConvert.DeserializeObject<DragDropConfig>(data.config_json);
 
@@ -241,14 +262,21 @@ public class GameManager : MonoBehaviour
     attempts++;
 
     // 🔥 GUARDAR RESULTADO
-    _resultService.SaveResult(
-        idUser,
-        idActivity,
-        score,
-        estrellasGanadas,
-        attempts,
-        ObtenerTiempoCompletado()
-    );
+    if (idUser > 0)
+    {
+        _resultService.SaveResult(
+            idUser,
+            idActivity,
+            score,
+            estrellasGanadas,
+            attempts,
+            ObtenerTiempoCompletado()
+        );
+    }
+    else
+    {
+        Debug.LogWarning("[GameManager] No hay usuario en sesion. El resultado no se guardo.");
+    }
 }
 
     void ActualizarEstrellas()
@@ -371,6 +399,30 @@ public class GameManager : MonoBehaviour
         int totalMinutes = Mathf.FloorToInt(elapsedSeconds / 60f);
         int seconds = Mathf.FloorToInt(elapsedSeconds % 60f);
         return $"{totalMinutes:00}:{seconds:00}";
+    }
+
+    void ResolveLoggedUser()
+    {
+        if (UserSessionManager.Instance != null && UserSessionManager.Instance.CurrentUser != null)
+        {
+            idUser = UserSessionManager.Instance.CurrentUser.id_user;
+            return;
+        }
+
+        Debug.LogWarning("[GameManager] No se encontro un usuario autenticado en sesion.");
+    }
+
+    public void CloseWinPanel()
+    {
+        if (WinPanel != null)
+        {
+            WinPanel.SetActive(false);
+        }
+    }
+
+    public void GoToInitialUserFlow()
+    {
+        SceneManager.LoadScene("TestInitialuserFlow");
     }
 
     void OnDestroy()

@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 /// <summary>
 /// Vista de login para estudiantes.
 /// Captura entradas, delega la autenticacion al presenter y representa mensajes de error.
+/// Orquesta la funcionalidad de "Recordar sesión" mediante persistencia.
 /// </summary>
 public class LoginStudentView : MonoBehaviour
 {
@@ -13,15 +14,19 @@ public class LoginStudentView : MonoBehaviour
     public TMP_InputField InputPassword;
     public Button LoginButton;
     public Button RegisterButton;
+    public Toggle RememberSessionToggle;
     public Text MessageText; // Campo para mostrar mensajes como "Registro exitoso"
     public Text NameErrorText; // Campo para mostrar error específico del nombre
     public Text PasswordErrorText; // Campo para mostrar error específico de la contraseña
     public Text MessageErrorLoginText;
+    
     private LoginPresenter loginPresenter;
+    private ISessionPersistence sessionPersistence;
     private bool initialized = false;
 
     /// <summary>
     /// Ejecuta el proceso de autenticacion del estudiante desde la UI.
+    /// Si "Recordar sesión" está activado, guarda la sesión para auto-login futuro.
     /// </summary>
     public void Login()
     {
@@ -49,6 +54,27 @@ public class LoginStudentView : MonoBehaviour
             if (UserSessionManager.Instance != null)
             {
                 UserSessionManager.Instance.SetCurrentUser(response.User);
+            }
+
+            // Guardar sesión SI Y SOLO SI el toggle "Recordar sesión" está ACTIVADO
+            // DEBUG: Verificar estado del toggle
+            if (RememberSessionToggle == null)
+            {
+                Debug.LogWarning("LoginStudentView: RememberSessionToggle NO está asignado en Inspector");
+            }
+            else
+            {
+                Debug.Log($"LoginStudentView: RememberSessionToggle estado = {RememberSessionToggle.isOn}");
+                
+                if (RememberSessionToggle.isOn)
+                {
+                    Debug.Log("✓ Toggle ACTIVADO -> Guardando sesión");
+                    SaveSession(response.User);
+                }
+                else
+                {
+                    Debug.Log("✗ Toggle DESACTIVADO -> NO se guarda sesión");
+                }
             }
             
             if (MessageText != null)
@@ -87,6 +113,9 @@ public class LoginStudentView : MonoBehaviour
         if (RegisterButton != null)
             RegisterButton.onClick.AddListener(GoToRegister);
 
+        // Inicializar persistencia de sesión
+        sessionPersistence = new SessionPersistence();
+
         // Mostrar mensaje si existe (ej. después de registro exitoso)
         string message = PlayerPrefs.GetString("LoginMessage", "");
         if (!string.IsNullOrEmpty(message) && MessageText != null)
@@ -114,6 +143,23 @@ public class LoginStudentView : MonoBehaviour
         loginPresenter = new LoginPresenter(auth);
 
         initialized = true;
+    }
+
+    /// <summary>
+    /// Guarda la sesión localmente para permitir auto-login futuro.
+    /// Solo se ejecuta si el usuario selecciona "Recordar sesión".
+    /// </summary>
+    private void SaveSession(UserModel user)
+    {
+        if (sessionPersistence == null)
+        {
+            Debug.LogWarning("LoginStudentView: SessionPersistence no está inicializado.");
+            return;
+        }
+
+        SessionData sessionData = new SessionData(user.id_user, "Student");
+        sessionPersistence.SaveSession(sessionData);
+        Debug.Log($"✓ LoginStudentView: Sesión guardada para auto-login (Usuario ID: {user.id_user}, Nombre: {user.name})");
     }
 
     void OnDisable()
@@ -183,5 +229,4 @@ public class LoginStudentView : MonoBehaviour
         if (MessageErrorLoginText != null)
             MessageErrorLoginText.gameObject.SetActive(false);
     }
-
 }

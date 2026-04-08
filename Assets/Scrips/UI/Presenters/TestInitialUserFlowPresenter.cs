@@ -6,13 +6,15 @@ using UnityEngine;
 /// </summary>
 public class TestInitialUserFlowPresenter
 {
-    private ITestInitialUserFlowView view;
-    private UserSessionManager userSession;
+    private readonly ITestInitialUserFlowView view;
+    private readonly UserSessionManager userSession;
+    private readonly ResultActivityService resultActivityService;
 
     public TestInitialUserFlowPresenter(ITestInitialUserFlowView view)
     {
         this.view = view ?? throw new System.ArgumentNullException(nameof(view));
-        this.userSession = UserSessionManager.Instance;
+        userSession = UserSessionManager.Instance;
+        resultActivityService = new ResultActivityService();
     }
 
     /// <summary>
@@ -22,15 +24,16 @@ public class TestInitialUserFlowPresenter
     {
         if (userSession == null || userSession.CurrentUser == null)
         {
-            view.ShowErrorMessage("No hay usuario en sesión.");
+            view.ShowErrorMessage("No hay usuario en sesion.");
             return;
         }
 
         string userName = userSession.CurrentUser.name;
         string roleName = GetRoleName(userSession.CurrentUser.id_role);
         string degreeName = GetDegreeName(userSession.CurrentUser.id_degree);
+        int totalStars = GetTotalStars(userSession.CurrentUser.id_user);
 
-        view.DisplayUserData(userName, roleName, degreeName);
+        view.DisplayUserData(userName, roleName, degreeName, totalStars);
     }
 
     /// <summary>
@@ -38,7 +41,6 @@ public class TestInitialUserFlowPresenter
     /// </summary>
     private string GetRoleName(int roleId)
     {
-        // 1 = Student, 2 = Teacher (ajusta según tu BD)
         return roleId == 1 ? "Estudiante" : roleId == 2 ? "Profesor" : "Desconocido";
     }
 
@@ -47,13 +49,24 @@ public class TestInitialUserFlowPresenter
     /// </summary>
     private string GetDegreeName(int degreeId)
     {
-        // Aquí podrías hacer una consulta a la BD para obtener el nombre del grado
-        // Por ahora retornamos el ID, pero idealmente querrías consultar la BD
-        
-        // Opción 1: Consulta simple (si tienes acceso a la BD)
         var degreeService = new DegreeService();
         var degree = degreeService.GetDegreeById(degreeId);
-        
         return degree != null ? degree.name : "Grado desconocido";
+    }
+
+    /// <summary>
+    /// Obtiene el acumulado de estrellas del usuario autenticado.
+    /// </summary>
+    private int GetTotalStars(int userId)
+    {
+        try
+        {
+            return resultActivityService.GetTotalStarsForUser(userId);
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"Error obteniendo estrellas del usuario: {ex.Message}");
+            return 0;
+        }
     }
 }

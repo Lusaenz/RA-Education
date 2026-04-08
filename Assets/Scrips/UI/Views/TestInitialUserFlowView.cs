@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Vista del flujo inicial tras autenticacion.
@@ -10,6 +11,7 @@ public class TestInitialUserFlowView : MonoBehaviour, ITestInitialUserFlowView
     [SerializeField] private TextMeshProUGUI userNameText;
     [SerializeField] private TextMeshProUGUI roleTypeText;
     [SerializeField] private TextMeshProUGUI degreeText;
+    [SerializeField] private TextMeshProUGUI totalStarsText;
 
     private TestInitialUserFlowPresenter presenter;
 
@@ -33,7 +35,7 @@ public class TestInitialUserFlowView : MonoBehaviour, ITestInitialUserFlowView
     /// <summary>
     /// Refresca los textos principales de la vista.
     /// </summary>
-    public void DisplayUserData(string userName, string roleName, string degreeName)
+    public void DisplayUserData(string userName, string roleName, string degreeName, int totalStars)
     {
         if (userNameText != null)
             userNameText.text = userName;
@@ -43,6 +45,9 @@ public class TestInitialUserFlowView : MonoBehaviour, ITestInitialUserFlowView
 
         if (degreeText != null)
             degreeText.text = degreeName;
+
+        if (totalStarsText != null)
+            totalStarsText.text = totalStars.ToString();
     }
 
     /// <summary>
@@ -51,5 +56,10 @@ public class TestInitialUserFlowView : MonoBehaviour, ITestInitialUserFlowView
     public void ShowErrorMessage(string message)
     {
         Debug.LogError("Error en TestInitialUserFlow: " + message);
+    }
+
+    public void IrAEscenaPrueba()
+    {
+        SceneManager.LoadScene("SelectGameExample");
     }
 }
