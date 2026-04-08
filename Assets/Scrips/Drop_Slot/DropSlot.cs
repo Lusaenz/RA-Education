@@ -54,6 +54,9 @@ public class DropSlot : MonoBehaviour, IDropHandler
             dragged.transform.SetParent(transform);
             dragged.transform.position = transform.position;
 
+        dragged.transform.SetParent(transform);
+        dragged.transform.position = transform.position;
+
             var cg = dragged.GetComponent<CanvasGroup>();
             if (cg != null) cg.blocksRaycasts = true;
 
@@ -64,7 +67,9 @@ public class DropSlot : MonoBehaviour, IDropHandler
             SoundManager.instance.PlayWrong();
 
             if (GameManager.instance != null)
-                GameManager.instance.RespuestaIncorrecta();
-        }
+                GameManagerJuego.instance.RespuestaIncorrecta();
     }
+}
+
+
 }
