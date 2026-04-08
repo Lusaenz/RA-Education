@@ -102,7 +102,7 @@ public class RegisterTeacherView : MonoBehaviour
         {
             // Guardar mensaje y redirigir a LoginStudent
             PlayerPrefs.SetString("LoginMessage", "Registro exitoso! Por favor inicia sesión.");
-            SceneManager.LoadScene("LoginStudent");
+            SceneManager.LoadScene("LoginTeacher");
         }
         else
         {

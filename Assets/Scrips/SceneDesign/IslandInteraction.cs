@@ -5,6 +5,8 @@ public class IslandInteraction : MonoBehaviour
     public GameObject bookSystem;
     public GameObject canvasTopHUD;
     public GameObject canvasBottomInfo;
+    //LayerMask layerMask;
+
 
     void Update()
     {

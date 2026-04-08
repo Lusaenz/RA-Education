@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public Sprite estrellaVacia;
 
     void Awake()
-{
+ {
     if (instance == null)
     {
         instance = this;
@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     {
         Destroy(gameObject);
     }
-}
+ }
 
     public void MostrarVictoria(int score, int maxScore)
     {
