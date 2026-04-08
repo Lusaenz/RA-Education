@@ -35,10 +35,10 @@ public class IslandInteraction : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
-            if (hit.transform == transform)
-            {
-                OpenBook();
-            }
+            if (hit.transform == transform || hit.transform.IsChildOf(transform))
+{
+    OpenBook();
+}
         }
     }
 

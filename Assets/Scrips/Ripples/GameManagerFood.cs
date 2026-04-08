@@ -54,7 +54,7 @@ public RandomizarOrganos randomizador;
 
             if (indiceActual >= respuestasCorrectas.Count)
             {
-                StartCoroutine(MostrarVictoria());
+                VerificarVictoria();
             }
             else
             {
@@ -100,37 +100,12 @@ public RandomizarOrganos randomizador;
         }
     }
 
-    IEnumerator MostrarVictoria()
+    void VerificarVictoria()
     {
-        yield return new WaitForSeconds(1f);
-
-        winPanel.SetActive(true);
-        winPanel.transform.localScale = Vector3.zero;
-
-        float tiempo = 0f;
-        float duracion = 0.4f;
-
-        while (tiempo < duracion)
+        if (indiceActual == textos.Count)
         {
-            tiempo += Time.deltaTime;
-            float escala = Mathf.Lerp(0, 1, tiempo / duracion);
-            winPanel.transform.localScale = new Vector3(escala, escala, escala);
-            yield return null;
+           
+            GameManager.instance.MostrarVictoria(score, 40);
         }
-
-        ActualizarEstrellas();
-        winPanel.transform.localScale = Vector3.one;
-    }
-
-    void ActualizarEstrellas()
-    {
-        int estrellasGanadas = Mathf.RoundToInt((float)score / maxScore * estrellas.Length);
-
-        for (int i = 0; i < estrellas.Length; i++)
-        {
-            estrellas[i].sprite = (i < estrellasGanadas) ? estrellaLlena : estrellaVacia;
-        }
-        Debug.Log(estrellasGanadas); //Variable de la cantidad de estrellas ganadas 
-
     }
 }
