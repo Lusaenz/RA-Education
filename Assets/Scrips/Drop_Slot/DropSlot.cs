@@ -49,7 +49,7 @@ public class DropSlot : MonoBehaviour, IDropHandler
             SoundManager.instance.PlayCorrect();
 
             if (GameManager.instance != null)
-                GameManager.instance.RespuestaCorrecta();
+                GameManagerJuego.instance.RespuestaCorrecta();
 
             dragged.transform.SetParent(transform);
             dragged.transform.position = transform.position;
