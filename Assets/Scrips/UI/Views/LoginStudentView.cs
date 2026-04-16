@@ -13,7 +13,6 @@ public class LoginStudentView : MonoBehaviour
     public TMP_InputField InputName;
     public TMP_InputField InputPassword;
     public Button LoginButton;
-    public Button RegisterButton;
     public Toggle RememberSessionToggle;
     public Text MessageText; // Campo para mostrar mensajes como "Registro exitoso"
     public Text NameErrorText; // Campo para mostrar error específico del nombre
@@ -56,6 +55,12 @@ public class LoginStudentView : MonoBehaviour
                 UserSessionManager.Instance.SetCurrentUser(response.User);
             }
 
+            // Actualizar última fecha de login
+            if (loginPresenter != null && response.User != null)
+            {
+                loginPresenter.UpdateLastLogin(response.User.id_user);
+            }
+
             // Guardar sesión SI Y SOLO SI el toggle "Recordar sesión" está ACTIVADO
             // DEBUG: Verificar estado del toggle
             if (RememberSessionToggle == null)
@@ -93,14 +98,6 @@ public class LoginStudentView : MonoBehaviour
     }
 
     /// <summary>
-    /// Navega a la pantalla de registro de estudiantes.
-    /// </summary>
-    public void GoToRegister()
-    {
-        SceneManager.LoadScene("RegisterStuden");
-    }
-
-    /// <summary>
     /// Registra listeners y espera a que la base quede lista para construir el presenter.
     /// </summary>
     void Start()
@@ -110,8 +107,6 @@ public class LoginStudentView : MonoBehaviour
 
         if (LoginButton != null)
             LoginButton.onClick.AddListener(Login);
-        if (RegisterButton != null)
-            RegisterButton.onClick.AddListener(GoToRegister);
 
         // Inicializar persistencia de sesión
         sessionPersistence = new SessionPersistence();
@@ -167,10 +162,6 @@ public class LoginStudentView : MonoBehaviour
         if (LoginButton != null)
             LoginButton.onClick.RemoveListener(Login);
 
-        if (RegisterButton != null)
-            RegisterButton.onClick.RemoveListener(GoToRegister);
-
-        // solo limpiar el listener del botón de login
     }
 
     /// <summary>

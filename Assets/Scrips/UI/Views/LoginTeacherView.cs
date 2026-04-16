@@ -103,6 +103,12 @@ public class LoginTeacherView : MonoBehaviour
                 UserSessionManager.Instance.SetCurrentUser(response.User);
             }
 
+            // Actualizar última fecha de login
+            if (presenter != null && response.User != null)
+            {
+                presenter.UpdateLastLogin(response.User.id_user);
+            }
+
             // Guardar sesión SI Y SOLO SI el toggle "Recordar sesión" está ACTIVADO
             // DEBUG: Verificar estado del toggle
             if (RememberSessionToggle == null)

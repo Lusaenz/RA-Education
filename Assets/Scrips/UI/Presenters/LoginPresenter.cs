@@ -104,6 +104,23 @@ public class LoginPresenter
     }
 
     /// <summary>
+    /// Actualiza la fecha del último login del usuario.
+    /// Debe llamarse después de un login exitoso.
+    /// </summary>
+    public void UpdateLastLogin(int userId)
+    {
+        try
+        {
+            authService.UpdateLastLogin(userId);
+            Debug.Log($"[LoginPresenter] Último login actualizado para usuario {userId}");
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"[LoginPresenter] Error al actualizar último login: {ex.Message}");
+        }
+    }
+
+    /// <summary>
     /// Carga una escena controlando errores de Unity.
     /// </summary>
     private void LoadScene(string sceneName)

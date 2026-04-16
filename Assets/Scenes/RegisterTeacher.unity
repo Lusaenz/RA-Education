@@ -1078,6 +1078,7 @@ GameObject:
   m_Component:
   - component: {fileID: 349329840}
   - component: {fileID: 349329843}
+  - component: {fileID: 349329844}
   - component: {fileID: 349329842}
   - component: {fileID: 349329841}
   m_Layer: 5
@@ -1150,7 +1151,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 349329842}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 349329844}
+        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
+        m_MethodName: LoadScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &349329842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1189,6 +1202,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 349329839}
   m_CullTransparentMesh: 1
+--- !u!114 &349329844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 349329839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88e5db53e4ae34f6d9e003a249a361c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SceneLoader
+  sceneName: LoginTeacher
 --- !u!1 &359542819
 GameObject:
   m_ObjectHideFlags: 0
@@ -3126,6 +3152,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DegreeSelector
   degreePanel: {fileID: 0}
   degreeInputField: {fileID: 756808095}
+  panelQuestionsSecurity: {fileID: 0}
+  questionInputField: {fileID: 0}
+  answerInputField: {fileID: 0}
 --- !u!4 &1165266809
 Transform:
   m_ObjectHideFlags: 0
@@ -5203,7 +5232,6 @@ MonoBehaviour:
   degreeInput: {fileID: 756808095}
   passInput: {fileID: 585772161}
   registerButton: {fileID: 1964315649}
-  loginButton: {fileID: 349329841}
   ErrorTextName: {fileID: 1892465887}
   ErrorTextEmail: {fileID: 248296958}
   ErrorTextDegree: {fileID: 940844113}

@@ -19,7 +19,6 @@ public class RegisterStudentView : MonoBehaviour
     public TMP_InputField InputAge;
     public TMP_InputField InputPassword;
     public Button RegisterButton;
-    public Button LoginButton;
     public Text ErrorTextName;
     public Text ErrorTextDegree;
     public Text ErrorTextAge;
@@ -55,11 +54,6 @@ public class RegisterStudentView : MonoBehaviour
         {
             RegisterButton.onClick.RemoveAllListeners();
             RegisterButton.onClick.AddListener(Register);
-        }
-        if (LoginButton != null)
-        {
-            LoginButton.onClick.RemoveAllListeners();
-            LoginButton.onClick.AddListener(GoToLogin);
         }
 
         if (RegisterConfirmationText != null)
@@ -106,6 +100,25 @@ public class RegisterStudentView : MonoBehaviour
         
         if (result.Success)
         {
+            int userId = result.UserId;
+            
+            // Guardar la pregunta de seguridad y su respuesta
+            if (degreeSelector != null && degreeSelector.IsSecurityQuestionSelected())
+            {
+                int questionId = degreeSelector.GetSelectedSecurityQuestionId();
+                string answer = degreeSelector.GetSecurityAnswer();
+                
+                var securityResult = presenter.ValidateAndSaveSecurityQuestion(userId, questionId, answer);
+                if (!securityResult.Success)
+                {
+                    Debug.LogWarning($"No se pudo guardar la pregunta de seguridad: {securityResult.ErrorMessage}");
+                }
+                else
+                {
+                    Debug.Log("Pregunta de seguridad guardada exitosamente");
+                }
+            }
+            
             // Guardar mensaje y redirigir a LoginStudent
             PlayerPrefs.SetString("LoginMessage", "Registro exitoso! Por favor inicia sesión.");
             SceneManager.LoadScene("LoginStudent");
@@ -202,13 +215,5 @@ public class RegisterStudentView : MonoBehaviour
         yield return new WaitForSeconds(seconds);
         ClearAllErrors();
         clearErrorCoroutine = null;
-    }
-
-    /// <summary>
-    /// Navega al login de estudiantes.
-    /// </summary>
-    public void GoToLogin()
-    {
-        SceneManager.LoadScene("LoginStudent");
     }
 }
