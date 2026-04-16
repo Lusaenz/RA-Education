@@ -76,7 +76,7 @@ public class ForgotPasswordPresenter
             }
 
             // Validar que el usuario tenga pregunta de seguridad configurada
-            if (user.id_security_question <= 0 || string.IsNullOrEmpty(user.security_answer_hash))
+            if (user.id_security_question <= 0 || string.IsNullOrEmpty(user.security_asnwer_hash))
             {
                 result.ErrorMessage = "Tu cuenta no tiene una pregunta de seguridad configurada. Contacta soporte.";
                 return result;

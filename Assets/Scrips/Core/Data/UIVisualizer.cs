@@ -10,14 +10,16 @@ public class UIVisualizer : MonoBehaviour
     
     [Header("Configuración de Carga")]
     public ModoCarga modoSeleccionado;
-    public DatabaseController dbController;
+    public  ModulesRepository ModulesRepository;
     public string NombreTabla;
 
     [Header("Referencias UI")]
     public TextMeshProUGUI textoMesh;
 
     void Start()
+
     {
+        ModulesRepository = new ModulesRepository();
         ConfiguracionFuncion();
     }
 
@@ -37,7 +39,7 @@ public class UIVisualizer : MonoBehaviour
     // Carga de datos completa
     public void CargarTabla()
     {
-        List<string[]> filas = DatabaseController.Instancia.ObtenerDatos(NombreTabla);
+        List<string[]> filas = ModulesRepository.ObtenerDatos(NombreTabla);
 
         if (filas != null && filas.Count > 0)
         {
@@ -68,7 +70,7 @@ public class UIVisualizer : MonoBehaviour
     public void CargarDatoUnico()
     {
         //solo para la descripción
-        string soloTexto = DatabaseController.Instancia.ObtenerDatoUnico(NombreTabla, "procesos");
+        string soloTexto = ModulesRepository.ObtenerDatoUnico(NombreTabla, "procesos");
     
         textoMesh.text = soloTexto;
     }

@@ -49,7 +49,6 @@ public class GameManagerJuego : MonoBehaviour
     {
         if (correctItems >= totalItems)
         {
-
             GameManager.instance.MostrarVictoria(score, 40);
         }
     }

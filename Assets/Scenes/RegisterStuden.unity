@@ -1285,7 +1285,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\xBFCu\xE1l es el nombre de tu mascota?"
+  m_Text: 
 --- !u!222 &174859579
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1416,7 +1416,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\xBFCu\xE1l es tu comida favorita?"
+  m_Text: 
 --- !u!222 &277553849
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4371,7 +4371,6 @@ MonoBehaviour:
   InputAge: {fileID: 164713903}
   InputPassword: {fileID: 977469220}
   RegisterButton: {fileID: 485747426}
-  LoginButton: {fileID: 735320763}
   ErrorTextName: {fileID: 334869852}
   ErrorTextDegree: {fileID: 1965966846}
   ErrorTextAge: {fileID: 1322274460}
@@ -6449,7 +6448,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\xBFCu\xE1l es tu color favorito?"
+  m_Text: 
 --- !u!222 &1857978507
 CanvasRenderer:
   m_ObjectHideFlags: 0

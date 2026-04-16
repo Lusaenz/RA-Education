@@ -126,7 +126,7 @@ public class UserRepository
         ExecuteWriteWithRetry(() =>
             ConnectionDb.Execute(
                 @"UPDATE users
-                  SET id_security_question = ?, security_answer_hash = ?
+                  SET id_security_question = ?, security_asnwer_hash = ?
                   WHERE id_user = ?",
                 questionId, encryptedAnswer, userId));
     }

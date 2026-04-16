@@ -89,7 +89,7 @@ public class AuthService
                 password = PasswordHasher.HashPassword(pass),
                 id_role = 1,
                 id_security_question = 0,
-                security_answer_hash = "",
+                security_asnwer_hash = "",
                 last_login = ""
             };
 
@@ -125,7 +125,7 @@ public class AuthService
             id_degree = degreeId,
             id_role = 2,
             id_security_question = 0,
-            security_answer_hash = "",
+            security_asnwer_hash = "",
             last_login = ""
         };
 
@@ -170,14 +170,14 @@ public class AuthService
         }
 
         UserModel user = userRepository.GetUserById(userId);
-        if (user == null || user.id_security_question <= 0 || string.IsNullOrEmpty(user.security_answer_hash))
+        if (user == null || user.id_security_question <= 0 || string.IsNullOrEmpty(user.security_asnwer_hash))
         {
             return false;
         }
 
         // Cifrar la respuesta proporcionada y compararla con la almacenada
         string encryptedProvided = EncryptAnswer(providedAnswer);
-        return string.Equals(encryptedProvided, user.security_answer_hash, System.StringComparison.Ordinal);
+        return string.Equals(encryptedProvided, user.security_asnwer_hash, System.StringComparison.Ordinal);
     }
 
     /// <summary>
