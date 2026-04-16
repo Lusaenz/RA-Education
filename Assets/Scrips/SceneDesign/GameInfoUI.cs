@@ -79,18 +79,50 @@ public class GameInfoUI : MonoBehaviour
     public void ShowGame(int gameID)
     {
         currentGameID = gameID;
+        StartCoroutine(LoadAndShowGameFromDatabase(gameID));
+    }
 
-        if (gameID < 0 || gameID >= games.Length)
+    private IEnumerator LoadAndShowGameFromDatabase(int gameActivityId)
+    {
+        GameActivityData gameActivity = null;
+
+        yield return StartCoroutine(gameActivityService.GetGameActivity(gameActivityId, result =>
         {
-            return;
+            gameActivity = result;
+        }));
+
+        if (gameActivity == null)
+        {
+            SetTexts("Actividad no disponible", "No se pudo cargar la configuracion del juego.");
+            yield break;
         }
 
-        GameData game = games[gameID];
-        SetTexts(game.title, game.description);
-
-        if (previewImage != null)
+        ActivityData activity = null;
+        yield return StartCoroutine(activityService.GetActivity(gameActivity.id_activity, result =>
         {
-            previewImage.sprite = game.preview;
+            activity = result;
+        }));
+
+        if (activity == null)
+        {
+            SetTexts("Actividad no disponible", "No se pudo cargar la informacion de la actividad.");
+            yield break;
+        }
+
+        SetTexts(activity.type, activity.description);
+
+        // Cargar imagen de preview dinámicamente desde addressable
+        if (previewImageLoader != null)
+        {
+            previewImageLoader.LoadPreviewForSelectedGame();
+        }
+        else if (gameActivityId < games.Length && games[gameActivityId] != null)
+        {
+            // Fallback al array estático si está disponible
+            if (previewImage != null)
+            {
+                previewImage.sprite = games[gameActivityId].preview;
+            }
         }
 
         if (panel != null)
@@ -109,6 +141,9 @@ public class GameInfoUI : MonoBehaviour
 
     public void PlayGame()
     {
+        // Guardar el gameID actual en PlayerPrefs para que la escena de DragAndDrop lo obtenga
+        PlayerPrefs.SetInt("selected_activity_id", currentGameID);
+        PlayerPrefs.Save();
         GoToDragAndDrop();
     }
 

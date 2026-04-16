@@ -61,6 +61,7 @@ Assets/Scrips/Core/Data/
   ActivityRepository.cs
   DegreeRepository.cs
   GameActivityRepository.cs
+  ModulesRepository.cs
   ResultActivityRepository.cs
   SecurityQuestionsRepository.cs
   UserRepository.cs
