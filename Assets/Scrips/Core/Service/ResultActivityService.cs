@@ -23,4 +23,9 @@ public class ResultActivityService
 
         _repository.Insert(result);
     }
+
+    public int GetTotalStarsForUser(int userId)
+    {
+        return _repository.GetTotalStarsByUser(userId);
+    }
 }

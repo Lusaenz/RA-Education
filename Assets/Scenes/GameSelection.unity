@@ -554,6 +554,8 @@ MonoBehaviour:
       \xA1Pon a prueba tu memoria y convi\xE9rtete en un experto del cuerpo humano!"
     preview: {fileID: 0}
     sceneName: 
+  previewImageLoader: {fileID: 322782463}
+  dragAndDropSceneName: DragAndDrop
 --- !u!1 &278554612
 GameObject:
   m_ObjectHideFlags: 0
@@ -588,6 +590,53 @@ Transform:
   - {fileID: 631255155}
   - {fileID: 1936300786}
   m_Father: {fileID: 520169811}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &322782462
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 322782464}
+  - component: {fileID: 322782463}
+  m_Layer: 0
+  m_Name: PreviewImageLoader
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &322782463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 322782462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27da04ae56269e84ba31cc3042689dc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PreviewImageLoader
+  previewImage: {fileID: 1723099076}
+  digestiveImageKey: images/digestive
+  cellImageKey: images/cell
+--- !u!4 &322782464
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 322782462}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 539.9988, y: 960, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &331383863
 PrefabInstance:

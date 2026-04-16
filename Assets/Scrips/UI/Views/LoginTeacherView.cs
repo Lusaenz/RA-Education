@@ -6,6 +6,7 @@ using TMPro;
 /// <summary>
 /// Vista de login para profesores.
 /// Orquesta los controles visuales y delega la autenticacion al presenter.
+/// Orquesta la funcionalidad de "Recordar sesión" mediante persistencia.
 /// </summary>
 public class LoginTeacherView : MonoBehaviour
 {
@@ -13,12 +14,14 @@ public class LoginTeacherView : MonoBehaviour
     public TMP_InputField passInput;
     public Button loginButton;
     public Button RegisterButton;
+    public Toggle RememberSessionToggle;
     public Text MessageText; // Campo para mostrar mensajes como "Registro exitoso"
     public Text EmailErrorText; // Campo para error del email
     public Text PasswordErrorText; // Campo para error de la contraseña
     public Text MessageErrorLoginText;
 
     private LoginPresenter presenter;
+    private ISessionPersistence sessionPersistence;
     private bool initialized = false;
 
     /// <summary>
@@ -31,6 +34,9 @@ public class LoginTeacherView : MonoBehaviour
             loginButton.onClick.AddListener(Login);
         if (RegisterButton != null)
             RegisterButton.onClick.AddListener(GoToRegister);
+
+        // Inicializar persistencia de sesión
+        sessionPersistence = new SessionPersistence();
 
         // Mostrar mensaje si existe (ej. después de registro exitoso)
         string message = PlayerPrefs.GetString("LoginMessage", "");
@@ -68,6 +74,7 @@ public class LoginTeacherView : MonoBehaviour
 
     /// <summary>
     /// Ejecuta el login del profesor y refleja el resultado en pantalla.
+    /// Si "Recordar sesión" está activado, guarda sesión para auto-login futuro.
     /// </summary>
     public void Login()
     {
@@ -95,6 +102,33 @@ public class LoginTeacherView : MonoBehaviour
             {
                 UserSessionManager.Instance.SetCurrentUser(response.User);
             }
+
+            // Actualizar última fecha de login
+            if (presenter != null && response.User != null)
+            {
+                presenter.UpdateLastLogin(response.User.id_user);
+            }
+
+            // Guardar sesión SI Y SOLO SI el toggle "Recordar sesión" está ACTIVADO
+            // DEBUG: Verificar estado del toggle
+            if (RememberSessionToggle == null)
+            {
+                Debug.LogWarning("LoginTeacherView: RememberSessionToggle NO está asignado en Inspector");
+            }
+            else
+            {
+                Debug.Log($"LoginTeacherView: RememberSessionToggle estado = {RememberSessionToggle.isOn}");
+                
+                if (RememberSessionToggle.isOn)
+                {
+                    Debug.Log("✓ Toggle ACTIVADO -> Guardando sesión");
+                    SaveSession(response.User);
+                }
+                else
+                {
+                    Debug.Log("✗ Toggle DESACTIVADO -> NO se guarda sesión");
+                }
+            }
             
             if (MessageText != null)
             {
@@ -110,6 +144,23 @@ public class LoginTeacherView : MonoBehaviour
             Debug.Log("Login incorrecto: " + response.GeneralMessage);
             ShowFieldError(MessageErrorLoginText, response.GeneralMessage);
         }
+    }
+
+    /// <summary>
+    /// Guarda la sesión localmente para permitir auto-login futuro.
+    /// Solo se ejecuta si el usuario selecciona "Recordar sesión".
+    /// </summary>
+    private void SaveSession(UserModel user)
+    {
+        if (sessionPersistence == null)
+        {
+            Debug.LogWarning("LoginTeacherView: SessionPersistence no está inicializado.");
+            return;
+        }
+
+        SessionData sessionData = new SessionData(user.id_user, "Teacher");
+        sessionPersistence.SaveSession(sessionData);
+        Debug.Log($"✓ LoginTeacherView: Sesión guardada para auto-login (Usuario ID: {user.id_user}, Nombre: {user.name})");
     }
 
     /// <summary>
@@ -167,5 +218,14 @@ public class LoginTeacherView : MonoBehaviour
             MessageText.gameObject.SetActive(false);
         if (MessageErrorLoginText != null)
             MessageErrorLoginText.gameObject.SetActive(false);
+    }
+
+    void OnDisable()
+    {
+        if (loginButton != null)
+            loginButton.onClick.RemoveListener(Login);
+
+        if (RegisterButton != null)
+            RegisterButton.onClick.RemoveListener(GoToRegister);
     }
 }

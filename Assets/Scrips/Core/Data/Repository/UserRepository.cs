@@ -119,6 +119,41 @@ public class UserRepository
     }
 
     /// <summary>
+    /// Actualiza la pregunta de seguridad y su respuesta cifrada para un usuario.
+    /// </summary>
+    public void UpdateUserSecurityQuestion(int userId, int questionId, string encryptedAnswer)
+    {
+        ExecuteWriteWithRetry(() =>
+            ConnectionDb.Execute(
+                @"UPDATE users
+                  SET id_security_question = ?, security_answer_hash = ?
+                  WHERE id_user = ?",
+                questionId, encryptedAnswer, userId));
+    }
+
+    /// <summary>
+    /// Actualiza el last_login del usuario con la fecha y hora actual.
+    /// </summary>
+    public void UpdateLastLogin(int userId, string lastLoginDateTime)
+    {
+        ExecuteWriteWithRetry(() =>
+            ConnectionDb.Execute(
+                @"UPDATE users
+                  SET last_login = ?
+                  WHERE id_user = ?",
+                lastLoginDateTime, userId));
+    }
+
+    /// <summary>
+    /// Obtiene el usuario por su ID.
+    /// </summary>
+    public UserModel GetUserById(int userId)
+    {
+        return ConnectionDb.Table<UserModel>()
+            .FirstOrDefault(x => x.id_user == userId);
+    }
+
+    /// <summary>
     /// Ejecuta escrituras serializadas para reducir conflictos concurrentes sobre SQLite.
     /// </summary>
     private void ExecuteWriteWithRetry(Action writeAction)

@@ -69,6 +69,8 @@ public class SelectRoleView : MonoBehaviour
     /// </summary>
     public void StudentPressed()
     {
+        // Guardar rol para el botón de regresar
+        RolePreferences.SaveSelectedRole(1); // 1 = Estudiante
         selectRolePresenter.GoStudentLogin();
     }
 
@@ -77,6 +79,8 @@ public class SelectRoleView : MonoBehaviour
     /// </summary>
     public void TeacherPressed()
     {
+        // Guardar rol para el botón de regresar
+        RolePreferences.SaveSelectedRole(2); // 2 = Profesor
         selectRolePresenter.GoTeacherLogin();
     }
 }

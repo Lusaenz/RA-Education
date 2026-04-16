@@ -20,7 +20,6 @@ public class RegisterTeacherView : MonoBehaviour
     public TMP_InputField degreeInput;
     public TMP_InputField passInput;
     public Button registerButton;
-    public Button loginButton;
     public Text ErrorTextName;
     public Text ErrorTextEmail;
     public Text ErrorTextDegree;
@@ -50,11 +49,6 @@ public class RegisterTeacherView : MonoBehaviour
         {
             registerButton.onClick.RemoveAllListeners();
             registerButton.onClick.AddListener(Register);
-        }
-        if (loginButton != null)
-        {
-            loginButton.onClick.RemoveAllListeners();
-            loginButton.onClick.AddListener(GoToLogin);
         }
 
         if (registerConfirmationText != null)
@@ -100,6 +94,25 @@ public class RegisterTeacherView : MonoBehaviour
         
         if (result.Success)
         {
+            int userId = result.UserId;
+            
+            // Guardar la pregunta de seguridad y su respuesta
+            if (degreeSelector != null && degreeSelector.IsSecurityQuestionSelected())
+            {
+                int questionId = degreeSelector.GetSelectedSecurityQuestionId();
+                string answer = degreeSelector.GetSecurityAnswer();
+                
+                var securityResult = presenter.ValidateAndSaveSecurityQuestion(userId, questionId, answer);
+                if (!securityResult.Success)
+                {
+                    Debug.LogWarning($"No se pudo guardar la pregunta de seguridad: {securityResult.ErrorMessage}");
+                }
+                else
+                {
+                    Debug.Log("Pregunta de seguridad guardada exitosamente");
+                }
+            }
+            
             // Guardar mensaje y redirigir a LoginStudent
             PlayerPrefs.SetString("LoginMessage", "Registro exitoso! Por favor inicia sesión.");
             SceneManager.LoadScene("LoginTeacher");
@@ -203,11 +216,4 @@ public class RegisterTeacherView : MonoBehaviour
         clearErrorCoroutine = null;
     }
 
-    /// <summary>
-    /// Navega al login de profesores.
-    /// </summary>
-    private void GoToLogin()
-    {
-        SceneManager.LoadScene("LoginTeacher");
-    }
 }
