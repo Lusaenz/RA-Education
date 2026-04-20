@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using SQLite4Unity3d;
 using UnityEngine;
 
@@ -87,5 +88,24 @@ public class ModulesRepository
         }
         
         return listaResultados;
+    }
+
+    /// <summary>
+    /// Obtiene un módulo por su ID de manera limpia usando el ORM.
+    /// </summary>
+    /// <param name="id_module">ID del módulo a buscar.</param>
+    /// <returns>El modelo del módulo o null si no se encuentra.</returns>
+    public ModuleModel GetModuleById(int id_module)
+    {
+        try
+        {
+            return ConnectionDb.Table<ModuleModel>()
+                .FirstOrDefault(m => m.id_module == id_module);
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"ModulesRepository: Error al obtener módulo {id_module}: {ex.Message}");
+            return null;
+        }
     }
 }

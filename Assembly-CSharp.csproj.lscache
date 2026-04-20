@@ -57,6 +57,7 @@ Assets/Scrips/Core/Data/
  DatabaseController.cs
  DatabaseLoader.cs
  DatabaseManager.cs
+ ModuleManager.cs
  Repository/
   ActivityRepository.cs
   DegreeRepository.cs
@@ -111,6 +112,7 @@ Assets/Scrips/UI/Models/
  ActivityData.cs
  DegreeModel.cs
  DragdropModel.cs
+ ModuleModel.cs
  ResultActivityData.cs
  SecurityQuestionsModel.cs
  StudentModel.cs
