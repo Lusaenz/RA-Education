@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public Sprite estrellaVacia;
 
     void Awake()
- {
+{
     if (instance == null)
     {
         instance = this;

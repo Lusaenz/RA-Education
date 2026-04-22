@@ -12,6 +12,11 @@ public class UserModel
     public int id_degree { get; set; }
     public string password { get; set; }
     public int id_role { get; set; }
+
+    public int id_security_question { get; set; }
+    public string security_asnwer_hash { get; set; }
+
+    public string  last_login { get; set; }
 }
 
 

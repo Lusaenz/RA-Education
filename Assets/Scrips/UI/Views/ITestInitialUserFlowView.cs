@@ -3,6 +3,6 @@
 /// </summary>
 public interface ITestInitialUserFlowView
 {
-    void DisplayUserData(string userName, string roleName, string degreeName);
+    void DisplayUserData(string userName, string roleName, string degreeName, int totalStars);
     void ShowErrorMessage(string message);
 }
