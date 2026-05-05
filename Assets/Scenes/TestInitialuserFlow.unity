@@ -2133,6 +2133,7 @@ GameObject:
   - component: {fileID: 618683830}
   - component: {fileID: 618683833}
   - component: {fileID: 618683832}
+  - component: {fileID: 618683834}
   - component: {fileID: 618683831}
   m_Layer: 0
   m_Name: 'Close '
@@ -2203,7 +2204,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 618683832}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 618683834}
+        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
+        m_MethodName: LoadScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &618683832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2242,6 +2255,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 618683829}
   m_CullTransparentMesh: 1
+--- !u!114 &618683834
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 618683829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88e5db53e4ae34f6d9e003a249a361c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SceneLoader
+  sceneName: TestInitialuserFlow
 --- !u!1001 &625050996
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4740,7 +4766,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1472226456}
-  - component: {fileID: 1472226455}
+  - component: {fileID: 1472226457}
   m_Layer: 0
   m_Name: ModuleManager
   m_TagString: Untagged
@@ -4748,18 +4774,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1472226455
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1472226454}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d52003578beee142b76081ce64dd076, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ModuleManager
 --- !u!4 &1472226456
 Transform:
   m_ObjectHideFlags: 0
@@ -4775,6 +4789,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1472226457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1472226454}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d52003578beee142b76081ce64dd076, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ModuleManager
+  statusCell: {fileID: 3198730952102073601}
+  statusDigestive: {fileID: 8077710215103226269}
+  digestiveModuleId: 1
+  cellModuleId: 2
+  notStartedStatusKey: estados/notstarted
+  completedStatusKey: estados/completed
+  inProgressStatusKey: estados/inprogress
 --- !u!1001 &1480873894
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6902,6 +6935,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7330851187357829710, guid: f88b6a79e90574d0c8553077f58c9f80, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7345366610075873404, guid: f88b6a79e90574d0c8553077f58c9f80, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9101927310165626604, guid: f88b6a79e90574d0c8553077f58c9f80, type: 3}
       propertyPath: moduleId
       value: 1
@@ -6926,6 +6967,11 @@ PrefabInstance:
 --- !u!4 &3198730952102073600 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6377565657969438062, guid: f88b6a79e90574d0c8553077f58c9f80, type: 3}
+  m_PrefabInstance: {fileID: 3198730952102073599}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &3198730952102073601 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 7035518579818080007, guid: f88b6a79e90574d0c8553077f58c9f80, type: 3}
   m_PrefabInstance: {fileID: 3198730952102073599}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8077710215103226267
@@ -7004,6 +7050,11 @@ PrefabInstance:
 --- !u!4 &8077710215103226268 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1608518248391194875, guid: a3a7dc3e28fe142d585d9c883b95e723, type: 3}
+  m_PrefabInstance: {fileID: 8077710215103226267}
+  m_PrefabAsset: {fileID: 0}
+--- !u!212 &8077710215103226269 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 2952271546086772733, guid: a3a7dc3e28fe142d585d9c883b95e723, type: 3}
   m_PrefabInstance: {fileID: 8077710215103226267}
   m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
