@@ -1,0 +1,66 @@
+using UnityEngine;
+
+public class IslandInteraction : MonoBehaviour
+{
+    public GameObject bookSystem;
+    public GameObject canvasTopHUD;
+    public GameObject canvasBottomInfo;
+    
+    [Header("Module Configuration")]
+    [SerializeField] private int moduleId;
+    //LayerMask layerMask;
+
+
+    void Update()
+    {
+        // TOUCH (movil)
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+
+            if (touch.phase == TouchPhase.Began)
+            {
+                CheckHit(touch.position);
+            }
+        }
+
+        // MOUSE (editor Unity)
+        if (Input.GetMouseButtonDown(0))
+        {
+            CheckHit(Input.mousePosition);
+        }
+    }
+
+    void CheckHit(Vector2 position)
+    {
+        Ray ray = Camera.main.ScreenPointToRay(position);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            if (hit.transform == transform || hit.transform.IsChildOf(transform))
+{
+    OpenBook();
+}
+        }
+    }
+
+    void OpenBook()
+    {
+        Debug.Log($"Isla tocada (ID Módulo: {moduleId})");
+        
+        // Consultar el nombre del módulo en la base de datos
+        if (ModuleManager.Instance != null)
+        {
+            ModuleManager.Instance.GetAndLogModuleName(moduleId);
+        }
+        else
+        {
+            Debug.LogWarning("ModuleManager no encontrado en la escena.");
+        }
+
+        canvasTopHUD.SetActive(false);
+        canvasBottomInfo.SetActive(false);
+        bookSystem.SetActive(true);
+    }
+}
