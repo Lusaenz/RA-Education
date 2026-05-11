@@ -27,6 +27,9 @@ EditorBuildSettings:
     path: Assets/Scenes/SelectGameExample.unity
     guid: ccdf8fe5551e0d14488d5cb44faaafc1
   - enabled: 1
+    path: Assets/Scenes/RAScreen.unity
+    guid: 9c467be440838462487fe2e239de92d0
+  - enabled: 1
     path: Assets/Scenes/LoginStudent.unity
     guid: 1b6817311b4ccaf4a8798e64fdc8cb45
   - enabled: 1
