@@ -5,7 +5,7 @@ public class PuzzleManager : MonoBehaviour
     public static PuzzleManager instance;
 
     public int correctItems = 0;
-    public int totalItems = 8; // ajusta según tu puzzle
+    public int totalItems = 8;
     public int score = 0;
 
     bool hasWon = false;
