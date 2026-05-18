@@ -2,10 +2,11 @@ using UnityEngine;
 
 public class SnapPiece : MonoBehaviour
 {
+    public PuzzleManager puzzleManager;
     public Transform snapPoint;
     public Transform targetSnapPoint;
 
-    public float snapDistance = 0.1f;
+    public float snapDistance = 0.08f;
 
     private bool isSnapped = false;
     private float debugDistance;
@@ -26,7 +27,7 @@ public class SnapPiece : MonoBehaviour
 
 void OnGUI()
 {
-    GUI.Label(new Rect(10, 10, 400, 40), "Distancia: " + debugDistance);
+    GUI.Label(new Rect(10, 10, 400, 40), "Prueba: " + debugDistance);
 }
     void Snap()
     {
@@ -44,6 +45,7 @@ void OnGUI()
         isSnapped = true;
 
         Debug.Log("Piezas unidas");
+        
     }
 
     Transform CreateOrGetGroup(Transform other)
