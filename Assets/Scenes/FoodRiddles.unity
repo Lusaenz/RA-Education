@@ -320,7 +320,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e1fd18c128731543a9f9209a07034df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DragHandler
-  id: 3
+  itemId: 
+  correctZone: 
+  itemImage: {fileID: 178454585}
 --- !u!114 &178454585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -810,7 +812,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e1fd18c128731543a9f9209a07034df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DragHandler
-  id: 2
+  itemId: 
+  correctZone: 
+  itemImage: {fileID: 594409725}
 --- !u!114 &594409725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -884,7 +888,6 @@ GameObject:
   - component: {fileID: 622740293}
   - component: {fileID: 622740292}
   - component: {fileID: 622740291}
-  - component: {fileID: 622740295}
   - component: {fileID: 622740296}
   m_Layer: 5
   m_Name: item
@@ -936,7 +939,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e1fd18c128731543a9f9209a07034df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DragHandler
-  id: 1
+  itemId: 
+  correctZone: 
+  itemImage: {fileID: 622740293}
 --- !u!114 &622740293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -975,18 +980,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 622740289}
   m_CullTransparentMesh: 1
---- !u!114 &622740295
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 622740289}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e08a631b61f9054cbaf344f1c539de5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::destroy
 --- !u!95 &622740296
 Animator:
   serializedVersion: 7
@@ -1469,7 +1462,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e1fd18c128731543a9f9209a07034df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DragHandler
-  id: 4
+  itemId: 
+  correctZone: 
+  itemImage: {fileID: 1092103925}
 --- !u!114 &1092103925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1680,7 +1675,6 @@ GameObject:
   - component: {fileID: 1111811862}
   - component: {fileID: 1111811861}
   - component: {fileID: 1111811860}
-  - component: {fileID: 1111811859}
   - component: {fileID: 1111811858}
   m_Layer: 5
   m_Name: item (4)
@@ -1730,18 +1724,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1111811859
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1111811856}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e08a631b61f9054cbaf344f1c539de5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::destroy
 --- !u!225 &1111811860
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1766,7 +1748,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e1fd18c128731543a9f9209a07034df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DragHandler
-  id: 5
+  itemId: 
+  correctZone: 
+  itemImage: {fileID: 1111811862}
 --- !u!114 &1111811862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1908,7 +1892,6 @@ GameObject:
   - component: {fileID: 1294580867}
   - component: {fileID: 1294580866}
   - component: {fileID: 1294580865}
-  - component: {fileID: 1294580864}
   - component: {fileID: 1294580863}
   m_Layer: 5
   m_Name: item (5)
@@ -1958,18 +1941,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &1294580864
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1294580861}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e08a631b61f9054cbaf344f1c539de5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::destroy
 --- !u!225 &1294580865
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1994,7 +1965,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e1fd18c128731543a9f9209a07034df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DragHandler
-  id: 6
+  itemId: 
+  correctZone: 
+  itemImage: {fileID: 1294580867}
 --- !u!114 &1294580867
 MonoBehaviour:
   m_ObjectHideFlags: 0

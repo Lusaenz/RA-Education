@@ -2,11 +2,11 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 /// <summary>
 /// Vista de registro para estudiantes.
@@ -25,10 +25,23 @@ public class RegisterStudentView : MonoBehaviour
     public Text ErrorTextPassword;
     public Text RegisterConfirmationText;
 
+    [Header("Mobile Keyboard")]
+    [SerializeField] RectTransform keyboardShiftRoot;
+    [SerializeField] ScrollRect formScrollRect;
+    [SerializeField] float keyboardPadding = 80f;
+    [SerializeField] float keyboardMoveSpeed = 12f;
+    [SerializeField] float keyboardFallbackHeightRatio = 0.38f;
+    [SerializeField] float maxKeyboardShift = 500f;
+
     RegisterPresenter presenter;
     DegreeSelector degreeSelector;
     bool isRegistering = false;
     Coroutine clearErrorCoroutine;
+    RectTransform cachedShiftRect;
+    Canvas rootCanvas;
+    Vector2 initialShiftPosition;
+    float currentKeyboardShift = 0f;
+    readonly List<TMP_InputField> trackedInputs = new List<TMP_InputField>();
 
     /// <summary>
     /// Resuelve dependencias de escena y enlaza eventos de botones.
@@ -67,6 +80,18 @@ public class RegisterStudentView : MonoBehaviour
         {
             degreeSelector.degreeInputField = InputDegree;
         }
+
+        CacheKeyboardSupportReferences();
+    }
+
+    void LateUpdate()
+    {
+        UpdateMobileKeyboardOffset();
+    }
+
+    void OnDisable()
+    {
+        RestoreKeyboardPositionImmediately();
     }
 
     /// <summary>
@@ -215,5 +240,248 @@ public class RegisterStudentView : MonoBehaviour
         yield return new WaitForSeconds(seconds);
         ClearAllErrors();
         clearErrorCoroutine = null;
+    }
+
+    void CacheKeyboardSupportReferences()
+    {
+        trackedInputs.Clear();
+        RegisterTrackedInput(InputName);
+        RegisterTrackedInput(InputDegree);
+        RegisterTrackedInput(InputAge);
+        RegisterTrackedInput(InputPassword);
+
+        if (degreeSelector != null)
+        {
+            RegisterTrackedInput(degreeSelector.questionInputField);
+            RegisterTrackedInput(degreeSelector.answerInputField);
+        }
+
+        if (formScrollRect == null)
+        {
+            formScrollRect = FindFirstObjectByType<ScrollRect>();
+        }
+
+        rootCanvas = ResolveRootCanvas();
+
+        if (keyboardShiftRoot == null && formScrollRect != null && formScrollRect.content != null)
+        {
+            keyboardShiftRoot = formScrollRect.content;
+        }
+
+        if (keyboardShiftRoot == null)
+        {
+            keyboardShiftRoot = FindBestKeyboardShiftRoot();
+        }
+
+        cachedShiftRect = keyboardShiftRoot;
+
+        if (cachedShiftRect != null)
+        {
+            initialShiftPosition = cachedShiftRect.anchoredPosition;
+        }
+    }
+
+    void UpdateMobileKeyboardOffset()
+    {
+        if (!Application.isMobilePlatform || cachedShiftRect == null)
+        {
+            return;
+        }
+
+        TMP_InputField selectedInput = GetSelectedInputField();
+        if (selectedInput == null || !selectedInput.isFocused)
+        {
+            MoveKeyboardShiftTowards(0f);
+            return;
+        }
+
+        float keyboardHeight = GetKeyboardHeight();
+        if (keyboardHeight <= 0f)
+        {
+            MoveKeyboardShiftTowards(0f);
+            return;
+        }
+
+        float overlap = CalculateInputOverlapWithKeyboard(selectedInput, keyboardHeight);
+        float targetShift = Mathf.Clamp(overlap, 0f, maxKeyboardShift);
+        MoveKeyboardShiftTowards(targetShift);
+    }
+
+    TMP_InputField GetSelectedInputField()
+    {
+        if (EventSystem.current == null)
+        {
+            return null;
+        }
+
+        GameObject selectedObject = EventSystem.current.currentSelectedGameObject;
+        if (selectedObject == null)
+        {
+            return null;
+        }
+
+        TMP_InputField selectedInput = selectedObject.GetComponent<TMP_InputField>();
+        if (selectedInput == null)
+        {
+            return null;
+        }
+
+        return trackedInputs.Contains(selectedInput) ? selectedInput : null;
+    }
+
+    float GetKeyboardHeight()
+    {
+        Rect keyboardArea = TouchScreenKeyboard.area;
+        if (keyboardArea.height > 0f)
+        {
+            return keyboardArea.height;
+        }
+
+        if (TouchScreenKeyboard.visible)
+        {
+            return Screen.height * keyboardFallbackHeightRatio;
+        }
+
+        return 0f;
+    }
+
+    float CalculateInputOverlapWithKeyboard(TMP_InputField inputField, float keyboardHeight)
+    {
+        RectTransform inputRect = inputField.transform as RectTransform;
+        if (inputRect == null)
+        {
+            return 0f;
+        }
+
+        Vector3[] corners = new Vector3[4];
+        inputRect.GetWorldCorners(corners);
+
+        Camera uiCamera = null;
+        if (rootCanvas != null && rootCanvas.renderMode != RenderMode.ScreenSpaceOverlay)
+        {
+            uiCamera = rootCanvas.worldCamera;
+        }
+
+        float inputBottomY = RectTransformUtility.WorldToScreenPoint(uiCamera, corners[0]).y;
+        float keyboardTopY = keyboardHeight + keyboardPadding;
+        return keyboardTopY - inputBottomY;
+    }
+
+    void MoveKeyboardShiftTowards(float targetShift)
+    {
+        currentKeyboardShift = Mathf.Lerp(currentKeyboardShift, targetShift, Time.unscaledDeltaTime * keyboardMoveSpeed);
+
+        if (Mathf.Abs(currentKeyboardShift - targetShift) < 0.5f)
+        {
+            currentKeyboardShift = targetShift;
+        }
+
+        cachedShiftRect.anchoredPosition = initialShiftPosition + new Vector2(0f, currentKeyboardShift);
+    }
+
+    void RestoreKeyboardPositionImmediately()
+    {
+        currentKeyboardShift = 0f;
+
+        if (cachedShiftRect != null)
+        {
+            cachedShiftRect.anchoredPosition = initialShiftPosition;
+        }
+    }
+
+    void RegisterTrackedInput(TMP_InputField inputField)
+    {
+        if (inputField != null && !trackedInputs.Contains(inputField))
+        {
+            trackedInputs.Add(inputField);
+        }
+    }
+
+    RectTransform FindBestKeyboardShiftRoot()
+    {
+        List<RectTransform> inputRects = trackedInputs
+            .Where(input => input != null)
+            .Select(input => input.transform as RectTransform)
+            .Where(rect => rect != null)
+            .ToList();
+
+        if (inputRects.Count == 0)
+        {
+            return rootCanvas != null ? rootCanvas.transform as RectTransform : null;
+        }
+
+        Transform commonAncestor = inputRects[0];
+        for (int i = 1; i < inputRects.Count; i++)
+        {
+            commonAncestor = FindCommonAncestor(commonAncestor, inputRects[i]);
+            if (commonAncestor == null)
+            {
+                break;
+            }
+        }
+
+        RectTransform candidate = commonAncestor as RectTransform;
+        RectTransform canvasRect = rootCanvas != null ? rootCanvas.transform as RectTransform : null;
+
+        if (candidate == canvasRect)
+        {
+            candidate = inputRects[0].parent as RectTransform;
+        }
+
+        if (candidate != null)
+        {
+            return candidate;
+        }
+
+        return inputRects[0].parent as RectTransform;
+    }
+
+    Transform FindCommonAncestor(Transform a, Transform b)
+    {
+        if (a == null || b == null)
+        {
+            return null;
+        }
+
+        HashSet<Transform> ancestors = new HashSet<Transform>();
+        Transform current = a;
+        while (current != null)
+        {
+            ancestors.Add(current);
+            current = current.parent;
+        }
+
+        current = b;
+        while (current != null)
+        {
+            if (ancestors.Contains(current))
+            {
+                return current;
+            }
+
+            current = current.parent;
+        }
+
+        return null;
+    }
+
+    Canvas ResolveRootCanvas()
+    {
+        foreach (TMP_InputField inputField in trackedInputs)
+        {
+            if (inputField == null)
+            {
+                continue;
+            }
+
+            Canvas canvas = inputField.GetComponentInParent<Canvas>();
+            if (canvas != null)
+            {
+                return canvas.rootCanvas;
+            }
+        }
+
+        Canvas fallbackCanvas = FindFirstObjectByType<Canvas>();
+        return fallbackCanvas != null ? fallbackCanvas.rootCanvas : null;
     }
 }

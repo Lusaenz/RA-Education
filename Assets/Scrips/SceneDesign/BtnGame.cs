@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class BtnGame : MonoBehaviour
 {
-     public string sceneName = "GameSelection";
+    public string sceneName = "GameSelection";
 
     public void OpenGameScene()
     {
