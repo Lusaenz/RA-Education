@@ -896,7 +896,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &255507242
 RectTransform:
   m_ObjectHideFlags: 0
@@ -920,7 +920,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -27.957825, y: -1.2280273}
+  m_AnchoredPosition: {x: -27.957764, y: -1.2280273}
   m_SizeDelta: {x: -165.0393, y: -163.6348}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &255507243
@@ -1593,7 +1593,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &463391651
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2395,7 +2395,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &554627191
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5941,7 +5941,7 @@ GameObject:
   - component: {fileID: 1472226456}
   - component: {fileID: 1472226457}
   m_Layer: 0
-  m_Name: ModuleManager
+  m_Name: EstadosController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

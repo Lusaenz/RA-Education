@@ -55,7 +55,7 @@ Assets/Scrips/Core/Data/
  DatabaseController.cs
  DatabaseLoader.cs
  DatabaseManager.cs
- ModuleManager.cs
+ EstadoManager.cs
  Repository/
   ActivityRepository.cs
   DegreeRepository.cs
@@ -97,10 +97,13 @@ Assets/Scrips/Ripples/
 Assets/Scrips/SceneDesign/
  BookAnimation.cs
  BoxGameSelector.cs
+ BtnGame.cs
+ BtnRA.cs
  GameInfoUI.cs
  IslandInteraction.cs
  PreviewImageLoader.cs
  RA/
+  ARModelController.cs
   InteractablePart.cs
   UIManager.cs
  RolePreferences.cs
