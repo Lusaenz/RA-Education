@@ -1,16 +1,20 @@
 using System.Collections;
-using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class GameInfoUI : MonoBehaviour
 {
+    private const int DefaultGameActivityId = 1;
+
     [FormerlySerializedAs("activityTitleText")]
     public TextMeshProUGUI titleText;
+
     [FormerlySerializedAs("activityDescriptionText")]
     public TextMeshProUGUI descriptionText;
+
     public Image previewImage;
     public GameObject panel;
     public GameData[] games;
@@ -28,6 +32,7 @@ public class GameInfoUI : MonoBehaviour
     {
         activityService = new ActivityService();
         gameActivityService = new GameActivityService();
+        ResolveFallbackGameDefinitions();
     }
 
     private void Start()
@@ -37,55 +42,29 @@ public class GameInfoUI : MonoBehaviour
 
     private IEnumerator LoadSelectedActivityInfo()
     {
-        int selectedGameActivityId = PlayerPrefs.GetInt("selected_activity_id", 1);
-        GameActivityData gameActivity = null;
-
-        yield return StartCoroutine(gameActivityService.GetGameActivity(selectedGameActivityId, result =>
-        {
-            gameActivity = result;
-        }));
-
-        if (gameActivity == null)
-        {
-            SetTexts("Actividad no disponible", "No se pudo cargar la configuracion del juego.");
-            yield break;
-        }
-
-        ActivityData activity = null;
-        yield return StartCoroutine(activityService.GetActivity(gameActivity.id_activity, result =>
-        {
-            activity = result;
-        }));
-
-        if (activity == null)
-        {
-            SetTexts("Actividad no disponible", "No se pudo cargar la informacion de la actividad.");
-            yield break;
-        }
-
-        SetTexts(activity.type, activity.description);
-
-        // Cargar imagen de preview dinámicamente desde addressable
-        if (previewImageLoader != null)
-        {
-            previewImageLoader.LoadPreviewForSelectedGame();
-        }
-        else
-        {
-            Debug.LogWarning("GameInfoUI: PreviewImageLoader no está asignado. Usando sprite estático del array GameData.");
-        }
+        int selectedGameActivityId = NormalizeGameActivityId(PlayerPrefs.GetInt("selected_activity_id", DefaultGameActivityId));
+        yield return StartCoroutine(LoadGameInfo(selectedGameActivityId, true));
     }
 
     public void ShowGame(int gameID)
     {
-        currentGameID = gameID;
-        StartCoroutine(LoadAndShowGameFromDatabase(gameID));
+        currentGameID = NormalizeGameActivityId(gameID);
+        PlayerPrefs.SetInt("selected_activity_id", currentGameID);
+        PlayerPrefs.Save();
+
+        if (panel != null)
+        {
+            panel.SetActive(true);
+        }
+
+        StartCoroutine(LoadGameInfo(currentGameID, false));
     }
 
-    private IEnumerator LoadAndShowGameFromDatabase(int gameActivityId)
+    private IEnumerator LoadGameInfo(int gameActivityId, bool keepPanelClosedOnFailure)
     {
-        GameActivityData gameActivity = null;
+        ResolveFallbackGameDefinitions();
 
+        GameActivityData gameActivity = null;
         yield return StartCoroutine(gameActivityService.GetGameActivity(gameActivityId, result =>
         {
             gameActivity = result;
@@ -93,7 +72,15 @@ public class GameInfoUI : MonoBehaviour
 
         if (gameActivity == null)
         {
-            SetTexts("Actividad no disponible", "No se pudo cargar la configuracion del juego.");
+            if (!TryApplyFallbackGameData(gameActivityId))
+            {
+                SetTexts("Actividad no disponible", "No se pudo cargar la configuracion del juego.");
+                if (keepPanelClosedOnFailure && panel != null)
+                {
+                    panel.SetActive(false);
+                }
+            }
+
             yield break;
         }
 
@@ -105,29 +92,111 @@ public class GameInfoUI : MonoBehaviour
 
         if (activity == null)
         {
-            SetTexts("Actividad no disponible", "No se pudo cargar la informacion de la actividad.");
+            if (!TryApplyFallbackGameData(gameActivityId))
+            {
+                SetTexts("Actividad no disponible", "No se pudo cargar la informacion de la actividad.");
+                if (keepPanelClosedOnFailure && panel != null)
+                {
+                    panel.SetActive(false);
+                }
+            }
+
             yield break;
         }
 
         SetTexts(activity.type, activity.description);
+        ApplyPreviewForGame(gameActivityId);
 
-        // Cargar imagen de preview dinámicamente desde addressable
-        if (previewImageLoader != null)
-        {
-            previewImageLoader.LoadPreviewForSelectedGame();
-        }
-        else if (gameActivityId < games.Length && games[gameActivityId] != null)
-        {
-            // Fallback al array estático si está disponible
-            if (previewImage != null)
-            {
-                previewImage.sprite = games[gameActivityId].preview;
-            }
-        }
-
-        if (panel != null)
+        if (panel != null && !panel.activeSelf)
         {
             panel.SetActive(true);
+        }
+    }
+
+    private void ResolveFallbackGameDefinitions()
+    {
+        if (games != null && games.Length > 0)
+        {
+            return;
+        }
+
+        GameInfoUI[] candidates = FindObjectsByType<GameInfoUI>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+        foreach (GameInfoUI candidate in candidates)
+        {
+            if (candidate == null || candidate == this)
+            {
+                continue;
+            }
+
+            if (candidate.games != null && candidate.games.Length > 0)
+            {
+                games = candidate.games;
+                return;
+            }
+        }
+    }
+
+    private bool TryApplyFallbackGameData(int gameActivityId)
+    {
+        ResolveFallbackGameDefinitions();
+        GameData fallbackData = GetFallbackGameData(gameActivityId);
+        if (fallbackData == null)
+        {
+            return false;
+        }
+
+        SetTexts(fallbackData.title, fallbackData.description);
+
+        if (previewImageLoader != null)
+        {
+            previewImageLoader.LoadPreviewByGameId(gameActivityId);
+        }
+        else if (previewImage != null && fallbackData.preview != null)
+        {
+            previewImage.sprite = fallbackData.preview;
+        }
+
+        if (panel != null && !panel.activeSelf)
+        {
+            panel.SetActive(true);
+        }
+
+        return true;
+    }
+
+    private GameData GetFallbackGameData(int gameActivityId)
+    {
+        if (games == null || games.Length == 0)
+        {
+            return null;
+        }
+
+        int zeroBasedIndex = gameActivityId - 1;
+        if (zeroBasedIndex >= 0 && zeroBasedIndex < games.Length && games[zeroBasedIndex] != null)
+        {
+            return games[zeroBasedIndex];
+        }
+
+        if (gameActivityId >= 0 && gameActivityId < games.Length && games[gameActivityId] != null)
+        {
+            return games[gameActivityId];
+        }
+
+        return games[0];
+    }
+
+    private void ApplyPreviewForGame(int gameActivityId)
+    {
+        if (previewImageLoader != null)
+        {
+            previewImageLoader.LoadPreviewByGameId(gameActivityId);
+            return;
+        }
+
+        GameData fallbackData = GetFallbackGameData(gameActivityId);
+        if (previewImage != null && fallbackData != null && fallbackData.preview != null)
+        {
+            previewImage.sprite = fallbackData.preview;
         }
     }
 
@@ -141,7 +210,7 @@ public class GameInfoUI : MonoBehaviour
 
     public void PlayGame()
     {
-        // Guardar el gameID actual en PlayerPrefs para que la escena de DragAndDrop lo obtenga
+        currentGameID = NormalizeGameActivityId(currentGameID);
         PlayerPrefs.SetInt("selected_activity_id", currentGameID);
         PlayerPrefs.Save();
         GoToDragAndDrop();
@@ -164,14 +233,28 @@ public class GameInfoUI : MonoBehaviour
             descriptionText.text = description;
         }
     }
+
+    private int NormalizeGameActivityId(int gameActivityId)
+    {
+        int normalizedId = gameActivityId > 0 ? gameActivityId : DefaultGameActivityId;
+
+        if (normalizedId != gameActivityId)
+        {
+            Debug.LogWarning($"GameInfoUI: gameActivityId inválido ({gameActivityId}). Se usará {normalizedId}.");
+        }
+
+        return normalizedId;
+    }
 }
 
 [System.Serializable]
 public class GameData
 {
     public string title;
+
     [TextArea(3, 5)]
     public string description;
+
     public Sprite preview;
     public string sceneName;
 }

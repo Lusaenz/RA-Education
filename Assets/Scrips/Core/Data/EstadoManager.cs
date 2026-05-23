@@ -10,7 +10,7 @@ using UnityEngine.ResourceManagement.AsyncOperations;
 /// Manager encargado de la logica relacionada con los modulos.
 /// Permite obtener informacion de los modulos desde la base de datos y manejar su visualizacion.
 /// </summary>
-public class ModuleManager : MonoBehaviour
+public class EstadoManager : MonoBehaviour
 {
     private const string StatusNotStarted = "nostarted";
     private const string StatusInProgress = "inprogress";
@@ -29,7 +29,7 @@ public class ModuleManager : MonoBehaviour
     [SerializeField] private string completedStatusKey = "estados/completed";
     [SerializeField] private string inProgressStatusKey = "estados/inprogress";
 
-    public static ModuleManager Instance { get; private set; }
+    public static EstadoManager Instance { get; private set; }
 
     private ModulesRepository modulesRepository;
     private ProgressRepository progressRepository;

@@ -2,15 +2,16 @@ using UnityEngine;
 
 public class ResultActivityService
 {
-    private readonly ResultActivityRepository _repository;
-
-    public ResultActivityService()
-    {
-        _repository = new ResultActivityRepository();
-    }
+    private ResultActivityRepository repository;
 
     public void SaveResult(int idUser, int idActivity, int score, int star, int attempts, string completedAt)
     {
+        if (!EnsureRepository())
+        {
+            Debug.LogWarning("[ResultActivityService] No se pudo guardar el resultado porque la base de datos no esta disponible.");
+            return;
+        }
+
         ResultActivityData result = new ResultActivityData
         {
             id_user = idUser,
@@ -21,11 +22,32 @@ public class ResultActivityService
             completed_at = completedAt
         };
 
-        _repository.Insert(result);
+        repository.Insert(result);
     }
 
     public int GetTotalStarsForUser(int userId)
     {
-        return _repository.GetTotalStarsByUser(userId);
+        if (!EnsureRepository())
+        {
+            return 0;
+        }
+
+        return repository.GetTotalStarsByUser(userId);
+    }
+
+    private bool EnsureRepository()
+    {
+        if (repository != null)
+        {
+            return true;
+        }
+
+        if (DatabaseManager.Instance == null || !DatabaseManager.Instance.IsReady)
+        {
+            return false;
+        }
+
+        repository = new ResultActivityRepository();
+        return true;
     }
 }
