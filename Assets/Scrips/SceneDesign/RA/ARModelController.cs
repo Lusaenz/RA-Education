@@ -5,32 +5,33 @@ public class ARModelControllerPro : MonoBehaviour
 {
     [Header("Rotation")]
     public float rotationSpeed = 0.2f;
-    public float smoothSpeed = 10f;
+    public float smoothSpeed = 12f;
 
     [Header("Zoom")]
-    public float zoomSpeed = 0.5f;
-    public float minScale = 0.8f;
-    public float maxScale = 4f;
+    public float zoomSpeed = 0.3f;
+    public float minScale = 0.05f;
+    public float maxScale = 0.35f;
 
-    [Header("Look At Camera (suave)")]
-    [Range(0f, 1f)]
-    public float lookWeight = 0.3f;      // cuánto “mira” a la cámara (0–1)
-    public float lookSmooth = 6f;        // suavizado de esa mirada
-    public float maxPitch = 25f;         // límite de inclinación vertical (grados)
+    [Header("Vertical Rotation Limits")]
+    public float minRotationX = -80f;
+    public float maxRotationX = 80f;
 
+    // Rotacion
     private float targetRotationY;
     private float currentRotationY;
 
-    private Vector3 initialLocalPos;
-    private float currentPitch;          // inclinación actual (X)
-
+    private float targetRotationX;
+    private float currentRotationX;
     void Start()
     {
-        initialLocalPos = transform.localPosition;
-        currentRotationY = transform.localEulerAngles.y;
-        targetRotationY = currentRotationY;
-    }
+        Vector3 angles = transform.localEulerAngles;
 
+        currentRotationY = angles.y;
+        targetRotationY = angles.y;
+
+        currentRotationX = angles.x;
+        targetRotationX = angles.x;
+    }
     void Update()
     {
         if (IsTouchOverUI()) return;
@@ -41,74 +42,86 @@ public class ARModelControllerPro : MonoBehaviour
 
     void LateUpdate()
     {
-        SmoothTransform();
+        SmoothRotation();
     }
-
-    // ---------------- ROTACIÓN ----------------
-
+    // Rotacion
     void HandleRotationInput()
     {
         // Mouse
         if (Input.GetMouseButton(0))
         {
-            targetRotationY += Input.GetAxis("Mouse X") * rotationSpeed * 200f;
-        }
+            // Horizontal = Y
+            targetRotationY +=
+                Input.GetAxis("Mouse X") *
+                rotationSpeed *
+                400f;
 
+            // Vertical = X
+            targetRotationX -=
+                Input.GetAxis("Mouse Y") *
+                rotationSpeed *
+                250f;
+        }
         // Touch
         if (Input.touchCount == 1)
         {
             Touch t = Input.GetTouch(0);
+
             if (t.phase == TouchPhase.Moved)
             {
-                targetRotationY += t.deltaPosition.x * rotationSpeed;
+                // Horizontal
+                targetRotationY +=
+                    t.deltaPosition.x *
+                    rotationSpeed *
+                    1.5f;
+                // Vertical
+                targetRotationX -=
+                    t.deltaPosition.y *
+                    rotationSpeed *
+                    1.2f;
             }
         }
+        targetRotationX = Mathf.Clamp(
+            targetRotationX,
+            minRotationX,
+            maxRotationX
+        );
 
         targetRotationY = NormalizeAngle(targetRotationY);
     }
-
-    void SmoothTransform()
+    void SmoothRotation()
     {
-        // 1) Rotación base en Y (360°)
-        currentRotationY = Mathf.LerpAngle(currentRotationY, targetRotationY, Time.deltaTime * smoothSpeed);
+        currentRotationY = Mathf.LerpAngle(
+            currentRotationY,
+            targetRotationY,
+            Time.deltaTime * smoothSpeed
+        );
 
-        // 2) Cálculo de inclinación hacia cámara (solo pitch)
-        float targetPitch = 0f;
+        currentRotationX = Mathf.LerpAngle(
+            currentRotationX,
+            targetRotationX,
+            Time.deltaTime * smoothSpeed
+        );
 
-        if (Camera.main != null)
-        {
-            Vector3 toCam = Camera.main.transform.position - transform.position;
-
-            // Proyectamos para obtener ángulo vertical (pitch)
-            float verticalAngle = Vector3.SignedAngle(
-                Vector3.ProjectOnPlane(toCam, transform.right), // referencia
-                toCam,
-                transform.right
+        transform.localRotation =
+            Quaternion.Euler(
+                currentRotationX,
+                currentRotationY,
+                0f
             );
-
-            // Limitamos y ponderamos
-            targetPitch = Mathf.Clamp(verticalAngle, -maxPitch, maxPitch) * lookWeight;
-        }
-
-        // Suavizamos la inclinación
-        currentPitch = Mathf.Lerp(currentPitch, targetPitch, Time.deltaTime * lookSmooth);
-
-        // 3) Aplicamos rotación final (solo X + Y)
-        transform.localRotation = Quaternion.Euler(currentPitch, currentRotationY, 0f);
-
-        // 4) Posición fija (no deriva)
-        transform.localPosition = initialLocalPos;
     }
-
-    // ---------------- ZOOM ----------------
-
+    // ZOOM
     void HandleZoom()
     {
         float zoomInput = 0f;
 
+        // Mouse wheel
         float scroll = Input.GetAxis("Mouse ScrollWheel");
-        if (scroll != 0) zoomInput = scroll;
 
+        if (scroll != 0)
+            zoomInput = scroll;
+
+        // Pinch móvil
         if (Input.touchCount == 2)
         {
             Touch t1 = Input.GetTouch(0);
@@ -131,35 +144,48 @@ public class ARModelControllerPro : MonoBehaviour
 
     void ApplyZoom(float increment)
     {
-        Vector3 newScale = transform.localScale + Vector3.one * increment * zoomSpeed;
-        float clamped = Mathf.Clamp(newScale.x, minScale, maxScale);
+        Vector3 newScale =
+            transform.localScale +
+            Vector3.one * increment * zoomSpeed;
 
-        transform.localScale = new Vector3(clamped, clamped, clamped);
+        float clamped = Mathf.Clamp(
+            newScale.x,
+            minScale,
+            maxScale
+        );
 
-        // asegurar estabilidad
-        transform.localPosition = initialLocalPos;
+        transform.localScale =
+            new Vector3(
+                clamped,
+                clamped,
+                clamped
+            );
     }
-
-    // ---------------- UTILS ----------------
 
     float NormalizeAngle(float angle)
     {
         angle %= 360f;
-        if (angle < 0) angle += 360f;
+
+        if (angle < 0)
+            angle += 360f;
+
         return angle;
     }
 
     bool IsTouchOverUI()
     {
+        // Mouse
         if (Input.GetMouseButton(0))
         {
             if (EventSystem.current.IsPointerOverGameObject())
                 return true;
         }
 
+        // Touch
         if (Input.touchCount > 0)
         {
             Touch t = Input.GetTouch(0);
+
             if (EventSystem.current.IsPointerOverGameObject(t.fingerId))
                 return true;
         }
