@@ -66,22 +66,20 @@ Assets/Scrips/Core/Data/
   UserRepository.cs
  UIVisualizer.cs
  UserSessionManager.cs
-Assets/Scrips/Core/
- Security/PasswordHasher.cs
- Service/
-  ActivityService.cs
-  AuthService.cs
-  DegreeService.cs
-  GameActivityService.cs
-  ResultActivityService.cs
-  SecurityQuestionsService.cs
- Session/
-  AutoLoginService.cs
-  IAutoLoginService.cs
-  ISessionPersistence.cs
-  SessionBootstrapper.cs
-  SessionData.cs
-  SessionPersistence.cs
+Assets/Scrips/Core/Service/
+ ActivityService.cs
+ AuthService.cs
+ DegreeService.cs
+ GameActivityService.cs
+ ResultActivityService.cs
+ SecurityQuestionsService.cs
+Assets/Scrips/Core/Session/
+ AutoLoginService.cs
+ IAutoLoginService.cs
+ ISessionPersistence.cs
+ SessionBootstrapper.cs
+ SessionData.cs
+ SessionPersistence.cs
 Assets/Scrips/Drop_Slot/
  DragHandler.cs
  DropSlot.cs
@@ -517,6 +515,9 @@ Library/ScriptAssemblies/
  UnityEngine.XR.LegacyInputHelpers.dll
  VuforiaEditorScripts.dll
  VuforiaScripts.dll
+Temp/bin/Debug/
+ RA-Education.Security.dll
+ RA-Education.Validation.dll
 
 [analyzerReferences]
 ../../../../Program Files/Unity/Hub/Editor/6000.3.8f1/Editor/Data/Tools/BuildPipeline/Unity.SourceGenerators/

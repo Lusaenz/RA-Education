@@ -35,8 +35,9 @@ public class LoginPresenter
     public LoginResult LoginStudent(string name, string pass)
     {
         var result = new LoginResult();
+        string normalizedName = name?.Trim();
         
-        if (string.IsNullOrEmpty(name))
+        if (string.IsNullOrWhiteSpace(normalizedName))
             result.NameError = "Escribe tu nombre completo.";
         if (string.IsNullOrEmpty(pass))
             result.PasswordError = "Escribe tu contraseña.";
@@ -44,7 +45,7 @@ public class LoginPresenter
         if (!string.IsNullOrEmpty(result.NameError) || !string.IsNullOrEmpty(result.PasswordError))
             return result;
 
-        result.User = authService.LoginStudent(name, pass);
+        result.User = authService.LoginStudent(normalizedName, pass);
         if (result.User == null)
             result.GeneralMessage = "No encontramos tu cuenta. Revisa tus datos o regístrate";
         else
