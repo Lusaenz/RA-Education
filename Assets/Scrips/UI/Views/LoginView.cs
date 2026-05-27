@@ -4,27 +4,34 @@ using TMPro;
 using UnityEngine.SceneManagement;
 
 /// <summary>
-/// Vista de login para estudiantes.
-/// Captura entradas, delega la autenticacion al presenter y representa mensajes de error.
+/// Vista de login unificada para estudiantes y profesores.
+/// Captura entradas, delega la autenticacion al presenter segun el rol y representa mensajes de error.
 /// Orquesta la funcionalidad de "Recordar sesión" mediante persistencia.
+/// Detecta el rol seleccionado y muestra los campos correspondientes:
+/// - Estudiante: InputName activo
+/// - Profesor: InputEmail activo
 /// </summary>
 public class LoginStudentView : MonoBehaviour
 {
     public TMP_InputField InputName;
+    public TMP_InputField InputEmail;
     public TMP_InputField InputPassword;
     public Button LoginButton;
     public Toggle RememberSessionToggle;
-    public Text MessageText; // Campo para mostrar mensajes como "Registro exitoso"
-    public Text NameErrorText; // Campo para mostrar error específico del nombre
-    public Text PasswordErrorText; // Campo para mostrar error específico de la contraseña
+    public TMP_Text MessageTextWelcome;
+    public Text NameErrorText;
+    public Text PasswordErrorText;
     public Text MessageErrorLoginText;
     
     private LoginPresenter loginPresenter;
     private ISessionPersistence sessionPersistence;
     private bool initialized = false;
+    private int selectedRole = 1; // 1 = Estudiante, 2 = Profesor
 
     /// <summary>
-    /// Ejecuta el proceso de autenticacion del estudiante desde la UI.
+    /// Ejecuta el proceso de autenticacion segun el rol seleccionado.
+    /// Para estudiante: usa InputName y InputPassword.
+    /// Para profesor: usa InputEmail y InputPassword.
     /// Si "Recordar sesión" está activado, guarda la sesión para auto-login futuro.
     /// </summary>
     public void Login()
@@ -37,11 +44,37 @@ public class LoginStudentView : MonoBehaviour
 
         ClearFieldErrors();
 
-        // solicitar al presenter que procese las credenciales y devuelva resultados
-        var response = loginPresenter.LoginStudent(InputName.text, InputPassword.text);
+        LoginPresenter.LoginResult response;
 
-        if (!string.IsNullOrEmpty(response.NameError))
-            ShowFieldError(NameErrorText, response.NameError);
+        if (selectedRole == 2) // Profesor
+        {
+            // Validar campos de profesor
+            if (InputEmail == null || string.IsNullOrEmpty(InputEmail.text))
+            {
+                Debug.LogWarning("InputEmail no está configurado para login de profesor");
+                return;
+            }
+
+            response = loginPresenter.LoginTeacher(InputEmail.text, InputPassword.text);
+            
+            if (!string.IsNullOrEmpty(response.NameError))
+                ShowFieldError(NameErrorText, response.NameError);
+        }
+        else // Estudiante
+        {
+            // Validar campos de estudiante
+            if (InputName == null || string.IsNullOrEmpty(InputName.text))
+            {
+                Debug.LogWarning("InputName no está configurado para login de estudiante");
+                return;
+            }
+
+            response = loginPresenter.LoginStudent(InputName.text, InputPassword.text);
+            
+            if (!string.IsNullOrEmpty(response.NameError))
+                ShowFieldError(NameErrorText, response.NameError);
+        }
+
         if (!string.IsNullOrEmpty(response.PasswordError))
             ShowFieldError(PasswordErrorText, response.PasswordError);
 
@@ -62,14 +95,13 @@ public class LoginStudentView : MonoBehaviour
             }
 
             // Guardar sesión SI Y SOLO SI el toggle "Recordar sesión" está ACTIVADO
-            // DEBUG: Verificar estado del toggle
             if (RememberSessionToggle == null)
             {
-                Debug.LogWarning("LoginStudentView: RememberSessionToggle NO está asignado en Inspector");
+                Debug.LogWarning("LoginView: RememberSessionToggle NO está asignado en Inspector");
             }
             else
             {
-                Debug.Log($"LoginStudentView: RememberSessionToggle estado = {RememberSessionToggle.isOn}");
+                Debug.Log($"LoginView: RememberSessionToggle estado = {RememberSessionToggle.isOn}");
                 
                 if (RememberSessionToggle.isOn)
                 {
@@ -80,11 +112,6 @@ public class LoginStudentView : MonoBehaviour
                 {
                     Debug.Log("✗ Toggle DESACTIVADO -> NO se guarda sesión");
                 }
-            }
-            
-            if (MessageText != null)
-            {
-                MessageText.gameObject.SetActive(true);
             }
             
             // Cargar escena TestInitialuserFlow
@@ -99,9 +126,16 @@ public class LoginStudentView : MonoBehaviour
 
     /// <summary>
     /// Registra listeners y espera a que la base quede lista para construir el presenter.
+    /// Detecta el rol seleccionado y configura la UI correspondiente.
     /// </summary>
     void Start()
     {
+        // Recuperar rol seleccionado (1 = Estudiante, 2 = Profesor)
+        selectedRole = RolePreferences.GetSelectedRole();
+        
+        // Configurar UI según el rol
+        ConfigureUIByRole();
+
         // Esperar hasta que DatabaseManager esté listo antes de crear repositorios/servicios.
         StartCoroutine(InitializeWhenDatabaseReady());
 
@@ -111,13 +145,46 @@ public class LoginStudentView : MonoBehaviour
         // Inicializar persistencia de sesión
         sessionPersistence = new SessionPersistence();
 
-        // Mostrar mensaje si existe (ej. después de registro exitoso)
+        // Mostrar mensaje de bienvenida según el rol
         string message = PlayerPrefs.GetString("LoginMessage", "");
-        if (!string.IsNullOrEmpty(message) && MessageText != null)
+        if (string.IsNullOrEmpty(message))
         {
-            MessageText.text = message;
-            MessageText.gameObject.SetActive(true);
-            PlayerPrefs.DeleteKey("LoginMessage");
+            message = selectedRole == 2 ? "Bienvenido Profesor/a" : "Bienvenido Estudiante";
+        }
+
+        if (!string.IsNullOrEmpty(message) && MessageTextWelcome != null)
+        {
+            MessageTextWelcome.text = message;
+            MessageTextWelcome.gameObject.SetActive(true);
+        }
+    }
+
+    /// <summary>
+    /// Configura la UI (campos visibles) según el rol seleccionado.
+    /// </summary>
+    private void ConfigureUIByRole()
+    {
+        if (selectedRole == 2) // Profesor
+        {
+            if (InputName != null)
+                InputName.gameObject.SetActive(false);
+            if (InputEmail != null)
+                InputEmail.gameObject.SetActive(true);
+            if (NameErrorText != null)
+                NameErrorText.gameObject.SetActive(false);
+            
+            Debug.Log("[LoginView] Configurado para LOGIN PROFESOR");
+        }
+        else // Estudiante (rol 1)
+        {
+            if (InputName != null)
+                InputName.gameObject.SetActive(true);
+            if (InputEmail != null)
+                InputEmail.gameObject.SetActive(false);
+            if (NameErrorText != null)
+                NameErrorText.gameObject.SetActive(false);
+            
+            Debug.Log("[LoginView] Configurado para LOGIN ESTUDIANTE");
         }
     }
 
@@ -143,18 +210,20 @@ public class LoginStudentView : MonoBehaviour
     /// <summary>
     /// Guarda la sesión localmente para permitir auto-login futuro.
     /// Solo se ejecuta si el usuario selecciona "Recordar sesión".
+    /// Guarda el rol correcto segun el usuario autenticado (Estudiante o Profesor).
     /// </summary>
     private void SaveSession(UserModel user)
     {
         if (sessionPersistence == null)
         {
-            Debug.LogWarning("LoginStudentView: SessionPersistence no está inicializado.");
+            Debug.LogWarning("LoginView: SessionPersistence no está inicializado.");
             return;
         }
 
-        SessionData sessionData = new SessionData(user.id_user, "Student");
+        string roleType = selectedRole == 2 ? "Teacher" : "Student";
+        SessionData sessionData = new SessionData(user.id_user, roleType);
         sessionPersistence.SaveSession(sessionData);
-        Debug.Log($"✓ LoginStudentView: Sesión guardada para auto-login (Usuario ID: {user.id_user}, Nombre: {user.name})");
+        Debug.Log($"✓ LoginView: Sesión guardada para auto-login (Usuario ID: {user.id_user}, Nombre: {user.name}, Rol: {roleType})");
     }
 
     void OnDisable()
@@ -164,30 +233,6 @@ public class LoginStudentView : MonoBehaviour
 
     }
 
-    /// <summary>
-    /// Muestra un mensaje general temporal.
-    /// </summary>
-    void ShowMessage(string msg)
-    {
-        if (MessageText == null) return;
-        MessageText.text = msg;
-        MessageText.gameObject.SetActive(true);
-        StartCoroutine(HideMessageAfter(5f));
-    }
-
-    /// <summary>
-    /// Oculta el mensaje general despues de un tiempo.
-    /// </summary>
-    System.Collections.IEnumerator HideMessageAfter(float seconds)
-    {
-        yield return new WaitForSeconds(seconds);
-        if (MessageText != null)
-            MessageText.gameObject.SetActive(false);
-    }
-
-    /// <summary>
-    /// Muestra un error temporal asociado a un campo.
-    /// </summary>
     void ShowFieldError(Text field, string msg)
     {
         if (field == null) return;
@@ -215,8 +260,6 @@ public class LoginStudentView : MonoBehaviour
             NameErrorText.gameObject.SetActive(false);
         if (PasswordErrorText != null)
             PasswordErrorText.gameObject.SetActive(false);
-        if (MessageText != null)
-            MessageText.gameObject.SetActive(false);
         if (MessageErrorLoginText != null)
             MessageErrorLoginText.gameObject.SetActive(false);
     }

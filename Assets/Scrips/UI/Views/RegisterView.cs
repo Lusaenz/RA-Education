@@ -9,20 +9,27 @@ using System.Collections.Generic;
 using System.Linq;
 
 /// <summary>
-/// Vista de registro para estudiantes.
-/// Recoge los datos del formulario, delega validaciones al presenter y representa errores.
+/// Vista de registro unificada para estudiantes y profesores.
+/// Recoge los datos del formulario, delega validaciones al presenter segun el rol y representa errores.
+/// Detecta el rol seleccionado y muestra los campos correspondientes:
+/// - Estudiante: InputAge activo
+/// - Profesor: InputEmail activo
 /// </summary>
 public class RegisterStudentView : MonoBehaviour
 {
     public TMP_InputField InputName;
     public TMP_InputField InputDegree;
     public TMP_InputField InputAge;
+    public TMP_InputField InputEmail;
     public TMP_InputField InputPassword;
     public Button RegisterButton;
+    public Button LoginButton;
     public Text ErrorTextName;
     public Text ErrorTextDegree;
     public Text ErrorTextAge;
+    public Text ErrorTextEmail;
     public Text ErrorTextPassword;
+    public Text ErrorTextSecurityQuestion;
     public Text RegisterConfirmationText;
 
     [Header("Mobile Keyboard")]
@@ -42,12 +49,19 @@ public class RegisterStudentView : MonoBehaviour
     Vector2 initialShiftPosition;
     float currentKeyboardShift = 0f;
     readonly List<TMP_InputField> trackedInputs = new List<TMP_InputField>();
+    private int selectedRole = 1; // 1 = Estudiante, 2 = Profesor
 
     /// <summary>
-    /// Resuelve dependencias de escena y enlaza eventos de botones.
+    /// Resuelve dependencias de escena, detecta el rol y enlaza eventos de botones.
     /// </summary>
     void Start()
     {
+        // Recuperar rol seleccionado (1 = Estudiante, 2 = Profesor)
+        selectedRole = RolePreferences.GetSelectedRole();
+        
+        // Configurar UI según el rol
+        ConfigureUIByRole();
+
         // Buscar un RegisterPresenter existente en la escena
         presenter = FindFirstObjectByType<RegisterPresenter>();
         if (presenter == null)
@@ -60,7 +74,7 @@ public class RegisterStudentView : MonoBehaviour
         degreeSelector = FindFirstObjectByType<DegreeSelector>();
         if (degreeSelector == null)
         {
-            Debug.LogWarning("RegisterStudentView: DegreeSelector no encontrado en la escena.");
+            Debug.LogWarning("RegisterView: DegreeSelector no encontrado en la escena.");
         }
 
         if (RegisterButton != null)
@@ -84,6 +98,35 @@ public class RegisterStudentView : MonoBehaviour
         CacheKeyboardSupportReferences();
     }
 
+    /// <summary>
+    /// Configura la UI (campos visibles) según el rol seleccionado.
+    /// </summary>
+    private void ConfigureUIByRole()
+    {
+        if (selectedRole == 2) // Profesor
+        {
+            if (InputAge != null)
+                InputAge.gameObject.SetActive(false);
+            if (InputEmail != null)
+                InputEmail.gameObject.SetActive(true);
+            if (ErrorTextAge != null)
+                ErrorTextAge.gameObject.SetActive(false);
+            
+            Debug.Log("[RegisterView] Configurado para REGISTRO PROFESOR");
+        }
+        else // Estudiante (rol 1)
+        {
+            if (InputAge != null)
+                InputAge.gameObject.SetActive(true);
+            if (InputEmail != null)
+                InputEmail.gameObject.SetActive(false);
+            if (ErrorTextEmail != null)
+                ErrorTextEmail.gameObject.SetActive(false);
+            
+            Debug.Log("[RegisterView] Configurado para REGISTRO ESTUDIANTE");
+        }
+    }
+
     void LateUpdate()
     {
         UpdateMobileKeyboardOffset();
@@ -95,7 +138,8 @@ public class RegisterStudentView : MonoBehaviour
     }
 
     /// <summary>
-    /// Ejecuta el registro de estudiante usando los valores actuales del formulario.
+    /// Ejecuta el registro segun el rol seleccionado (estudiante o profesor).
+    /// Usa los valores actuales del formulario y valida según el rol.
     /// </summary>
     public void Register()
     {
@@ -114,39 +158,56 @@ public class RegisterStudentView : MonoBehaviour
         // Limpiar errores previos
         ClearAllErrors();
 
-        // Obtener valores de los campos
+        // Obtener valores comunes de los campos
         var name = InputName != null ? InputName.text : string.Empty;
-        var ageText = InputAge != null ? InputAge.text : string.Empty;
         var pass = InputPassword != null ? InputPassword.text : string.Empty;
         var degreeId = degreeSelector != null ? degreeSelector.GetSelectedDegreeId() : 0;
 
-        // Llamar al presenter que realiza las validaciones
-        var result = presenter.RegisterStudent(degreeId, name, ageText, pass);
-        
+        // Validar pregunta de seguridad ANTES de registrar
+        if (degreeSelector == null)
+        {
+            ShowFieldError(ErrorTextSecurityQuestion, "No se encontró el selector de pregunta de seguridad.");
+            return;
+        }
+
+        int questionId = degreeSelector.GetSelectedSecurityQuestionId();
+        string answer = degreeSelector.GetSecurityAnswer();
+        var securityErrors = RegisterValidator.ValidateSecurityQuestion(questionId, answer);
+        if (securityErrors.Count > 0)
+        {
+            DisplayErrorsByField(securityErrors);
+            return;
+        }
+
+        // Llamar al presenter segun el rol
+        RegisterResult result;
+
+        if (selectedRole == 2) // Profesor
+        {
+            var email = InputEmail != null ? InputEmail.text : string.Empty;
+            result = presenter.RegisterTeacher(degreeId, name, email, pass);
+        }
+        else // Estudiante
+        {
+            var ageText = InputAge != null ? InputAge.text : string.Empty;
+            result = presenter.RegisterStudent(degreeId, name, ageText, pass);
+        }
+
         if (result.Success)
         {
             int userId = result.UserId;
-            
+
             // Guardar la pregunta de seguridad y su respuesta
-            if (degreeSelector != null && degreeSelector.IsSecurityQuestionSelected())
+            var securityResult = presenter.ValidateAndSaveSecurityQuestion(userId, questionId, answer);
+            if (!securityResult.Success)
             {
-                int questionId = degreeSelector.GetSelectedSecurityQuestionId();
-                string answer = degreeSelector.GetSecurityAnswer();
-                
-                var securityResult = presenter.ValidateAndSaveSecurityQuestion(userId, questionId, answer);
-                if (!securityResult.Success)
-                {
-                    Debug.LogWarning($"No se pudo guardar la pregunta de seguridad: {securityResult.ErrorMessage}");
-                }
-                else
-                {
-                    Debug.Log("Pregunta de seguridad guardada exitosamente");
-                }
+                Debug.LogWarning($"No se pudo guardar la pregunta de seguridad: {securityResult.ErrorMessage}");
+                DisplayErrorsByField(securityResult.FieldErrors);
+                return;
             }
-            
-            // Guardar mensaje y redirigir a LoginStudent
-            PlayerPrefs.SetString("LoginMessage", "Registro exitoso! Por favor inicia sesión.");
-            SceneManager.LoadScene("LoginStudent");
+
+            // Mostrar mensaje de éxito
+            ShowRegistrationSuccess();
         }
         else
         {
@@ -166,26 +227,36 @@ public class RegisterStudentView : MonoBehaviour
         {
             ShowFieldError(ErrorTextName, fieldErrors["name"]);
         }
-        
+
         if (fieldErrors.ContainsKey("degree"))
         {
             ShowFieldError(ErrorTextDegree, fieldErrors["degree"]);
         }
-        
+
         if (fieldErrors.ContainsKey("age"))
         {
             ShowFieldError(ErrorTextAge, fieldErrors["age"]);
         }
-        
+
+        if (fieldErrors.ContainsKey("email"))
+        {
+            ShowFieldError(ErrorTextEmail, fieldErrors["email"]);
+        }
+
         if (fieldErrors.ContainsKey("password"))
         {
             ShowFieldError(ErrorTextPassword, fieldErrors["password"]);
         }
+
+        if (fieldErrors.ContainsKey("answer"))
+        {
+            ShowFieldError(ErrorTextSecurityQuestion, fieldErrors["answer"]);
+        }
+
         if (clearErrorCoroutine != null)
             StopCoroutine(clearErrorCoroutine);
 
         clearErrorCoroutine = StartCoroutine(ClearErrorAfterSeconds(5f));
-        
     }
 
     /// <summary>
@@ -220,7 +291,9 @@ public class RegisterStudentView : MonoBehaviour
         ClearFieldError(ErrorTextName);
         ClearFieldError(ErrorTextDegree);
         ClearFieldError(ErrorTextAge);
+        ClearFieldError(ErrorTextEmail);
         ClearFieldError(ErrorTextPassword);
+        ClearFieldError(ErrorTextSecurityQuestion);
     }
 
     /// <summary>
@@ -248,6 +321,7 @@ public class RegisterStudentView : MonoBehaviour
         RegisterTrackedInput(InputName);
         RegisterTrackedInput(InputDegree);
         RegisterTrackedInput(InputAge);
+        RegisterTrackedInput(InputEmail);
         RegisterTrackedInput(InputPassword);
 
         if (degreeSelector != null)
@@ -483,5 +557,28 @@ public class RegisterStudentView : MonoBehaviour
 
         Canvas fallbackCanvas = FindFirstObjectByType<Canvas>();
         return fallbackCanvas != null ? fallbackCanvas.rootCanvas : null;
+    }
+
+    /// <summary>
+    /// Muestra el mensaje de éxito del registro y ajusta el estado de los botones.
+    /// </summary>
+    void ShowRegistrationSuccess()
+    {
+        if (RegisterConfirmationText != null)
+        {
+            RegisterConfirmationText.text = "¡Listo! Tu cuenta ya está creada. Ahora puedes iniciar sesión.";
+            RegisterConfirmationText.gameObject.SetActive(true);
+        }
+
+        if (RegisterButton != null)
+        {
+            RegisterButton.interactable = false;
+        }
+
+        if (LoginButton != null)
+        {
+            LoginButton.gameObject.SetActive(true);
+            LoginButton.interactable = true;
+        }
     }
 }

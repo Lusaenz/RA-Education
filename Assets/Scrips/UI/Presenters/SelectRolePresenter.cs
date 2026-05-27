@@ -1,23 +1,26 @@
 using UnityEngine.SceneManagement;
 
 /// <summary>
-/// Presenter minimo para navegar a la pantalla de login segun el rol elegido.
+/// Presenter minimo para navegar a la pantalla de login unificada segun el rol elegido.
+/// Ambos roles redireccionan a la misma escena "Login" que se configura dinamicamente.
 /// </summary>
 public class SelectRolePresenter
 {
+    private const string LOGIN_SCENE = "Login";
+
     /// <summary>
-    /// Navega al login de estudiantes.
+    /// Navega al login unificado para estudiantes.
     /// </summary>
     public void GoStudentLogin()
     {
-        SceneManager.LoadScene("LoginStudent");
+        SceneManager.LoadScene(LOGIN_SCENE);
     }
 
     /// <summary>
-    /// Navega al login de profesores.
+    /// Navega al login unificado para profesores.
     /// </summary>
     public void GoTeacherLogin()
     {
-        SceneManager.LoadScene("LoginTeacher");
+        SceneManager.LoadScene(LOGIN_SCENE);
     }
 }
