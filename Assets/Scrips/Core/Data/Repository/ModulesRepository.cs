@@ -20,7 +20,6 @@ public class ModulesRepository
 
         ConnectionDb = connection;
 
-
     }
 
     public ModulesRepository()
@@ -61,7 +60,6 @@ public class ModulesRepository
         return resultado;
     }
 
-    // Trae todas las columnas de la tabla
     public List<string[]> ObtenerDatos(string nombreTabla)
     {
         List<string[]> listaResultados = new List<string[]>();
@@ -108,4 +106,82 @@ public class ModulesRepository
             return null;
         }
     }
+
+    public List<TopicJson> ObtenerEstructuraCompleta(int id_module)
+    {
+        List<TopicJson> resultadoFinal = new List<TopicJson>();
+        
+        ModuleModel infoModulo = ObtenerModulo(id_module);
+        
+        if (infoModulo != null) {
+            resultadoFinal.Add(new TopicJson {
+                topic_id = -1,
+                topic_name = infoModulo.name,
+                sections = new List<SeccionJson> {
+                    new SeccionJson { title = "Introducción", content = infoModulo.description }
+                }
+            });
+        }
+
+        var topics = ConnectionDb.Table<TopicModel>().Where(t => t.id_module == id_module).ToList();
+        foreach (var t in topics) {
+            resultadoFinal.Add(new TopicJson {
+                topic_id = t.id_topic,
+                topic_name = t.name,
+                image = t.image,
+                sections = ConnectionDb.Table<SeccionJson>().Where(m => m.id_topic == t.id_topic).OrderBy(m => m.order_index).ToList()
+            });
+        }
+        return resultadoFinal;
+    }
+
+    public ModuleModel ObtenerModulo(int id_module)
+    {
+        try 
+        {
+            var modulo = ConnectionDb.Table<ModuleModel>()
+                                .Where(m => m.id_module == id_module)
+                                .FirstOrDefault();
+            return modulo;
+        } 
+        catch (System.Exception ex) 
+        {
+            UnityEngine.Debug.LogError("Error al obtener la información del módulo: " + ex.Message);
+            return null;
+        }
+    }
+
+}
+
+
+[Table("topics")] // Carga de Tabla "topics"
+public class TopicModel 
+{
+    [PrimaryKey]
+    public int id_topic { get; set; }
+    public string name { get; set; }
+    public string image { get; set; }
+    public int id_module { get; set; }
+}
+
+[Table("content_sections")] // Carga de Tabla "content_sections"
+[System.Serializable]
+public class SeccionJson
+{
+    [PrimaryKey]
+    public int id_section { get; set; }
+    public int id_topic { get; set; }
+    public string title { get; set; }
+    public string content { get; set; }
+    public string section_type { get; set; }
+    public int order_index { get; set; }
+}
+
+// Clase para agrupar los datos en C#
+public class TopicJson
+{
+    public int topic_id;
+    public string topic_name;
+    public string image;
+    public List<SeccionJson> sections;
 }
