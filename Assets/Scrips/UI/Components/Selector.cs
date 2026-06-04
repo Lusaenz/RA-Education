@@ -23,9 +23,9 @@ public class DegreeSelector : MonoBehaviour
     private Button[] degreeButtons;
     private Button[] questionButtons;
     
-    private int selectedDegreeId = -1;
+    private int selectedDegreeId = 0;
     private string selectedDegreeName = "";
-    private int selectedQuestionId = -1;
+    private int selectedQuestionId = 0;
     private string selectedQuestion = "";
     private string securityAnswer = "";
 
@@ -455,7 +455,7 @@ public class DegreeSelector : MonoBehaviour
     /// </summary>
     public void ResetDegreeSelection()
     {
-        selectedDegreeId = -1;
+        selectedDegreeId = 0;
         selectedDegreeName = "";
         if (degreeInputField != null)
         {
@@ -468,7 +468,7 @@ public class DegreeSelector : MonoBehaviour
     /// </summary>
     public void ResetSecurityQuestionSelection()
     {
-        selectedQuestionId = -1;
+        selectedQuestionId = 0;
         selectedQuestion = "";
         if (questionInputField != null)
         {

@@ -51,9 +51,9 @@ public class IslandInteraction : MonoBehaviour
         Debug.Log($"Isla tocada (ID Módulo: {moduleId})");
         
         // Consultar el nombre del módulo en la base de datos
-        if (ModuleManager.Instance != null)
+        if (EstadoManager.Instance != null)
         {
-            ModuleManager.Instance.GetAndLogModuleName(moduleId);
+            EstadoManager.Instance.GetAndLogModuleName(moduleId);
         }
         
         if (visualizador != null)

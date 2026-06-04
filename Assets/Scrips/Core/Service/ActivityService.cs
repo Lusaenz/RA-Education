@@ -4,23 +4,28 @@ using UnityEngine;
 
 public class ActivityService
 {
-    private readonly ActivityRepository _repository;
-
-    public ActivityService()
-    {
-        _repository = new ActivityRepository();
-    }
+    private ActivityRepository repository;
 
     public IEnumerator GetActivity(int idActivity, Action<ActivityData> callback)
     {
+        if (DatabaseManager.Instance == null)
+        {
+            Debug.LogError("[ActivityService] DatabaseManager.Instance es null.");
+            callback?.Invoke(null);
+            yield break;
+        }
+
         if (!DatabaseManager.Instance.IsReady)
+        {
             yield return new WaitUntil(() => DatabaseManager.Instance.IsReady);
+        }
 
         ActivityData result = null;
 
         try
         {
-            result = _repository.GetById(idActivity);
+            EnsureRepository();
+            result = repository.GetById(idActivity);
         }
         catch (Exception ex)
         {
@@ -28,5 +33,13 @@ public class ActivityService
         }
 
         callback?.Invoke(result);
+    }
+
+    private void EnsureRepository()
+    {
+        if (repository == null)
+        {
+            repository = new ActivityRepository();
+        }
     }
 }

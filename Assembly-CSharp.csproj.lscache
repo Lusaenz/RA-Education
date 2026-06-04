@@ -2,12 +2,10 @@ version=1
 
 # This file caches language service data to improve the performance of C# Dev Kit.
 # It is not intended for manual editing. It can safely be deleted and will be
-# regenerated automatically.
+# regenerated automatically. For more information, see https://aka.ms/lscache
 #
-# To exclude from version control, add *.lscache to your .gitignore file.
-#
-# To disable caching, add the following to your VS Code settings:
-#   "dotnet.projectsystem.enableLanguageServiceCache": false
+# To control where cache files are stored, use the following VS Code setting:
+#   "dotnet.projectsystem.cacheInProjectFolder": true
 
 [project]
 language=C#
@@ -57,7 +55,7 @@ Assets/Scrips/Core/Data/
  DatabaseController.cs
  DatabaseLoader.cs
  DatabaseManager.cs
- ModuleManager.cs
+ EstadoManager.cs
  Repository/
   ActivityRepository.cs
   DegreeRepository.cs
@@ -68,22 +66,20 @@ Assets/Scrips/Core/Data/
   UserRepository.cs
  UIVisualizer.cs
  UserSessionManager.cs
-Assets/Scrips/Core/
- Security/PasswordHasher.cs
- Service/
-  ActivityService.cs
-  AuthService.cs
-  DegreeService.cs
-  GameActivityService.cs
-  ResultActivityService.cs
-  SecurityQuestionsService.cs
- Session/
-  AutoLoginService.cs
-  IAutoLoginService.cs
-  ISessionPersistence.cs
-  SessionBootstrapper.cs
-  SessionData.cs
-  SessionPersistence.cs
+Assets/Scrips/Core/Service/
+ ActivityService.cs
+ AuthService.cs
+ DegreeService.cs
+ GameActivityService.cs
+ ResultActivityService.cs
+ SecurityQuestionsService.cs
+Assets/Scrips/Core/Session/
+ AutoLoginService.cs
+ IAutoLoginService.cs
+ ISessionPersistence.cs
+ SessionBootstrapper.cs
+ SessionData.cs
+ SessionPersistence.cs
 Assets/Scrips/Drop_Slot/
  DragHandler.cs
  DropSlot.cs
@@ -99,9 +95,15 @@ Assets/Scrips/Ripples/
 Assets/Scrips/SceneDesign/
  BookAnimation.cs
  BoxGameSelector.cs
+ BtnGame.cs
+ BtnRA.cs
  GameInfoUI.cs
  IslandInteraction.cs
  PreviewImageLoader.cs
+ RA/
+  ARModelController.cs
+  InteractablePart.cs
+  UIManager.cs
  RolePreferences.cs
  SceneLoader.cs
 Assets/Scrips/UI/Components/
@@ -113,6 +115,7 @@ Assets/Scrips/UI/Models/
  DegreeModel.cs
  DragdropModel.cs
  ModuleModel.cs
+ ProgressModel.cs
  ResultActivityData.cs
  SecurityQuestionsModel.cs
  StudentModel.cs
@@ -512,13 +515,16 @@ Library/ScriptAssemblies/
  UnityEngine.XR.LegacyInputHelpers.dll
  VuforiaEditorScripts.dll
  VuforiaScripts.dll
+Temp/bin/Debug/
+ RA-Education.Security.dll
+ RA-Education.Validation.dll
 
 [analyzerReferences]
 ../../../../Program Files/Unity/Hub/Editor/6000.3.8f1/Editor/Data/Tools/BuildPipeline/Unity.SourceGenerators/
  Unity.Properties.SourceGenerator.dll
  Unity.SourceGenerators.dll
  Unity.UIToolkit.SourceGenerator.dll
-../../.vscode/extensions/visualstudiotoolsforunity.vstuc-1.2.1/Analyzers/Microsoft.Unity.Analyzers.dll
+../../.vscode/extensions/visualstudiotoolsforunity.vstuc-1.2.2/Analyzers/Microsoft.Unity.Analyzers.dll
 Library/PackageCache/
  com.unity.ai.inference@e760aa121ec7/Runtime/Core/SourceGenerator/SourceGenerators.dll
  com.unity.dt.app-ui@8ac7e730dd5d/Runtime/
