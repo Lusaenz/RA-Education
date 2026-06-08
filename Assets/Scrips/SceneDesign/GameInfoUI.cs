@@ -35,16 +35,6 @@ public class GameInfoUI : MonoBehaviour
         ResolveFallbackGameDefinitions();
     }
 
-    private void Start()
-    {
-        StartCoroutine(LoadSelectedActivityInfo());
-    }
-
-    private IEnumerator LoadSelectedActivityInfo()
-    {
-        int selectedGameActivityId = NormalizeGameActivityId(PlayerPrefs.GetInt("selected_activity_id", DefaultGameActivityId));
-        yield return StartCoroutine(LoadGameInfo(selectedGameActivityId, true));
-    }
 
     public void ShowGame(int gameID)
     {
