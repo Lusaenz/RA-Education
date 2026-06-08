@@ -205,6 +205,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 19338534}
+  - component: {fileID: 19338538}
   - component: {fileID: 19338537}
   - component: {fileID: 19338536}
   - component: {fileID: 19338535}
@@ -299,6 +300,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 19338533}
   m_CullTransparentMesh: 1
+--- !u!114 &19338538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 19338533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802bd8449c113434f9a8d48f0e75caaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::UserScreenView
+  userNameText: {fileID: 959627177}
+  roleTypeText: {fileID: 551477843}
+  degreeText: {fileID: 1179699855}
+  totalStarsText: {fileID: 1335630908}
+  dayLastLoginText: {fileID: 1871136591}
+  dateLastLoginText: {fileID: 421737496}
 --- !u!1 &152479966
 GameObject:
   m_ObjectHideFlags: 0
@@ -2994,6 +3013,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1663373731}
   - component: {fileID: 1663373730}
+  - component: {fileID: 1663373732}
   m_Layer: 0
   m_Name: UserScreenManager
   m_TagString: Untagged
@@ -3010,15 +3030,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1663373729}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 802bd8449c113434f9a8d48f0e75caaa, type: 3}
+  m_Script: {fileID: 11500000, guid: a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UserScreenView
-  userNameText: {fileID: 959627177}
-  roleTypeText: {fileID: 551477843}
-  degreeText: {fileID: 1179699855}
-  totalStarsText: {fileID: 1335630908}
-  dayLastLoginText: {fileID: 1871136591}
-  dateLastLoginText: {fileID: 421737496}
+  m_EditorClassIdentifier: Assembly-CSharp::UserScreenManager
+  userScreenView: {fileID: 19338538}
 --- !u!4 &1663373731
 Transform:
   m_ObjectHideFlags: 0
@@ -3034,6 +3049,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1663373732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1663373729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c64a9dc8aea155e49a3f151c977b5ac9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SessionButtons
+  logoutButton: {fileID: 1839841411}
+  exitButton: {fileID: 0}
 --- !u!1 &1707770078
 GameObject:
   m_ObjectHideFlags: 0
