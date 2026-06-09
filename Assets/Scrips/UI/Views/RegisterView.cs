@@ -163,7 +163,6 @@ public class RegisterStudentView : MonoBehaviour
         var pass = InputPassword != null ? InputPassword.text : string.Empty;
         var degreeId = degreeSelector != null ? degreeSelector.GetSelectedDegreeId() : 0;
 
-        // Validar pregunta de seguridad ANTES de registrar
         if (degreeSelector == null)
         {
             ShowFieldError(ErrorTextSecurityQuestion, "No se encontró el selector de pregunta de seguridad.");
@@ -172,14 +171,36 @@ public class RegisterStudentView : MonoBehaviour
 
         int questionId = degreeSelector.GetSelectedSecurityQuestionId();
         string answer = degreeSelector.GetSecurityAnswer();
-        var securityErrors = RegisterValidator.ValidateSecurityQuestion(questionId, answer);
-        if (securityErrors.Count > 0)
+
+        // Recopilar TODOS los errores de validación antes de mostrar cualquiera
+        var allErrors = new System.Collections.Generic.Dictionary<string, string>();
+
+        Dictionary<string, string> fieldErrors;
+        if (selectedRole == 2) // Profesor
         {
-            DisplayErrorsByField(securityErrors);
+            var email = InputEmail != null ? InputEmail.text : string.Empty;
+            fieldErrors = RegisterValidator.ValidateTeacher(name, degreeId, email, pass);
+        }
+        else // Estudiante
+        {
+            var ageText = InputAge != null ? InputAge.text : string.Empty;
+            fieldErrors = RegisterValidator.ValidateStudent(name, degreeId, ageText, pass);
+        }
+
+        foreach (var kvp in fieldErrors)
+            allErrors[kvp.Key] = kvp.Value;
+
+        var securityErrors = RegisterValidator.ValidateSecurityQuestion(questionId, answer);
+        foreach (var kvp in securityErrors)
+            allErrors[kvp.Key] = kvp.Value;
+
+        if (allErrors.Count > 0)
+        {
+            DisplayErrorsByField(allErrors);
             return;
         }
 
-        // Llamar al presenter segun el rol
+        // Llamar al presenter segun el rol (solo si toda la validación pasó)
         RegisterResult result;
 
         if (selectedRole == 2) // Profesor
@@ -197,7 +218,6 @@ public class RegisterStudentView : MonoBehaviour
         {
             int userId = result.UserId;
 
-            // Guardar la pregunta de seguridad y su respuesta
             var securityResult = presenter.ValidateAndSaveSecurityQuestion(userId, questionId, answer);
             if (!securityResult.Success)
             {
@@ -206,13 +226,19 @@ public class RegisterStudentView : MonoBehaviour
                 return;
             }
 
-            // Mostrar mensaje de éxito
             ShowRegistrationSuccess();
         }
         else
         {
-            // Mostrar errores de cada campo desde el resultado del presenter
             DisplayErrorsByField(result.FieldErrors);
+
+            if (result.FieldErrors.Count == 0 && !string.IsNullOrEmpty(result.ErrorMessage))
+            {
+                ShowFieldError(ErrorTextPassword, result.ErrorMessage);
+                if (clearErrorCoroutine != null)
+                    StopCoroutine(clearErrorCoroutine);
+                clearErrorCoroutine = StartCoroutine(ClearErrorAfterSeconds(5f));
+            }
         }
     }
 
@@ -251,6 +277,11 @@ public class RegisterStudentView : MonoBehaviour
         if (fieldErrors.ContainsKey("answer"))
         {
             ShowFieldError(ErrorTextSecurityQuestion, fieldErrors["answer"]);
+        }
+
+        if (fieldErrors.ContainsKey("security"))
+        {
+            ShowFieldError(ErrorTextSecurityQuestion, fieldErrors["security"]);
         }
 
         if (clearErrorCoroutine != null)
