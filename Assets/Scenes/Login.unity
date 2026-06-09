@@ -541,7 +541,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 164008793}
-  - component: {fileID: 164008798}
   - component: {fileID: 164008797}
   - component: {fileID: 164008796}
   - component: {fileID: 164008795}
@@ -725,22 +724,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 164008792}
   m_CullTransparentMesh: 1
---- !u!114 &164008798
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 164008792}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70b33ee0571c3d04cb6b062480d0b855, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CaretControllerMovile
-  inputField: {fileID: 164008795}
-  caretBlinkRate: 1
-  caretColor: {r: 0.1, g: 0.1, b: 0.1, a: 1}
-  showCaretOnMobile: 1
 --- !u!1 &200780712
 GameObject:
   m_ObjectHideFlags: 0
@@ -2489,7 +2472,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1453728545}
   - component: {fileID: 1453728548}
-  - component: {fileID: 1453728550}
   - component: {fileID: 1453728547}
   - component: {fileID: 1453728546}
   - component: {fileID: 1453728549}
@@ -2671,22 +2653,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eab6fc860123f9419755ff4c121861b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InputFieldHandler
---- !u!114 &1453728550
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1453728544}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70b33ee0571c3d04cb6b062480d0b855, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CaretControllerMovile
-  inputField: {fileID: 1453728546}
-  caretBlinkRate: 1
-  caretColor: {r: 0.1, g: 0.1, b: 0.1, a: 1}
-  showCaretOnMobile: 1
 --- !u!1 &1520705360
 GameObject:
   m_ObjectHideFlags: 0
@@ -3753,7 +3719,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1805906140}
   - component: {fileID: 1805906143}
-  - component: {fileID: 1805906145}
   - component: {fileID: 1805906142}
   - component: {fileID: 1805906141}
   - component: {fileID: 1805906144}
@@ -3938,22 +3903,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eab6fc860123f9419755ff4c121861b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InputFieldHandler
---- !u!114 &1805906145
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1805906139}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70b33ee0571c3d04cb6b062480d0b855, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::CaretControllerMovile
-  inputField: {fileID: 1805906141}
-  caretBlinkRate: 1
-  caretColor: {r: 0.1, g: 0.1, b: 0.1, a: 1}
-  showCaretOnMobile: 1
 --- !u!1 &1838075299
 GameObject:
   m_ObjectHideFlags: 0

@@ -48,29 +48,27 @@ public class LoginStudentView : MonoBehaviour
 
         if (selectedRole == 2) // Profesor
         {
-            // Validar campos de profesor
-            if (InputEmail == null || string.IsNullOrEmpty(InputEmail.text))
+            if (InputEmail == null)
             {
-                Debug.LogWarning("InputEmail no está configurado para login de profesor");
+                Debug.LogError("InputEmail no está asignado en el Inspector");
                 return;
             }
 
             response = loginPresenter.LoginTeacher(InputEmail.text, InputPassword.text);
-            
+
             if (!string.IsNullOrEmpty(response.NameError))
                 ShowFieldError(NameErrorText, response.NameError);
         }
         else // Estudiante
         {
-            // Validar campos de estudiante
-            if (InputName == null || string.IsNullOrEmpty(InputName.text))
+            if (InputName == null)
             {
-                Debug.LogWarning("InputName no está configurado para login de estudiante");
+                Debug.LogError("InputName no está asignado en el Inspector");
                 return;
             }
 
             response = loginPresenter.LoginStudent(InputName.text, InputPassword.text);
-            
+
             if (!string.IsNullOrEmpty(response.NameError))
                 ShowFieldError(NameErrorText, response.NameError);
         }
