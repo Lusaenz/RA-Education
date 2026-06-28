@@ -105,7 +105,7 @@ public RandomizarOrganos randomizador;
         if (indiceActual == textos.Count)
         {
            
-            GameManager.instance.MostrarVictoria(score, 40);
+            //GameManager.instance.MostrarVictoria(score, 40);
         }
     }
 }

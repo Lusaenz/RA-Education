@@ -1,77 +1,143 @@
+using Newtonsoft.Json;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
 
 public class UIVisualizer : MonoBehaviour
 {
-    
-    //Opciones del menú
-    public enum ModoCarga {CargarTabla, CargarDatoUnico}
-    
-    [Header("Configuración de Carga")]
-    public ModoCarga modoSeleccionado;
-    public  ModulesRepository ModulesRepository;
-    public string NombreTabla;
 
-    [Header("Referencias UI")]
-    public TextMeshProUGUI textoMesh;
+    //Opciones del menú
+    [Header("Conexiones UI")]
+    //public GameObject InfoModules;
+    public TextMeshProUGUI txtModulo;
+    public TextMeshProUGUI tituloPrincipal;
+    //matriz de paneles
+    public TextMeshProUGUI[] panelesSeccion; 
+    public Image imagenModelo;
+
+    [Header("Otras Referencias")]
+    public BookAnimation BookAnimation;
+    public ModulesRepository repository;
 
     void Start()
-
     {
-        ModulesRepository = new ModulesRepository();
-        ConfiguracionFuncion();
+        repository = new ModulesRepository(); 
+        
+        MostrarModulo(0);
     }
 
-    //Selección de la función
-    void ConfiguracionFuncion()
+
+    public void MostrarIntroduccionModulo(int id_module)
     {
-        if (modoSeleccionado == ModoCarga.CargarTabla)
+        ModuleModel infoModulo = repository.ObtenerModulo(id_module);
+
+        if (infoModulo != null && txtModulo != null)
         {
-            CargarTabla();
+            txtModulo.text = $"<b>{infoModulo.name}</b>\n\n{infoModulo.description}";
         }
         else
         {
-            CargarDatoUnico();
+            Debug.LogWarning("No se encontró información del módulo " + id_module);
         }
     }
-
-    // Carga de datos completa
-    public void CargarTabla()
+    public void MostrarModulo(int id_module)
     {
-        List<string[]> filas = ModulesRepository.ObtenerDatos(NombreTabla);
 
-        if (filas != null && filas.Count > 0)
+        List<TopicJson> listaTemas = repository.ObtenerEstructuraCompleta(id_module);
+        
+        if (BookAnimation == null || panelesSeccion == null || panelesSeccion.Length == 0) 
         {
-            string[] fila = filas[0]; 
+            Debug.LogWarning("Faltan referencias de UI o del Animador en el UIVisualizer");
+            return;
+        }
+        
+        if (listaTemas != null && listaTemas.Count > 0)
+        {
+            BookAnimation.IniT(listaTemas);
+        }
 
-            string textoTabla = ""; 
+    }
 
-            // Recorremos cada columna de la fila
-            for (int i = 0; i < fila.Length; i++)
+
+    public void RenderizarUnicoTema(TopicJson tema)
+    {
+        if (tituloPrincipal != null) 
+        {
+            tituloPrincipal.text = tema.topic_name;
+        }
+
+        bool esPaginaIntro = (tema.topic_id == -1);
+
+        if (esPaginaIntro){
+
+        foreach (var p in panelesSeccion) 
+        {
+            if (p != null) p.transform.parent.gameObject.SetActive(false);
+        }
+        
+        if (txtModulo != null) 
+        {
+            txtModulo.gameObject.SetActive(true);
+            if (tema.sections != null && tema.sections.Count > 0)
             {
-                // Salta la columna 0 que es el ID
-                if (i == 0) continue; 
-
-                // Unimos el texto: \n crea un salto de línea entre columnas
-                textoTabla += fila[i] + "\n\n"; 
+                txtModulo.text = tema.sections[0].content; 
             }
+        }
 
-            // Asignamos el resultado final al componente TextMeshPro
-            textoMesh.text = textoTabla;
-        }
-        else
-        {
-            Debug.LogWarning("No se encontraron datos para la tabla: " + NombreTabla);
-        }
+        if (imagenModelo != null) imagenModelo.enabled = false;
     }
-    
-    //Selección columna Unica
-    public void CargarDatoUnico()
+    else
     {
-        //solo para la descripción
-        string soloTexto = ModulesRepository.ObtenerDatoUnico(NombreTabla, "procesos");
-    
-        textoMesh.text = soloTexto;
+        // APAGAR TEXTO DE INTRODUCCIÓN
+        if (txtModulo != null) txtModulo.gameObject.SetActive(false);
+        
+        // ENCENDER LOS BLOQUES DE COLORES COMPLETOS
+        foreach (var p in panelesSeccion) 
+        {
+            if (p != null) 
+            {
+                p.transform.parent.gameObject.SetActive(true);
+                p.text = ""; // Limpiamos el texto viejo
+            }
+        }
+
+        if (tema.sections != null)
+        {
+            for (int i = 0; i < tema.sections.Count; i++)
+            {
+                if (i < panelesSeccion.Length && panelesSeccion[i] != null)
+                {
+                    var seccion = tema.sections[i];
+                    panelesSeccion[i].text = $"<b>{seccion.title}</b>\n{seccion.content}";
+                }
+            }
+        }
+    } 
+        
+        Debug.Log("Buscando en Resources el archivo: '" + tema.image + "'");
+
+        if (imagenModelo != null)
+        {
+            if (!string.IsNullOrEmpty(tema.image))
+            {
+                Sprite nuevaImagen = Resources.Load<Sprite>(tema.image);
+                
+                if (nuevaImagen != null)
+                {
+                    imagenModelo.sprite = nuevaImagen;
+                    imagenModelo.enabled = true;
+                }
+                else
+                {
+                    Debug.LogWarning($"[UIVisualizer] No se encontró el archivo Sprite con el nombre '{tema.image}' dentro de la carpeta Resources.");
+                    imagenModelo.enabled = false;
+                }
+            }
+            else
+            {
+                imagenModelo.enabled = false; 
+            }
+        }
     }
 }

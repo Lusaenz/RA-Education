@@ -15,13 +15,15 @@ public class BoxGameSelector : MonoBehaviour
     private void Awake()
     {
         RefreshCamera();
-        ResolveGameInfoUI();
     }
 
     private void OnEnable()
     {
         RefreshCamera();
-        ResolveGameInfoUI();
+        if (gameInfoUI == null)
+        {
+            ResolveGameInfoUI();
+        }
     }
 
     private void Start()

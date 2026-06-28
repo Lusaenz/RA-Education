@@ -3,67 +3,43 @@ using UnityEngine;
 
 /// <summary>
 /// Presenter para la pantalla de perfil del usuario.
-/// Formatea datos del usuario para presentación en UI.
-/// Sigue arquitectura MVP.
+/// SOLO formatea datos para presentación en UI, sin obtener datos de servicios.
+/// Sigue arquitectura MVP correcta: solo contiene lógica de formateo.
 /// </summary>
 public class UserScreenPresenter
 {
-    private readonly DegreeService degreeService;
-
-    /// <summary>
-    /// Información formateada del último login.
-    /// </summary>
     public class LastLoginInfo
     {
-        public string DayOnly { get; set; }          // "14"
-        public string MonthAndYear { get; set; }     // "Abril 2026"
+        public string DayOnly { get; set; }
+        public string MonthAndYear { get; set; }
     }
 
-    public UserScreenPresenter(DegreeService degreeService = null)
+    public UserScreenPresenter()
     {
-        this.degreeService = degreeService;
-    }
-
-    /// <summary>
-    /// Obtiene el nombre del grado/carrera desde la BD.
-    /// </summary>
-    public string GetDegreeName(int degreeId)
-    {
-        if (degreeService == null)
-        {
-            Debug.LogWarning("[UserScreenPresenter] DegreeService no está disponible");
-            return $"Grado: {degreeId}";
-        }
-
-        try
-        {
-            var degree = degreeService.GetDegreeById(degreeId);
-            if (degree == null)
-            {
-                Debug.LogWarning($"[UserScreenPresenter] Grado no encontrado: {degreeId}");
-                return $"Grado: {degreeId}";
-            }
-
-            return degree.name;
-        }
-        catch (Exception ex)
-        {
-            Debug.LogError($"[UserScreenPresenter] Error al obtener nombre de grado: {ex.Message}");
-            return $"Grado ID: {degreeId}";
-        }
     }
 
     /// <summary>
-    /// Obtiene el nombre del rol en formato legible.
+    /// Formatea el nombre del rol recibido como parámetro.
     /// </summary>
-    public string GetRoleName(int roleId)
+    public string FormatRoleName(string roleName)
     {
-        return roleId switch
-        {
-            1 => "Estudiante",
-            2 => "Profesor",
-            _ => "Usuario"
-        };
+        return string.IsNullOrEmpty(roleName) ? "Usuario" : roleName;
+    }
+
+    /// <summary>
+    /// Formatea el nombre del grado/carrera recibido como parámetro.
+    /// </summary>
+    public string FormatDegreeName(string degreeName)
+    {
+        return string.IsNullOrEmpty(degreeName) ? "Grado desconocido" : degreeName;
+    }
+
+    /// <summary>
+    /// Formatea el total de estrellas como string.
+    /// </summary>
+    public string FormatTotalStars(int stars)
+    {
+        return stars.ToString();
     }
 
     /// <summary>
@@ -83,7 +59,6 @@ public class UserScreenPresenter
 
         try
         {
-            // Esperado: "dd/MM/yyyy" ej: "14/04/2026"
             string[] parts = lastLoginDate.Split('/');
 
             if (parts.Length != 3)
@@ -94,19 +69,15 @@ public class UserScreenPresenter
                 return info;
             }
 
-            // Extraer componentes
-            string dayStr = parts[0];              // "14"
-            string monthStr = parts[1];            // "04"
-            string yearStr = parts[2];             // "2026"
+            string dayStr = parts[0];
+            string monthStr = parts[1];
+            string yearStr = parts[2];
 
-            // El día tal cual
             info.DayOnly = dayStr;
 
-            // Convertir mes a nombre en español
             int monthNum = int.Parse(monthStr);
             string monthName = GetMonthNameInSpanish(monthNum);
 
-            // Formato: "Abril 2026"
             info.MonthAndYear = $"{monthName} {yearStr}";
 
             return info;
@@ -120,9 +91,6 @@ public class UserScreenPresenter
         }
     }
 
-    /// <summary>
-    /// Convierte número de mes a nombre en español.
-    /// </summary>
     private string GetMonthNameInSpanish(int month)
     {
         return month switch

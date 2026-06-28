@@ -5,7 +5,8 @@ public class IslandInteraction : MonoBehaviour
     public GameObject bookSystem;
     public GameObject canvasTopHUD;
     public GameObject canvasBottomInfo;
-    
+    public UIVisualizer visualizador;
+
     [Header("Module Configuration")]
     [SerializeField] private int moduleId;
     //LayerMask layerMask;
@@ -54,9 +55,15 @@ public class IslandInteraction : MonoBehaviour
         {
             EstadoManager.Instance.GetAndLogModuleName(moduleId);
         }
-        else
+        
+        if (visualizador != null)
         {
-            Debug.LogWarning("ModuleManager no encontrado en la escena.");
+            visualizador.MostrarModulo(moduleId);
+        }
+        else 
+        {
+            visualizador = FindFirstObjectByType<UIVisualizer>();
+            if(visualizador != null) visualizador.MostrarModulo(moduleId);
         }
 
         canvasTopHUD.SetActive(false);
