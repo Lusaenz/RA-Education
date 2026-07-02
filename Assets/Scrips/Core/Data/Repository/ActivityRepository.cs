@@ -16,4 +16,5 @@ public class ActivityRepository
         return _connection.Table<ActivityData>()
             .FirstOrDefault(x => x.id_activity == idActivity);
     }
+
 }

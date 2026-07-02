@@ -56,6 +56,122 @@ public class GameActivityService
         callback?.Invoke(result);
     }
 
+    public IEnumerator GetGameActivityByActivityId(int idActivity, Action<GameActivityData> callback)
+    {
+        if (DatabaseManager.Instance == null)
+        {
+            Debug.LogError("[GameActivityService] DatabaseManager.Instance es null.");
+            callback?.Invoke(null);
+            yield break;
+        }
+
+        if (!DatabaseManager.Instance.IsReady)
+            yield return new WaitUntil(() => DatabaseManager.Instance.IsReady);
+
+        GameActivityData result = null;
+
+        try
+        {
+            EnsureRepository();
+            result = repository.GetByActivityId(idActivity);
+
+            if (result == null)
+                Debug.LogWarning($"[GameActivityService] No se encontró game_activity con id_activity {idActivity}");
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"[GameActivityService] Error al buscar por id_activity: {ex.Message}");
+        }
+
+        callback?.Invoke(result);
+    }
+
+    public IEnumerator GetGameActivityByModuleId(int idModule, Action<GameActivityData> callback)
+    {
+        if (DatabaseManager.Instance == null)
+        {
+            Debug.LogError("[GameActivityService] DatabaseManager.Instance es null.");
+            callback?.Invoke(null);
+            yield break;
+        }
+
+        if (!DatabaseManager.Instance.IsReady)
+            yield return new WaitUntil(() => DatabaseManager.Instance.IsReady);
+
+        GameActivityData result = null;
+
+        try
+        {
+            EnsureRepository();
+            result = repository.GetByModuleId(idModule);
+
+            if (result == null)
+                Debug.LogWarning($"[GameActivityService] No se encontró game_activity con id_module {idModule}");
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"[GameActivityService] Error al buscar por id_module: {ex.Message}");
+        }
+
+        callback?.Invoke(result);
+    }
+
+    public IEnumerator GetAllGameActivitiesByModuleId(int idModule, System.Action<System.Collections.Generic.List<GameActivityData>> callback)
+    {
+        if (DatabaseManager.Instance == null)
+        {
+            Debug.LogError("[GameActivityService] DatabaseManager.Instance es null.");
+            callback?.Invoke(null);
+            yield break;
+        }
+
+        if (!DatabaseManager.Instance.IsReady)
+            yield return new WaitUntil(() => DatabaseManager.Instance.IsReady);
+
+        System.Collections.Generic.List<GameActivityData> result = null;
+
+        try
+        {
+            EnsureRepository();
+            result = repository.GetAllByModuleId(idModule);
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"[GameActivityService] Error al cargar actividades del módulo {idModule}: {ex.Message}");
+        }
+
+        callback?.Invoke(result);
+    }
+
+    public IEnumerator GetAllGameActivities(System.Action<System.Collections.Generic.List<GameActivityData>> callback)
+    {
+        if (DatabaseManager.Instance == null)
+        {
+            Debug.LogError("[GameActivityService] DatabaseManager.Instance es null.");
+            callback?.Invoke(null);
+            yield break;
+        }
+
+        if (!DatabaseManager.Instance.IsReady)
+        {
+            yield return new WaitUntil(() => DatabaseManager.Instance.IsReady);
+        }
+
+        System.Collections.Generic.List<GameActivityData> result = null;
+
+        try
+        {
+            EnsureRepository();
+            result = repository.GetAll();
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"[GameActivityService] Error al cargar todas las actividades: {ex.Message}");
+        }
+
+        callback?.Invoke(result);
+    }
+
     private void EnsureRepository()
     {
         if (repository == null)
