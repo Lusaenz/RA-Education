@@ -276,46 +276,10 @@ public class GameManagerFood : MonoBehaviour
 
     private void ActualizarEstrellas()
     {
-        if (estrellas == null) return;
-        int ganadas = CalcularEstrellasGanadas();
-
-        for (int i = 0; i < estrellas.Length; i++)
+        if (indiceActual == textos.Count)
         {
-            if (estrellas[i] == null) continue;
-            estrellas[i].sprite = i < ganadas ? estrellaLlena : estrellaVacia;
+           
+            //GameManager.instance.MostrarVictoria(score, 40);
         }
-    }
-
-    private int CalcularEstrellasGanadas()
-    {
-        int maxStars = _activityData != null ? Mathf.Max(0, _activityData.max_star) : 0;
-        if (maxStars == 0 || maxScore <= 0) return 0;
-        return Mathf.Clamp(Mathf.RoundToInt(score / (float)maxScore * maxStars), 0, maxStars);
-    }
-
-    private string ObtenerTiempoCompletado()
-    {
-        float elapsed = Mathf.Max(0f, Time.time - _activityStartTime);
-        return $"{Mathf.FloorToInt(elapsed / 60f):00}:{Mathf.FloorToInt(elapsed % 60f):00}";
-    }
-
-    private void EnsureDatabaseManagerExists()
-    {
-        if (DatabaseManager.Instance != null) return;
-        new GameObject(DatabaseManagerObjectName).AddComponent<DatabaseManager>();
-    }
-
-    private void ResolveLoggedInUser()
-    {
-        UserSessionManager session = UserSessionManager.Instance;
-        if (session != null && session.CurrentUser != null)
-            _idUser = session.CurrentUser.id_user;
-    }
-
-    private void OnDestroy()
-    {
-        if (instance == this) instance = null;
-        foreach (AsyncOperationHandle<Sprite> h in _handles)
-            if (h.IsValid()) Addressables.Release(h);
     }
 }
