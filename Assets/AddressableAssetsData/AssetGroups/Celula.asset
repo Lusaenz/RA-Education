@@ -15,6 +15,11 @@ MonoBehaviour:
   m_GroupName: Celula
   m_GUID: 7aa10af1ef77a454e95b957e84d97f9d
   m_SerializeEntries:
+  - m_GUID: 1f69e4775a744442887451b477dac177
+    m_Address: 3DModels/AnimalCell
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4232ebfef31b0e34a96a7ff051f9163d
     m_Address: celula/golgi
     m_ReadOnly: 0
@@ -27,6 +32,11 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4a314f2b2c7c1b145be06a8968cc6db1
     m_Address: celula/nucleo
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 59a1e7dd3f27f4d4c8ea48a1a28b4598
+    m_Address: 3DModels/VegetalCell
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

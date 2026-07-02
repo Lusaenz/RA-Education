@@ -41,6 +41,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DragAndDrop.unity
     guid: 879b15fb4a6a86041968d961f545ee66
+  - enabled: 1
+    path: Assets/Scenes/FoodRiddles.unity
+    guid: 57d5a34f2f2e9c64fae458cff6159db5
   - enabled: 0
     path: Assets/Scenes/SelectGameExample.unity
     guid: ccdf8fe5551e0d14488d5cb44faaafc1

@@ -28,19 +28,19 @@ public class SessionButtons : MonoBehaviour
     {
         Debug.Log("[SessionButtons] Cerrando sesión");
 
+        // Limpiar sesión guardada (recuérdame) para evitar auto-login al volver
+        new SessionPersistence().ClearSession();
+
         if (UserSessionManager.Instance != null)
         {
-            // Limpiar sesión
             UserSessionManager.Instance.ClearSession();
-
-            // Redirigir a SelectRole
-            SceneManager.LoadScene("SelectRole");
         }
         else
         {
             Debug.LogWarning("[SessionButtons] UserSessionManager no encontrado");
-            SceneManager.LoadScene("SelectRole");
         }
+
+        SceneManager.LoadScene("SelectRole");
     }
 
     /// <summary>

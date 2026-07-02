@@ -7,7 +7,19 @@ public class BoxGameSelector : MonoBehaviour
 {
     public GameInfoUI gameInfoUI;
     [SerializeField] private bool showAndroidTouchMessages = true;
-    [SerializeField] private int fallbackGameActivityId = 1;
+
+    /// <summary>
+    /// Si es mayor que 0, este crate abre directamente esa game_activity ignorando el módulo.
+    /// Asígnalo en el Inspector para crear crates de juegos específicos dentro del mismo módulo.
+    /// </summary>
+    [SerializeField] private int specificGameActivityId = 0;
+
+    /// <summary>
+    /// Si es mayor que 0, este crate solo es visible cuando el módulo activo coincide.
+    /// Útil cuando la escena GameSelection es compartida entre módulos.
+    /// 0 = visible para todos los módulos (comportamiento por defecto).
+    /// </summary>
+    [SerializeField] private int visibleForModuleId = 0;
 
     private Camera cachedCamera;
     private int lastSelectionFrame = -1;
@@ -28,6 +40,18 @@ public class BoxGameSelector : MonoBehaviour
 
     private void Start()
     {
+        ApplyModuleVisibility();
+    }
+
+    private void ApplyModuleVisibility()
+    {
+        if (visibleForModuleId <= 0) return;
+
+        int activeModule = PlayerPrefs.GetInt("selected_module_id", 0);
+        if (activeModule != visibleForModuleId)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     private void Update()
@@ -182,9 +206,10 @@ public class BoxGameSelector : MonoBehaviour
 
         lastSelectionFrame = Time.frameCount;
 
-        int gameID = ResolveGameActivityId();
-        Debug.Log($"BoxGameSelector: seleccion detectada desde {source}. ID: {gameID}");
-        ResolveGameInfoUI();
+        if (gameInfoUI == null)
+        {
+            ResolveGameInfoUI();
+        }
 
         if (gameInfoUI == null)
         {
@@ -192,13 +217,23 @@ public class BoxGameSelector : MonoBehaviour
             return;
         }
 
-        gameInfoUI.ShowGame(gameID);
-    }
+        // Si tiene una actividad específica asignada en el Inspector, la abre directamente.
+        if (specificGameActivityId > 0)
+        {
+            Debug.Log($"BoxGameSelector ({gameObject.name}): abriendo actividad específica {specificGameActivityId}.");
+            gameInfoUI.ShowGame(specificGameActivityId);
+            return;
+        }
 
-    private int ResolveGameActivityId()
-    {
-        int gameID = PlayerPrefs.GetInt("selected_activity_id", fallbackGameActivityId);
-        return gameID > 0 ? gameID : fallbackGameActivityId;
+        int moduleId = PlayerPrefs.GetInt("selected_module_id", 0);
+        if (moduleId <= 0)
+        {
+            Debug.LogWarning($"BoxGameSelector ({gameObject.name}): no hay módulo seleccionado en PlayerPrefs.");
+            return;
+        }
+
+        Debug.Log($"BoxGameSelector: seleccion detectada desde {source}. Módulo: {moduleId}");
+        gameInfoUI.ShowGameForModule(moduleId);
     }
 
 }

@@ -1,111 +1,321 @@
-using UnityEngine;
-
-using TMPro;
 using System.Collections;
 using System.Collections.Generic;
+using Newtonsoft.Json;
+using TMPro;
+using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.UI;
+
 public class GameManagerFood : MonoBehaviour
 {
-public static GameManagerFood instance;
+    public static GameManagerFood instance;
+
+    private const string DatabaseManagerObjectName = "DatabaseManager_Auto";
+    private const int DefaultGameActivityId = 3;
 
     [Header("Puntaje")]
     public int score = 0;
-    public int puntosCorrecto = 10;
-    public int puntosIncorrecto = -5;
+    public int maxScore = 0;
 
     [Header("UI")]
     public TMP_Text scoreText;
     public GameObject winPanel;
+    public TMP_Text textoInstruccion;
+    public TMP_Text textoAcertijo;
 
     [Header("Estrellas")]
-    public UnityEngine.UI.Image[] estrellas;
+    public Image[] estrellas;
     public Sprite estrellaLlena;
     public Sprite estrellaVacia;
-    public int maxScore = 40;
 
-    [Header("Sistema Secuencial")]
-    public List<string> respuestasCorrectas;
-    private int indiceActual = 0;
+    [Header("Items en escena (mismo orden que config_json)")]
+    public DragHandler[] items;
 
-    [Header("Textos Secuenciales")]
-public TMP_Text textoInstruccion;
-public List<string> textos;
+    [Header("Slot de destino")]
+    public Mouth dropSlot;
 
-public RandomizarOrganos randomizador;
+    [Header("Randomizador")]
+    public RandomizarOrganos randomizador;
 
+    private List<FoodRiddleLevel> _levels;
+    private int _indiceActual = 0;
 
+    private GameActivityService _gameActivityService;
+    private ActivityService _activityService;
+    private ResultActivityService _resultService;
+    private ActivityData _activityData;
 
-    void Awake()
+    private readonly List<AsyncOperationHandle<Sprite>> _handles = new();
+    private static readonly WaitForSeconds WaitOneSecond = new(1f);
+
+    private float _activityStartTime = 0f;
+    private int _idActivity;
+    private int _idUser;
+    private int _attempts = 0;
+
+    private void Awake()
     {
+        if (instance != null && instance != this) { Destroy(gameObject); return; }
         instance = this;
-        ActualizarUI();
-        ActualizarTexto();
+        _gameActivityService = new GameActivityService();
+        _activityService = new ActivityService();
+        _resultService = new ResultActivityService();
+        EnsureDatabaseManagerExists();
     }
 
-
-    public void EvaluarItem(string idItem)
+    private void Start()
     {
-        if (idItem == respuestasCorrectas[indiceActual])
+        StartCoroutine(BootstrapGame());
+    }
+
+    private IEnumerator BootstrapGame()
+    {
+        if (winPanel != null)
+        {
+            winPanel.SetActive(false);
+            winPanel.transform.localScale = Vector3.one;
+        }
+
+        EnsureDatabaseManagerExists();
+        yield return new WaitUntil(() => DatabaseManager.Instance != null);
+        yield return new WaitUntil(() => DatabaseManager.Instance.IsReady);
+        ResolveLoggedInUser();
+
+        int gameActivityId = PlayerPrefs.GetInt("selected_activity_id", DefaultGameActivityId);
+        gameActivityId = gameActivityId > 0 ? gameActivityId : DefaultGameActivityId;
+        PlayerPrefs.SetInt("selected_activity_id", gameActivityId);
+        PlayerPrefs.Save();
+
+        yield return StartCoroutine(LoadActivity(gameActivityId));
+    }
+
+    private IEnumerator LoadActivity(int idGameActivity)
+    {
+        GameActivityData data = null;
+        yield return StartCoroutine(_gameActivityService.GetGameActivity(idGameActivity, result => data = result));
+
+        if (data == null)
+        {
+            Debug.LogError($"[GameManagerFood] No se encontró game_activity con id {idGameActivity}.");
+            yield break;
+        }
+
+        _idActivity = data.id_activity;
+
+        yield return StartCoroutine(_activityService.GetActivity(_idActivity, result => _activityData = result));
+
+        if (_activityData == null)
+        {
+            Debug.LogError("[GameManagerFood] No se pudo cargar activity.");
+            yield break;
+        }
+
+        if (string.IsNullOrWhiteSpace(data.config_json))
+        {
+            Debug.LogError("[GameManagerFood] config_json vacío.");
+            yield break;
+        }
+
+        FoodRiddlesConfig config = null;
+        try
+        {
+            config = JsonConvert.DeserializeObject<FoodRiddlesConfig>(data.config_json);
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError("[GameManagerFood] Error al leer config_json: " + ex.Message);
+            yield break;
+        }
+
+        if (config?.levels == null || config.levels.Count == 0)
+        {
+            Debug.LogError("[GameManagerFood] La actividad no tiene niveles configurados.");
+            yield break;
+        }
+
+        yield return StartCoroutine(SetupScene(config));
+    }
+
+    private IEnumerator SetupScene(FoodRiddlesConfig config)
+    {
+        _levels = config.levels;
+        _levels.Sort((a, b) => a.order.CompareTo(b.order));
+        _indiceActual = 0;
+
+        maxScore = _activityData != null ? Mathf.Max(1, _activityData.max_score) : 100;
+        score = 0;
+
+        if (config.items != null)
+        {
+            for (int i = 0; i < config.items.Count; i++)
+            {
+                if (i >= items.Length || items[i] == null)
+                {
+                    Debug.LogWarning($"[GameManagerFood] No hay DragHandler asignado en el índice {i}.");
+                    continue;
+                }
+
+                FoodRiddleItem foodItem = config.items[i];
+                items[i].itemId = foodItem.id;
+
+                if (string.IsNullOrWhiteSpace(foodItem.addressableKey)) continue;
+
+                AsyncOperationHandle<Sprite> handle = Addressables.LoadAssetAsync<Sprite>(foodItem.addressableKey);
+                _handles.Add(handle);
+                yield return handle;
+
+                if (handle.Status == AsyncOperationStatus.Succeeded)
+                    items[i].SetSprite(handle.Result);
+                else
+                    Debug.LogWarning($"[GameManagerFood] Sprite no encontrado: {foodItem.addressableKey}");
+            }
+        }
+
+        if (randomizador != null) randomizador.MezclarHijos();
+        ActualizarUI();
+        ActualizarTexto();
+        _activityStartTime = Time.time;
+    }
+
+    public bool EvaluarItem(string idItem)
+    {
+        if (_levels == null || _indiceActual >= _levels.Count) return false;
+
+        if (idItem == _levels[_indiceActual].correctItemId)
         {
             RespuestaCorrecta();
-            indiceActual++;
-            randomizador.MezclarHijos();
+            _indiceActual++;
+            if (randomizador != null) randomizador.MezclarHijos();
 
-
-
-            if (indiceActual >= respuestasCorrectas.Count)
-            {
-                VerificarVictoria();
-            }
+            if (_indiceActual >= _levels.Count)
+                StartCoroutine(MostrarVictoria());
             else
-            {
-                Debug.Log("Siguiente: " + respuestasCorrectas[indiceActual]);
-                ActualizarTexto(); 
-            }
+                ActualizarTexto();
+
+            return true;
         }
         else
         {
             RespuestaIncorrecta();
+            return false;
         }
-        Debug.Log(indiceActual);
     }
-
-    void ActualizarTexto()
-{
-    if (textoInstruccion != null && indiceActual < textos.Count)
-    {
-        textoInstruccion.text = textos[indiceActual];
-    }
-}
 
     public void RespuestaCorrecta()
     {
-        score += puntosCorrecto;
+        int puntosCorrecto = Mathf.Max(1, maxScore / Mathf.Max(1, _levels != null ? _levels.Count : 1));
+        score = Mathf.Min(score + puntosCorrecto, maxScore);
         ActualizarUI();
-        SoundManager.instance.PlayCorrect(); 
+        if (SoundManager.instance != null) SoundManager.instance.PlayCorrect();
     }
 
     public void RespuestaIncorrecta()
     {
-        score += puntosIncorrecto;
+        int puntosIncorrecto = Mathf.Max(1, maxScore / Mathf.Max(1, _levels != null ? _levels.Count : 1));
+        score = Mathf.Max(score - puntosIncorrecto, 0);
         ActualizarUI();
-        SoundManager.instance.PlayWrong();
-        
+        if (SoundManager.instance != null) SoundManager.instance.PlayWrong();
     }
 
-    void ActualizarUI()
+    private void ActualizarUI()
     {
-        if (scoreText != null)
+        if (scoreText != null) scoreText.text = ": " + score;
+    }
+
+    private void ActualizarTexto()
+    {
+        if (_levels == null || _indiceActual >= _levels.Count) return;
+        string riddle = _levels[_indiceActual].riddle;
+        if (textoInstruccion != null) textoInstruccion.text = riddle;
+        if (textoAcertijo != null) textoAcertijo.text = riddle;
+    }
+
+    private IEnumerator MostrarVictoria()
+    {
+        yield return WaitOneSecond;
+        yield return StartCoroutine(AnimarPanelVictoria());
+        ActualizarEstrellas();
+
+        _attempts++;
+        ResolveLoggedInUser();
+        if (_idUser <= 0)
         {
-            scoreText.text = ": " + score;
+            Debug.LogWarning("[GameManagerFood] No hay usuario logeado. No se guardará result_activity.");
+            yield break;
+        }
+
+        _resultService.SaveResult(
+            _idUser,
+            _idActivity,
+            score,
+            CalcularEstrellasGanadas(),
+            _attempts,
+            ObtenerTiempoCompletado());
+    }
+
+    private IEnumerator AnimarPanelVictoria()
+    {
+        if (winPanel == null) yield break;
+
+        winPanel.SetActive(true);
+        winPanel.transform.localScale = Vector3.zero;
+
+        float t = 0f;
+        const float dur = 0.4f;
+        while (t < dur)
+        {
+            t += Time.deltaTime;
+            float s = Mathf.Lerp(0f, 1f, t / dur);
+            winPanel.transform.localScale = new Vector3(s, s, s);
+            yield return null;
+        }
+
+        winPanel.transform.localScale = Vector3.one;
+    }
+
+    private void ActualizarEstrellas()
+    {
+        if (estrellas == null) return;
+        int ganadas = CalcularEstrellasGanadas();
+
+        for (int i = 0; i < estrellas.Length; i++)
+        {
+            if (estrellas[i] == null) continue;
+            estrellas[i].sprite = i < ganadas ? estrellaLlena : estrellaVacia;
         }
     }
 
-    void VerificarVictoria()
+    private int CalcularEstrellasGanadas()
     {
-        if (indiceActual == textos.Count)
-        {
-           
-            GameManager.instance.MostrarVictoria(score, 40);
-        }
+        int maxStars = _activityData != null ? Mathf.Max(0, _activityData.max_star) : 0;
+        if (maxStars == 0 || maxScore <= 0) return 0;
+        return Mathf.Clamp(Mathf.RoundToInt(score / (float)maxScore * maxStars), 0, maxStars);
+    }
+
+    private string ObtenerTiempoCompletado()
+    {
+        float elapsed = Mathf.Max(0f, Time.time - _activityStartTime);
+        return $"{Mathf.FloorToInt(elapsed / 60f):00}:{Mathf.FloorToInt(elapsed % 60f):00}";
+    }
+
+    private void EnsureDatabaseManagerExists()
+    {
+        if (DatabaseManager.Instance != null) return;
+        new GameObject(DatabaseManagerObjectName).AddComponent<DatabaseManager>();
+    }
+
+    private void ResolveLoggedInUser()
+    {
+        UserSessionManager session = UserSessionManager.Instance;
+        if (session != null && session.CurrentUser != null)
+            _idUser = session.CurrentUser.id_user;
+    }
+
+    private void OnDestroy()
+    {
+        if (instance == this) instance = null;
+        foreach (AsyncOperationHandle<Sprite> h in _handles)
+            if (h.IsValid()) Addressables.Release(h);
     }
 }

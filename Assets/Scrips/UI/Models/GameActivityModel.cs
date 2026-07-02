@@ -14,6 +14,7 @@ public class GameActivityData
     [PrimaryKey]
     public int    id_game_activity { get; set; }
     public int    id_activity { get; set; }
+    public int    id_module { get; set; }
     public string game_type { get; set; }
     public int    max_lives { get; set; }
     public string config_json { get; set; }
@@ -40,4 +41,27 @@ public class ZoneData
 {
     public string id;
     public string label;
+}
+
+[Serializable]
+public class FoodRiddlesConfig
+{
+    public List<FoodRiddleLevel> levels;
+    public List<FoodRiddleItem>  items;
+}
+
+[Serializable]
+public class FoodRiddleLevel
+{
+    public int    order;
+    public string riddle;
+    public string correctItemId;
+}
+
+[Serializable]
+public class FoodRiddleItem
+{
+    public string id;
+    public string name;
+    public string addressableKey;
 }

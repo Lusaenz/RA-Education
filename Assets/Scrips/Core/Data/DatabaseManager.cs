@@ -6,16 +6,16 @@ using System.Collections;
 using UnityEngine.Networking;
 using System.Security.Cryptography;
 
-/// <summary>
-/// Punto unico de inicializacion y acceso a SQLite.
-/// Copia la base, abre la conexion y reintenta cuando el archivo esta ocupado.
-/// </summary>
 public class DatabaseManager : MonoBehaviour
 {
     private const string DbName = "ciencia_viva.db";
     private const string DbHashFile = "ciencia_viva.db.hash";
     private const int MaxInitRetries = 30;
     private const float InitRetryDelaySeconds = 0.25f;
+
+    // Tablas gestionadas por el desarrollador — se reemplazan al actualizar la BD original.
+    // Las tablas de usuario (users, students, teachers, result_activity, progress) se preservan siempre.
+    private static readonly string[] ContentTables = { "degrees", "modules", "activity", "game_activity", "security_questions" };
 
     public static DatabaseManager Instance { get; private set; }
 
@@ -25,9 +25,6 @@ public class DatabaseManager : MonoBehaviour
 
     public event Action OnReady;
 
-    /// <summary>
-    /// Inicializa el singleton y lanza la apertura asincronica de la base.
-    /// </summary>
     void Awake()
     {
         if (Instance == null)
@@ -42,9 +39,6 @@ public class DatabaseManager : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Reintenta la apertura de la conexion para tolerar bloqueos temporales del archivo.
-    /// </summary>
     IEnumerator InicializarDBConReintentos()
     {
         IsReady = false;
@@ -74,16 +68,11 @@ public class DatabaseManager : MonoBehaviour
             }
             catch (SQLiteException ex) when (ex.Result == SQLite3.Result.Busy)
             {
-                if (attempt == MaxInitRetries)
-                {
-                    break;
-                }
-
+                if (attempt == MaxInitRetries) break;
                 shouldRetry = true;
             }
             catch (Exception ex)
             {
-                // Algunos entornos propagan "Busy" como Exception genérica.
                 if (ex.Message.IndexOf("busy", StringComparison.OrdinalIgnoreCase) >= 0 && attempt < MaxInitRetries)
                 {
                     shouldRetry = true;
@@ -97,29 +86,24 @@ public class DatabaseManager : MonoBehaviour
             }
 
             if (shouldRetry)
-            {
                 yield return new WaitForSecondsRealtime(InitRetryDelaySeconds);
-            }
         }
 
         Debug.LogError("DatabaseManager: Error inicializando DB: Busy (timeout de reintentos agotado).");
         IsReady = false;
     }
 
-    /// <summary>
-    /// Garantiza que exista una copia fisica de la base en almacenamiento persistente.
-    /// Detecta cambios en la base de datos original y actualiza la copia si es necesario.
-    /// </summary>
     IEnumerator EnsureDatabaseFileExists(string targetPath)
     {
         string sourcePath = Path.Combine(Application.streamingAssetsPath, DbName);
-        
-        // Verificar si la base de datos original ha sido modificada
+
         if (File.Exists(targetPath))
         {
             yield return StartCoroutine(CheckAndUpdateIfModified(sourcePath, targetPath));
             yield break;
         }
+
+        byte[] sourceBytes = null;
 
         if (sourcePath.Contains("://"))
         {
@@ -133,7 +117,8 @@ public class DatabaseManager : MonoBehaviour
                     yield break;
                 }
 
-                File.WriteAllBytes(targetPath, www.downloadHandler.data);
+                sourceBytes = www.downloadHandler.data;
+                File.WriteAllBytes(targetPath, sourceBytes);
             }
         }
         else
@@ -144,83 +129,150 @@ public class DatabaseManager : MonoBehaviour
                 yield break;
             }
 
+            sourceBytes = File.ReadAllBytes(sourcePath);
             File.Copy(sourcePath, targetPath, true);
+        }
+
+        // Guardar hash tras la copia inicial para evitar una migración innecesaria en el próximo arranque.
+        if (sourceBytes != null)
+        {
+            try
+            {
+                string hashFilePath = Path.Combine(Application.persistentDataPath, DbHashFile);
+                File.WriteAllText(hashFilePath, CalculateHash(sourceBytes));
+            }
+            catch (Exception ex)
+            {
+                Debug.LogWarning($"DatabaseManager: No se pudo guardar hash inicial: {ex.Message}");
+            }
         }
 
         Debug.Log("DatabaseManager: DB copiada a persistentDataPath.");
     }
 
-    /// <summary>
-    /// Verifica si la base de datos original ha sido modificada y actualiza la copia.
-    /// </summary>
     private IEnumerator CheckAndUpdateIfModified(string sourcePath, string targetPath)
     {
         string hashFilePath = Path.Combine(Application.persistentDataPath, DbHashFile);
         string currentHash = "";
-        
-        // Obtener el hash de la base de datos original
+        byte[] newDbBytes = null;
+
         if (sourcePath.Contains("://"))
         {
             using (UnityWebRequest www = UnityWebRequest.Get(sourcePath))
             {
                 yield return www.SendWebRequest();
-                
+
                 if (www.result == UnityWebRequest.Result.Success)
                 {
-                    currentHash = CalculateHash(www.downloadHandler.data);
+                    newDbBytes = www.downloadHandler.data;
+                    currentHash = CalculateHash(newDbBytes);
                 }
             }
         }
         else if (File.Exists(sourcePath))
         {
-            byte[] fileData = File.ReadAllBytes(sourcePath);
-            currentHash = CalculateHash(fileData);
+            newDbBytes = File.ReadAllBytes(sourcePath);
+            currentHash = CalculateHash(newDbBytes);
         }
-        
-        // Comparar con el hash almacenado
-        string storedHash = "";
-        if (File.Exists(hashFilePath))
+
+        string storedHash = File.Exists(hashFilePath) ? File.ReadAllText(hashFilePath).Trim() : "";
+
+        if (string.IsNullOrEmpty(currentHash) || currentHash == storedHash)
+            yield break;
+
+        Debug.Log("DatabaseManager: BD original modificada. Iniciando migración selectiva...");
+
+        bool migrated = newDbBytes != null && MigrateContentTables(targetPath, newDbBytes);
+
+        if (!migrated)
         {
-            storedHash = File.ReadAllText(hashFilePath).Trim();
-        }
-        
-        // Si el hash es diferente, actualizar la copia
-        if (!string.IsNullOrEmpty(currentHash) && currentHash != storedHash)
-        {
-            Debug.Log("DatabaseManager: Base de datos original modificada. Actualizando copia local.");
-            
-            // Eliminar la copia antigua
+            // Fallback: reemplazar la BD completa. Los datos de usuario se perderán.
+            Debug.LogWarning("DatabaseManager: Migración selectiva fallida. Reemplazando BD completa.");
             try
             {
                 if (File.Exists(targetPath))
-                {
                     File.Delete(targetPath);
-                    Debug.Log("DatabaseManager: Archivo DB antiguo eliminado.");
-                }
             }
             catch (Exception ex)
             {
-                Debug.LogError($"DatabaseManager: Error al eliminar DB antigua: {ex.Message}");
+                Debug.LogError($"DatabaseManager: Error al eliminar BD antigua: {ex.Message}");
             }
-            
-            // Copiar la nueva versión
+
             yield return StartCoroutine(CopyDatabaseFile(sourcePath, targetPath));
-            
-            // Guardar el nuevo hash
-            try
-            {
-                File.WriteAllText(hashFilePath, currentHash);
-            }
-            catch (Exception ex)
-            {
-                Debug.LogError($"DatabaseManager: Error al guardar hash: {ex.Message}");
-            }
+        }
+
+        try
+        {
+            File.WriteAllText(hashFilePath, currentHash);
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"DatabaseManager: Error al guardar hash: {ex.Message}");
         }
     }
-    
+
     /// <summary>
-    /// Copia el archivo de base de datos desde origen a destino.
+    /// Actualiza las tablas de contenido en la BD local usando ATTACH, preservando los datos de usuario.
+    /// Devuelve true si la migración fue exitosa.
     /// </summary>
+    private bool MigrateContentTables(string localDbPath, byte[] newDbBytes)
+    {
+        string tempPath = localDbPath + ".update";
+
+        try
+        {
+            File.WriteAllBytes(tempPath, newDbBytes);
+
+            string escapedTemp = tempPath.Replace("'", "''");
+
+            using (var conn = new SQLiteConnection(localDbPath, SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.FullMutex))
+            {
+                conn.BusyTimeout = TimeSpan.FromSeconds(15);
+                conn.Execute($"ATTACH DATABASE '{escapedTemp}' AS newdb;");
+                conn.Execute("BEGIN TRANSACTION;");
+
+                foreach (string table in ContentTables)
+                {
+                    try
+                    {
+                        // Obtener el DDL original de la BD fuente para recrear la tabla con el esquema correcto.
+                        string ddl = conn.ExecuteScalar<string>(
+                            $"SELECT sql FROM newdb.sqlite_master WHERE type='table' AND name='{table}';");
+
+                        conn.Execute($"DROP TABLE IF EXISTS \"{table}\";");
+
+                        if (!string.IsNullOrEmpty(ddl))
+                        {
+                            conn.Execute(ddl);
+                        }
+
+                        conn.Execute($"INSERT INTO \"{table}\" SELECT * FROM newdb.\"{table}\";");
+                        Debug.Log($"DatabaseManager: Tabla '{table}' actualizada.");
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.LogWarning($"DatabaseManager: No se pudo migrar tabla '{table}': {ex.Message}");
+                    }
+                }
+
+                conn.Execute("COMMIT;");
+                conn.Execute("DETACH DATABASE newdb;");
+            }
+
+            Debug.Log("DatabaseManager: Migración selectiva completada. Datos de usuario preservados.");
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"DatabaseManager: Error en migración selectiva: {ex.Message}");
+            return false;
+        }
+        finally
+        {
+            try { if (File.Exists(tempPath)) File.Delete(tempPath); } catch { }
+        }
+    }
+
     private IEnumerator CopyDatabaseFile(string sourcePath, string targetPath)
     {
         if (sourcePath.Contains("://"))
@@ -228,13 +280,13 @@ public class DatabaseManager : MonoBehaviour
             using (UnityWebRequest www = UnityWebRequest.Get(sourcePath))
             {
                 yield return www.SendWebRequest();
-                
+
                 if (www.result != UnityWebRequest.Result.Success)
                 {
                     Debug.LogError($"DatabaseManager: No se pudo copiar DB desde StreamingAssets: {www.error}");
                     yield break;
                 }
-                
+
                 File.WriteAllBytes(targetPath, www.downloadHandler.data);
                 Debug.Log("DatabaseManager: DB actualizada desde StreamingAssets.");
             }
@@ -246,35 +298,26 @@ public class DatabaseManager : MonoBehaviour
                 Debug.LogWarning($"DatabaseManager: DB base no encontrada en StreamingAssets: {sourcePath}");
                 yield break;
             }
-            
+
             File.Copy(sourcePath, targetPath, true);
             Debug.Log("DatabaseManager: DB actualizada a persistentDataPath.");
         }
     }
-    
-    /// <summary>
-    /// Calcula el hash MD5 de los datos del archivo.
-    /// </summary>
+
     private string CalculateHash(byte[] data)
     {
         using (MD5 md5 = MD5.Create())
         {
             byte[] hash = md5.ComputeHash(data);
-            return System.Convert.ToBase64String(hash);
+            return Convert.ToBase64String(hash);
         }
     }
 
-    /// <summary>
-    /// Expone la conexion activa para repositorios y servicios legacy.
-    /// </summary>
     public SQLiteConnection GetConnection()
     {
         return Connection;
     }
 
-    /// <summary>
-    /// Cierra la conexion al salir de la aplicacion.
-    /// </summary>
     void OnApplicationQuit()
     {
         Connection?.Close();
