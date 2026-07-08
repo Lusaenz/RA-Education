@@ -62,6 +62,10 @@ public class IslandInteraction : MonoBehaviour
     void OpenBook()
     {
         Debug.Log($"Isla tocada (ID Módulo: {moduleId})");
+
+        PlayerPrefs.SetInt("selected_module_id", moduleId);
+        PlayerPrefs.SetInt("selected_activity_id", moduleId);
+        PlayerPrefs.Save();
         
         // Consultar el nombre del módulo en la base de datos
         if (EstadoManager.Instance != null)

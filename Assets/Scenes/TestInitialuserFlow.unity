@@ -2856,7 +2856,6 @@ GameObject:
   - component: {fileID: 618683830}
   - component: {fileID: 618683833}
   - component: {fileID: 618683832}
-  - component: {fileID: 618683834}
   - component: {fileID: 618683831}
   m_Layer: 0
   m_Name: 'Close '
@@ -2873,7 +2872,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 618683829}
   m_LocalRotation: {x: 0.37226146, y: 0.9281279, z: 1.395757e-33, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: -14}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2881,7 +2880,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 43.71}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -81, y: -49}
+  m_AnchoredPosition: {x: -74, y: -43}
   m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &618683831
@@ -2928,9 +2927,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 618683834}
-        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
-        m_MethodName: LoadScene
+      - m_Target: {fileID: 682012926}
+        m_TargetAssemblyTypeName: TestInitialUserFlowView, Assembly-CSharp
+        m_MethodName: CloseBook
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2978,19 +2977,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 618683829}
   m_CullTransparentMesh: 1
---- !u!114 &618683834
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 618683829}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88e5db53e4ae34f6d9e003a249a361c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SceneLoader
-  sceneName: TestInitialuserFlow
 --- !u!1001 &625050996
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3690,6 +3676,9 @@ MonoBehaviour:
   roleTypeText: {fileID: 2139419797}
   degreeText: {fileID: 54535108}
   totalStarsText: {fileID: 1412990094}
+  bookSystem: {fileID: 463391650}
+  canvasTopHUD: {fileID: 307273644}
+  canvasBottomInfo: {fileID: 554627190}
 --- !u!4 &682012927
 Transform:
   m_ObjectHideFlags: 0
@@ -9293,6 +9282,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 307273644}
     - target: {fileID: 9101927310165626604, guid: f88b6a79e90574d0c8553077f58c9f80, type: 3}
+      propertyPath: gameActivityId
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9101927310165626604, guid: f88b6a79e90574d0c8553077f58c9f80, type: 3}
       propertyPath: canvasBottomInfo
       value: 
       objectReference: {fileID: 554627190}
@@ -9362,6 +9355,10 @@ PrefabInstance:
       propertyPath: canvasTopHUD
       value: 
       objectReference: {fileID: 307273644}
+    - target: {fileID: 6634685624747772869, guid: a3a7dc3e28fe142d585d9c883b95e723, type: 3}
+      propertyPath: gameActivityId
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6634685624747772869, guid: a3a7dc3e28fe142d585d9c883b95e723, type: 3}
       propertyPath: canvasBottomInfo
       value: 

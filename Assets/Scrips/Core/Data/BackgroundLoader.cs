@@ -20,16 +20,31 @@ public class BackgroundLoader : MonoBehaviour
     [Header("Addressable Keys")]
     [SerializeField] private string digestiveBackgroundKey = "background/digestivo";
     [SerializeField] private string cellBackgroundKey = "background/celula";
+    [SerializeField] private string foodRiddlesBackgroundKey = "background/food_riddles";
 
     // ── Internos ─────────────────────────────────────────────────────────
     private AsyncOperationHandle<Sprite> _currentHandle;
 
+    private void Start()
+    {
+        LoadBackgroundForSelectedGame();
+    }
+
     /// <summary>
     /// Carga el fondo según el juego seleccionado en GameSelector.
-    /// Lee el ID desde PlayerPrefs (selected_activity_id).
+    /// Prioriza selected_game_type; cae a ID solo como fallback de emergencia.
     /// </summary>
     public void LoadBackgroundForSelectedGame()
     {
+        string gameType = PlayerPrefs.GetString("selected_game_type", "");
+        if (!string.IsNullOrEmpty(gameType))
+        {
+            LoadBackgroundByGameType(gameType);
+            return;
+        }
+
+        // Fallback: usar ID solo si no hay game_type guardado
+        Debug.LogWarning("BackgroundLoader: 'selected_game_type' no encontrado en PlayerPrefs. Usando fallback por ID.");
         int selectedGameId = PlayerPrefs.GetInt("selected_activity_id", 1);
         LoadBackgroundByGameId(selectedGameId);
     }
@@ -88,6 +103,7 @@ public class BackgroundLoader : MonoBehaviour
         {
             1 => digestiveBackgroundKey,      // Digestivo
             2 => cellBackgroundKey,            // Célula
+            3 => foodRiddlesBackgroundKey,    // Food Riddles
             _ => null
         };
     }
@@ -97,10 +113,16 @@ public class BackgroundLoader : MonoBehaviour
     /// </summary>
     private string GetBackgroundKeyForGameType(string gameType)
     {
+        if (string.IsNullOrEmpty(gameType))
+        {
+            return null;
+        }
+
         return gameType.ToLower() switch
         {
-            "digestive" or "digestivo" => digestiveBackgroundKey,
-            "cell" or "célula" or "celula" => cellBackgroundKey,
+            "drag_drop_digestive_system" or "digestive" or "digestivo" => digestiveBackgroundKey,
+            "drag_drop_cell" or "cell" or "célula" or "celula" => cellBackgroundKey,
+            "food_riddles" or "foodriddle" or "foodriddles" => foodRiddlesBackgroundKey,
             _ => null
         };
     }

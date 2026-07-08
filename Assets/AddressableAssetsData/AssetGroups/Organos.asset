@@ -20,6 +20,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0ba782ed71a8240be8d8c204fbbee72b
+    m_Address: 3DModels/SystemDigestive
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 75d6c84aa7cf79a46bf96f6a76ef15ec
     m_Address: organos/estomago
     m_ReadOnly: 0

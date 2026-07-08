@@ -343,7 +343,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 24049a7e4a624e4499ddef1fdb6f455e, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -835,7 +835,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ac1073039d9752241b2db0f982d16b4b, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -962,7 +962,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3dc3c8a621797ef43befa9558a024d09, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1485,7 +1485,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 29b321e6c540c2849a437c1120ed918d, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1582,7 +1582,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Acertijo
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
@@ -1771,7 +1771,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 72c03daa5507d914285c449a87d075d3, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1848,7 +1848,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0942c134b7929c6478c96e339ad60c2f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b8be9fc013e9643acbf16c678cbbe35a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1988,7 +1988,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 63be6b4bb0ca74d499a0396793db1523, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2760,34 +2760,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManagerFood
   score: 0
-  puntosCorrecto: 10
-  puntosIncorrecto: -5
+  maxScore: 0
   scoreText: {fileID: 0}
   winPanel: {fileID: 0}
-  estrellas:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  estrellaLlena: {fileID: 21300000, guid: ae88574e085024f47b6ac8535f8fe948, type: 3}
-  estrellaVacia: {fileID: 21300000, guid: 3d3ed98f60537ac42b2fe596b1245f9b, type: 3}
-  maxScore: 60
-  respuestasCorrectas:
-  - 1
-  - 2
-  - 3
-  - 4
-  - 5
-  - 6
-  textoInstruccion: {fileID: 1106851693}
-  textos:
-  - "Crujientes, saladas y adictivas, se comen r\xE1pido pero no alimentan bien."
-  - "Hoja verde, ligera y fresca, com\xFAn en comidas saludables."
-  - "Bebida dulce y refrescante, con alto contenido de az\xFAcar constante."
-  - "Mucho sabor y grasa en cada bocado; en exceso afecta el coraz\xF3n."
-  - "Alimentos naturales que aportan vitaminas y energ\xEDa real."
-  - "L\xEDquido vital que hidrata y mantiene el cuerpo funcionando correctamente."
+  textoInstruccion: {fileID: 0}
+  textoAcertijo: {fileID: 1106851693}
+  estrellas: []
+  estrellaLlena: {fileID: 0}
+  estrellaVacia: {fileID: 0}
+  items:
+  - {fileID: 622740292}
+  - {fileID: 594409724}
+  - {fileID: 178454584}
+  - {fileID: 1092103924}
+  - {fileID: 1111811861}
+  - {fileID: 1294580866}
+  dropSlot: {fileID: 1158101597}
   randomizador: {fileID: 940853032}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

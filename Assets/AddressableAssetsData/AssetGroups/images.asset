@@ -20,6 +20,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 70e5f1a17081dbf4d8bff336fe53dbab
+    m_Address: images/food_riddles
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f5f4113e965908e498b8da1b2fce740b
     m_Address: images/digestive
     m_ReadOnly: 0
