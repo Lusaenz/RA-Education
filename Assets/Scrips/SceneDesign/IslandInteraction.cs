@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class IslandInteraction : MonoBehaviour
 {
@@ -11,10 +12,23 @@ public class IslandInteraction : MonoBehaviour
     [SerializeField] private int moduleId;
     //LayerMask layerMask;
 
-
     void Update()
     {
-        // TOUCH (movil)
+        //evento nop-click pc
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return; 
+        }
+
+        //evento nop-touch cel
+        if (Input.touchCount > 0)
+        {
+            Touch toque = Input.GetTouch(0);
+            if (EventSystem.current.IsPointerOverGameObject(toque.fingerId))
+            {
+                return; 
+            }
+        }
         if (Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0);
@@ -25,7 +39,6 @@ public class IslandInteraction : MonoBehaviour
             }
         }
 
-        // MOUSE (editor Unity)
         if (Input.GetMouseButtonDown(0))
         {
             CheckHit(Input.mousePosition);
