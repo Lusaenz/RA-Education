@@ -17,12 +17,33 @@ public class ARModelControllerPro : MonoBehaviour
     public float minRotationX = -80f;
     public float maxRotationX = 80f;
 
+    [Header("Rotacion/Zoom de la parte aislada (foco)")]
+    [Tooltip("Sensibilidad de rotacion aplicada a la parte mientras esta enfocada/aislada.")]
+    public float partRotationSpeed = 0.2f;
+    [Tooltip("Sensibilidad de zoom aplicada a la parte mientras esta enfocada/aislada.")]
+    public float partZoomSpeed = 0.5f;
+    public float partMinScaleMultiplier = 0.6f;
+    public float partMaxScaleMultiplier = 2.5f;
+    public float partMinRotationX = -80f;
+    public float partMaxRotationX = 80f;
+
     // Rotacion
     private float targetRotationY;
     private float currentRotationY;
 
     private float targetRotationX;
     private float currentRotationX;
+
+    // Rotacion/zoom de la parte aislada: independientes de las de arriba
+    // para que, una vez que solo queda visible la parte seleccionada, el
+    // usuario pueda inspeccionarla girandola sobre si misma en vez de sobre
+    // el pivote del modelo completo (que la sacaria de cuadro).
+    private Transform _focusedPart;
+    private Quaternion _partBaseLocalRotation;
+    private Vector3 _partBaseLocalScale;
+    private float _partTargetRotY, _partCurrentRotY;
+    private float _partTargetRotX, _partCurrentRotX;
+    private float _partScaleMultiplier = 1f;
 
     // Solo se acepta input de rotacion/zoom una vez que ESTE target especifico
     // fue encontrado. Sin esto, Update() corria igual para los 3 ImageTargets
@@ -66,8 +87,17 @@ void Start()
     void Update()
     {
         if (!_canInteract) return;
-        if (_isFocused) return;
         if (IsTouchOverUI()) return;
+
+        if (_isFocused)
+        {
+            if (_focusedPart != null)
+            {
+                HandlePartRotationInput();
+                HandlePartZoom();
+            }
+            return;
+        }
 
         HandleRotationInput();
         HandleZoom();
@@ -76,6 +106,8 @@ void Start()
     void LateUpdate()
     {
         SmoothRotation();
+        if (_isFocused && _focusedPart != null)
+            SmoothPartRotation();
     }
 
     // Centra y escala el modelo para que 'part' quede en viewportTarget
@@ -97,6 +129,25 @@ void Start()
             _prevLocalScale = transform.localScale;
         }
         _isFocused = true;
+
+        // Si se cambia de parte sin cerrar el panel, se restaura primero la
+        // rotacion/escala manual que el usuario le haya aplicado a la parte
+        // anterior antes de soltarla.
+        if (_focusedPart != null && _focusedPart != part)
+        {
+            _focusedPart.localRotation = _partBaseLocalRotation;
+            _focusedPart.localScale = _partBaseLocalScale;
+        }
+
+        if (_focusedPart != part)
+        {
+            _focusedPart = part;
+            _partBaseLocalRotation = part.localRotation;
+            _partBaseLocalScale = part.localScale;
+            _partTargetRotX = _partCurrentRotX = 0f;
+            _partTargetRotY = _partCurrentRotY = 0f;
+            _partScaleMultiplier = 1f;
+        }
 
         Transform camTransform = _arCamera.transform;
 
@@ -131,6 +182,13 @@ void Start()
 
         if (_focusRoutine != null) StopCoroutine(_focusRoutine);
         _focusRoutine = StartCoroutine(AnimateTransform(_prevLocalPosition, _prevLocalScale, 0.35f));
+
+        if (_focusedPart != null)
+        {
+            _focusedPart.localRotation = _partBaseLocalRotation;
+            _focusedPart.localScale = _partBaseLocalScale;
+            _focusedPart = null;
+        }
     }
 
     IEnumerator AnimateTransform(Vector3 targetLocalPosition, Vector3 targetScale, float duration)
@@ -271,6 +329,102 @@ void Start()
                 clamped,
                 clamped
             );
+    }
+
+    // Rotacion/zoom de la parte aislada (mientras esta enfocada)
+    void HandlePartRotationInput()
+    {
+        if (Input.GetMouseButton(0))
+        {
+            _partTargetRotY +=
+                Input.GetAxis("Mouse X") *
+                partRotationSpeed *
+                15f;
+
+            _partTargetRotX -=
+                Input.GetAxis("Mouse Y") *
+                partRotationSpeed *
+                12f;
+        }
+        if (Input.touchCount == 1)
+        {
+            Touch t = Input.GetTouch(0);
+
+            if (t.phase == TouchPhase.Moved)
+            {
+                _partTargetRotY +=
+                    t.deltaPosition.x *
+                    partRotationSpeed *
+                    1.5f;
+                _partTargetRotX -=
+                    t.deltaPosition.y *
+                    partRotationSpeed *
+                    1.2f;
+            }
+        }
+        _partTargetRotX = Mathf.Clamp(
+            _partTargetRotX,
+            partMinRotationX,
+            partMaxRotationX
+        );
+
+        _partTargetRotY = NormalizeAngle(_partTargetRotY);
+    }
+
+    void SmoothPartRotation()
+    {
+        _partCurrentRotY = Mathf.LerpAngle(
+            _partCurrentRotY,
+            _partTargetRotY,
+            Time.deltaTime * smoothSpeed
+        );
+
+        _partCurrentRotX = Mathf.LerpAngle(
+            _partCurrentRotX,
+            _partTargetRotX,
+            Time.deltaTime * smoothSpeed
+        );
+
+        _focusedPart.localRotation =
+            _partBaseLocalRotation *
+            Quaternion.Euler(_partCurrentRotX, _partCurrentRotY, 0f);
+    }
+
+    void HandlePartZoom()
+    {
+        float zoomInput = 0f;
+
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
+        if (scroll != 0)
+            zoomInput = scroll;
+
+        if (Input.touchCount == 2)
+        {
+            Touch t1 = Input.GetTouch(0);
+            Touch t2 = Input.GetTouch(1);
+
+            Vector2 prev1 = t1.position - t1.deltaPosition;
+            Vector2 prev2 = t2.position - t2.deltaPosition;
+
+            float prevMag = (prev1 - prev2).magnitude;
+            float currentMag = (t1.position - t2.position).magnitude;
+
+            zoomInput = (currentMag - prevMag) * 0.001f;
+        }
+
+        if (zoomInput != 0)
+            ApplyPartZoom(zoomInput);
+    }
+
+    void ApplyPartZoom(float increment)
+    {
+        _partScaleMultiplier = Mathf.Clamp(
+            _partScaleMultiplier + increment * partZoomSpeed,
+            partMinScaleMultiplier,
+            partMaxScaleMultiplier
+        );
+
+        _focusedPart.localScale = _partBaseLocalScale * _partScaleMultiplier;
     }
 
     float NormalizeAngle(float angle)

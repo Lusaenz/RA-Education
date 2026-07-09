@@ -11,7 +11,6 @@ public class GameManagerFood : MonoBehaviour
 {
     public static GameManagerFood instance;
 
-    private const string DatabaseManagerObjectName = "DatabaseManager_Auto";
     private const int DefaultGameActivityId = 3;
 
     [Header("Puntaje")]
@@ -51,7 +50,6 @@ public class GameManagerFood : MonoBehaviour
 
     private float _activityStartTime = 0f;
     private int _idActivity;
-    private int _idUser;
     private int _attempts = 0;
 
     private void Awake()
@@ -61,7 +59,6 @@ public class GameManagerFood : MonoBehaviour
         _gameActivityService = new GameActivityService();
         _activityService = new ActivityService();
         _resultService = new ResultActivityService();
-        EnsureDatabaseManagerExists();
     }
 
     private void Start()
@@ -77,10 +74,9 @@ public class GameManagerFood : MonoBehaviour
             winPanel.transform.localScale = Vector3.one;
         }
 
-        EnsureDatabaseManagerExists();
+
         yield return new WaitUntil(() => DatabaseManager.Instance != null);
         yield return new WaitUntil(() => DatabaseManager.Instance.IsReady);
-        ResolveLoggedInUser();
 
         int gameActivityId = PlayerPrefs.GetInt("selected_activity_id", DefaultGameActivityId);
         gameActivityId = gameActivityId > 0 ? gameActivityId : DefaultGameActivityId;
@@ -235,23 +231,27 @@ public class GameManagerFood : MonoBehaviour
     {
         yield return WaitOneSecond;
         yield return StartCoroutine(AnimarPanelVictoria());
-        ActualizarEstrellas();
+
+        int stars = CalcularEstrellas();
+        ActualizarEstrellas(stars);
 
         _attempts++;
-        ResolveLoggedInUser();
-        if (_idUser <= 0)
+
+        var session = UserSessionManager.Instance;
+        var user = session != null ? session.CurrentUser : null;
+        if (user == null)
         {
             Debug.LogWarning("[GameManagerFood] No hay usuario logeado. No se guardará result_activity.");
             yield break;
         }
 
         _resultService.SaveResult(
-            _idUser,
+            user.id_user,
             _idActivity,
             score,
-            CalcularEstrellasGanadas(),
+            stars,
             _attempts,
-            ObtenerTiempoCompletado());
+            GetElapsedTime());
     }
 
     private IEnumerator AnimarPanelVictoria()
@@ -274,12 +274,27 @@ public class GameManagerFood : MonoBehaviour
         winPanel.transform.localScale = Vector3.one;
     }
 
-    private void ActualizarEstrellas()
+    private int CalcularEstrellas()
     {
-        if (indiceActual == textos.Count)
+        if (maxScore <= 0) return 0;
+        float p = Mathf.Clamp01((float)score / maxScore);
+        int maxStars = estrellas != null ? estrellas.Length : 3;
+        return Mathf.RoundToInt(p * maxStars);
+    }
+
+    private void ActualizarEstrellas(int numEstrellas)
+    {
+        if (estrellas == null || estrellas.Length == 0) return;
+        for (int i = 0; i < estrellas.Length; i++)
         {
-           
-            //GameManager.instance.MostrarVictoria(score, 40);
+            if (estrellas[i] != null)
+                estrellas[i].sprite = i < numEstrellas ? estrellaLlena : estrellaVacia;
         }
+    }
+
+    private string GetElapsedTime()
+    {
+        float t = Time.time - _activityStartTime;
+        return $"{Mathf.FloorToInt(t / 60):00}:{Mathf.FloorToInt(t % 60):00}";
     }
 }

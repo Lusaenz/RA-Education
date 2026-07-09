@@ -23,13 +23,11 @@ public class ARPartButtonManager : MonoBehaviour
     [Tooltip("id_topic usado cuando la parte no está en partTopicOverrides (0 = ninguno). Útil cuando todas las partes comparten un mismo topic, como los orgánulos de una célula.")]
     public int defaultTopicId = 0;
 
-    [Header("Zoom / Highlight al seleccionar una parte")]
+    [Header("Zoom al seleccionar una parte")]
     [Tooltip("Punto del viewport de la camara AR (0..1) donde se centra la parte seleccionada. Y=0.68 apunta al centro del area libre superior, ya que el panel de info ocupa la franja inferior de la pantalla.")]
     public Vector2 focusViewportTarget = new Vector2(0.5f, 0.68f);
     [Tooltip("Multiplicador de escala aplicado sobre la escala actual del modelo al enfocar una parte (se recorta entre minScale/maxScale de ARModelControllerPro).")]
     public float focusZoomMultiplier = 1.6f;
-    [Tooltip("Color de emision (glow) aplicado a la parte seleccionada.")]
-    public Color highlightEmissionColor = new Color(1f, 0.65f, 0.15f) * 2.2f;
 
     private Camera _arCamera;
     private bool _isTracking;
@@ -38,6 +36,7 @@ public class ARPartButtonManager : MonoBehaviour
     private DefaultObserverEventHandler _handler;
     private ARModelControllerPro _modelController;
     private Transform _focusedPart;
+    private Transform _modelRoot;
     private Dictionary<string, int> _topicByPart;
     private readonly List<(RectTransform btnRect, Transform part)> _buttons =
         new List<(RectTransform, Transform)>();
@@ -147,6 +146,7 @@ void OnTrackingLost()
 
         // Primer hijo de 3DModels = raíz del modelo (ej. Aparato_Digestivo)
         Transform modelRoot = transform.GetChild(0);
+        _modelRoot = modelRoot;
 
         for (int i = 0; i < modelRoot.childCount; i++)
         {
@@ -168,7 +168,7 @@ void OnTrackingLost()
     }
 
     // Abre/actualiza el panel de contenido para 'part' y sincroniza el
-    // zoom+highlight sobre el modelo 3D con lo que le pase al panel
+    // zoom sobre el modelo 3D con lo que le pase al panel
     // (abrir, cambiar de parte, o cerrar via toggle del mismo eyebutton).
     void SelectPart(Transform part, int idTopic)
     {
@@ -188,11 +188,8 @@ void OnTrackingLost()
             return;
         }
 
-        if (_focusedPart != null && _focusedPart != part)
-            SetHighlight(_focusedPart, false);
-
         _focusedPart = part;
-        SetHighlight(part, true);
+        ShowOnlyPart(part);
 
         if (_modelController != null)
             _modelController.FocusOnPart(part, focusViewportTarget, focusZoomMultiplier);
@@ -200,32 +197,32 @@ void OnTrackingLost()
 
     void ClearFocusAndHighlight()
     {
-        if (_focusedPart != null)
-            SetHighlight(_focusedPart, false);
         _focusedPart = null;
+        ShowAllParts();
 
         if (_modelController != null)
             _modelController.ClearFocus();
     }
 
-    static readonly int EmissionColorId = Shader.PropertyToID("_EmissionColor");
-
-    void SetHighlight(Transform part, bool on)
+    // Oculta el resto de partes del modelo para que en pantalla solo quede
+    // visible la parte seleccionada (junto con el panel de informacion).
+    void ShowOnlyPart(Transform part)
     {
-        Renderer renderer = part.GetComponent<Renderer>();
-        if (renderer == null) return;
+        if (_modelRoot == null) return;
 
-        Material mat = renderer.material;
-        if (on)
+        for (int i = 0; i < _modelRoot.childCount; i++)
         {
-            mat.EnableKeyword("_EMISSION");
-            mat.SetColor(EmissionColorId, highlightEmissionColor);
+            Transform child = _modelRoot.GetChild(i);
+            child.gameObject.SetActive(child == part);
         }
-        else
-        {
-            mat.DisableKeyword("_EMISSION");
-            mat.SetColor(EmissionColorId, Color.black);
-        }
+    }
+
+    void ShowAllParts()
+    {
+        if (_modelRoot == null) return;
+
+        for (int i = 0; i < _modelRoot.childCount; i++)
+            _modelRoot.GetChild(i).gameObject.SetActive(true);
     }
 
     int ResolveTopicId(string partName)

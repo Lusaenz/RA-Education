@@ -11605,11 +11605,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!224 &1453876951 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 3107482605730704342, guid: 1c6a0c46d3e2d484e8694fc0d6f609ff, type: 3}
-  m_PrefabInstance: {fileID: 865058875}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1543652015
 GameObject:
   m_ObjectHideFlags: 0
