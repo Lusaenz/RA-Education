@@ -64,12 +64,12 @@ public class BookAnimation : MonoBehaviour
         bookPage.SetActive(true);
 
         // pequeño tiempo para que se vea la animación
-        yield return new WaitForSeconds(0.4f);
+        yield return new WaitForSeconds(0.2f);
 
         // actualizar pagina
         ActualizarT();
 
-        yield return new WaitForSeconds(0.6f);
+        yield return new WaitForSeconds(0.2f);
 
         // volver al libro normal
         bookPage.SetActive(false);

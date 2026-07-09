@@ -3,11 +3,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
+using System.Collections;
 
 public class UIVisualizer : MonoBehaviour
 {
 
     //Opciones del menú
+    [Header("Solución de Layout")]
+    public RectTransform contenedorPrincipal;
     [Header("Conexiones UI")]
     //public GameObject InfoModules;
     public TextMeshProUGUI txtModulo;
@@ -26,8 +29,6 @@ public class UIVisualizer : MonoBehaviour
         
         MostrarModulo(0);
     }
-
-
     public void MostrarIntroduccionModulo(int id_module)
     {
         ModuleModel infoModulo = repository.ObtenerModulo(id_module);
@@ -59,7 +60,6 @@ public class UIVisualizer : MonoBehaviour
 
     }
 
-
     public void RenderizarUnicoTema(TopicJson tema)
     {
         if (tituloPrincipal != null) 
@@ -86,58 +86,90 @@ public class UIVisualizer : MonoBehaviour
         }
 
         if (imagenModelo != null) imagenModelo.enabled = false;
-    }
-    else
-    {
-        // APAGAR TEXTO DE INTRODUCCIÓN
-        if (txtModulo != null) txtModulo.gameObject.SetActive(false);
-        
-        // ENCENDER LOS BLOQUES DE COLORES COMPLETOS
-        foreach (var p in panelesSeccion) 
-        {
-            if (p != null) 
-            {
-                p.transform.parent.gameObject.SetActive(true);
-                p.text = ""; // Limpiamos el texto viejo
-            }
         }
-
-        if (tema.sections != null)
+        else
         {
-            for (int i = 0; i < tema.sections.Count; i++)
-            {
-                if (i < panelesSeccion.Length && panelesSeccion[i] != null)
-                {
-                    var seccion = tema.sections[i];
-                    panelesSeccion[i].text = $"<b>{seccion.title}</b>\n{seccion.content}";
-                }
-            }
-        }
-    } 
-        
-        Debug.Log("Buscando en Resources el archivo: '" + tema.image + "'");
+            for (int i = 0; i < panelesSeccion.Length; i++){
+                if (panelesSeccion[i] == null) continue;
 
-        if (imagenModelo != null)
-        {
-            if (!string.IsNullOrEmpty(tema.image))
-            {
-                Sprite nuevaImagen = Resources.Load<Sprite>(tema.image);
-                
-                if (nuevaImagen != null)
+                if (tema.sections != null && i < tema.sections.Count)
                 {
-                    imagenModelo.sprite = nuevaImagen;
-                    imagenModelo.enabled = true;
+                    panelesSeccion[i].gameObject.SetActive(true);
+                    panelesSeccion[i].text = $"<b>{tema.sections[i].title}</b>\n{tema.sections[i].content}";
                 }
                 else
                 {
-                    Debug.LogWarning($"[UIVisualizer] No se encontró el archivo Sprite con el nombre '{tema.image}' dentro de la carpeta Resources.");
-                    imagenModelo.enabled = false;
+                    panelesSeccion[i].gameObject.SetActive(false);
                 }
             }
-            else
+            
+            if (txtModulo != null) txtModulo.gameObject.SetActive(false);
+            
+            foreach (var p in panelesSeccion) 
             {
-                imagenModelo.enabled = false; 
+                if (p != null) 
+                {
+                    p.transform.parent.gameObject.SetActive(true);
+                    p.text = ""; // Limpiamos el texto viejo
+                }
             }
+
+            if (tema.sections != null)
+            {
+                for (int i = 0; i < panelesSeccion.Length; i++)
+                {
+                    if (panelesSeccion[i] == null) continue;
+
+                    // ¿Tenemos información para este bloque?
+                    if (tema.sections != null && i < tema.sections.Count)
+                    {
+                        // Encendemos el bloque (padre) y ponemos el texto
+                        panelesSeccion[i].transform.parent.gameObject.SetActive(true);
+                        var seccion = tema.sections[i];
+                        panelesSeccion[i].text = $"<b>{seccion.title}</b>\n{seccion.content}";
+                    }
+                    else
+                    {
+                        // Si no hay información (ej. el tema solo tiene 2 secciones), apagamos el bloque 3 y 4
+                        panelesSeccion[i].transform.parent.gameObject.SetActive(false);
+                    }
+                }
+            } 
+            if (imagenModelo != null)
+            {
+                if (!string.IsNullOrEmpty(tema.image))
+                {
+                    Sprite nuevaImagen = Resources.Load<Sprite>(tema.image);
+                    
+                    if (nuevaImagen != null)
+                    {
+                        imagenModelo.sprite = nuevaImagen;
+                        imagenModelo.enabled = true;
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"[UIVisualizer] No se encontró el archivo Sprite con el nombre '{tema.image}' dentro de la carpeta Resources.");
+                        imagenModelo.enabled = false;
+                    }
+                }
+                else
+                {
+                    imagenModelo.enabled = false; 
+                }
+            }
+    }if (gameObject.activeInHierarchy)
+        {
+            StartCoroutine(ForzarActualizacionUI());
         }
     }
+    IEnumerator ForzarActualizacionUI()
+    {
+        yield return new WaitForEndOfFrame();
+        
+        if (contenedorPrincipal != null)
+        {
+            LayoutRebuilder.ForceRebuildLayoutImmediate(contenedorPrincipal);
+        }
+}
+
 }
