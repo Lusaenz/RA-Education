@@ -22,7 +22,6 @@ public class DragObject : MonoBehaviour
             HandleInput(touch.position, touch.phase);
         }
 
-        // MOUSE
         if (Input.GetMouseButtonDown(0))
         {
             HandleInput(Input.mousePosition, TouchPhase.Began);
@@ -40,15 +39,22 @@ public class DragObject : MonoBehaviour
     void HandleInput(Vector2 inputPosition, TouchPhase phase)
     {
         Ray ray = arCamera.ScreenPointToRay(inputPosition);
-        RaycastHit hit;
 
         if (phase == TouchPhase.Began)
         {
-            if (Physics.Raycast(ray, out hit))
+            RaycastHit[] hits = Physics.RaycastAll(ray);
+
+            foreach (RaycastHit hit in hits)
             {
                 if (hit.transform == transform)
                 {
                     isDragging = true;
+
+if (MembraneVisibility.Instance != null)
+{
+    MembraneVisibility.Instance.Hide();
+}
+
 
                     zDistance = arCamera.WorldToScreenPoint(transform.position).z;
 
@@ -61,6 +67,7 @@ public class DragObject : MonoBehaviour
                     );
 
                     offset = transform.position - inputWorld;
+                    break;
                 }
             }
         }
@@ -75,22 +82,33 @@ public class DragObject : MonoBehaviour
                 )
             );
 
-            // OBJETO A MOVER
-            Transform objectToMove = transform;
-
-            // SI PERTENECE A UN GRUPO, MOVER EL GRUPO
-            if (transform.parent != null &&
-                transform.parent.name.StartsWith("Group"))
-            {
-                objectToMove = transform.parent;
-            }
-
-            objectToMove.position = inputWorld + offset;
+            
+            transform.position = inputWorld + offset;
         }
 
         if (phase == TouchPhase.Ended)
         {
+            if (!isDragging)
+                return;
+
             isDragging = false;
+
+  if (MembraneVisibility.Instance != null)
+{
+    MembraneVisibility.Instance.Show();
+}
+
+            SnapPiece snap = GetComponent<SnapPiece>();
+
+            if (snap != null)
+            {
+                snap.TrySnap();
+
+                if (!snap.IsSnapped())
+                {
+                    PuzzleManager.instance.ItemIncorrecto();
+                }
+            }
         }
     }
 

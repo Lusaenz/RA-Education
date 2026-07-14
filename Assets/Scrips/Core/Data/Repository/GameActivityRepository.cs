@@ -54,4 +54,40 @@ public class GameActivityRepository
         return ConnectionDb.Table<GameActivityData>()
             .FirstOrDefault(x => x.id_game_activity == idGameActivity);
     }
+
+    /// <summary>
+    /// Busca el primer game_activity asociado a un id_activity.
+    /// </summary>
+    public GameActivityData GetByActivityId(int idActivity)
+    {
+        return ConnectionDb.Table<GameActivityData>()
+            .FirstOrDefault(x => x.id_activity == idActivity);
+    }
+
+    /// <summary>
+    /// Busca el primer game_activity asociado a un id_module.
+    /// </summary>
+    public GameActivityData GetByModuleId(int idModule)
+    {
+        return ConnectionDb.Table<GameActivityData>()
+            .FirstOrDefault(x => x.id_module == idModule);
+    }
+
+    /// <summary>
+    /// Retorna todos los game_activity asociados a un id_module.
+    /// </summary>
+    public System.Collections.Generic.List<GameActivityData> GetAllByModuleId(int idModule)
+    {
+        return ConnectionDb.Table<GameActivityData>()
+            .Where(x => x.id_module == idModule)
+            .ToList();
+    }
+
+    /// <summary>
+    /// Retorna todos los registros de game_activity.
+    /// </summary>
+    public System.Collections.Generic.List<GameActivityData> GetAll()
+    {
+        return ConnectionDb.Table<GameActivityData>().ToList();
+    }
 }

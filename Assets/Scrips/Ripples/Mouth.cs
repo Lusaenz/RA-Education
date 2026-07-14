@@ -14,7 +14,8 @@ public void OnDrop(PointerEventData eventData)
 
             if(item != null)
             {
-                gameManager.EvaluarItem(item.itemId);
+                bool correcto = gameManager.EvaluarItem(item.itemId);
+                if (correcto) Destroy(objeto);
             }
         }
     }

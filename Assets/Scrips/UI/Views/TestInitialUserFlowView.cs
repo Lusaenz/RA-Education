@@ -13,6 +13,11 @@ public class TestInitialUserFlowView : MonoBehaviour, ITestInitialUserFlowView
     [SerializeField] private TextMeshProUGUI degreeText;
     [SerializeField] private TextMeshProUGUI totalStarsText;
 
+    [Header("BookSystem")]
+    [SerializeField] private GameObject bookSystem;
+    [SerializeField] private GameObject canvasTopHUD;
+    [SerializeField] private GameObject canvasBottomInfo;
+
     private TestInitialUserFlowPresenter presenter;
 
     /// <summary>
@@ -56,6 +61,13 @@ public class TestInitialUserFlowView : MonoBehaviour, ITestInitialUserFlowView
     public void ShowErrorMessage(string message)
     {
         Debug.LogError("Error en TestInitialUserFlow: " + message);
+    }
+
+    public void CloseBook()
+    {
+        if (bookSystem != null) bookSystem.SetActive(false);
+        if (canvasTopHUD != null) canvasTopHUD.SetActive(true);
+        if (canvasBottomInfo != null) canvasBottomInfo.SetActive(true);
     }
 
     public void IrAEscenaPrueba()
