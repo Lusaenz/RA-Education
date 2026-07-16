@@ -22,6 +22,7 @@ public class ARPartButtonManager : MonoBehaviour
     public List<PartTopicOverride> partTopicOverrides = new List<PartTopicOverride>();
     [Tooltip("id_topic usado cuando la parte no está en partTopicOverrides (0 = ninguno). Útil cuando todas las partes comparten un mismo topic, como los orgánulos de una célula.")]
     public int defaultTopicId = 0;
+    public int defaultContentId = 0;
 
     [Header("Zoom al seleccionar una parte")]
     [Tooltip("Punto del viewport de la camara AR (0..1) donde se centra la parte seleccionada. Y=0.68 apunta al centro del area libre superior, ya que el panel de info ocupa la franja inferior de la pantalla.")]
@@ -38,6 +39,7 @@ public class ARPartButtonManager : MonoBehaviour
     private Transform _focusedPart;
     private Transform _modelRoot;
     private Dictionary<string, int> _topicByPart;
+    private Dictionary<string, int> _contentSectionByPart;
     private readonly List<(RectTransform btnRect, Transform part)> _buttons =
         new List<(RectTransform, Transform)>();
 
@@ -46,6 +48,8 @@ public class ARPartButtonManager : MonoBehaviour
     {
         public string partName;
         public int idTopic;
+
+        public int idContentSection;
     }
 
     void Start()
@@ -55,6 +59,14 @@ public class ARPartButtonManager : MonoBehaviour
         {
             if (!string.IsNullOrEmpty(entry.partName))
                 _topicByPart[entry.partName] = entry.idTopic;
+
+        }
+
+        _contentSectionByPart = new Dictionary<string, int>(System.StringComparer.OrdinalIgnoreCase);
+        foreach (var entry in partTopicOverrides)
+        {
+            if (!string.IsNullOrEmpty(entry.partName))
+                _contentSectionByPart[entry.partName] = entry.idContentSection;
         }
 
         _arCamera = Camera.main;
@@ -160,7 +172,8 @@ void OnTrackingLost()
             if (btn != null)
             {
                 int idTopic = ResolveTopicId(part.name);
-                btn.onClick.AddListener(() => SelectPart(part, idTopic));
+                int idContentSection = ResolveContentSectionId(part.name);
+                btn.onClick.AddListener(() => SelectPart(part, idTopic, idContentSection));
             }
 
             _buttons.Add((btnGO.GetComponent<RectTransform>(), part));
@@ -170,17 +183,30 @@ void OnTrackingLost()
     // Abre/actualiza el panel de contenido para 'part' y sincroniza el
     // zoom sobre el modelo 3D con lo que le pase al panel
     // (abrir, cambiar de parte, o cerrar via toggle del mismo eyebutton).
-    void SelectPart(Transform part, int idTopic)
+    // idContentSection (opcional, 0 = ninguno) abre el panel directamente en esa
+    // content_section en vez de la primera del topic.
+void SelectPart(Transform part, int idTopic, int idContentSection = 0)
     {
-        if (contentPanel == null || idTopic <= 0)
+        if (contentPanel == null || (idTopic <= 0 && idContentSection <= 0))
         {
-            Debug.LogWarning($"[ARPartButtonManager] Sin id_topic mapeado para la parte '{part.name}'.", this);
+            Debug.LogWarning($"[ARPartButtonManager] Sin id_topic ni id_content_section mapeado para la parte '{part.name}'.", this);
             return;
         }
 
-        bool willClose = contentPanel.IsOpen && contentPanel.CurrentTopicId == idTopic;
+        bool willClose;
+        if (idTopic > 0)
+        {
+            willClose = contentPanel.IsOpen && contentPanel.CurrentTopicId == idTopic
+                && (idContentSection <= 0 || contentPanel.CurrentContentSectionId == idContentSection);
 
-        contentPanel.ShowTopic(idTopic);
+            contentPanel.ShowTopic(idTopic, idContentSection);
+        }
+        else
+        {
+            willClose = contentPanel.IsOpen && contentPanel.CurrentContentSectionId == idContentSection;
+
+            contentPanel.ShowContentSection(idContentSection);
+        }
 
         if (willClose)
         {
@@ -231,6 +257,14 @@ void OnTrackingLost()
             return idTopic;
 
         return defaultTopicId;
+    }
+
+    int ResolveContentSectionId(string partName)
+    {
+        if (_contentSectionByPart != null && _contentSectionByPart.TryGetValue(partName, out int idContentSection) && idContentSection > 0)
+            return idContentSection;
+
+        return defaultContentId;
     }
 
     void ClearButtons()

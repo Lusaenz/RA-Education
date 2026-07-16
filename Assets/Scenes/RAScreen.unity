@@ -337,6 +337,12 @@ MonoBehaviour:
   maxScale: 0.55
   minRotationX: -80
   maxRotationX: 80
+  partRotationSpeed: 0.2
+  partZoomSpeed: 0.5
+  partMinScaleMultiplier: 0.6
+  partMaxScaleMultiplier: 2.5
+  partMinRotationX: -80
+  partMaxRotationX: 80
 --- !u!114 &76985662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -352,11 +358,47 @@ MonoBehaviour:
   eyeButtonPrefab: {fileID: 5990783412744417745, guid: d5c41afcfcedea642bcc209490fb4033, type: 3}
   canvasRect: {fileID: 1131953553}
   contentPanel: {fileID: 749282800}
-  partTopicOverrides: []
-  defaultTopicId: 13
+  partTopicOverrides:
+  - partName: Aparato_Golgi.001
+    idTopic: 0
+    idContentSection: 83
+  - partName: Centrosoma
+    idTopic: 0
+    idContentSection: 99
+  - partName: Citplasma.001
+    idTopic: 0
+    idContentSection: 100
+  - partName: Lisosoma
+    idTopic: 0
+    idContentSection: 101
+  - partName: Membrana_Plasmatica
+    idTopic: 0
+    idContentSection: 102
+  - partName: Microtubulos
+    idTopic: 0
+    idContentSection: 103
+  - partName: Mitocondria_1.001
+    idTopic: 0
+    idContentSection: 104
+  - partName: Nucleo.001
+    idTopic: 0
+    idContentSection: 105
+  - partName: Nucleolo.001
+    idTopic: 0
+    idContentSection: 106
+  - partName: Reticulo_Endoplasmatico
+    idTopic: 0
+    idContentSection: 107
+  - partName: Reticulo_Endoplasmatico_Liso
+    idTopic: 0
+    idContentSection: 108
+  - partName: Ribosomas
+    idTopic: 0
+    idContentSection: 109
+  defaultTopicId: 12
+  defaultContentId: 0
   focusViewportTarget: {x: 0.5, y: 0.68}
   focusZoomMultiplier: 1.6
-  highlightEmissionColor: {r: 2.2, g: 1.43, b: 0.33, a: 2.2}
 --- !u!1 &122706194
 GameObject:
   m_ObjectHideFlags: 0
@@ -1043,6 +1085,12 @@ MonoBehaviour:
   maxScale: 0.55
   minRotationX: -80
   maxRotationX: 80
+  partRotationSpeed: 0.2
+  partZoomSpeed: 0.5
+  partMinScaleMultiplier: 0.6
+  partMaxScaleMultiplier: 2.5
+  partMinRotationX: -80
+  partMaxRotationX: 80
 --- !u!114 &713151257
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1060,9 +1108,9 @@ MonoBehaviour:
   contentPanel: {fileID: 749282800}
   partTopicOverrides: []
   defaultTopicId: 13
+  defaultContentId: 0
   focusViewportTarget: {x: 0.5, y: 0.68}
   focusZoomMultiplier: 1.6
-  highlightEmissionColor: {r: 2.2, g: 1.43, b: 0.33, a: 2.2}
 --- !u!1 &737634298
 GameObject:
   m_ObjectHideFlags: 0
@@ -1431,6 +1479,12 @@ MonoBehaviour:
   maxScale: 1
   minRotationX: -80
   maxRotationX: 80
+  partRotationSpeed: 0.2
+  partZoomSpeed: 0.5
+  partMinScaleMultiplier: 0.6
+  partMaxScaleMultiplier: 2.5
+  partMinRotationX: -80
+  partMaxRotationX: 80
 --- !u!114 &792103337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1449,34 +1503,38 @@ MonoBehaviour:
   partTopicOverrides:
   - partName: Cavidad_Oral
     idTopic: 1
-  - partName: Boca
-    idTopic: 1
-  - partName: Dientes
-    idTopic: 1
+    idContentSection: 0
   - partName: Faringe
     idTopic: 2
+    idContentSection: 0
   - partName: Esofago
     idTopic: 3
+    idContentSection: 0
   - partName: Estomago
     idTopic: 4
-  - partName: Duodeno
-    idTopic: 5
+    idContentSection: 0
   - partName: Intestino_Delgado
     idTopic: 5
+    idContentSection: 0
   - partName: Intestino_Grueso
     idTopic: 6
+    idContentSection: 0
   - partName: Higado
     idTopic: 7
+    idContentSection: 0
   - partName: Pancreas
-    idTopic: 7
+    idTopic: 17
+    idContentSection: 0
   - partName: Vesicula_Biliar
-    idTopic: 7
+    idTopic: 16
+    idContentSection: 0
   - partName: Recto_Ano
     idTopic: 8
+    idContentSection: 0
   defaultTopicId: 0
+  defaultContentId: 0
   focusViewportTarget: {x: 0.5, y: 0.68}
   focusZoomMultiplier: 1.6
-  highlightEmissionColor: {r: 2.2, g: 1.43, b: 0.33, a: 2.2}
 --- !u!1 &867019536
 GameObject:
   m_ObjectHideFlags: 0
@@ -2570,7 +2628,8 @@ PrefabInstance:
       value: Aparato_Digestivo (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3967734806500462532, guid: 0ba782ed71a8240be8d8c204fbbee72b, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5360467077992591539, guid: 0ba782ed71a8240be8d8c204fbbee72b, type: 3}
