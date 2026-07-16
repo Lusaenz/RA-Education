@@ -5,6 +5,9 @@ using System.Collections.Generic;
 public class Observer : MonoBehaviour
 {
     public Transform arCamera;
+    public Transform fixedModel;
+
+    public Vector3 rotationOffset = new Vector3(0f, 180f, 0f);
 
     private ObserverBehaviour observer;
     private List<Transform> models = new List<Transform>();
@@ -44,17 +47,16 @@ public class Observer : MonoBehaviour
                     model.gameObject.AddComponent<BoxCollider>();
                 }
 
-                if (model.GetComponent<DragObject>() == null)
+                
+                if (model != fixedModel)
                 {
-                    model.gameObject.AddComponent<DragObject>();
+                    if (model.GetComponent<DragObject>() == null)
+                    {
+                        model.gameObject.AddComponent<DragObject>();
+                    }
                 }
 
                 model.SetParent(null);
-
-                if (model.GetComponent<DragObject>() == null)
-                {
-                    model.gameObject.AddComponent<DragObject>();
-                }
             }
 
             MoveAllToCenter();
@@ -63,11 +65,6 @@ public class Observer : MonoBehaviour
 
     void MoveAllToCenter()
     {
-        int total = models.Count;
-
-        int columns = Mathf.CeilToInt(Mathf.Sqrt(total));
-        int rows = Mathf.CeilToInt((float)total / columns);
-
         float distance = 1.0f;
         Vector3 center = arCamera.position + arCamera.forward * distance;
 
@@ -77,32 +74,47 @@ public class Observer : MonoBehaviour
         float visibleHeight = 2f * distance * Mathf.Tan(fov / 2f);
         float visibleWidth = visibleHeight * cam.aspect;
 
-        float cellWidth = visibleWidth / columns;
-        float cellHeight = visibleHeight / rows;
+        float scale = Mathf.Min(visibleWidth, visibleHeight) * 0.18f;
 
-        float spacingFactor = 0.8f;
-        float spacingX = cellWidth * spacingFactor;
-        float spacingY = cellHeight * spacingFactor;
+        Quaternion rotation =
+            Quaternion.LookRotation(arCamera.forward) *
+            Quaternion.Euler(rotationOffset);
 
-        float scale = Mathf.Min(cellWidth, cellHeight) * 0.5f;
-
-        for (int i = 0; i < total; i++)
+    
+        if (fixedModel != null)
         {
-            int row = i / columns;
-            int col = i % columns;
+            fixedModel.position = center;
+            fixedModel.rotation = rotation;
+            fixedModel.localScale = Vector3.one * scale;
+        }
 
-            float xOffset = (col - (columns - 1) / 2.0f) * spacingX;
-            float yOffset = ((rows - 1) / 2.0f - row) * spacingY;
+        
+        List<Transform> movableModels = new List<Transform>();
 
-            Vector3 offset = (arCamera.right * xOffset) + (arCamera.up * yOffset);
+        foreach (Transform model in models)
+        {
+            if (model != fixedModel)
+            {
+                movableModels.Add(model);
+            }
+        }
 
-            models[i].position = center + offset;
+        
+        float radius = Mathf.Min(visibleWidth, visibleHeight) * 0.45f;
 
-            models[i].rotation =
-                Quaternion.LookRotation(arCamera.forward)
-                * Quaternion.Euler(0f, 180f, 0f);
+        for (int i = 0; i < movableModels.Count; i++)
+        {
+            float angle = (360f / movableModels.Count) * i;
 
-            models[i].localScale = Vector3.one * scale;
+            float rad = angle * Mathf.Deg2Rad;
+
+            Vector3 offset =
+                arCamera.right * Mathf.Cos(rad) * radius +
+                arCamera.up * Mathf.Sin(rad) * radius;
+
+            movableModels[i].position = center + offset;
+            movableModels[i].rotation = rotation;
+            movableModels[i].localScale = Vector3.one * scale;
         }
     }
 }

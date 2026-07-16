@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class SnapPiece : MonoBehaviour
 {
-    public PuzzleManager puzzleManager;
     public Transform snapPoint;
     public Transform targetSnapPoint;
 
@@ -11,63 +10,167 @@ public class SnapPiece : MonoBehaviour
     private bool isSnapped = false;
     private float debugDistance;
 
+    private SnapPiece[] allPieces;
 
-    void Update()
-{
-    if (snapPoint == null || targetSnapPoint == null) return;
-
-    float distance = Vector3.Distance(snapPoint.position, targetSnapPoint.position);
-    debugDistance = distance;
-
-    if (distance < snapDistance)
+    void Start()
     {
-        Snap();
+        allPieces = FindObjectsByType<SnapPiece>(FindObjectsSortMode.None);
     }
-}
 
-void OnGUI()
-{
-    GUI.Label(new Rect(10, 10, 400, 40), "Prueba: " + debugDistance);
-}
-    void Snap()
+    void OnGUI()
     {
-       
-        Vector3 offset = targetSnapPoint.position - snapPoint.position;
+        GUI.Label(new Rect(10, 10, 400, 40), "Prueba: " + debugDistance);
+    }
+
+   
+    void Snap(Transform target)
+    {
+        Vector3 offset = target.position - snapPoint.position;
+
+
+        // offset.z = 0f;
+
         transform.position += offset;
-        transform.rotation = targetSnapPoint.rotation;
 
-        Transform group = CreateOrGetGroup(targetSnapPoint.parent); 
+        Transform group = CreateOrGetGroup(target.parent);
 
-        
-        transform.SetParent(group); 
-        if (targetSnapPoint.parent.parent != group)
-    {
-        targetSnapPoint.parent.SetParent(group);
-    }
+        transform.SetParent(group);
+
+        if (target.parent.parent != group)
+        {
+            target.parent.SetParent(group);
+        }
 
         isSnapped = true;
 
-        Debug.Log("Piezas unidas");
         
-    }
+DragObject drag = GetComponent<DragObject>();
 
-   Transform CreateOrGetGroup(Transform other)
+if (drag != null)
 {
-    
-    if (other.parent != null &&
-        other.parent.name.StartsWith("Group"))
-    {
-        return other.parent;
+    drag.enabled = false;
+}
+
+        if (PuzzleManager.instance != null)
+        {
+            PuzzleManager.instance.ItemCorrecto();
+        }
+        else
+        {
+            Debug.LogError("No existe un PuzzleManager en la escena.");
+        }
     }
 
-    
-    GameObject group = new GameObject("Group");
+    Transform CreateOrGetGroup(Transform other)
+    {
+        if (other.parent != null &&
+            other.parent.name.StartsWith("Group"))
+        {
+            return other.parent;
+        }
 
-    group.transform.position = other.position;
+        GameObject group = new GameObject("Group");
 
-    
-    group.transform.SetParent(transform.parent);
+        group.transform.position = other.position;
 
-    return group.transform;
-}
+        group.transform.SetParent(transform.parent);
+
+        return group.transform;
+    }
+
+   
+    bool NearWrongSnap()
+    {
+        foreach (SnapPiece piece in allPieces)
+        {
+            if (piece == this)
+                continue;
+
+            if (piece.isSnapped)
+                continue;
+
+            float distance = Vector3.Distance(
+                snapPoint.position,
+                piece.targetSnapPoint.position);
+
+            if (distance < snapDistance)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
+    public bool TrySnap()
+    {
+        if (isSnapped)
+            return true;
+
+        
+        if (targetSnapPoint != null)
+        {
+            float distance = Vector3.Distance(
+                snapPoint.position,
+                targetSnapPoint.position);
+
+            if (distance <= snapDistance)
+            {
+                Snap(targetSnapPoint);
+                return true;
+            }
+            Debug.Log("esteeee");
+        }
+
+       
+        foreach (SnapPiece piece in allPieces)
+        {
+            if (piece == this)
+                continue;
+
+            if (piece.targetSnapPoint == snapPoint)
+            {
+                float distance = Vector3.Distance(
+                    piece.snapPoint.position,
+                    snapPoint.position);
+
+                if (distance <= snapDistance)
+                {
+                    
+                    Snap(piece.snapPoint);
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    private bool IsNearWrongSnap()
+    {
+        SnapPiece[] pieces = FindObjectsByType<SnapPiece>(FindObjectsSortMode.None);
+
+        foreach (SnapPiece piece in pieces)
+        {
+            if (piece == this)
+                continue;
+
+            float distance = Vector3.Distance(
+                snapPoint.position,
+                piece.targetSnapPoint.position);
+
+            if (distance <= snapDistance)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public bool IsSnapped()
+    {
+        return isSnapped;
+    }
 }
