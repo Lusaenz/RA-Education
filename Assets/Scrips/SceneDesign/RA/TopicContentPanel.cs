@@ -38,6 +38,14 @@ public class TopicContentPanel : MonoBehaviour
     // eyebutton), para que quien enfoco/ilumino una parte pueda revertirlo.
     public System.Action OnClosed;
 
+    // Se dispara cada vez que se renderiza una content_section (al abrir el
+    // panel o al navegar con Next/Prev), pasando su id_section. Permite que
+    // quien mapea partes 1:1 con content_sections (ver ARPartButtonManager,
+    // caso celula) sincronice que parte del modelo 3D queda visible/enfocada
+    // cuando el topic agrupa varias partes en un mismo topic (a diferencia
+    // del sistema digestivo, donde cada parte tiene su propio topic completo).
+    public System.Action<int> OnSectionChanged;
+
 
     void Awake()
     {
@@ -141,5 +149,7 @@ public class TopicContentPanel : MonoBehaviour
 
         if (prevButton != null) prevButton.interactable = _currentIndex > 0;
         if (nextButton != null) nextButton.interactable = _currentIndex < _sections.Count - 1;
+
+        OnSectionChanged?.Invoke(section.id_section);
     }
 }

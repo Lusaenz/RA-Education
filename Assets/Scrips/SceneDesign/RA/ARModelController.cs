@@ -27,6 +27,12 @@ public class ARModelControllerPro : MonoBehaviour
     public float partMinRotationX = -80f;
     public float partMaxRotationX = 80f;
 
+    [Header("Filtrado de gestos")]
+    [Tooltip("Movimiento minimo (px) de un toque/mouse antes de aplicarlo como rotacion. Filtra el ruido de touchpad/sensor que antes se colaba como micro-rotaciones.")]
+    public float rotationDeadzone = 0.15f;
+    [Tooltip("Cambio minimo (px) en la distancia entre dos dedos antes de aplicarlo como zoom.")]
+    public float zoomDeadzone = 0.5f;
+
     // Rotacion
     private float targetRotationY;
     private float currentRotationY;
@@ -62,6 +68,13 @@ public class ARModelControllerPro : MonoBehaviour
     private Coroutine _focusRoutine;
     private Camera _arCamera;
 
+    // Numero de touches del frame anterior. Cuando cambia (ej. empieza o
+    // termina un pinch mientras se rotaba con un dedo) la posicion que
+    // reporta el SO para ese primer frame suele venir de un estado previo y
+    // genera un salto brusco de rotacion/zoom; se descarta el input de ese
+    // unico frame de transicion en vez de aplicarlo.
+    private int _previousTouchCount = -1;
+
 void Start()
     {
         SyncRotationFromTransform();
@@ -88,6 +101,10 @@ void Start()
     {
         if (!_canInteract) return;
         if (IsTouchOverUI()) return;
+
+        bool touchCountChanged = Input.touchCount != _previousTouchCount;
+        _previousTouchCount = Input.touchCount;
+        if (touchCountChanged) return;
 
         if (_isFocused)
         {
@@ -220,13 +237,13 @@ void Start()
             // Horizontal = Y
             // Input.GetAxis ya aplica la sensibilidad de mouse de Unity (~0.1),
             // por eso el multiplicador es bajo: iguala la sensibilidad al touch (1.5f/1.2f)
-            targetRotationY +=
+            targetRotationY -=
                 Input.GetAxis("Mouse X") *
                 rotationSpeed *
                 15f;
 
             // Vertical = X
-            targetRotationX -=
+            targetRotationX +=
                 Input.GetAxis("Mouse Y") *
                 rotationSpeed *
                 12f;
@@ -236,15 +253,15 @@ void Start()
         {
             Touch t = Input.GetTouch(0);
 
-            if (t.phase == TouchPhase.Moved)
+            if (t.phase == TouchPhase.Moved && t.deltaPosition.sqrMagnitude >= rotationDeadzone * rotationDeadzone)
             {
                 // Horizontal
-                targetRotationY +=
+                targetRotationY -=
                     t.deltaPosition.x *
                     rotationSpeed *
                     1.5f;
                 // Vertical
-                targetRotationX -=
+                targetRotationX +=
                     t.deltaPosition.y *
                     rotationSpeed *
                     1.2f;
@@ -301,8 +318,10 @@ void Start()
 
             float prevMag = (prev1 - prev2).magnitude;
             float currentMag = (t1.position - t2.position).magnitude;
+            float pinchDelta = currentMag - prevMag;
 
-            zoomInput = (currentMag - prevMag) * 0.001f;
+            if (Mathf.Abs(pinchDelta) >= zoomDeadzone)
+                zoomInput = pinchDelta * 0.001f;
         }
 
         if (zoomInput != 0)
@@ -336,12 +355,12 @@ void Start()
     {
         if (Input.GetMouseButton(0))
         {
-            _partTargetRotY +=
+            _partTargetRotY -=
                 Input.GetAxis("Mouse X") *
                 partRotationSpeed *
                 15f;
 
-            _partTargetRotX -=
+            _partTargetRotX +=
                 Input.GetAxis("Mouse Y") *
                 partRotationSpeed *
                 12f;
@@ -350,13 +369,13 @@ void Start()
         {
             Touch t = Input.GetTouch(0);
 
-            if (t.phase == TouchPhase.Moved)
+            if (t.phase == TouchPhase.Moved && t.deltaPosition.sqrMagnitude >= rotationDeadzone * rotationDeadzone)
             {
-                _partTargetRotY +=
+                _partTargetRotY -=
                     t.deltaPosition.x *
                     partRotationSpeed *
                     1.5f;
-                _partTargetRotX -=
+                _partTargetRotX +=
                     t.deltaPosition.y *
                     partRotationSpeed *
                     1.2f;
@@ -408,8 +427,10 @@ void Start()
 
             float prevMag = (prev1 - prev2).magnitude;
             float currentMag = (t1.position - t2.position).magnitude;
+            float pinchDelta = currentMag - prevMag;
 
-            zoomInput = (currentMag - prevMag) * 0.001f;
+            if (Mathf.Abs(pinchDelta) >= zoomDeadzone)
+                zoomInput = pinchDelta * 0.001f;
         }
 
         if (zoomInput != 0)
