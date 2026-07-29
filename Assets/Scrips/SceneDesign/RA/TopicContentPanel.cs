@@ -32,10 +32,19 @@ public class TopicContentPanel : MonoBehaviour
 
     public bool IsOpen => panelRoot != null && panelRoot.activeSelf;
     public int CurrentTopicId => _currentTopicId;
+    public int CurrentContentSectionId => _sections.Count > 0 ? _sections[_currentIndex].id_section : -1;
 
     // Se dispara al cerrar el panel (boton Close o toggle-close desde un
     // eyebutton), para que quien enfoco/ilumino una parte pueda revertirlo.
     public System.Action OnClosed;
+
+    // Se dispara cada vez que se renderiza una content_section (al abrir el
+    // panel o al navegar con Next/Prev), pasando su id_section. Permite que
+    // quien mapea partes 1:1 con content_sections (ver ARPartButtonManager,
+    // caso celula) sincronice que parte del modelo 3D queda visible/enfocada
+    // cuando el topic agrupa varias partes en un mismo topic (a diferencia
+    // del sistema digestivo, donde cada parte tiene su propio topic completo).
+    public System.Action<int> OnSectionChanged;
 
 
     void Awake()
@@ -49,9 +58,12 @@ public class TopicContentPanel : MonoBehaviour
         Close();
     }
 
-    public void ShowTopic(int idTopic)
+    // idContentSection (opcional, 0 = ninguno) permite abrir el panel directamente
+    // en una content_section concreta del topic en vez de la primera (order_index 0).
+    public void ShowTopic(int idTopic, int idContentSection = 0)
     {
-        if (_currentTopicId == idTopic && panelRoot != null && panelRoot.activeSelf)
+        if (_currentTopicId == idTopic && panelRoot != null && panelRoot.activeSelf
+            && (idContentSection <= 0 || CurrentContentSectionId == idContentSection))
         {
             Close();
             return;
@@ -68,12 +80,37 @@ public class TopicContentPanel : MonoBehaviour
             return;
         }
 
+        if (idContentSection > 0)
+        {
+            int index = _sections.FindIndex(s => s.id_section == idContentSection);
+            if (index >= 0)
+                _currentIndex = index;
+            else
+                Debug.LogWarning($"[TopicContentPanel] La content_section {idContentSection} no pertenece al topic {idTopic}.");
+        }
+
         if (topicNameText != null) topicNameText.text = topic != null ? topic.name : string.Empty;
 
         if (panelRoot != null) panelRoot.SetActive(true);
         if (buttonsRoot != null) buttonsRoot.SetActive(true);
 
         RenderCurrentSection();
+    }
+
+    // Abre el panel a partir del id de una content_section, resolviendo su topic
+    // automáticamente. Útil cuando lo único que se conoce es el id_content_section.
+    public void ShowContentSection(int idContentSection)
+    {
+        if (idContentSection <= 0) return;
+
+        SeccionJson section = _repository.GetSectionById(idContentSection);
+        if (section == null)
+        {
+            Debug.LogWarning($"[TopicContentPanel] No existe la content_section {idContentSection}.");
+            return;
+        }
+
+        ShowTopic(section.id_topic, idContentSection);
     }
 
     public void Next()
@@ -112,5 +149,7 @@ public class TopicContentPanel : MonoBehaviour
 
         if (prevButton != null) prevButton.interactable = _currentIndex > 0;
         if (nextButton != null) nextButton.interactable = _currentIndex < _sections.Count - 1;
+
+        OnSectionChanged?.Invoke(section.id_section);
     }
 }

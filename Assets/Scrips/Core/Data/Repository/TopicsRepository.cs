@@ -62,4 +62,17 @@ public class TopicsRepository
             return new List<SeccionJson>();
         }
     }
+
+    public SeccionJson GetSectionById(int idSection)
+    {
+        try
+        {
+            return _connection.Table<SeccionJson>().FirstOrDefault(s => s.id_section == idSection);
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"TopicsRepository: Error al obtener content_section {idSection}: {ex.Message}");
+            return null;
+        }
+    }
 }
