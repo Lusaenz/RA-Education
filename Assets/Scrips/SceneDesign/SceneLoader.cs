@@ -28,16 +28,15 @@ public class SceneLoader : MonoBehaviour
     }
 
     /// <summary>
-    /// Carga la escena de login correspondiente según el rol pasado.
-    /// Estudiante (1) → LoginStudent
-    /// Profesor (2) → LoginTeacher
+    /// Carga la escena de login (única para ambos roles) dejando el rol
+    /// correspondiente guardado para que LoginStudentView configure la UI correcta.
     /// Uso: Desde ForgotPasswordView con currentUser.id_role
     /// </summary>
     public void LoadLoginByRole(int roleId)
     {
-        string targetScene = GetLoginSceneForRole(roleId);
-        Debug.Log($"[SceneLoader] Rol ID: {roleId} → Cargando escena: {targetScene}");
-        SceneManager.LoadScene(targetScene);
+        RolePreferences.SaveSelectedRole(roleId);
+        Debug.Log($"[SceneLoader] Rol ID: {roleId} → Cargando escena: Login");
+        SceneManager.LoadScene("Login");
     }
 
     /// <summary>
@@ -48,22 +47,7 @@ public class SceneLoader : MonoBehaviour
     public void LoadLoginForBackButton()
     {
         int roleId = RolePreferences.GetSelectedRole();
-        string targetScene = GetLoginSceneForRole(roleId);
-        Debug.Log($"[SceneLoader] Back Button - Rol ID: {roleId} → Cargando escena: {targetScene}");
-        SceneManager.LoadScene(targetScene);
-    }
-
-    /// <summary>
-    /// Mapea un ID de rol a su escena de login correspondiente.
-    /// Centraliza la lógica de mapeo para evitar duplicación.
-    /// </summary>
-    private string GetLoginSceneForRole(int roleId)
-    {
-        return roleId switch
-        {
-            1 => "LoginStudent",      // Estudiante
-            2 => "LoginTeacher",      // Profesor
-            _ => "LoginStudent"       // Default: Estudiante
-        };
+        Debug.Log($"[SceneLoader] Back Button - Rol ID: {roleId} → Cargando escena: Login");
+        SceneManager.LoadScene("Login");
     }
 }

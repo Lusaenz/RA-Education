@@ -29,6 +29,7 @@ public class ForgotPasswordView : MonoBehaviour
     private UserModel currentUser;
     private bool initialized = false;
     private Coroutine clearErrorCoroutine;
+    private UnityEngine.Events.UnityAction<string> onNameSubmitted;
 
     // ==================== Lifecycle ====================
 
@@ -46,8 +47,16 @@ public class ForgotPasswordView : MonoBehaviour
         // Permitir buscar usuario presionando Enter en el campo de nombre
         if (InputName != null)
         {
-            InputName.onSubmit.AddListener((_) => OnNameEntered());
+            onNameSubmitted = (_) => OnNameEntered();
+            InputName.onSubmit.AddListener(onNameSubmitted);
         }
+
+        // La respuesta de seguridad y la nueva contraseña solo deben poder
+        // completarse DESPUÉS de identificar al usuario por su nombre.
+        if (InputSecurityAnswer != null)
+            InputSecurityAnswer.interactable = false;
+        if (InputNewPassword != null)
+            InputNewPassword.interactable = false;
     }
 
     System.Collections.IEnumerator InitializeWhenDatabaseReady()
@@ -73,8 +82,8 @@ public class ForgotPasswordView : MonoBehaviour
     {
         if (ButtonConfirm != null)
             ButtonConfirm.onClick.RemoveListener(ConfirmPasswordReset);
-        if (InputName != null)
-            InputName.onSubmit.RemoveListener((_) => OnNameEntered());
+        if (InputName != null && onNameSubmitted != null)
+            InputName.onSubmit.RemoveListener(onNameSubmitted);
     }
 
     // ==================== Event Handlers ====================
