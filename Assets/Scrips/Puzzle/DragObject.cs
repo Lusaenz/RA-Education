@@ -7,14 +7,23 @@ public class DragObject : MonoBehaviour
     private Vector3 offset;
     private float zDistance;
     private bool isPlaced = false;
+    private PuzzlePieceInfo info;
+    
+    private TagPointInfo[] snapPoints;
+private TagPointInfo ultimoSnap;
+
+    
 
     void Start()
-    {
-        arCamera = Camera.main;
-    }
+{
+    arCamera = Camera.main;
+    info = GetComponent<PuzzlePieceInfo>();
+    snapPoints = FindObjectsOfType<TagPointInfo>();
+}
 
     void Update()
     {
+
         // TOUCH
         if (Input.touchCount > 0)
         {
@@ -49,6 +58,10 @@ public class DragObject : MonoBehaviour
                 if (hit.transform == transform)
                 {
                     isDragging = true;
+                    if (info != null && PuzzleManager.instance != null)
+{
+    PuzzleManager.instance.MostrarNombre(info.nombrePieza);
+}
 
 if (MembraneVisibility.Instance != null)
 {
@@ -84,6 +97,7 @@ if (MembraneVisibility.Instance != null)
 
             
             transform.position = inputWorld + offset;
+            DetectarSnapPointCercano();
         }
 
         if (phase == TouchPhase.Ended)
@@ -92,6 +106,12 @@ if (MembraneVisibility.Instance != null)
                 return;
 
             isDragging = false;
+
+            if (PuzzleManager.instance != null)
+{
+    PuzzleManager.instance.OcultarNombre();
+    ultimoSnap = null;
+}
 
   if (MembraneVisibility.Instance != null)
 {
@@ -103,10 +123,16 @@ if (MembraneVisibility.Instance != null)
             if (snap != null)
             {
                 snap.TrySnap();
+                 if (snap.IsSnapped())
+{
+    PuzzleManager.instance.OcultarTarget();
+    ultimoSnap = null;
+}
 
                 if (!snap.IsSnapped())
                 {
                     PuzzleManager.instance.ItemIncorrecto();
+                   
                 }
             }
         }
@@ -114,6 +140,9 @@ if (MembraneVisibility.Instance != null)
 
     private void OnTriggerEnter(Collider other)
     {
+        
+
+    
         if (other.CompareTag("Zona"))
         {
             Debug.Log("Objeto colocado correctamente");
@@ -125,4 +154,44 @@ if (MembraneVisibility.Instance != null)
             isPlaced = true;
         }
     }
+
+    private void OnTriggerExit(Collider other)
+{
+    TagPointInfo info = other.GetComponent<TagPointInfo>();
+
+    
+}
+
+void DetectarSnapPointCercano()
+{
+    float distanciaMinima = 0.07f;
+    TagPointInfo masCercano = null;
+
+    foreach (TagPointInfo punto in snapPoints)
+    {
+        float distancia = Vector3.Distance(transform.position, punto.transform.position);
+
+        if (distancia < distanciaMinima)
+        {
+            distanciaMinima = distancia;
+            masCercano = punto;
+        }
+    }
+
+    if (masCercano != ultimoSnap)
+    {
+        ultimoSnap = masCercano;
+
+        if (masCercano != null)
+            PuzzleManager.instance.MostrarTarget(masCercano.nombre);
+            
+        else
+            PuzzleManager.instance.OcultarTarget();
+            
+    }
+    masCercano = null;
+    
+}
+
+    
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +15,7 @@ public class VictoryUIManager : MonoBehaviour
 {
     [Header("Panel")]
     public GameObject winPanel;
+    public GameObject info;
 
     [Header("Estrellas")]
     public Image[] estrellas;
@@ -48,6 +50,7 @@ public class VictoryUIManager : MonoBehaviour
     private IEnumerator AnimatePanel()
     {
         winPanel.SetActive(true);
+        info.SetActive(false);
         winPanel.transform.localScale = Vector3.zero;
 
         float t = 0;
@@ -81,7 +84,7 @@ public class VictoryUIManager : MonoBehaviour
 }
         Clear();
 
-        if (count <= 0) return;
+        if (count <= 0) count=1;
 
         estrellas = new Image[count];
 
