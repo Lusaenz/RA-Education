@@ -1,5 +1,12 @@
 fileFormatVersion: 2
 guid: d2a0ff0a7a0b76349865662d016981be
+AssetOrigin:
+  serializedVersion: 1
+  productId: 271239
+  packageName: 'Unity Learn | 2D Adventure Game: Robot Repair'
+  packageVersion: 2.0.0
+  assetPath: Assets/_2DAdventureGame/Art/Ducko/Characters/PlayerCharacterSheet.png
+  uploadId: 832758
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -106,753 +113,1364 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 1
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 100
+    crunchedCompression: 1
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 1
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 100
+    crunchedCompression: 1
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 1
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 100
+    crunchedCompression: 1
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: DuckoRunSide1
+      name: PlayerCharacterSheet_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 2304
-        width: 256
-        height: 256
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 130
+        y: 2540
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 03f8d6277b705224887653498449fe12
-      internalID: 1442360895
+      spriteID: 387a521fad5744446b4466777153a2e6
+      internalID: -2071878476
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DuckoRunSide2
+      name: PlayerCharacterSheet_1
       rect:
         serializedVersion: 2
-        x: 256
-        y: 2304
-        width: 256
-        height: 256
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 330
+        y: 2555
+        width: 10
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 34b473946b086bc4a9006b314f4d9f4f
-      internalID: 976706863
+      spriteID: 0c475c7125b9c4ef78729a7fedf04fc0
+      internalID: 1408918871
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DuckoRunSide3
+      name: PlayerCharacterSheet_2
       rect:
         serializedVersion: 2
-        x: 512
-        y: 2304
-        width: 256
-        height: 256
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 834
+        y: 2540
+        width: 21
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f0b6f3bd71757bf40b796f4927df2fec
-      internalID: -1589862634
+      spriteID: 53d415e1163c44a28b23e36cd86a471d
+      internalID: -1374497787
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DuckoRunSide4
+      name: PlayerCharacterSheet_3
       rect:
         serializedVersion: 2
-        x: 768
-        y: 2304
-        width: 256
-        height: 256
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 890
+        y: 2555
+        width: 6
+        height: 4
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fb4e083d2eb3eaf4face73e428234285
-      internalID: 1591499144
+      spriteID: efd7655f8a48a4a94ae206084c64bb0e
+      internalID: -1609850386
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DuckoRunSide5
+      name: PlayerCharacterSheet_4
       rect:
         serializedVersion: 2
-        x: 0
-        y: 2048
-        width: 256
-        height: 256
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 53
+        y: 2332
+        width: 153
+        height: 209
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 154ba81d5b2265641bbd866654102ec7
-      internalID: 1073202592
+      spriteID: 0c88cd2b04fdb4a05ba13edea102a773
+      internalID: -1362272213
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DuckoRunDown1
+      name: PlayerCharacterSheet_5
       rect:
         serializedVersion: 2
-        x: 256
-        y: 2048
-        width: 256
-        height: 256
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 318
+        y: 2328
+        width: 217
+        height: 214
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ee7150779c83fee48bb269cf2cd13934
-      internalID: 1760751149
+      spriteID: 171772f9ec2e9404986e64484308e882
+      internalID: 1906326002
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DuckoRunDown2
+      name: PlayerCharacterSheet_6
       rect:
         serializedVersion: 2
-        x: 512
-        y: 2048
-        width: 256
-        height: 256
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 400
+        y: 2540
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6938434cc4ca54d409ccaec82cbed3da
-      internalID: -795413968
+      spriteID: 53e0cdb96a8644333885914ceaf95207
+      internalID: -726601434
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DuckoRunDown3
+      name: PlayerCharacterSheet_7
       rect:
         serializedVersion: 2
-        x: 768
-        y: 2048
-        width: 256
-        height: 256
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 48
+        y: 2440
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 468b3dc73ad263d4e8be93184ce0a797
-      internalID: 1094869957
+      spriteID: 3f4241a69636e4e0f8efc80d55677f03
+      internalID: 415186112
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DuckoRunDown4
+      name: PlayerCharacterSheet_8
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1792
-        width: 256
-        height: 256
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 579
+        y: 2321
+        width: 133
+        height: 190
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ad60a639ba6311542b4d1298d5c8e5cd
-      internalID: -1309261130
+      spriteID: 18664fc00023045d8ab2583c23e46bf0
+      internalID: -1093910209
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DuckoRunDown5
+      name: PlayerCharacterSheet_9
       rect:
         serializedVersion: 2
-        x: 256
-        y: 1792
-        width: 256
-        height: 256
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 833
+        y: 2339
+        width: 142
+        height: 192
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 061ff72381cd3ba4ca7f209ca75282b5
-      internalID: 595375070
+      spriteID: a9f98c78ad1bf4ae9b3e2d6e375a024a
+      internalID: 973042286
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DuckoRunDown6
+      name: PlayerCharacterSheet_10
       rect:
         serializedVersion: 2
-        x: 512
-        y: 1792
-        width: 256
-        height: 256
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 49
+        y: 2391
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f8b66acae1cc5074caa764710a58b88b
-      internalID: -1778919119
+      spriteID: 0487d4c2ace484a61bd3f8223cc5bbee
+      internalID: 1526684500
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DuckoRunUp1
+      name: PlayerCharacterSheet_11
       rect:
         serializedVersion: 2
-        x: 768
-        y: 1792
-        width: 256
-        height: 256
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 56
+        y: 2400
+        width: 4
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d9b06269c18330e46ba907897ba12a7d
-      internalID: -520209124
+      spriteID: bc6aac67c7ce645389997d704b1b6207
+      internalID: 1609127671
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DuckoRunUp2
+      name: PlayerCharacterSheet_12
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1536
-        width: 256
-        height: 256
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 39
+        y: 2094
+        width: 182
+        height: 189
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 499684e5ad0cc2048ad2dae233a55b42
-      internalID: 527932069
+      spriteID: 7f9966aed28264494a7825c251ba522e
+      internalID: -400997161
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DuckoRunUp3
+      name: PlayerCharacterSheet_13
       rect:
         serializedVersion: 2
-        x: 256
-        y: 1536
-        width: 256
-        height: 256
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 50
+        y: 2095
+        width: 5
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 034336cd72fe8c24d97840c3dd7a5b64
-      internalID: -1594450653
+      spriteID: a419cf259a765483fa5130b0638292db
+      internalID: 1542951798
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DuckoRunUp4
+      name: PlayerCharacterSheet_14
       rect:
         serializedVersion: 2
-        x: 512
-        y: 1536
-        width: 256
-        height: 256
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 331
+        y: 2078
+        width: 90
+        height: 208
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 82fb95aeb28bf354a926228e4597f65f
-      internalID: 454275821
+      spriteID: 63901df2aca2f4b4d8b76a7839b5ef03
+      internalID: 1345379142
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DuckoRunUp5
+      name: PlayerCharacterSheet_15
       rect:
         serializedVersion: 2
-        x: 768
-        y: 1536
-        width: 256
-        height: 256
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 590
+        y: 2091
+        width: 86
+        height: 200
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 82d254718af64ce41a07e5e7457fe75a
-      internalID: 638111577
+      spriteID: d157a1fada5ea49be962ac4d32e5c040
+      internalID: 1198882865
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DuckoRunUp6
+      name: PlayerCharacterSheet_16
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1280
-        width: 256
-        height: 256
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 851
+        y: 2056
+        width: 94
+        height: 208
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c84fa2efb194ca1449a6f4b1fde6f410
-      internalID: 2131705948
+      spriteID: d032149fb43a0491182b2b156bce854b
+      internalID: -463545591
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DuckoIdleDown1
+      name: PlayerCharacterSheet_17
       rect:
         serializedVersion: 2
-        x: 256
-        y: 1280
-        width: 256
-        height: 256
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 88
+        y: 1822
+        width: 90
+        height: 207
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2a83e75f201d9bd47a9ecd54dd628145
-      internalID: 1464151854
+      spriteID: 0bfe867a743fb4fe29860d3010cd9089
+      internalID: -1698005756
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DuckoIdleDown2
+      name: PlayerCharacterSheet_18
       rect:
         serializedVersion: 2
-        x: 512
-        y: 1280
-        width: 256
-        height: 256
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 195
+        y: 1875
+        width: 11
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 70875c917735e66479c55e061116e3b2
-      internalID: 587219134
+      spriteID: 45ef35988370846b0a98689787e6a548
+      internalID: -210067068
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DuckoIdleDown3
+      name: PlayerCharacterSheet_19
       rect:
         serializedVersion: 2
-        x: 768
-        y: 1280
-        width: 256
-        height: 256
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 346
+        y: 1834
+        width: 86
+        height: 202
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 08b454a0acde3634f8150773bbeeb7d5
-      internalID: -956532526
+      spriteID: aad7a97714abe4c86b80fdced6ea0f13
+      internalID: 1134651920
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DuckoIdleDown4
+      name: PlayerCharacterSheet_20
       rect:
         serializedVersion: 2
-        x: 0
-        y: 1024
-        width: 256
-        height: 256
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 592
+        y: 1799
+        width: 94
+        height: 208
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8e617e475c821c545940d287aa1429b0
-      internalID: 1694984486
+      spriteID: df3687e7643b94e98990a61f8df9b712
+      internalID: -382265513
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DuckoIdleSide1
+      name: PlayerCharacterSheet_21
       rect:
         serializedVersion: 2
-        x: 256
-        y: 1024
-        width: 256
-        height: 256
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 848
+        y: 1800
+        width: 126
+        height: 241
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 12ef1d5fe0fe42247be0aa1269e59e7e
-      internalID: 339654822
+      spriteID: b5560a9d6670946909289f3cc1a1bc25
+      internalID: -508172755
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DuckoIdleSide2
+      name: PlayerCharacterSheet_22
       rect:
         serializedVersion: 2
-        x: 512
-        y: 1024
-        width: 256
-        height: 256
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 598
+        y: 1524
+        width: 88
+        height: 265
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1cceeaccb6874c044a366a9d211637a3
-      internalID: -624105008
+      spriteID: 0e0baa4880fa34958a450c4b60bcd441
+      internalID: -1985150106
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DuckoIdleSide3
+      name: PlayerCharacterSheet_23
       rect:
         serializedVersion: 2
-        x: 768
-        y: 1024
-        width: 256
-        height: 256
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 745
+        y: 1785
+        width: 4
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dec59aee583d85446b3ee82dfb27b2d6
-      internalID: 1425454237
+      spriteID: 4d96efe3d52c340e2950e6b2ecc073f1
+      internalID: -1901542747
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DuckoIdleUp1
+      name: PlayerCharacterSheet_24
       rect:
         serializedVersion: 2
-        x: 0
-        y: 768
-        width: 256
-        height: 256
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 790
+        y: 1785
+        width: 70
+        height: 35
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 298b8e0183ef2644281c33d74463cffa
-      internalID: -847497012
+      spriteID: caf6205873e954a51abb4c032d38f887
+      internalID: -308208764
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DuckoIdleUp2
+      name: PlayerCharacterSheet_25
       rect:
         serializedVersion: 2
-        x: 256
-        y: 768
-        width: 256
-        height: 256
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 853
+        y: 1525
+        width: 117
+        height: 273
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 01ac9c474d669f74298a4ad80bdb142d
-      internalID: 1402785502
+      spriteID: 583c470de52734d62a2fcfee5cc1b085
+      internalID: 1957882808
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DuckoIdleUp3
+      name: PlayerCharacterSheet_26
       rect:
         serializedVersion: 2
-        x: 512
-        y: 768
-        width: 256
-        height: 256
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 82
+        y: 1561
+        width: 111
+        height: 223
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 049e2bb42491fd24e8d8306d14edc656
-      internalID: -1728995131
+      spriteID: ca0b0899afdf5437bb050e35b7d69a07
+      internalID: -508587958
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DuckoHitSide
+      name: PlayerCharacterSheet_27
       rect:
         serializedVersion: 2
-        x: 768
-        y: 768
-        width: 256
-        height: 256
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 195
+        y: 1623
+        width: 4
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7a3a2c1bab0d72943a8053cfce392fd2
-      internalID: -555793286
+      spriteID: de2361a8379c24a68b999bf37ac3182a
+      internalID: -1654829787
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DuckoHitUp
+      name: PlayerCharacterSheet_28
       rect:
         serializedVersion: 2
-        x: 0
-        y: 512
-        width: 256
-        height: 256
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 338
+        y: 1559
+        width: 91
+        height: 217
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5f92b8621e9f2f84c94fc605a2b96db4
-      internalID: 1973821942
+      spriteID: bfe4b677637d140798f2daa24bf57fd2
+      internalID: 980365816
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DuckoHitDown
+      name: PlayerCharacterSheet_29
       rect:
         serializedVersion: 2
-        x: 256
-        y: 512
-        width: 256
-        height: 256
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 150
+        y: 1560
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e2ad8657897c394469a820a33590e9db
-      internalID: 1812551475
+      spriteID: ec66fa1aa250c42fcb4882db9015e570
+      internalID: -219409447
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DuckoLaunchSide
+      name: PlayerCharacterSheet_30
       rect:
         serializedVersion: 2
-        x: 512
-        y: 512
-        width: 256
-        height: 256
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 330
+        y: 1530
+        width: 45
+        height: 35
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9abaefe633a5181458da11374f64c0eb
-      internalID: 453022491
+      spriteID: 11fe7b0114b614334b6f41b2403768ca
+      internalID: -1171344644
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DuckoLaunchDown
+      name: PlayerCharacterSheet_31
       rect:
         serializedVersion: 2
-        x: 768
-        y: 512
-        width: 256
-        height: 256
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 410
+        y: 1535
+        width: 4
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 632de209871a9ed49ab52a9a5ff3c325
-      internalID: -416249586
+      spriteID: c41a9091a8a974d58b23af9ab0ecc9cb
+      internalID: 1113311653
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DuckoLaunchUp
+      name: PlayerCharacterSheet_32
       rect:
         serializedVersion: 2
-        x: 0
-        y: 256
-        width: 256
-        height: 256
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 920
+        y: 1530
+        width: 8
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5e5684fd27f80b240b0e51ea4b4847ca
-      internalID: -433247889
+      spriteID: e3930623b5d634d6babd13ccf0bf31a9
+      internalID: -406330939
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: DuckoRunSide6
+      name: PlayerCharacterSheet_33
       rect:
         serializedVersion: 2
-        x: 256
-        y: 256
-        width: 256
-        height: 256
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 79
+        y: 1298
+        width: 112
+        height: 219
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 91afcd5cb5262174490099c297c5719c
-      internalID: 1181794579
+      spriteID: a742ba1f1f61d4ec0a6c304bf6ef7ba4
+      internalID: 842090996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCharacterSheet_34
+      rect:
+        serializedVersion: 2
+        x: 283
+        y: 1284
+        width: 337
+        height: 233
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 73ff7049232744bf698bcc5777e4c767
+      internalID: -1209127328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCharacterSheet_35
+      rect:
+        serializedVersion: 2
+        x: 680
+        y: 1515
+        width: 200
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65dcbd2c40fc44e77bf7778d5f846a7b
+      internalID: -374334316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCharacterSheet_36
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 1385
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2edb8ad2b072f4c438d541c2b125b6ea
+      internalID: -866913603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCharacterSheet_37
+      rect:
+        serializedVersion: 2
+        x: 607
+        y: 1284
+        width: 83
+        height: 223
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be86b9da727a9431eb8b5dd2e56a3d47
+      internalID: -625848768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCharacterSheet_38
+      rect:
+        serializedVersion: 2
+        x: 863
+        y: 1284
+        width: 83
+        height: 222
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 964b2052560e3499db28e9c4728278ae
+      internalID: 77130574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCharacterSheet_39
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 1028
+        width: 86
+        height: 225
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4753f3db2ea5642caa627482d616fac7
+      internalID: -583485447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCharacterSheet_40
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 1023
+        width: 88
+        height: 233
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 071a133c81c8b49ad9c2e1abcde5eb92
+      internalID: -1175205811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCharacterSheet_41
+      rect:
+        serializedVersion: 2
+        x: 593
+        y: 1023
+        width: 88
+        height: 233
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c5c82a312c22a4c5098b01e89188948a
+      internalID: -1793023145
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCharacterSheet_42
+      rect:
+        serializedVersion: 2
+        x: 851
+        y: 1023
+        width: 87
+        height: 229
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8711db6f04b674a8b86e3d9cfc0c177a
+      internalID: -1707949544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCharacterSheet_43
+      rect:
+        serializedVersion: 2
+        x: 93
+        y: 772
+        width: 84
+        height: 225
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10561d4bf700e4bcebdfb1e0cb82a06c
+      internalID: -1494647080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCharacterSheet_44
+      rect:
+        serializedVersion: 2
+        x: 349
+        y: 772
+        width: 84
+        height: 222
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bae6bbd17cafd4df39bdff60f4551b92
+      internalID: 260346192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCharacterSheet_45
+      rect:
+        serializedVersion: 2
+        x: 606
+        y: 772
+        width: 83
+        height: 221
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4054ba0972eb64c259649a9a54d7043f
+      internalID: 128233279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCharacterSheet_46
+      rect:
+        serializedVersion: 2
+        x: 810
+        y: 794
+        width: 133
+        height: 209
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3c8fb1737bd1485eb465be31642c3c6
+      internalID: 479320642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCharacterSheet_47
+      rect:
+        serializedVersion: 2
+        x: 31
+        y: 640
+        width: 14
+        height: 17
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db96525fad1ed4944b77cea0747e9828
+      internalID: -1001152912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCharacterSheet_48
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 539
+        width: 157
+        height: 190
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 475e907852d97406fada412c69eb4b0a
+      internalID: 849934828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCharacterSheet_49
+      rect:
+        serializedVersion: 2
+        x: 322
+        y: 531
+        width: 136
+        height: 221
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0579100cf48a24e5e82667564a54b017
+      internalID: -248168675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCharacterSheet_50
+      rect:
+        serializedVersion: 2
+        x: 521
+        y: 519
+        width: 225
+        height: 197
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2872ebca383d436d8be810d7b792bfc
+      internalID: -407819770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCharacterSheet_51
+      rect:
+        serializedVersion: 2
+        x: 809
+        y: 519
+        width: 184
+        height: 194
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d463f823d26454609b119e86cbf3ec7d
+      internalID: -71801515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCharacterSheet_52
+      rect:
+        serializedVersion: 2
+        x: 975
+        y: 625
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff763b733adef4ddb976e72d3b1d8289
+      internalID: 263847612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCharacterSheet_53
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 420
+        width: 5
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 90003aeb957534434b61ea55f3c2fe79
+      internalID: 205399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCharacterSheet_54
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 264
+        width: 156
+        height: 197
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c65624a1943fa47788ab67c9e45d95a6
+      internalID: 1133467819
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCharacterSheet_55
+      rect:
+        serializedVersion: 2
+        x: 323
+        y: 238
+        width: 134
+        height: 230
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2dc00b6e28c8d47238921d90b0fcf832
+      internalID: 1915658884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCharacterSheet_56
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 410
+        width: 4
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f85ab11da1fa044359358e2ff3110fd4
+      internalID: -320344081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCharacterSheet_57
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 365
+        width: 25
+        height: 25
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03bd0545781324819a32b4b51c778429
+      internalID: 1544112379
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCharacterSheet_58
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 254
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 597edba7e4a5f439e9f8c7ff52952952
+      internalID: -350992180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PlayerCharacterSheet_59
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 234
+        width: 10
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0be5cf344197b45e5b7e238acce25e6b
+      internalID: -1429711647
       vertices: []
       indices: 
       edges: []
@@ -869,51 +1487,72 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      DuckoHitDown: 1812551475
-      DuckoHitSide: -555793286
-      DuckoHitUp: 1973821942
-      DuckoIdleDown1: 1464151854
-      DuckoIdleDown2: 587219134
-      DuckoIdleDown3: -956532526
-      DuckoIdleDown4: 1694984486
-      DuckoIdleSide1: 339654822
-      DuckoIdleSide2: -624105008
-      DuckoIdleSide3: 1425454237
-      DuckoIdleUp1: -847497012
-      DuckoIdleUp2: 1402785502
-      DuckoIdleUp3: -1728995131
-      DuckoLaunchDown: -416249586
-      DuckoLaunchSide: 453022491
-      DuckoLaunchUp: -433247889
-      DuckoRunDown1: 1760751149
-      DuckoRunDown2: -795413968
-      DuckoRunDown3: 1094869957
-      DuckoRunDown4: -1309261130
-      DuckoRunDown5: 595375070
-      DuckoRunDown6: -1778919119
-      DuckoRunSide1: 1442360895
-      DuckoRunSide2: 976706863
-      DuckoRunSide3: -1589862634
-      DuckoRunSide4: 1591499144
-      DuckoRunSide5: 1073202592
-      DuckoRunSide6: 1181794579
-      DuckoRunUp1: -520209124
-      DuckoRunUp2: 527932069
-      DuckoRunUp3: -1594450653
-      DuckoRunUp4: 454275821
-      DuckoRunUp5: 638111577
-      DuckoRunUp6: 2131705948
+      PlayerCharacterSheet_0: -2071878476
+      PlayerCharacterSheet_1: 1408918871
+      PlayerCharacterSheet_10: 1526684500
+      PlayerCharacterSheet_11: 1609127671
+      PlayerCharacterSheet_12: -400997161
+      PlayerCharacterSheet_13: 1542951798
+      PlayerCharacterSheet_14: 1345379142
+      PlayerCharacterSheet_15: 1198882865
+      PlayerCharacterSheet_16: -463545591
+      PlayerCharacterSheet_17: -1698005756
+      PlayerCharacterSheet_18: -210067068
+      PlayerCharacterSheet_19: 1134651920
+      PlayerCharacterSheet_2: -1374497787
+      PlayerCharacterSheet_20: -382265513
+      PlayerCharacterSheet_21: -508172755
+      PlayerCharacterSheet_22: -1985150106
+      PlayerCharacterSheet_23: -1901542747
+      PlayerCharacterSheet_24: -308208764
+      PlayerCharacterSheet_25: 1957882808
+      PlayerCharacterSheet_26: -508587958
+      PlayerCharacterSheet_27: -1654829787
+      PlayerCharacterSheet_28: 980365816
+      PlayerCharacterSheet_29: -219409447
+      PlayerCharacterSheet_3: -1609850386
+      PlayerCharacterSheet_30: -1171344644
+      PlayerCharacterSheet_31: 1113311653
+      PlayerCharacterSheet_32: -406330939
+      PlayerCharacterSheet_33: 842090996
+      PlayerCharacterSheet_34: -1209127328
+      PlayerCharacterSheet_35: -374334316
+      PlayerCharacterSheet_36: -866913603
+      PlayerCharacterSheet_37: -625848768
+      PlayerCharacterSheet_38: 77130574
+      PlayerCharacterSheet_39: -583485447
+      PlayerCharacterSheet_4: -1362272213
+      PlayerCharacterSheet_40: -1175205811
+      PlayerCharacterSheet_41: -1793023145
+      PlayerCharacterSheet_42: -1707949544
+      PlayerCharacterSheet_43: -1494647080
+      PlayerCharacterSheet_44: 260346192
+      PlayerCharacterSheet_45: 128233279
+      PlayerCharacterSheet_46: 479320642
+      PlayerCharacterSheet_47: -1001152912
+      PlayerCharacterSheet_48: 849934828
+      PlayerCharacterSheet_49: -248168675
+      PlayerCharacterSheet_5: 1906326002
+      PlayerCharacterSheet_50: -407819770
+      PlayerCharacterSheet_51: -71801515
+      PlayerCharacterSheet_52: 263847612
+      PlayerCharacterSheet_53: 205399
+      PlayerCharacterSheet_54: 1133467819
+      PlayerCharacterSheet_55: 1915658884
+      PlayerCharacterSheet_56: -320344081
+      PlayerCharacterSheet_57: 1544112379
+      PlayerCharacterSheet_58: -350992180
+      PlayerCharacterSheet_59: -1429711647
+      PlayerCharacterSheet_6: -726601434
+      PlayerCharacterSheet_7: 415186112
+      PlayerCharacterSheet_8: -1093910209
+      PlayerCharacterSheet_9: 973042286
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 271239
-  packageName: 'Unity Learn | 2D Adventure Game: Robot Repair'
-  packageVersion: 2.0.0
-  assetPath: Assets/_2DAdventureGame/Art/Ducko/Characters/PlayerCharacterSheet.png
-  uploadId: 832758
