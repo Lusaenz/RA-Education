@@ -45,6 +45,7 @@ public class ForgotPasswordView : MonoBehaviour
         }
 
         // Permitir buscar usuario presionando Enter en el campo de nombre
+        InputFieldSubmitNavigator.ForceSingleLine(InputName);
         if (InputName != null)
         {
             onNameSubmitted = (_) => OnNameEntered();
@@ -57,6 +58,9 @@ public class ForgotPasswordView : MonoBehaviour
             InputSecurityAnswer.interactable = false;
         if (InputNewPassword != null)
             InputNewPassword.interactable = false;
+
+        // Encadenar Enter/Done: respuesta de seguridad -> nueva contraseña -> cierra el teclado.
+        InputFieldSubmitNavigator.Chain(InputSecurityAnswer, InputNewPassword);
     }
 
     System.Collections.IEnumerator InitializeWhenDatabaseReady()
@@ -99,7 +103,7 @@ public class ForgotPasswordView : MonoBehaviour
             return;
         }
 
-        string name = InputName?.text ?? string.Empty;
+        string name = InputFieldSubmitNavigator.GetCommittedText(InputName);
 
         if (string.IsNullOrWhiteSpace(name))
         {
@@ -191,6 +195,7 @@ public class ForgotPasswordView : MonoBehaviour
         {
             InputSecurityAnswer.interactable = true;
             InputSecurityAnswer.Select();
+            InputSecurityAnswer.ActivateInputField();
         }
 
         if (InputNewPassword != null)
@@ -206,8 +211,8 @@ public class ForgotPasswordView : MonoBehaviour
     {
         ClearAllErrors();
 
-        string securityAnswer = InputSecurityAnswer?.text ?? string.Empty;
-        string newPassword = InputNewPassword?.text ?? string.Empty;
+        string securityAnswer = InputFieldSubmitNavigator.GetCommittedText(InputSecurityAnswer);
+        string newPassword = InputFieldSubmitNavigator.GetCommittedText(InputNewPassword);
 
         // Validar y procesar
         var resetResult = presenter.ResetPassword(currentUser.id_user, securityAnswer, newPassword);

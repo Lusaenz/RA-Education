@@ -20,6 +20,15 @@ public class EstadoManager : MonoBehaviour
     [SerializeField] private SpriteRenderer statusCell;
     [SerializeField] private SpriteRenderer statusDigestive;
 
+    [Header("Status Text Sprites")]
+    [SerializeField] private SpriteRenderer textCell;
+    [SerializeField] private SpriteRenderer textDigestive;
+
+    [Header("Status Text Colors")]
+    [SerializeField] private Color notStartedTextColor = Color.white;
+    [SerializeField] private Color inProgressTextColor = new Color(0.15f, 0.15f, 0.15f);
+    [SerializeField] private Color completedTextColor = Color.white;
+
     [Header("Module IDs")]
     [SerializeField] private int digestiveModuleId = 1;
     [SerializeField] private int cellModuleId = 2;
@@ -239,6 +248,7 @@ public class EstadoManager : MonoBehaviour
 
         string addressableKey = GetAddressableKeyForStatus(status);
         LoadStatusSprite(targetRenderer, addressableKey);
+        ApplyTextColor(moduleId, status);
     }
 
     private SpriteRenderer GetRendererForModule(int moduleId)
@@ -254,6 +264,42 @@ public class EstadoManager : MonoBehaviour
         }
 
         return null;
+    }
+
+    private SpriteRenderer GetTextRendererForModule(int moduleId)
+    {
+        if (moduleId == digestiveModuleId)
+        {
+            return textDigestive;
+        }
+
+        if (moduleId == cellModuleId)
+        {
+            return textCell;
+        }
+
+        return null;
+    }
+
+    private void ApplyTextColor(int moduleId, string status)
+    {
+        SpriteRenderer textRenderer = GetTextRendererForModule(moduleId);
+        if (textRenderer == null)
+        {
+            return;
+        }
+
+        textRenderer.color = GetTextColorForStatus(status);
+    }
+
+    private Color GetTextColorForStatus(string status)
+    {
+        return NormalizeStatus(status) switch
+        {
+            StatusCompleted => completedTextColor,
+            StatusInProgress => inProgressTextColor,
+            _ => notStartedTextColor
+        };
     }
 
     private string GetAddressableKeyForStatus(string status)

@@ -59,7 +59,9 @@ public class ForgotPasswordPresenter
     {
         var result = new UserLookupResult();
 
-        if (string.IsNullOrWhiteSpace(name))
+        string normalizedName = name?.Trim();
+
+        if (string.IsNullOrWhiteSpace(normalizedName))
         {
             result.ErrorMessage = "Por favor ingresa tu nombre completo.";
             return result;
@@ -67,7 +69,7 @@ public class ForgotPasswordPresenter
 
         try
         {
-            UserModel user = authService.FindUserByNameAndRole(name, 1);
+            UserModel user = authService.FindUserByNameAndRole(normalizedName, 1);
 
             if (user == null)
             {

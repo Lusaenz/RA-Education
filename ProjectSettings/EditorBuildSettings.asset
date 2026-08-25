@@ -38,12 +38,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/FoodRiddles.unity
     guid: 57d5a34f2f2e9c64fae458cff6159db5
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/kk.unity
     guid: 3a22b07075c6d1241bfb1b73e4ecd0c9
   - enabled: 1
     path: Assets/Scenes/PuzzleDigestive.unity
     guid: 1845b9305270f4a40a00df4fe44150e1
+  - enabled: 1
+    path: Assets/Scenes/PuzzleCells.unity
+    guid: 8a8f29f3cf5076b438a06cd11b088045
   - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
@@ -62,6 +65,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/RAScreen.unity
     guid: 9c467be440838462487fe2e239de92d0
+  - enabled: 1
+    path: Assets/Scenes/HomeTeachers.unity
+    guid: 93d80db2cdc3748cda953f42eaf8101d
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 23c8a86039b7c5246a2ab73ad3f0c2c2, type: 2}
     com.unity.dt.app-ui: {fileID: 11400000, guid: 1b1c20d82303e4b5781c3ef50ac1449f, type: 2}

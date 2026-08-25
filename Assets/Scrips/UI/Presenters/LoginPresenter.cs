@@ -63,8 +63,9 @@ public class LoginPresenter
     public LoginResult LoginTeacher(string email, string pass)
     {
         var result = new LoginResult();
+        string normalizedEmail = email?.Trim().ToLowerInvariant();
 
-        if (string.IsNullOrEmpty(email))
+        if (string.IsNullOrEmpty(normalizedEmail))
             result.NameError = "Escribe tu correo electrónico.";
         if (string.IsNullOrEmpty(pass))
             result.PasswordError = "La contraseña no es correcta. Inténtalo otra vez.";
@@ -72,7 +73,7 @@ public class LoginPresenter
         if (!string.IsNullOrEmpty(result.NameError) || !string.IsNullOrEmpty(result.PasswordError))
             return result;
 
-        result.User = authService.LoginTeacher(email, pass);
+        result.User = authService.LoginTeacher(normalizedEmail, pass);
         if (result.User == null)
             result.GeneralMessage = "No encontramos tu cuenta. Revisa tus datos o regístrate";
         else

@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 /// <summary>
 /// Vista de login unificada para estudiantes y profesores.
@@ -22,11 +23,17 @@ public class LoginStudentView : MonoBehaviour
     public Text NameErrorText;
     public Text PasswordErrorText;
     public Text MessageErrorLoginText;
-    
+    [SerializeField] private Image MessageWelcomeBackground;
+    [SerializeField] private Image MessageWelcomeIcon;
+
     private LoginPresenter loginPresenter;
     private ISessionPersistence sessionPersistence;
     private bool initialized = false;
     private int selectedRole = 1; // 1 = Estudiante, 2 = Profesor
+
+    private static readonly Color DefaultWelcomeColor = new Color(0.1f, 0.1f, 0.1f);
+    private static readonly Color SuccessWelcomeColor = new Color(0.106f, 0.541f, 0.361f);
+    private static readonly Color SuccessWelcomeBackgroundColor = new Color(0.106f, 0.541f, 0.361f, 0.14f);
 
     /// <summary>
     /// Ejecuta el proceso de autenticacion segun el rol seleccionado.
@@ -54,7 +61,9 @@ public class LoginStudentView : MonoBehaviour
                 return;
             }
 
-            response = loginPresenter.LoginTeacher(InputEmail.text, InputPassword.text);
+            response = loginPresenter.LoginTeacher(
+                InputFieldSubmitNavigator.GetCommittedText(InputEmail),
+                InputFieldSubmitNavigator.GetCommittedText(InputPassword));
 
             if (!string.IsNullOrEmpty(response.NameError))
                 ShowFieldError(NameErrorText, response.NameError);
@@ -67,7 +76,9 @@ public class LoginStudentView : MonoBehaviour
                 return;
             }
 
-            response = loginPresenter.LoginStudent(InputName.text, InputPassword.text);
+            response = loginPresenter.LoginStudent(
+                InputFieldSubmitNavigator.GetCommittedText(InputName),
+                InputFieldSubmitNavigator.GetCommittedText(InputPassword));
 
             if (!string.IsNullOrEmpty(response.NameError))
                 ShowFieldError(NameErrorText, response.NameError);
@@ -112,8 +123,11 @@ public class LoginStudentView : MonoBehaviour
                 }
             }
             
-            // Cargar escena TestInitialuserFlow
-            SceneManager.LoadScene("TestInitialuserFlow");
+            // Cargar escena según el rol del usuario autenticado
+            if (response.User.id_role == 2) // Profesor
+                SceneManager.LoadScene("HomeTeachers");
+            else
+                SceneManager.LoadScene("TestInitialuserFlow");
         }
         else if (!string.IsNullOrEmpty(response.GeneralMessage))
         {
@@ -134,6 +148,10 @@ public class LoginStudentView : MonoBehaviour
         // Configurar UI según el rol
         ConfigureUIByRole();
 
+        // Encadenar el Enter/Done del teclado movil entre los campos visibles del rol actual.
+        TMP_InputField firstField = selectedRole == 2 ? InputEmail : InputName;
+        InputFieldSubmitNavigator.Chain(firstField, InputPassword);
+
         // Esperar hasta que DatabaseManager esté listo antes de crear repositorios/servicios.
         StartCoroutine(InitializeWhenDatabaseReady());
 
@@ -143,18 +161,119 @@ public class LoginStudentView : MonoBehaviour
         // Inicializar persistencia de sesión
         sessionPersistence = new SessionPersistence();
 
-        // Mostrar mensaje de bienvenida según el rol
-        string message = PlayerPrefs.GetString("LoginMessage", "");
-        if (string.IsNullOrEmpty(message))
+        // Mostrar mensaje de bienvenida según el rol, o el mensaje de éxito
+        // proveniente del flujo de "olvidaste tu contraseña" (se consume una sola vez).
+        string storedMessage = PlayerPrefs.GetString("LoginMessage", "");
+        if (!string.IsNullOrEmpty(storedMessage))
+            PlayerPrefs.DeleteKey("LoginMessage");
+
+        string defaultMessage = selectedRole == 2 ? "Bienvenido Profesor/a" : "Bienvenido Estudiante";
+
+        if (MessageTextWelcome != null)
         {
-            message = selectedRole == 2 ? "Bienvenido Profesor/a" : "Bienvenido Estudiante";
+            if (!string.IsNullOrEmpty(storedMessage))
+                ShowSuccessWelcomeMessage(storedMessage, defaultMessage);
+            else
+                SetWelcomeMessage(defaultMessage, DefaultWelcomeColor, showBackground: false);
+        }
+    }
+
+    /// <summary>
+    /// Aplica texto y color al mensaje de bienvenida, mostrando u ocultando el fondo destacado.
+    /// </summary>
+    private void SetWelcomeMessage(string text, Color color, bool showBackground)
+    {
+        MessageTextWelcome.text = text;
+        MessageTextWelcome.color = color;
+        MessageTextWelcome.gameObject.SetActive(true);
+
+        if (MessageWelcomeBackground != null)
+            MessageWelcomeBackground.gameObject.SetActive(showBackground);
+        if (MessageWelcomeIcon != null)
+            MessageWelcomeIcon.gameObject.SetActive(showBackground);
+    }
+
+    /// <summary>
+    /// Muestra el mensaje de éxito (p. ej. tras recuperar la contraseña) con un
+    /// estilo llamativo: ícono de check, color verde, fondo resaltado y animación
+    /// de entrada. Vuelve automáticamente al mensaje de bienvenida tras unos segundos.
+    /// </summary>
+    private void ShowSuccessWelcomeMessage(string message, string fallbackMessage)
+    {
+        string cleanMessage = message.TrimStart('✓', ' ');
+
+        SetWelcomeMessage(cleanMessage, SuccessWelcomeColor, showBackground: true);
+
+        if (MessageWelcomeBackground != null)
+            MessageWelcomeBackground.color = SuccessWelcomeBackgroundColor;
+        if (MessageWelcomeIcon != null)
+            MessageWelcomeIcon.color = SuccessWelcomeColor;
+
+        StartCoroutine(AnimateWelcomeMessageIn());
+        StartCoroutine(RevertWelcomeMessageAfter(5f, fallbackMessage));
+    }
+
+    /// <summary>
+    /// Anima la aparición del mensaje de bienvenida (fade + escala) para llamar la atención.
+    /// </summary>
+    private IEnumerator AnimateWelcomeMessageIn()
+    {
+        CanvasGroup canvasGroup = MessageTextWelcome.GetComponent<CanvasGroup>();
+        if (canvasGroup == null)
+            canvasGroup = MessageTextWelcome.gameObject.AddComponent<CanvasGroup>();
+
+        RectTransform rectTransform = MessageTextWelcome.rectTransform;
+        Vector3 startScale = Vector3.one * 0.85f;
+        float duration = 0.3f;
+        float elapsed = 0f;
+
+        canvasGroup.alpha = 0f;
+        rectTransform.localScale = startScale;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float eased = 1f - Mathf.Pow(1f - Mathf.Clamp01(elapsed / duration), 3f);
+            canvasGroup.alpha = eased;
+            rectTransform.localScale = Vector3.LerpUnclamped(startScale, Vector3.one, eased);
+            yield return null;
         }
 
-        if (!string.IsNullOrEmpty(message) && MessageTextWelcome != null)
+        canvasGroup.alpha = 1f;
+        rectTransform.localScale = Vector3.one;
+    }
+
+    /// <summary>
+    /// Tras unos segundos, hace un fundido y restaura el mensaje de bienvenida por defecto.
+    /// </summary>
+    private IEnumerator RevertWelcomeMessageAfter(float seconds, string fallbackMessage)
+    {
+        yield return new WaitForSeconds(seconds);
+
+        if (MessageTextWelcome == null)
+            yield break;
+
+        CanvasGroup canvasGroup = MessageTextWelcome.GetComponent<CanvasGroup>();
+        yield return FadeCanvasGroup(canvasGroup, 1f, 0f, 0.25f);
+
+        SetWelcomeMessage(fallbackMessage, DefaultWelcomeColor, showBackground: false);
+
+        yield return FadeCanvasGroup(canvasGroup, 0f, 1f, 0.25f);
+    }
+
+    private IEnumerator FadeCanvasGroup(CanvasGroup canvasGroup, float from, float to, float duration)
+    {
+        if (canvasGroup == null)
+            yield break;
+
+        float elapsed = 0f;
+        while (elapsed < duration)
         {
-            MessageTextWelcome.text = message;
-            MessageTextWelcome.gameObject.SetActive(true);
+            elapsed += Time.deltaTime;
+            canvasGroup.alpha = Mathf.Lerp(from, to, elapsed / duration);
+            yield return null;
         }
+        canvasGroup.alpha = to;
     }
 
     /// <summary>
