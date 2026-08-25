@@ -70,8 +70,4 @@ public class TestInitialUserFlowView : MonoBehaviour, ITestInitialUserFlowView
         if (canvasBottomInfo != null) canvasBottomInfo.SetActive(true);
     }
 
-    public void IrAEscenaPrueba()
-    {
-        SceneManager.LoadScene("SelectGameExample");
-    }
 }

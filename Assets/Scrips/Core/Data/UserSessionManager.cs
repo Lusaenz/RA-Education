@@ -63,8 +63,8 @@ public class UserSessionManager : MonoBehaviour
             persistence.ClearSession();
         }
 
-        // Redirigir a pantalla de login
-        SceneManager.LoadScene("LoginStudentScene"); // Ajusta el nombre según tu escena de login
+        // Redirigir a la selección de rol (no hay sesión guardada, se mostrará normalmente)
+        SceneManager.LoadScene("SelectRole");
     }
 
     /// <summary>

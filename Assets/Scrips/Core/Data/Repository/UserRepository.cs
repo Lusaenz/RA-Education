@@ -86,9 +86,13 @@ public class UserRepository
             return null;
         }
 
-        return ConnectionDb.Table<UserModel>()
-            .FirstOrDefault(x => string.Equals(x.name, name, System.StringComparison.OrdinalIgnoreCase)
-                              && x.id_role == 1);
+        var result = ConnectionDb.Query<UserModel>(
+            @"SELECT * FROM users
+                WHERE name = ? COLLATE NOCASE
+                AND id_role = 1",
+            name);
+
+        return result.FirstOrDefault();
     }
 
     /// <summary>
@@ -99,7 +103,7 @@ public class UserRepository
         var result = ConnectionDb.Query<UserModel>(
             @"SELECT u.* FROM users u
                 JOIN teachers t ON u.id_user = t.id_user
-                WHERE t.email=?",
+                WHERE t.email = ? COLLATE NOCASE",
             email);
 
         return result.FirstOrDefault();

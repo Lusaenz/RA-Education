@@ -269,7 +269,7 @@ public class GameInfoUI : MonoBehaviour
         return gameType.ToLower() switch
         {
             "drag_drop_digestive_system" or "drag_drop_cell" => "DragAndDrop",
-            "food_riddles" or "foodriddles" => "FoodRiddles",
+            "food_riddles" or "foodriddles" => "FoodRiddles", "Puzzle_Cells" or "puzzle_cells" => "PuzzleCells",
             _ => "DragAndDrop"
         };
     }

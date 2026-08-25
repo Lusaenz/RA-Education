@@ -43,8 +43,8 @@ public class ARPartButtonManager : MonoBehaviour
     public Color clusterBadgeExpandedColor = new Color(0.85f, 0.35f, 0.20f, 0.9f);
 
     [Header("Feedback visual")]
-    [Tooltip("Texto mostrado brevemente al detectar el target, invitando a explorar el modelo.")]
-    public string findHintText = "Toca una parte para explorar";
+    [Tooltip("Objeto de texto en la escena que se muestra al detectar el target.")]
+    public GameObject hintTextObject;
     [Tooltip("Segundos que permanece visible el aviso de 'target encontrado' antes de desvanecerse.")]
     public float hintDuration = 2.5f;
 
@@ -95,10 +95,6 @@ public class ARPartButtonManager : MonoBehaviour
     private readonly List<List<int>> _clusters = new List<List<int>>();
     private bool[] _assignedScratch = new bool[0];
 
-    // Aviso "toca una parte para explorar" mostrado al detectar el target.
-    // Se crea una unica vez en runtime (no requiere prefab propio) y se
-    // reutiliza en cada deteccion.
-    private GameObject _hintGO;
     private CanvasGroup _hintCanvasGroup;
     private Coroutine _hintRoutine;
 
@@ -372,8 +368,9 @@ void SelectPart(Transform part, int idTopic, int idContentSection = 0)
     // primera vez, para que el usuario sepa que el modelo es interactuable.
     void ShowFindHint()
     {
-        if (canvasRect == null) return;
-        if (_hintGO == null) CreateFindHint();
+        if (hintTextObject == null) return;
+        if (_hintCanvasGroup == null) _hintCanvasGroup = hintTextObject.GetComponent<CanvasGroup>();
+        if (_hintCanvasGroup == null) return;
 
         if (_hintRoutine != null) StopCoroutine(_hintRoutine);
         _hintRoutine = StartCoroutine(FindHintRoutine());
@@ -381,7 +378,7 @@ void SelectPart(Transform part, int idTopic, int idContentSection = 0)
 
     void HideFindHint(bool immediate)
     {
-        if (_hintGO == null) return;
+        if (hintTextObject == null || _hintCanvasGroup == null) return;
 
         if (_hintRoutine != null)
         {
@@ -392,7 +389,7 @@ void SelectPart(Transform part, int idTopic, int idContentSection = 0)
         if (immediate)
         {
             _hintCanvasGroup.alpha = 0f;
-            _hintGO.SetActive(false);
+            hintTextObject.SetActive(false);
         }
         else
         {
@@ -400,57 +397,20 @@ void SelectPart(Transform part, int idTopic, int idContentSection = 0)
         }
     }
 
-    void CreateFindHint()
+IEnumerator FindHintRoutine()
     {
-        _hintGO = new GameObject("TargetFoundHint", typeof(RectTransform));
-        _hintGO.transform.SetParent(canvasRect, false);
-
-        RectTransform rect = (RectTransform)_hintGO.transform;
-        rect.anchorMin = new Vector2(0.5f, 0f);
-        rect.anchorMax = new Vector2(0.5f, 0f);
-        rect.pivot = new Vector2(0.5f, 0f);
-        rect.anchoredPosition = new Vector2(0f, 40f);
-        rect.sizeDelta = new Vector2(560f, 60f);
-
-        Image bg = _hintGO.AddComponent<Image>();
-        bg.color = new Color(0f, 0f, 0f, 0.55f);
-        bg.raycastTarget = false;
-
-        GameObject textGO = new GameObject("Label", typeof(RectTransform));
-        textGO.transform.SetParent(_hintGO.transform, false);
-        RectTransform textRect = (RectTransform)textGO.transform;
-        textRect.anchorMin = Vector2.zero;
-        textRect.anchorMax = Vector2.one;
-        textRect.offsetMin = new Vector2(24f, 0f);
-        textRect.offsetMax = new Vector2(-24f, 0f);
-
-        TextMeshProUGUI label = textGO.AddComponent<TextMeshProUGUI>();
-        label.text = findHintText;
-        label.color = Color.white;
-        label.fontSize = 26f;
-        label.alignment = TextAlignmentOptions.Center;
-        label.raycastTarget = false;
-
-        _hintCanvasGroup = _hintGO.AddComponent<CanvasGroup>();
-        _hintCanvasGroup.alpha = 0f;
-        _hintCanvasGroup.blocksRaycasts = false;
-        _hintGO.SetActive(false);
-    }
-
-    IEnumerator FindHintRoutine()
-    {
-        _hintGO.SetActive(true);
+        hintTextObject.SetActive(true);
         yield return FadeCanvasGroup(_hintCanvasGroup, 0f, 1f, 0.25f);
         yield return new WaitForSeconds(hintDuration);
         yield return FadeCanvasGroup(_hintCanvasGroup, 1f, 0f, 0.35f);
-        _hintGO.SetActive(false);
+        hintTextObject.SetActive(false);
         _hintRoutine = null;
     }
 
     IEnumerator FadeHintOut()
     {
         yield return FadeCanvasGroup(_hintCanvasGroup, _hintCanvasGroup.alpha, 0f, 0.2f);
-        _hintGO.SetActive(false);
+        hintTextObject.SetActive(false);
         _hintRoutine = null;
     }
 

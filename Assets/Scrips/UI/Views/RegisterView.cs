@@ -96,6 +96,16 @@ public class RegisterStudentView : MonoBehaviour
         }
 
         CacheKeyboardSupportReferences();
+
+        // Encadenar el Enter/Done del teclado movil entre los campos visibles del formulario.
+        TMP_InputField roleField = selectedRole == 2 ? InputEmail : InputAge;
+        InputFieldSubmitNavigator.Chain(
+            InputName,
+            InputDegree,
+            roleField,
+            InputPassword,
+            degreeSelector != null ? degreeSelector.questionInputField : null,
+            degreeSelector != null ? degreeSelector.answerInputField : null);
     }
 
     /// <summary>
@@ -159,8 +169,8 @@ public class RegisterStudentView : MonoBehaviour
         ClearAllErrors();
 
         // Obtener valores comunes de los campos
-        var name = InputName != null ? InputName.text : string.Empty;
-        var pass = InputPassword != null ? InputPassword.text : string.Empty;
+        var name = InputFieldSubmitNavigator.GetCommittedText(InputName);
+        var pass = InputFieldSubmitNavigator.GetCommittedText(InputPassword);
         var degreeId = degreeSelector != null ? degreeSelector.GetSelectedDegreeId() : 0;
 
         if (degreeSelector == null)
@@ -178,12 +188,12 @@ public class RegisterStudentView : MonoBehaviour
         Dictionary<string, string> fieldErrors;
         if (selectedRole == 2) // Profesor
         {
-            var email = InputEmail != null ? InputEmail.text : string.Empty;
+            var email = InputFieldSubmitNavigator.GetCommittedText(InputEmail);
             fieldErrors = RegisterValidator.ValidateTeacher(name, degreeId, email, pass);
         }
         else // Estudiante
         {
-            var ageText = InputAge != null ? InputAge.text : string.Empty;
+            var ageText = InputFieldSubmitNavigator.GetCommittedText(InputAge);
             fieldErrors = RegisterValidator.ValidateStudent(name, degreeId, ageText, pass);
         }
 
@@ -205,12 +215,12 @@ public class RegisterStudentView : MonoBehaviour
 
         if (selectedRole == 2) // Profesor
         {
-            var email = InputEmail != null ? InputEmail.text : string.Empty;
+            var email = InputFieldSubmitNavigator.GetCommittedText(InputEmail);
             result = presenter.RegisterTeacher(degreeId, name, email, pass);
         }
         else // Estudiante
         {
-            var ageText = InputAge != null ? InputAge.text : string.Empty;
+            var ageText = InputFieldSubmitNavigator.GetCommittedText(InputAge);
             result = presenter.RegisterStudent(degreeId, name, ageText, pass);
         }
 
