@@ -10,9 +10,13 @@ using UnityEngine.UI;
 /// - Panel
 /// - Animación
 /// - Estrellas
+/// Persistente entre escenas (Singleton)
 /// </summary>
 public class VictoryUIManager : MonoBehaviour
 {
+    // Instancia global accesible desde cualquier minijuego
+    public static VictoryUIManager Instance { get; private set; }
+
     [Header("Panel")]
     public GameObject winPanel;
     public GameObject info;
@@ -29,6 +33,29 @@ public class VictoryUIManager : MonoBehaviour
     private readonly List<GameObject> generated = new();
 
     public int lastStars;
+
+    private void Awake()
+    {
+        // Control para evitar duplicados al regresar al GameSelector
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+        DontDestroyOnLoad(gameObject); // Evita que se destruya al cambiar de escena
+    }
+
+    /// <summary>
+    /// Oculta el panel de victoria y limpia las estrellas para preparar un nuevo minijuego
+    /// </summary>
+    public void ResetUI()
+    {
+        if (winPanel != null) winPanel.SetActive(false);
+        if (info != null) info.SetActive(true);
+        Clear();
+    }
 
     public int ShowVictory(int score, int maxScore, int maxStars)
     {
@@ -50,7 +77,7 @@ public class VictoryUIManager : MonoBehaviour
     private IEnumerator AnimatePanel()
     {
         winPanel.SetActive(true);
-        info.SetActive(false);
+        if (info != null) info.SetActive(false);
         winPanel.transform.localScale = Vector3.zero;
 
         float t = 0;
@@ -78,13 +105,14 @@ public class VictoryUIManager : MonoBehaviour
     private void BuildStars(int count)
     {
         if (container == null)
-{
-    Debug.LogError("VictoryUIManager: Container no está asignado.");
-    return;
-}
+        {
+            Debug.LogError("VictoryUIManager: Container no está asignado.");
+            return;
+        }
+
         Clear();
 
-        if (count <= 0) count=1;
+        if (count <= 0) count = 1;
 
         estrellas = new Image[count];
 
@@ -95,20 +123,19 @@ public class VictoryUIManager : MonoBehaviour
 
             RectTransform rt = go.GetComponent<RectTransform>();
 
-rt.anchorMin = new Vector2(0.5f, 0.5f);
-rt.anchorMax = new Vector2(0.5f, 0.5f);
-rt.pivot = new Vector2(0.5f, 0.5f);
+            rt.anchorMin = new Vector2(0.5f, 0.5f);
+            rt.anchorMax = new Vector2(0.5f, 0.5f);
+            rt.pivot = new Vector2(0.5f, 0.5f);
 
-rt.sizeDelta = size;
-rt.localScale = Vector3.one;
-rt.anchoredPosition = GetPos(i, count);
+            rt.sizeDelta = size;
+            rt.localScale = Vector3.one;
+            rt.anchoredPosition = GetPos(i, count);
 
             Image img = go.GetComponent<Image>();
             img.sprite = estrellaLlena;
             img.color = Color.white;
-img.preserveAspect = true;
-img.raycastTarget = false;
             img.preserveAspect = true;
+            img.raycastTarget = false;
 
             estrellas[i] = img;
             generated.Add(go);
@@ -116,25 +143,25 @@ img.raycastTarget = false;
     }
 
     private Vector2 GetPos(int index, int totalStars)
-{
-    if (totalStars <= 1)
-        return Vector2.zero;
+    {
+        if (totalStars <= 1)
+            return Vector2.zero;
 
-    float spacing = Mathf.Max(size.x * 0.9f, 120f);
+        float spacing = Mathf.Max(size.x * 0.9f, 120f);
 
-    float centeredIndex = index - (totalStars - 1) * 0.5f;
+        float centeredIndex = index - (totalStars - 1) * 0.5f;
 
-    float x = centeredIndex * spacing;
+        float x = centeredIndex * spacing;
 
-    float normalizedDistance =
-        totalStars <= 2
-            ? 1f
-            : Mathf.Abs(centeredIndex) / ((totalStars - 1) * 0.5f);
+        float normalizedDistance =
+            totalStars <= 2
+                ? 1f
+                : Mathf.Abs(centeredIndex) / ((totalStars - 1) * 0.5f);
 
-    float y = (1f - normalizedDistance) * arcHeight;
+        float y = (1f - normalizedDistance) * arcHeight;
 
-    return new Vector2(x, y);
-}
+        return new Vector2(x, y);
+    }
 
     private void Clear()
     {

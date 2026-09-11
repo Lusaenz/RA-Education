@@ -297,8 +297,12 @@ extern void U3CActualizacionUIU3Ed__18_System_Collections_IEnumerator_Reset_mF90
 extern void U3CActualizacionUIU3Ed__18_System_Collections_IEnumerator_get_Current_mE36A2C517E0F396DB0FC3D1E207EF106E7236CF5 (void);
 extern void UserSessionManager_get_Instance_m3D0C5993236179F87B0CBB8ED6DA964C400FB027 (void);
 extern void UserSessionManager_set_Instance_mD26C492D8FE5430754BCF8518D6C65BD19F15D05 (void);
+extern void UserSessionManager_get_SelectedUserForView_mF25333E67E51B8DB65E1B3E5F0696197DF825967 (void);
+extern void UserSessionManager_set_SelectedUserForView_mC6487F5554D805C5FA672CB01438BF2C1522AAA1 (void);
 extern void UserSessionManager_get_CurrentUser_m90EB675DF9F02648C1E1AFAF5122C9732E461BC2 (void);
 extern void UserSessionManager_set_CurrentUser_m009C2FDF700B9349D667CF0CA31D4691CE37828B (void);
+extern void UserSessionManager_get_PreviousSceneName_mB9D2E9DB32E0D69E1A0CF25B86FD68CC25FC445C (void);
+extern void UserSessionManager_set_PreviousSceneName_m5D66CD20A26FC5B1B9B13C0BDD4BA050D1DA3E6C (void);
 extern void UserSessionManager_Awake_m2B13605C5822F9E651DE9B6BEF10D6D0640CEA7B (void);
 extern void UserSessionManager_SetCurrentUser_mFF0E9634947C80E454B96F405469E9C91D8E8469 (void);
 extern void UserSessionManager_Logout_m0102127E612742BE9CF5B1D5788F2A28FAB74084 (void);
@@ -879,6 +883,7 @@ extern void U3CInitializeWhenDatabaseReadyU3Ed__18_System_Collections_Generic_IE
 extern void U3CInitializeWhenDatabaseReadyU3Ed__18_System_Collections_IEnumerator_Reset_m0BB99FE8B90EC183A6E5B8959F06A5ACF3D7B770 (void);
 extern void U3CInitializeWhenDatabaseReadyU3Ed__18_System_Collections_IEnumerator_get_Current_mA97866A415894E898717C0493BD427C98B39B3AE (void);
 extern void SessionButtons_Start_mEF22A641887A24C80D58416DBB9711DBCF685FCB (void);
+extern void SessionButtons_OnBackClicked_m35B889AF0A5FF0BF68989310B9F20D2E75B8C48A (void);
 extern void SessionButtons_OnLogoutClicked_mC1F7D1F6F37BB20C9DA9418B7CF8EF8AC46BA584 (void);
 extern void SessionButtons_OnExitClicked_m31E837FE95D8C5072C3288BCE2A2604125C8CCBE (void);
 extern void SessionButtons_OnDestroy_mD5B70204636A6E627CC344ECE4D9F091AF4A23CC (void);
@@ -890,6 +895,8 @@ extern void ToggleObjectButton_CloseObject_mAA528B96FE3B7F6EC1A3192EA24E40D389CC
 extern void ToggleObjectButton_get_IsObjectActive_m8C0A7929D61F55F2538249B6993B65C558D9E0C8 (void);
 extern void ToggleObjectButton_OnDestroy_m73DFE2A01A863C7DE7FF63A646B2CA17BD0C976F (void);
 extern void ToggleObjectButton__ctor_m551807727BDA52E0E8DA7E0EBF3E4543E5CBDD38 (void);
+extern void UserScreenManager_get_SelectedUserForView_m1339C13232F8067829416A4C66E87DED6E820551 (void);
+extern void UserScreenManager_set_SelectedUserForView_mF5178C0BC3B1C721760ECE2D7C05EBC739075FCE (void);
 extern void UserScreenManager_Start_m1BA4FC8D57C4C3317D07F3AFD675FD0A5453FF9E (void);
 extern void UserScreenManager_InitializeWhenDatabaseReady_m4E2552292BF852F2AC36C2B944AD4D7239E11C71 (void);
 extern void UserScreenManager_LoadAndDisplayUserData_m9F5924F55499DCF22AB2DBFD2CBEF0B9B1CCD0B3 (void);
@@ -899,14 +906,14 @@ extern void UserScreenManager_GetTotalStarsForUser_m53D1D1EAC537528187A4C7111766
 extern void UserScreenManager__ctor_m5E22B33EA8B0D006A9C09DC16F1CB8F5A2282474 (void);
 extern void U3CU3Ec__cctor_mBB05C51895152DAE7DE26C7446FD42E6E8F0827B (void);
 extern void U3CU3Ec__ctor_m80884F49A147771403BA9032B9480856AE0F820B (void);
-extern void U3CU3Ec_U3CInitializeWhenDatabaseReadyU3Eb__5_0_m666C185863F7F212E076E344E43B4193934CEE5A (void);
-extern void U3CU3Ec_U3CInitializeWhenDatabaseReadyU3Eb__5_1_m2B3EEE50C854188E6BD72D686DD3A95AD6ABCE8C (void);
-extern void U3CInitializeWhenDatabaseReadyU3Ed__5__ctor_mE3D7C6BCE32E893520926E0988EFC165957F5485 (void);
-extern void U3CInitializeWhenDatabaseReadyU3Ed__5_System_IDisposable_Dispose_mA94A8C6649024DEACA85577E0053EB3BCC01C6AE (void);
-extern void U3CInitializeWhenDatabaseReadyU3Ed__5_MoveNext_m8D4F2B2279F953F28C11E258DBBD6DFDA989ABB8 (void);
-extern void U3CInitializeWhenDatabaseReadyU3Ed__5_System_Collections_Generic_IEnumeratorU3CSystem_ObjectU3E_get_Current_m6DBEE13430DE17C579E5A6EAD864BAD2D1815E26 (void);
-extern void U3CInitializeWhenDatabaseReadyU3Ed__5_System_Collections_IEnumerator_Reset_mF2B367C0D9EB97BCF454F4FCBE4869A6FBBC2639 (void);
-extern void U3CInitializeWhenDatabaseReadyU3Ed__5_System_Collections_IEnumerator_get_Current_m3FFF44F50E395CC4C77301FFEC2CFB29A6A68239 (void);
+extern void U3CU3Ec_U3CInitializeWhenDatabaseReadyU3Eb__9_0_m2A1C69EC83814355ECD32EDB64478481D7946E20 (void);
+extern void U3CU3Ec_U3CInitializeWhenDatabaseReadyU3Eb__9_1_m2F7DEDD36FCA6D9CDABEE0BE4E88C1391C8F52A7 (void);
+extern void U3CInitializeWhenDatabaseReadyU3Ed__9__ctor_mDF105A7BD0763DCA72832A89006A72B788E6BE75 (void);
+extern void U3CInitializeWhenDatabaseReadyU3Ed__9_System_IDisposable_Dispose_m5F6AF6133F27A05019ACC9C2C0FCC51B15DC7F08 (void);
+extern void U3CInitializeWhenDatabaseReadyU3Ed__9_MoveNext_mCC03CDF0F09374C9080A926136B41136952005FD (void);
+extern void U3CInitializeWhenDatabaseReadyU3Ed__9_System_Collections_Generic_IEnumeratorU3CSystem_ObjectU3E_get_Current_m4952E9953EB0777337B24D38660D8C8ECE26D54E (void);
+extern void U3CInitializeWhenDatabaseReadyU3Ed__9_System_Collections_IEnumerator_Reset_m2FA81D8B3CA69BF2CD94FA97ABB02C43AC55EF33 (void);
+extern void U3CInitializeWhenDatabaseReadyU3Ed__9_System_Collections_IEnumerator_get_Current_m840EF9B6BF764DF8A72C2D3E3CA19ABB76BD6FDB (void);
 extern void ActivityData_get_id_activity_mCD51EF337C4EFE34E9C8457482171B4046EB201F (void);
 extern void ActivityData_set_id_activity_m77D73C9D0A495C87537A2B4ECD59CCD119D5BF45 (void);
 extern void ActivityData_get_type_m7DAAF28BE18A4F02060324A201CD1E154FA1D103 (void);
@@ -1092,11 +1099,10 @@ extern void LastLoginInfo_get_MonthAndYear_m3C7F1F39B97694391E99FB4860B7447A8C28
 extern void LastLoginInfo_set_MonthAndYear_m0926FE39AD397683D70512DAC5CDEB19F386C996 (void);
 extern void LastLoginInfo__ctor_mFB3909AD581D0DACCBD890F280566AC5B8952910 (void);
 extern void StudentCardUI_Setup_m75F29BF4B9143CF479BD85018DC2B98B0D62D015 (void);
-extern void StudentCardUI_OnClickViewProgress_m4AFF0EBD149EABEB8415BFA741E624D459C9542E (void);
+extern void StudentCardUI_OnViewProgressClicked_m0CC8329816B72238AB3B64DD2E176AA6D23829FB (void);
+extern void StudentCardUI_UpdateStatusSprite_m746DBA866F145969BC9CB70F85314228489D4495 (void);
 extern void StudentCardUI__ctor_m1978B6D9620EDDF7E372F8726E07ECEBC2646054 (void);
-extern void U3CU3Ec__DisplayClass5_0__ctor_m19AA15A66080121CF953CDF81F0CC2817EDDCDCD (void);
-extern void U3CU3Ec__DisplayClass5_0_U3CSetupU3Eb__0_mD48D5F6331ED53AA96712C0F5329624F3E4564C4 (void);
-extern void StudentCardData__ctor_m269AFCA1D939746D1242828DE5617BE40D5C54DB (void);
+extern void StudentCardData__ctor_m1DBF5C54D84D38B1479AEDF7115F549DFAE9D611 (void);
 extern void StudentListController_Awake_mAE22C8963D22202FDFDDAE113927C7D8455ADDDB (void);
 extern void StudentListController_Start_mCB8EAD1967F7F86B06602574E37C8FB92C251A6D (void);
 extern void StudentListController_OnDestroy_m270ED48B12B3C7A0F9E7DE3D17B566A6ED7AF444 (void);
@@ -1553,7 +1559,7 @@ extern void SQLite3_ColumnByteArray_m09025DD6AB983E61366EFCB4F1500F7EA24CEC5E (v
 extern void SQLite3_ExtendedErrCode_mE53EAE79412B17719370EA83EF845896409E4E68 (void);
 extern void SQLite3_LibVersionNumber_m2C388472E0DC6C13BA5F5A2DD8BB226EA30D52C5 (void);
 extern void U3CPrivateImplementationDetailsU3E_ComputeStringHash_m6EA1F233618497AEFF8902A5EDFA24C74E2F2876 (void);
-static Il2CppMethodPointer s_methodPointers[1626] = 
+static Il2CppMethodPointer s_methodPointers[1632] = 
 {
 	SimpleClient_get_Instance_mDC1DDA8FC69B0D48B9F438B77369309975F84CF6,
 	SimpleClient_set_Instance_m6A3F53421EF9256A41C5D7A33DC21BAF67390B74,
@@ -1845,8 +1851,12 @@ static Il2CppMethodPointer s_methodPointers[1626] =
 	U3CActualizacionUIU3Ed__18_System_Collections_IEnumerator_get_Current_mE36A2C517E0F396DB0FC3D1E207EF106E7236CF5,
 	UserSessionManager_get_Instance_m3D0C5993236179F87B0CBB8ED6DA964C400FB027,
 	UserSessionManager_set_Instance_mD26C492D8FE5430754BCF8518D6C65BD19F15D05,
+	UserSessionManager_get_SelectedUserForView_mF25333E67E51B8DB65E1B3E5F0696197DF825967,
+	UserSessionManager_set_SelectedUserForView_mC6487F5554D805C5FA672CB01438BF2C1522AAA1,
 	UserSessionManager_get_CurrentUser_m90EB675DF9F02648C1E1AFAF5122C9732E461BC2,
 	UserSessionManager_set_CurrentUser_m009C2FDF700B9349D667CF0CA31D4691CE37828B,
+	UserSessionManager_get_PreviousSceneName_mB9D2E9DB32E0D69E1A0CF25B86FD68CC25FC445C,
+	UserSessionManager_set_PreviousSceneName_m5D66CD20A26FC5B1B9B13C0BDD4BA050D1DA3E6C,
 	UserSessionManager_Awake_m2B13605C5822F9E651DE9B6BEF10D6D0640CEA7B,
 	UserSessionManager_SetCurrentUser_mFF0E9634947C80E454B96F405469E9C91D8E8469,
 	UserSessionManager_Logout_m0102127E612742BE9CF5B1D5788F2A28FAB74084,
@@ -2434,6 +2444,7 @@ static Il2CppMethodPointer s_methodPointers[1626] =
 	U3CInitializeWhenDatabaseReadyU3Ed__18_System_Collections_IEnumerator_Reset_m0BB99FE8B90EC183A6E5B8959F06A5ACF3D7B770,
 	U3CInitializeWhenDatabaseReadyU3Ed__18_System_Collections_IEnumerator_get_Current_mA97866A415894E898717C0493BD427C98B39B3AE,
 	SessionButtons_Start_mEF22A641887A24C80D58416DBB9711DBCF685FCB,
+	SessionButtons_OnBackClicked_m35B889AF0A5FF0BF68989310B9F20D2E75B8C48A,
 	SessionButtons_OnLogoutClicked_mC1F7D1F6F37BB20C9DA9418B7CF8EF8AC46BA584,
 	SessionButtons_OnExitClicked_m31E837FE95D8C5072C3288BCE2A2604125C8CCBE,
 	SessionButtons_OnDestroy_mD5B70204636A6E627CC344ECE4D9F091AF4A23CC,
@@ -2445,6 +2456,8 @@ static Il2CppMethodPointer s_methodPointers[1626] =
 	ToggleObjectButton_get_IsObjectActive_m8C0A7929D61F55F2538249B6993B65C558D9E0C8,
 	ToggleObjectButton_OnDestroy_m73DFE2A01A863C7DE7FF63A646B2CA17BD0C976F,
 	ToggleObjectButton__ctor_m551807727BDA52E0E8DA7E0EBF3E4543E5CBDD38,
+	UserScreenManager_get_SelectedUserForView_m1339C13232F8067829416A4C66E87DED6E820551,
+	UserScreenManager_set_SelectedUserForView_mF5178C0BC3B1C721760ECE2D7C05EBC739075FCE,
 	UserScreenManager_Start_m1BA4FC8D57C4C3317D07F3AFD675FD0A5453FF9E,
 	UserScreenManager_InitializeWhenDatabaseReady_m4E2552292BF852F2AC36C2B944AD4D7239E11C71,
 	UserScreenManager_LoadAndDisplayUserData_m9F5924F55499DCF22AB2DBFD2CBEF0B9B1CCD0B3,
@@ -2454,14 +2467,14 @@ static Il2CppMethodPointer s_methodPointers[1626] =
 	UserScreenManager__ctor_m5E22B33EA8B0D006A9C09DC16F1CB8F5A2282474,
 	U3CU3Ec__cctor_mBB05C51895152DAE7DE26C7446FD42E6E8F0827B,
 	U3CU3Ec__ctor_m80884F49A147771403BA9032B9480856AE0F820B,
-	U3CU3Ec_U3CInitializeWhenDatabaseReadyU3Eb__5_0_m666C185863F7F212E076E344E43B4193934CEE5A,
-	U3CU3Ec_U3CInitializeWhenDatabaseReadyU3Eb__5_1_m2B3EEE50C854188E6BD72D686DD3A95AD6ABCE8C,
-	U3CInitializeWhenDatabaseReadyU3Ed__5__ctor_mE3D7C6BCE32E893520926E0988EFC165957F5485,
-	U3CInitializeWhenDatabaseReadyU3Ed__5_System_IDisposable_Dispose_mA94A8C6649024DEACA85577E0053EB3BCC01C6AE,
-	U3CInitializeWhenDatabaseReadyU3Ed__5_MoveNext_m8D4F2B2279F953F28C11E258DBBD6DFDA989ABB8,
-	U3CInitializeWhenDatabaseReadyU3Ed__5_System_Collections_Generic_IEnumeratorU3CSystem_ObjectU3E_get_Current_m6DBEE13430DE17C579E5A6EAD864BAD2D1815E26,
-	U3CInitializeWhenDatabaseReadyU3Ed__5_System_Collections_IEnumerator_Reset_mF2B367C0D9EB97BCF454F4FCBE4869A6FBBC2639,
-	U3CInitializeWhenDatabaseReadyU3Ed__5_System_Collections_IEnumerator_get_Current_m3FFF44F50E395CC4C77301FFEC2CFB29A6A68239,
+	U3CU3Ec_U3CInitializeWhenDatabaseReadyU3Eb__9_0_m2A1C69EC83814355ECD32EDB64478481D7946E20,
+	U3CU3Ec_U3CInitializeWhenDatabaseReadyU3Eb__9_1_m2F7DEDD36FCA6D9CDABEE0BE4E88C1391C8F52A7,
+	U3CInitializeWhenDatabaseReadyU3Ed__9__ctor_mDF105A7BD0763DCA72832A89006A72B788E6BE75,
+	U3CInitializeWhenDatabaseReadyU3Ed__9_System_IDisposable_Dispose_m5F6AF6133F27A05019ACC9C2C0FCC51B15DC7F08,
+	U3CInitializeWhenDatabaseReadyU3Ed__9_MoveNext_mCC03CDF0F09374C9080A926136B41136952005FD,
+	U3CInitializeWhenDatabaseReadyU3Ed__9_System_Collections_Generic_IEnumeratorU3CSystem_ObjectU3E_get_Current_m4952E9953EB0777337B24D38660D8C8ECE26D54E,
+	U3CInitializeWhenDatabaseReadyU3Ed__9_System_Collections_IEnumerator_Reset_m2FA81D8B3CA69BF2CD94FA97ABB02C43AC55EF33,
+	U3CInitializeWhenDatabaseReadyU3Ed__9_System_Collections_IEnumerator_get_Current_m840EF9B6BF764DF8A72C2D3E3CA19ABB76BD6FDB,
 	ActivityData_get_id_activity_mCD51EF337C4EFE34E9C8457482171B4046EB201F,
 	ActivityData_set_id_activity_m77D73C9D0A495C87537A2B4ECD59CCD119D5BF45,
 	ActivityData_get_type_m7DAAF28BE18A4F02060324A201CD1E154FA1D103,
@@ -2647,11 +2660,10 @@ static Il2CppMethodPointer s_methodPointers[1626] =
 	LastLoginInfo_set_MonthAndYear_m0926FE39AD397683D70512DAC5CDEB19F386C996,
 	LastLoginInfo__ctor_mFB3909AD581D0DACCBD890F280566AC5B8952910,
 	StudentCardUI_Setup_m75F29BF4B9143CF479BD85018DC2B98B0D62D015,
-	StudentCardUI_OnClickViewProgress_m4AFF0EBD149EABEB8415BFA741E624D459C9542E,
+	StudentCardUI_OnViewProgressClicked_m0CC8329816B72238AB3B64DD2E176AA6D23829FB,
+	StudentCardUI_UpdateStatusSprite_m746DBA866F145969BC9CB70F85314228489D4495,
 	StudentCardUI__ctor_m1978B6D9620EDDF7E372F8726E07ECEBC2646054,
-	U3CU3Ec__DisplayClass5_0__ctor_m19AA15A66080121CF953CDF81F0CC2817EDDCDCD,
-	U3CU3Ec__DisplayClass5_0_U3CSetupU3Eb__0_mD48D5F6331ED53AA96712C0F5329624F3E4564C4,
-	StudentCardData__ctor_m269AFCA1D939746D1242828DE5617BE40D5C54DB,
+	StudentCardData__ctor_m1DBF5C54D84D38B1479AEDF7115F549DFAE9D611,
 	StudentListController_Awake_mAE22C8963D22202FDFDDAE113927C7D8455ADDDB,
 	StudentListController_Start_mCB8EAD1967F7F86B06602574E37C8FB92C251A6D,
 	StudentListController_OnDestroy_m270ED48B12B3C7A0F9E7DE3D17B566A6ED7AF444,
@@ -3229,7 +3241,7 @@ static Il2CppTokenAdjustorThunkPair s_adjustorThunks[22] =
 	{ 0x06000033, U3CSendStudentU3Ed__5_MoveNext_m4A68BAF8D1ADBEC19242B27A969B9E7FA3795224_AdjustorThunk },
 	{ 0x06000034, U3CSendStudentU3Ed__5_SetStateMachine_m9FA030C17C7A135427E593C6A06889D4CEC9E7CE_AdjustorThunk },
 };
-static const int32_t s_InvokerIndices[1626] = 
+static const int32_t s_InvokerIndices[1632] = 
 {
 	27927,
 	26707,
@@ -3521,8 +3533,12 @@ static const int32_t s_InvokerIndices[1626] =
 	16349,
 	27927,
 	26707,
+	27927,
+	26707,
 	16349,
 	12620,
+	27927,
+	26707,
 	16585,
 	12620,
 	16585,
@@ -4118,9 +4134,12 @@ static const int32_t s_InvokerIndices[1626] =
 	16585,
 	16585,
 	16585,
+	16585,
 	16138,
 	16585,
 	16585,
+	27927,
+	26707,
 	16585,
 	16349,
 	16585,
@@ -4323,11 +4342,10 @@ static const int32_t s_InvokerIndices[1626] =
 	12620,
 	16585,
 	12620,
+	16585,
 	12620,
 	16585,
-	16585,
-	16585,
-	2141,
+	1063,
 	16585,
 	16585,
 	16585,
@@ -4860,37 +4878,37 @@ static const int32_t s_InvokerIndices[1626] =
 };
 static const Il2CppTokenRangePair s_rgctxIndices[31] = 
 {
-	{ 0x02000111, { 56, 8 } },
-	{ 0x02000115, { 64, 49 } },
-	{ 0x02000116, { 134, 1 } },
-	{ 0x02000117, { 135, 5 } },
-	{ 0x0600051B, { 0, 1 } },
-	{ 0x0600051C, { 1, 1 } },
-	{ 0x0600051D, { 2, 1 } },
-	{ 0x06000523, { 3, 2 } },
-	{ 0x06000529, { 5, 2 } },
-	{ 0x0600052A, { 7, 2 } },
-	{ 0x0600052B, { 9, 2 } },
-	{ 0x0600052E, { 11, 2 } },
-	{ 0x0600052F, { 13, 6 } },
-	{ 0x06000530, { 19, 6 } },
-	{ 0x06000531, { 25, 6 } },
-	{ 0x06000533, { 31, 6 } },
-	{ 0x0600054C, { 37, 1 } },
-	{ 0x0600054D, { 38, 1 } },
-	{ 0x060005D3, { 39, 3 } },
-	{ 0x060005D4, { 42, 5 } },
-	{ 0x060005D5, { 47, 4 } },
-	{ 0x060005D7, { 51, 3 } },
-	{ 0x060005D8, { 54, 2 } },
-	{ 0x0600060D, { 113, 2 } },
-	{ 0x06000613, { 115, 2 } },
-	{ 0x06000614, { 117, 2 } },
-	{ 0x06000615, { 119, 2 } },
-	{ 0x06000616, { 121, 2 } },
-	{ 0x06000617, { 123, 1 } },
-	{ 0x06000619, { 124, 7 } },
-	{ 0x0600061A, { 131, 3 } },
+	{ 0x02000110, { 56, 8 } },
+	{ 0x02000114, { 64, 49 } },
+	{ 0x02000115, { 134, 1 } },
+	{ 0x02000116, { 135, 5 } },
+	{ 0x06000521, { 0, 1 } },
+	{ 0x06000522, { 1, 1 } },
+	{ 0x06000523, { 2, 1 } },
+	{ 0x06000529, { 3, 2 } },
+	{ 0x0600052F, { 5, 2 } },
+	{ 0x06000530, { 7, 2 } },
+	{ 0x06000531, { 9, 2 } },
+	{ 0x06000534, { 11, 2 } },
+	{ 0x06000535, { 13, 6 } },
+	{ 0x06000536, { 19, 6 } },
+	{ 0x06000537, { 25, 6 } },
+	{ 0x06000539, { 31, 6 } },
+	{ 0x06000552, { 37, 1 } },
+	{ 0x06000553, { 38, 1 } },
+	{ 0x060005D9, { 39, 3 } },
+	{ 0x060005DA, { 42, 5 } },
+	{ 0x060005DB, { 47, 4 } },
+	{ 0x060005DD, { 51, 3 } },
+	{ 0x060005DE, { 54, 2 } },
+	{ 0x06000613, { 113, 2 } },
+	{ 0x06000619, { 115, 2 } },
+	{ 0x0600061A, { 117, 2 } },
+	{ 0x0600061B, { 119, 2 } },
+	{ 0x0600061C, { 121, 2 } },
+	{ 0x0600061D, { 123, 1 } },
+	{ 0x0600061F, { 124, 7 } },
+	{ 0x06000620, { 131, 3 } },
 };
 extern const uint32_t g_rgctx_T_t3F54073FBC2F54FED5400403A98E24B1366F9EF6;
 extern const uint32_t g_rgctx_T_t3814F1FCC50BFF1CE6D1FD34B76B9083E207AC49;
@@ -5179,7 +5197,7 @@ IL2CPP_EXTERN_C const Il2CppCodeGenModule g_AssemblyU2DCSharp_CodeGenModule;
 const Il2CppCodeGenModule g_AssemblyU2DCSharp_CodeGenModule = 
 {
 	"Assembly-CSharp.dll",
-	1626,
+	1632,
 	s_methodPointers,
 	22,
 	s_adjustorThunks,

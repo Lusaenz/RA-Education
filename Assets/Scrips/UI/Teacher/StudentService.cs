@@ -47,7 +47,8 @@ public class StudentService
                 string status = completedCount == 0 ? "No Iniciado" : 
                                (completedCount >= totalTopics ? "Completado" : "En Progreso");
 
-                studentsCardsList.Add(new StudentCardData(studentName, degreeName, completedTopics, status));
+                // Dentro de GetStudentsForCards():
+studentsCardsList.Add(new StudentCardData(student, studentName, degreeName, completedTopics, status));
             }
         }
         catch (System.Exception ex)

@@ -595,7 +595,7 @@ MonoBehaviour:
   m_KeyboardType: 0
   m_LineType: 0
   m_HideMobileInput: 1
-  m_HideSoftKeyboard: 1
+  m_HideSoftKeyboard: 0
   m_CharacterValidation: 0
   m_RegexValue: 
   m_GlobalPointSize: 14
@@ -625,7 +625,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_CustomCaretColor: 0
+  m_CustomCaretColor: 1
   m_SelectionColor: {r: 0, g: 0, b: 0, a: 1}
   m_Text: 
   m_CaretBlinkRate: 1
@@ -641,7 +641,7 @@ MonoBehaviour:
   m_LineLimit: 0
   isAlert: 0
   m_InputValidator: {fileID: 0}
-  m_ShouldActivateOnSelect: 0
+  m_ShouldActivateOnSelect: 1
 --- !u!114 &164008796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1664,7 +1664,7 @@ MonoBehaviour:
   NameErrorText: {fileID: 1521378288}
   PasswordErrorText: {fileID: 1526687180}
   MessageErrorLoginText: {fileID: 1614513222}
-  MessageWelcomeBackground: {fileID: 1079433992}
+  MessageWelcomeBackground: {fileID: 0}
   MessageWelcomeIcon: {fileID: 185759242}
 --- !u!1 &820520959
 GameObject:
@@ -3263,7 +3263,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1079433994}
   - {fileID: 185759244}
   - {fileID: 1363080732}
   - {fileID: 1951308198}

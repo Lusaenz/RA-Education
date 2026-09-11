@@ -1693,7 +1693,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3096751938484834534, guid: 1c6a0c46d3e2d484e8694fc0d6f609ff, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3107482605730704342, guid: 1c6a0c46d3e2d484e8694fc0d6f609ff, type: 3}
       propertyPath: m_Pivot.x
@@ -2625,6 +2625,7 @@ MonoBehaviour:
   backgroundImage: {fileID: 416451722}
   digestiveBackgroundKey: background/digestivo
   cellBackgroundKey: background/celula
+  foodRiddlesBackgroundKey: background/food_riddles
 --- !u!4 &1350014397
 Transform:
   m_ObjectHideFlags: 0
@@ -2962,6 +2963,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::VictoryUIManager
   winPanel: {fileID: 865058876}
+  info: {fileID: 0}
   estrellas: []
   estrellaLlena: {fileID: 21300000, guid: ae88574e085024f47b6ac8535f8fe948, type: 3}
   estrellaVacia: {fileID: 21300000, guid: bc275467211964fbc85d3905f9c0c5af, type: 3}

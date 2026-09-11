@@ -1,6 +1,8 @@
 using UnityEngine;
-using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+using TMPro;
+using UnityEngine.SceneManagement; // <-- Agrega esta línea arriba del todo
 
 public class StudentCardUI : MonoBehaviour
 {
@@ -8,34 +10,74 @@ public class StudentCardUI : MonoBehaviour
     [SerializeField] private TextMeshProUGUI degreeText;
     [SerializeField] private TextMeshProUGUI completedTopicsText;
     [SerializeField] private TextMeshProUGUI statusText;
-    [SerializeField] private Button viewProgressButton;
+    [SerializeField] private Image statusCircleImage;
+    [SerializeField] private Button btnViewProgress; // <-- Asigna el botón "Ver Progreso" en el Inspector
 
-    /// <summary>
-    /// Recibe los datos del estudiante y los asigna a la interfaz de la card.
-    /// </summary>
-    public void Setup(StudentCardData data)
+    [Header("Sprites de Estado")]
+    [SerializeField] private Sprite completedSprite;
+    [SerializeField] private Sprite inProgressSprite;
+    [SerializeField] private Sprite notStartedSprite;
+
+    private UserModel currentUserData;
+
+    public void Setup(StudentCardData studentData)
     {
-        if (nameText != null) 
-            nameText.text = data.Name;
-            
-        if (degreeText != null) 
-            degreeText.text = "Grado: " + data.Degree;
+        currentUserData = studentData.User; // Guardamos el usuario
 
-        if (completedTopicsText != null) 
-            completedTopicsText.text = "Temas Completados: " + data.CompletedTopicsText;
+        nameText.text = studentData.Name;
+        
+        string degreeFormatted = studentData.Degree.StartsWith("Grado") 
+            ? studentData.Degree 
+            : $"{studentData.Degree}";
+        degreeText.text = degreeFormatted;
 
-        if (statusText != null) 
-            statusText.text = data.Status;
+        completedTopicsText.text = $"Temas Completados: {studentData.CompletedTopicsText}";
+        statusText.text = studentData.Status;
 
-        if (viewProgressButton != null)
+        UpdateStatusSprite(studentData.Status);
+
+        // Configurar evento de clic en el botón
+        if (btnViewProgress != null)
         {
-            viewProgressButton.onClick.RemoveAllListeners();
-            viewProgressButton.onClick.AddListener(() => OnClickViewProgress(data.Name));
+            btnViewProgress.onClick.RemoveAllListeners();
+            btnViewProgress.onClick.AddListener(OnViewProgressClicked);
         }
     }
 
-    private void OnClickViewProgress(string studentName)
+    private void OnViewProgressClicked()
     {
-        Debug.Log("Viendo progreso de: " + studentName);
+        if (currentUserData != null)
+        {
+            // Asignamos el estudiante seleccionado para que la siguiente escena lo lea
+            UserSessionManager.SelectedUserForView = currentUserData;
+
+            // Reemplaza "UserScreenScene" por el nombre exacto de tu escena de detalle de perfil
+           // Guardas la escena actual antes de cambiar
+UserSessionManager.PreviousSceneName = SceneManager.GetActiveScene().name;
+
+// Abres la pantalla de usuario
+
+            SceneManager.LoadScene("UserScreen"); 
+        }
+    }
+
+    private void UpdateStatusSprite(string status)
+    {
+        if (statusCircleImage == null) return;
+        statusCircleImage.color = Color.white;
+
+        switch (status)
+        {
+            case "Completado":
+                if (completedSprite != null) statusCircleImage.sprite = completedSprite;
+                break;
+            case "En Progreso":
+                if (inProgressSprite != null) statusCircleImage.sprite = inProgressSprite;
+                break;
+            case "No Iniciado":
+            default:
+                if (notStartedSprite != null) statusCircleImage.sprite = notStartedSprite;
+                break;
+        }
     }
 }

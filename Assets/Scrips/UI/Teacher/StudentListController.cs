@@ -4,13 +4,15 @@ using UnityEngine;
 [System.Serializable]
 public class StudentCardData
 {
+    public UserModel User; // <-- Guardamos el objeto completo del usuario
     public string Name;
     public string Degree;
     public string CompletedTopicsText;
     public string Status;
 
-    public StudentCardData(string name, string degree, string completedTopicsText, string status)
+    public StudentCardData(UserModel user, string name, string degree, string completedTopicsText, string status)
     {
+        User = user;
         Name = name;
         Degree = degree;
         CompletedTopicsText = completedTopicsText;

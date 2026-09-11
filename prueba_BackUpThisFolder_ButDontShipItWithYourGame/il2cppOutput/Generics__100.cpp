@@ -6836,7 +6836,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void NativeArrayStaticId_1__cctor_m67213AA711
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 96750
+// Method Definition Index: 96756
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t NativeArrayUtils_1_GetInstanceSize_mDD9CA3CB6C31BD407C71F1CBCAE22F92D3BB6581_gshared (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -6874,7 +6874,7 @@ IL_0021:
 		return L_6;
 	}
 }
-// Method Definition Index: 96751
+// Method Definition Index: 96757
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR intptr_t NativeArrayUtils_1_GetAddressOfElement_m9575576FE6B6568190489686B3B8BEA2F0EEF0E5_gshared (intptr_t ___0_buffer, int32_t ___1_index, const RuntimeMethod* method) 
 {
 	{

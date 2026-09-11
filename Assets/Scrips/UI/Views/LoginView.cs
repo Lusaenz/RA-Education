@@ -287,6 +287,9 @@ public class LoginStudentView : MonoBehaviour
                 InputName.gameObject.SetActive(false);
             if (InputEmail != null)
                 InputEmail.gameObject.SetActive(true);
+                InputEmail.interactable = true; // Forzar interactividad
+            InputEmail.ActivateInputField(); // Refrescar el estado del InputField para móviles
+            InputEmail.DeactivateInputField(); // Dejar listo para toque
             if (NameErrorText != null)
                 NameErrorText.gameObject.SetActive(false);
             

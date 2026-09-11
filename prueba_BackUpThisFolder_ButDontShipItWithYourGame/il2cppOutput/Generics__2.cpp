@@ -28454,7 +28454,7 @@ int32_t AddElementDelegate_Invoke_m1029A85B51F44C4A2AF74CF8126DB660306FDEFC_Open
 	typedef int32_t (*FunctionPointerType) (intptr_t, int32_t, const RuntimeMethod*);
 	return ((FunctionPointerType)__this->___method_ptr)(___0_setHandle, ___1_element, method);
 }
-// Method Definition Index: 96663
+// Method Definition Index: 96669
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void AddElementDelegate__ctor_mD2E41FDC3CD0B28333A1135032CF878DAAEA1759_gshared (AddElementDelegate_t5E1149371D243119F1E92FC55D5AA657B86035A2* __this, RuntimeObject* ___0_object, intptr_t ___1_method, const RuntimeMethod* method) 
 {
 	__this->___method_ptr = (intptr_t)il2cpp_codegen_get_method_pointer((RuntimeMethod*)___1_method);
@@ -28483,13 +28483,13 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void AddElementDelegate__ctor_mD2E41FDC3CD0B2
 	}
 	__this->___extra_arg = (intptr_t)&AddElementDelegate_Invoke_m1029A85B51F44C4A2AF74CF8126DB660306FDEFC_Multicast;
 }
-// Method Definition Index: 96664
+// Method Definition Index: 96670
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t AddElementDelegate_Invoke_m1029A85B51F44C4A2AF74CF8126DB660306FDEFC_gshared (AddElementDelegate_t5E1149371D243119F1E92FC55D5AA657B86035A2* __this, intptr_t ___0_setHandle, int32_t ___1_element, const RuntimeMethod* method) 
 {
 	typedef int32_t (*FunctionPointerType) (RuntimeObject*, intptr_t, int32_t, const RuntimeMethod*);
 	return ((FunctionPointerType)__this->___invoke_impl)((Il2CppObject*)__this->___method_code, ___0_setHandle, ___1_element, reinterpret_cast<RuntimeMethod*>(__this->___method));
 }
-// Method Definition Index: 96665
+// Method Definition Index: 96671
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* AddElementDelegate_BeginInvoke_mC8BAB0285951904D18570F10D66761F0576123C3_gshared (AddElementDelegate_t5E1149371D243119F1E92FC55D5AA657B86035A2* __this, intptr_t ___0_setHandle, int32_t ___1_element, AsyncCallback_t7FEF460CBDCFB9C5FA2EF776984778B9A4145F4C* ___2_callback, RuntimeObject* ___3_object, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -28503,7 +28503,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* AddElementDelegate_BeginInvoke
 	__d_args[1] = Box(Int32Enum_tCBAC8BA2BFF3A845FA599F303093BBBA374B6F0C_il2cpp_TypeInfo_var, &___1_element);
 	return (RuntimeObject*)il2cpp_codegen_delegate_begin_invoke((RuntimeDelegate*)__this, __d_args, (RuntimeDelegate*)___2_callback, (RuntimeObject*)___3_object);
 }
-// Method Definition Index: 96666
+// Method Definition Index: 96672
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t AddElementDelegate_EndInvoke_m7649FEB55CD12A723CDBC47103CAE7E8A961199B_gshared (AddElementDelegate_t5E1149371D243119F1E92FC55D5AA657B86035A2* __this, RuntimeObject* ___0_result, const RuntimeMethod* method) 
 {
 	RuntimeObject *__result = il2cpp_codegen_delegate_end_invoke((Il2CppAsyncResult*) ___0_result, 0);
@@ -28542,7 +28542,7 @@ int32_t AddElementDelegate_Invoke_mA326C7CDA3DD81B8928F135252F198ACEA483C3F_Clos
 {
 	return InvokerFuncInvoker2< int32_t, intptr_t, Il2CppFullySharedGenericAny >::Invoke((Il2CppMethodPointer)__this->___method_ptr, method, __this->___m_target, ___0_setHandle, ___1_element);
 }
-// Method Definition Index: 96663
+// Method Definition Index: 96669
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void AddElementDelegate__ctor_mECBDD1ED3C8BE518BA054142E7F63A90FE9A0368_gshared (AddElementDelegate_t0B736F8C92AD00C575EC3B3DD4B9046F30B1314C* __this, RuntimeObject* ___0_object, intptr_t ___1_method, const RuntimeMethod* method) 
 {
 	__this->___method_ptr = (intptr_t)il2cpp_codegen_get_method_pointer((RuntimeMethod*)___1_method);
@@ -28567,13 +28567,13 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void AddElementDelegate__ctor_mECBDD1ED3C8BE5
 	}
 	__this->___extra_arg = (intptr_t)&AddElementDelegate_Invoke_mA326C7CDA3DD81B8928F135252F198ACEA483C3F_Multicast;
 }
-// Method Definition Index: 96664
+// Method Definition Index: 96670
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t AddElementDelegate_Invoke_mA326C7CDA3DD81B8928F135252F198ACEA483C3F_gshared (AddElementDelegate_t0B736F8C92AD00C575EC3B3DD4B9046F30B1314C* __this, intptr_t ___0_setHandle, Il2CppFullySharedGenericAny ___1_element, const RuntimeMethod* method) 
 {
 	typedef int32_t (*FunctionPointerType) (RuntimeObject*, intptr_t, Il2CppFullySharedGenericAny, const RuntimeMethod*);
 	return ((FunctionPointerType)__this->___invoke_impl)((Il2CppObject*)__this->___method_code, ___0_setHandle, ___1_element, reinterpret_cast<RuntimeMethod*>(__this->___method));
 }
-// Method Definition Index: 96665
+// Method Definition Index: 96671
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* AddElementDelegate_BeginInvoke_m53C58789D918DDBD78768D1BF2AF2E7423FF9B6B_gshared (AddElementDelegate_t0B736F8C92AD00C575EC3B3DD4B9046F30B1314C* __this, intptr_t ___0_setHandle, Il2CppFullySharedGenericAny ___1_element, AsyncCallback_t7FEF460CBDCFB9C5FA2EF776984778B9A4145F4C* ___2_callback, RuntimeObject* ___3_object, const RuntimeMethod* method) 
 {
 	void *__d_args[3] = {0};
@@ -28582,7 +28582,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* AddElementDelegate_BeginInvoke
 	__d_args[1] = (il2cpp_codegen_class_is_value_type(___1_element_klass) ? Box(___1_element_klass, ___1_element) : (void*)___1_element);
 	return (RuntimeObject*)il2cpp_codegen_delegate_begin_invoke((RuntimeDelegate*)__this, __d_args, (RuntimeDelegate*)___2_callback, (RuntimeObject*)___3_object);
 }
-// Method Definition Index: 96666
+// Method Definition Index: 96672
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t AddElementDelegate_EndInvoke_m1C5FDB3B6952EAF2F73FD14B299B4D3CCBA19D69_gshared (AddElementDelegate_t0B736F8C92AD00C575EC3B3DD4B9046F30B1314C* __this, RuntimeObject* ___0_result, const RuntimeMethod* method) 
 {
 	RuntimeObject *__result = il2cpp_codegen_delegate_end_invoke((Il2CppAsyncResult*) ___0_result, 0);

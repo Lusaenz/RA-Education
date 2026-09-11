@@ -318,7 +318,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Object__ctor_mE837C6B9FA8C6D5D109F4B2EC8
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 104828
+// Method Definition Index: 104834
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR String_t* PasswordHasher_HashPassword_m8D7550D8D1D22CC1D739F0755FCCAEB8CEC4AD4D (String_t* ___0_password, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -461,7 +461,7 @@ IL_006d:
 		return L_23;
 	}
 }
-// Method Definition Index: 104829
+// Method Definition Index: 104835
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool PasswordHasher_IsSha256Hash_m600F0F642139FE5CB95A29F5ADEE159B9C3E08BA (String_t* ___0_value, const RuntimeMethod* method) 
 {
 	int32_t V_0 = 0;
@@ -607,7 +607,7 @@ IL_004f:
 		return (bool)1;
 	}
 }
-// Method Definition Index: 104830
+// Method Definition Index: 104836
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool PasswordHasher_VerifyPassword_m56F77F7A11DCC0907E238E5717817644E38811FB (String_t* ___0_inputPassword, String_t* ___1_storedPassword, const RuntimeMethod* method) 
 {
 	{
@@ -666,7 +666,7 @@ IL_0020:
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 104831
+// Method Definition Index: 104837
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR MonoScriptData_t129DA1E3B96146BD7E1A15182E2C6463B23BBB52 UnitySourceGeneratedAssemblyMonoScriptTypes_v1_Get_m3586773A47F762CCBBD47684AB9DAFBEAE010A1C (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -700,7 +700,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR MonoScriptData_t129DA1E3B96146BD7E1A15182E2C6
 		return L_6;
 	}
 }
-// Method Definition Index: 104832
+// Method Definition Index: 104838
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void UnitySourceGeneratedAssemblyMonoScriptTypes_v1__ctor_m3B7B42059062C725187EEAE83464998CFF27A176 (UnitySourceGeneratedAssemblyMonoScriptTypes_v1_t2BAC58CA52B68B6D0ED9843AF302C61381BE165C* __this, const RuntimeMethod* method) 
 {
 	{

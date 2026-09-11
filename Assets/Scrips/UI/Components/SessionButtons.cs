@@ -3,17 +3,19 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 /// <summary>
-/// Componente que gestiona los botones de sesión: Logout y Exit.
-/// Logout: cierra la sesión y redirige a SelectRole
-/// Exit: cierra la aplicación sin cerrar sesión
+/// Gestiona la navegación de la barra superior: Volver (según Rol), Cerrar Sesión y Salir.
 /// </summary>
 public class SessionButtons : MonoBehaviour
 {
-    [SerializeField] private Button logoutButton;
-    [SerializeField] private Button exitButton;
+    [SerializeField] private Button backButton;   // Botón de Inicio / Casita / Volver
+    [SerializeField] private Button logoutButton; // Botón de Cerrar Sesión
+    [SerializeField] private Button exitButton;   // Botón de Salir
 
     private void Start()
     {
+        if (backButton != null)
+            backButton.onClick.AddListener(OnBackClicked);
+
         if (logoutButton != null)
             logoutButton.onClick.AddListener(OnLogoutClicked);
 
@@ -22,30 +24,56 @@ public class SessionButtons : MonoBehaviour
     }
 
     /// <summary>
-    /// Cierra la sesión y redirige a la escena SelectRole
+    /// Redirige a la escena correspondiente según el rol del usuario actual
     /// </summary>
+    private void OnBackClicked()
+    {
+        // 1. Limpiamos la selección temporal del perfil si veníamos de ver un estudiante
+        UserSessionManager.SelectedUserForView = null;
+
+        // 2. Verificamos la sesión activa
+        if (UserSessionManager.Instance != null && UserSessionManager.Instance.CurrentUser != null)
+        {
+            int roleId = UserSessionManager.Instance.CurrentUser.id_role;
+
+            if (roleId == 1) // Estudiante
+            {
+                Debug.Log("[SessionButtons] Redirigiendo a TestInitialuserFlow (Estudiante)");
+                SceneManager.LoadScene("TestInitialuserFlow");
+            }
+            else if (roleId == 2) // Profesor
+            {
+                Debug.Log("[SessionButtons] Redirigiendo a HomeTeachers (Profesor)");
+                SceneManager.LoadScene("HomeTeachers");
+            }
+            else
+            {
+                Debug.LogWarning($"[SessionButtons] Rol no reconocido ({roleId}). Cargando SelectRole.");
+                SceneManager.LoadScene("SelectRole");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("[SessionButtons] No hay sesión activa. Cargando SelectRole.");
+            SceneManager.LoadScene("SelectRole");
+        }
+    }
+
     private void OnLogoutClicked()
     {
         Debug.Log("[SessionButtons] Cerrando sesión");
-
-        // Limpiar sesión guardada (recuérdame) para evitar auto-login al volver
+        
+        UserSessionManager.SelectedUserForView = null;
         new SessionPersistence().ClearSession();
 
         if (UserSessionManager.Instance != null)
         {
             UserSessionManager.Instance.ClearSession();
         }
-        else
-        {
-            Debug.LogWarning("[SessionButtons] UserSessionManager no encontrado");
-        }
 
         SceneManager.LoadScene("SelectRole");
     }
 
-    /// <summary>
-    /// Sale de la aplicación sin cerrar sesión
-    /// </summary>
     private void OnExitClicked()
     {
         Debug.Log("[SessionButtons] Saliendo de la aplicación");
@@ -59,10 +87,8 @@ public class SessionButtons : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (logoutButton != null)
-            logoutButton.onClick.RemoveListener(OnLogoutClicked);
-
-        if (exitButton != null)
-            exitButton.onClick.RemoveListener(OnExitClicked);
+        if (backButton != null) backButton.onClick.RemoveListener(OnBackClicked);
+        if (logoutButton != null) logoutButton.onClick.RemoveListener(OnLogoutClicked);
+        if (exitButton != null) exitButton.onClick.RemoveListener(OnExitClicked);
     }
 }

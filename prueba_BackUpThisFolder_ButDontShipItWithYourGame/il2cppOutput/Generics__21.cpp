@@ -10992,7 +10992,7 @@ IL_0011:
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 97033
+// Method Definition Index: 97039
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DelegateList_1__ctor_mB2DC41857C7A99AB34FD614EF33A5DF50B4F71BD_gshared (DelegateList_1_t41ACA8DED01331F3B3587FDEFC202D1429DA46B4* __this, Func_2_t4FB252C4D5440E172A1CD22D536CE7BE6CE4C966* ___0_acquireFunc, Action_1_t7F4FABC7A58C6A5DDEE6FDDEBD8864FAC0B3BBB6* ___1_releaseFunc, const RuntimeMethod* method) 
 {
 	{
@@ -11042,7 +11042,7 @@ IL_0022:
 		return;
 	}
 }
-// Method Definition Index: 97034
+// Method Definition Index: 97040
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t DelegateList_1_get_Count_m96448D35FC2D3FFAB3035FAA96BC42F789C9EEA8_gshared (DelegateList_1_t41ACA8DED01331F3B3587FDEFC202D1429DA46B4* __this, const RuntimeMethod* method) 
 {
 	{
@@ -11066,7 +11066,7 @@ IL_0014:
 		return 0;
 	}
 }
-// Method Definition Index: 97035
+// Method Definition Index: 97041
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DelegateList_1_Add_mB48747322CF4B002B10BBD2942298A279AA2EEA6_gshared (DelegateList_1_t41ACA8DED01331F3B3587FDEFC202D1429DA46B4* __this, Action_1_t597199961BAA72AAD4CBE797FBA844A692DB004D* ___0_action, const RuntimeMethod* method) 
 {
 	LinkedListNode_1_tF24EDEDFCA9861CE1DB70360E7B901713696FF3C* V_0 = NULL;
@@ -11104,7 +11104,7 @@ IL_0020:
 		return;
 	}
 }
-// Method Definition Index: 97036
+// Method Definition Index: 97042
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DelegateList_1_Remove_m60CBDBBAE09D2E6B516A5C9C1B2C0D1768E5DC17_gshared (DelegateList_1_t41ACA8DED01331F3B3587FDEFC202D1429DA46B4* __this, Action_1_t597199961BAA72AAD4CBE797FBA844A692DB004D* ___0_action, const RuntimeMethod* method) 
 {
 	LinkedListNode_1_tF24EDEDFCA9861CE1DB70360E7B901713696FF3C* V_0 = NULL;
@@ -11203,7 +11203,7 @@ IL_0055:
 		return;
 	}
 }
-// Method Definition Index: 97037
+// Method Definition Index: 97043
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DelegateList_1_Invoke_m57228A6EAF084FF1B29951EB1570119089540EEC_gshared (DelegateList_1_t41ACA8DED01331F3B3587FDEFC202D1429DA46B4* __this, AsyncOperationHandle_1_tF0C18B1708F42632D0DCFCD51AFCC737C73CDD66 ___0_res, const RuntimeMethod* method) 
 {
 	LinkedListNode_1_tF24EDEDFCA9861CE1DB70360E7B901713696FF3C* V_0 = NULL;
@@ -11367,7 +11367,7 @@ IL_0081:
 		return;
 	}
 }
-// Method Definition Index: 97038
+// Method Definition Index: 97044
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DelegateList_1_Clear_m6041708369C9CDA15985B609F3FF87CA73218AF2_gshared (DelegateList_1_t41ACA8DED01331F3B3587FDEFC202D1429DA46B4* __this, const RuntimeMethod* method) 
 {
 	LinkedListNode_1_tF24EDEDFCA9861CE1DB70360E7B901713696FF3C* V_0 = NULL;
@@ -11430,7 +11430,7 @@ IL_0036:
 		return;
 	}
 }
-// Method Definition Index: 97039
+// Method Definition Index: 97045
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR DelegateList_1_t41ACA8DED01331F3B3587FDEFC202D1429DA46B4* DelegateList_1_CreateWithGlobalCache_m9026C6EF53C1F50BFFD22B2AEEA0411569C09AD9_gshared (const RuntimeMethod* method) 
 {
 	{
@@ -11467,7 +11467,7 @@ IL_000e:
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 97033
+// Method Definition Index: 97039
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DelegateList_1__ctor_mFB908DB9755420E7B1B3B7A1A77304D276052C18_gshared (DelegateList_1_t51F01629D26EB9846917908343E4022C1EFCA6C9* __this, Func_2_t30E3A5C088415F78ABA17087ED0F7F65B22857A9* ___0_acquireFunc, Action_1_t0683EC8444D3F4B64D1A680FAD55773857246C3D* ___1_releaseFunc, const RuntimeMethod* method) 
 {
 	{
@@ -11517,7 +11517,7 @@ IL_0022:
 		return;
 	}
 }
-// Method Definition Index: 97034
+// Method Definition Index: 97040
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t DelegateList_1_get_Count_mBF5618B2A441EE4181F4F21D9F607C4B37003666_gshared (DelegateList_1_t51F01629D26EB9846917908343E4022C1EFCA6C9* __this, const RuntimeMethod* method) 
 {
 	{
@@ -11541,7 +11541,7 @@ IL_0014:
 		return 0;
 	}
 }
-// Method Definition Index: 97035
+// Method Definition Index: 97041
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DelegateList_1_Add_m6F22C34E3F6C7A41A54B2B66DBB153D315933B22_gshared (DelegateList_1_t51F01629D26EB9846917908343E4022C1EFCA6C9* __this, Action_1_tD69D95FBB6D297EA3F1DBF47CBEC1525CA9702BA* ___0_action, const RuntimeMethod* method) 
 {
 	LinkedListNode_1_t3F93A4464D33AB083F0F9A356A62F6B0DCDFCBDC* V_0 = NULL;
@@ -11579,7 +11579,7 @@ IL_0020:
 		return;
 	}
 }
-// Method Definition Index: 97036
+// Method Definition Index: 97042
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DelegateList_1_Remove_m2392DAE14D58F7AC3A464AB82AAB154B14B0ABF6_gshared (DelegateList_1_t51F01629D26EB9846917908343E4022C1EFCA6C9* __this, Action_1_tD69D95FBB6D297EA3F1DBF47CBEC1525CA9702BA* ___0_action, const RuntimeMethod* method) 
 {
 	LinkedListNode_1_t3F93A4464D33AB083F0F9A356A62F6B0DCDFCBDC* V_0 = NULL;
@@ -11678,7 +11678,7 @@ IL_0055:
 		return;
 	}
 }
-// Method Definition Index: 97037
+// Method Definition Index: 97043
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DelegateList_1_Invoke_m5B38AEEC73F9BB704FCAB1852B32DCB2E6848907_gshared (DelegateList_1_t51F01629D26EB9846917908343E4022C1EFCA6C9* __this, AsyncOperationHandle_1_tFCA9C8A0842BE8A0771A40EA2C7FC9C94E2564BA ___0_res, const RuntimeMethod* method) 
 {
 	LinkedListNode_1_t3F93A4464D33AB083F0F9A356A62F6B0DCDFCBDC* V_0 = NULL;
@@ -11842,7 +11842,7 @@ IL_0081:
 		return;
 	}
 }
-// Method Definition Index: 97038
+// Method Definition Index: 97044
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DelegateList_1_Clear_m733A99AFDDE4B4F91D05D5C0564AB427F4C8F4E0_gshared (DelegateList_1_t51F01629D26EB9846917908343E4022C1EFCA6C9* __this, const RuntimeMethod* method) 
 {
 	LinkedListNode_1_t3F93A4464D33AB083F0F9A356A62F6B0DCDFCBDC* V_0 = NULL;
@@ -11905,7 +11905,7 @@ IL_0036:
 		return;
 	}
 }
-// Method Definition Index: 97039
+// Method Definition Index: 97045
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR DelegateList_1_t51F01629D26EB9846917908343E4022C1EFCA6C9* DelegateList_1_CreateWithGlobalCache_mC626C57923FC4C04D30835FDC40D09988DEDBE4D_gshared (const RuntimeMethod* method) 
 {
 	{
@@ -11942,7 +11942,7 @@ IL_000e:
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 97033
+// Method Definition Index: 97039
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DelegateList_1__ctor_m630B60E627930078FF21ADD26B938B1DB87FE152_gshared (DelegateList_1_tE5214C095910CA36010DD471BBF1F8F7EA6D4787* __this, Func_2_t4AC2BC0ABFE52FFDDB0F1F8868A4CC623F3D924D* ___0_acquireFunc, Action_1_tDB4F373D5BB1BB1937E63784E330001A2DC7B179* ___1_releaseFunc, const RuntimeMethod* method) 
 {
 	{
@@ -11992,7 +11992,7 @@ IL_0022:
 		return;
 	}
 }
-// Method Definition Index: 97034
+// Method Definition Index: 97040
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t DelegateList_1_get_Count_m5133E9DED5ACFD9BF95D7A39FE61750CB78FC708_gshared (DelegateList_1_tE5214C095910CA36010DD471BBF1F8F7EA6D4787* __this, const RuntimeMethod* method) 
 {
 	{
@@ -12016,7 +12016,7 @@ IL_0014:
 		return 0;
 	}
 }
-// Method Definition Index: 97035
+// Method Definition Index: 97041
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DelegateList_1_Add_mF5DAB0FB0EABE76CCB1438AAC83A7FEBE9DC8F84_gshared (DelegateList_1_tE5214C095910CA36010DD471BBF1F8F7EA6D4787* __this, Action_1_t0A01E63A4339ABF30BF7C175CF376F7CE2BAC1A8* ___0_action, const RuntimeMethod* method) 
 {
 	LinkedListNode_1_t2A67D2029E173CBC4B393A08888D52B422D60CDE* V_0 = NULL;
@@ -12054,7 +12054,7 @@ IL_0020:
 		return;
 	}
 }
-// Method Definition Index: 97036
+// Method Definition Index: 97042
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DelegateList_1_Remove_m807C62748695880D54B76BBED32DD5314F8108ED_gshared (DelegateList_1_tE5214C095910CA36010DD471BBF1F8F7EA6D4787* __this, Action_1_t0A01E63A4339ABF30BF7C175CF376F7CE2BAC1A8* ___0_action, const RuntimeMethod* method) 
 {
 	LinkedListNode_1_t2A67D2029E173CBC4B393A08888D52B422D60CDE* V_0 = NULL;
@@ -12153,7 +12153,7 @@ IL_0055:
 		return;
 	}
 }
-// Method Definition Index: 97037
+// Method Definition Index: 97043
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DelegateList_1_Invoke_mF5DD006A41666CFEE8881FA9C64756276AB559A8_gshared (DelegateList_1_tE5214C095910CA36010DD471BBF1F8F7EA6D4787* __this, AsyncOperationHandle_1_tDD1D892D87C7A0C3189DD56DDB997AB1A2089A74 ___0_res, const RuntimeMethod* method) 
 {
 	LinkedListNode_1_t2A67D2029E173CBC4B393A08888D52B422D60CDE* V_0 = NULL;
@@ -12317,7 +12317,7 @@ IL_0081:
 		return;
 	}
 }
-// Method Definition Index: 97038
+// Method Definition Index: 97044
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DelegateList_1_Clear_m400E8139AF65610B7AA5DE23D7554C1D7973E8B1_gshared (DelegateList_1_tE5214C095910CA36010DD471BBF1F8F7EA6D4787* __this, const RuntimeMethod* method) 
 {
 	LinkedListNode_1_t2A67D2029E173CBC4B393A08888D52B422D60CDE* V_0 = NULL;
@@ -12380,7 +12380,7 @@ IL_0036:
 		return;
 	}
 }
-// Method Definition Index: 97039
+// Method Definition Index: 97045
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR DelegateList_1_tE5214C095910CA36010DD471BBF1F8F7EA6D4787* DelegateList_1_CreateWithGlobalCache_mCCF82736EFC78B15DB9C16BD58F49433B8A8FCFA_gshared (const RuntimeMethod* method) 
 {
 	{
@@ -12417,7 +12417,7 @@ IL_000e:
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 97033
+// Method Definition Index: 97039
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DelegateList_1__ctor_m60762E95FBD2438EBAD48D31F7ADADAD0FB8280F_gshared (DelegateList_1_tBC410718EDA73307B44CA825E7E82C1E4472A647* __this, Func_2_t42A116ADFA87B64CCA035EB916BEA489107913C3* ___0_acquireFunc, Action_1_tC10848E9FAB0E50FD29962B464BD6F879C33FBF0* ___1_releaseFunc, const RuntimeMethod* method) 
 {
 	{
@@ -12467,7 +12467,7 @@ IL_0022:
 		return;
 	}
 }
-// Method Definition Index: 97034
+// Method Definition Index: 97040
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t DelegateList_1_get_Count_m1D45A24584D8BF55C4F0BF668AA92D670880AF10_gshared (DelegateList_1_tBC410718EDA73307B44CA825E7E82C1E4472A647* __this, const RuntimeMethod* method) 
 {
 	{
@@ -12491,7 +12491,7 @@ IL_0014:
 		return 0;
 	}
 }
-// Method Definition Index: 97035
+// Method Definition Index: 97041
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DelegateList_1_Add_m2BDF3C563E8E46CC0E957BC6EC09797B31D89689_gshared (DelegateList_1_tBC410718EDA73307B44CA825E7E82C1E4472A647* __this, Action_1_tBF02462CDF8C44C65825EBF7E54411B70D8779DA* ___0_action, const RuntimeMethod* method) 
 {
 	LinkedListNode_1_t8B5373D849687B2005EE92BFEE6CD151D64D212D* V_0 = NULL;
@@ -12529,7 +12529,7 @@ IL_0020:
 		return;
 	}
 }
-// Method Definition Index: 97036
+// Method Definition Index: 97042
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DelegateList_1_Remove_mDC5C4381EFFB878271B849B39AB822095781D7C6_gshared (DelegateList_1_tBC410718EDA73307B44CA825E7E82C1E4472A647* __this, Action_1_tBF02462CDF8C44C65825EBF7E54411B70D8779DA* ___0_action, const RuntimeMethod* method) 
 {
 	LinkedListNode_1_t8B5373D849687B2005EE92BFEE6CD151D64D212D* V_0 = NULL;
@@ -12628,7 +12628,7 @@ IL_0055:
 		return;
 	}
 }
-// Method Definition Index: 97037
+// Method Definition Index: 97043
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DelegateList_1_Invoke_mC1C7463D66BF1E3B3C22FB71759F7BDC7A4C3298_gshared (DelegateList_1_tBC410718EDA73307B44CA825E7E82C1E4472A647* __this, AsyncOperationHandle_1_t074166892865CF484A3C77A1E9FB6F5E83DA1DA5 ___0_res, const RuntimeMethod* method) 
 {
 	LinkedListNode_1_t8B5373D849687B2005EE92BFEE6CD151D64D212D* V_0 = NULL;
@@ -12792,7 +12792,7 @@ IL_0081:
 		return;
 	}
 }
-// Method Definition Index: 97038
+// Method Definition Index: 97044
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DelegateList_1_Clear_m4A3CCD36BCC8DEE006CD5977D3918543810BFC6C_gshared (DelegateList_1_tBC410718EDA73307B44CA825E7E82C1E4472A647* __this, const RuntimeMethod* method) 
 {
 	LinkedListNode_1_t8B5373D849687B2005EE92BFEE6CD151D64D212D* V_0 = NULL;
@@ -12855,7 +12855,7 @@ IL_0036:
 		return;
 	}
 }
-// Method Definition Index: 97039
+// Method Definition Index: 97045
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR DelegateList_1_tBC410718EDA73307B44CA825E7E82C1E4472A647* DelegateList_1_CreateWithGlobalCache_m292E0B617435B6AC745E6F1EDAC6140FA569DC7A_gshared (const RuntimeMethod* method) 
 {
 	{
@@ -12892,7 +12892,7 @@ IL_000e:
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 97033
+// Method Definition Index: 97039
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DelegateList_1__ctor_m0C50982B0CDA75F438D57E252F7EEA39B69B06C1_gshared (DelegateList_1_tC070A3D40FCD92D36D6C762C004DDB78978B4F88* __this, Func_2_t87A9CDC74069EA143F2B7C384C4A4749C15B524E* ___0_acquireFunc, Action_1_t5DD2FB43F7B71E80E7942751149978B44C665E22* ___1_releaseFunc, const RuntimeMethod* method) 
 {
 	{
@@ -12942,7 +12942,7 @@ IL_0022:
 		return;
 	}
 }
-// Method Definition Index: 97034
+// Method Definition Index: 97040
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t DelegateList_1_get_Count_m38AFF54C2C2A7A7404C37E3150DC46D268525EFD_gshared (DelegateList_1_tC070A3D40FCD92D36D6C762C004DDB78978B4F88* __this, const RuntimeMethod* method) 
 {
 	{
@@ -12966,7 +12966,7 @@ IL_0014:
 		return 0;
 	}
 }
-// Method Definition Index: 97035
+// Method Definition Index: 97041
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DelegateList_1_Add_mE9C4F22929C05A3C040D9E27188D1F74780A8B67_gshared (DelegateList_1_tC070A3D40FCD92D36D6C762C004DDB78978B4F88* __this, Action_1_t84AF53BD4007CE3C0DE9F29034F579B456DC98DF* ___0_action, const RuntimeMethod* method) 
 {
 	LinkedListNode_1_t101F3CDE1EF28D7EEEE47540AFBB5DA5E7B2B7EE* V_0 = NULL;
@@ -13004,7 +13004,7 @@ IL_0020:
 		return;
 	}
 }
-// Method Definition Index: 97036
+// Method Definition Index: 97042
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DelegateList_1_Remove_m7144980CA656C16D25C7F45A7E59786E27C93771_gshared (DelegateList_1_tC070A3D40FCD92D36D6C762C004DDB78978B4F88* __this, Action_1_t84AF53BD4007CE3C0DE9F29034F579B456DC98DF* ___0_action, const RuntimeMethod* method) 
 {
 	LinkedListNode_1_t101F3CDE1EF28D7EEEE47540AFBB5DA5E7B2B7EE* V_0 = NULL;
@@ -13103,7 +13103,7 @@ IL_0055:
 		return;
 	}
 }
-// Method Definition Index: 97037
+// Method Definition Index: 97043
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DelegateList_1_Invoke_m8DA6574AB2C9BE8F64E205281D4D076B7479B88B_gshared (DelegateList_1_tC070A3D40FCD92D36D6C762C004DDB78978B4F88* __this, AsyncOperationHandle_t58B507DCAA6531B85FDBA6188D8E1F7DF89D3F5D ___0_res, const RuntimeMethod* method) 
 {
 	LinkedListNode_1_t101F3CDE1EF28D7EEEE47540AFBB5DA5E7B2B7EE* V_0 = NULL;
@@ -13267,7 +13267,7 @@ IL_0081:
 		return;
 	}
 }
-// Method Definition Index: 97038
+// Method Definition Index: 97044
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DelegateList_1_Clear_m8F685DDA6308752F78DEF343BB1673032A0D774C_gshared (DelegateList_1_tC070A3D40FCD92D36D6C762C004DDB78978B4F88* __this, const RuntimeMethod* method) 
 {
 	LinkedListNode_1_t101F3CDE1EF28D7EEEE47540AFBB5DA5E7B2B7EE* V_0 = NULL;
@@ -13330,7 +13330,7 @@ IL_0036:
 		return;
 	}
 }
-// Method Definition Index: 97039
+// Method Definition Index: 97045
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR DelegateList_1_tC070A3D40FCD92D36D6C762C004DDB78978B4F88* DelegateList_1_CreateWithGlobalCache_mF7F99698DA3B016EA0B9416B020E820B0F3295B3_gshared (const RuntimeMethod* method) 
 {
 	{
@@ -13367,7 +13367,7 @@ IL_000e:
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 97033
+// Method Definition Index: 97039
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DelegateList_1__ctor_m41E9950983F3108E91520A7A92D4EA98B11306C2_gshared (DelegateList_1_t472259E3E09904EE80A15B306399DBFE8998BAAD* __this, Func_2_t41A95935AFF0DB3FD25E84D4B4047C9BA04F25CB* ___0_acquireFunc, Action_1_t07DD388597F5077D80ED66A6F55632991D676B3B* ___1_releaseFunc, const RuntimeMethod* method) 
 {
 	{
@@ -13417,7 +13417,7 @@ IL_0022:
 		return;
 	}
 }
-// Method Definition Index: 97034
+// Method Definition Index: 97040
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t DelegateList_1_get_Count_m223AB598437CF44CA939FA35E9947D572DCD2C0E_gshared (DelegateList_1_t472259E3E09904EE80A15B306399DBFE8998BAAD* __this, const RuntimeMethod* method) 
 {
 	{
@@ -13441,7 +13441,7 @@ IL_0014:
 		return 0;
 	}
 }
-// Method Definition Index: 97035
+// Method Definition Index: 97041
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DelegateList_1_Add_mC8B62045B6C67BF2223B64816318FB296409CD42_gshared (DelegateList_1_t472259E3E09904EE80A15B306399DBFE8998BAAD* __this, Action_1_t310F18CB4338A2740CA701F160C62E2C3198E66A* ___0_action, const RuntimeMethod* method) 
 {
 	LinkedListNode_1_tA5F5865A8D41D4FB06E830D5700EB0C46383C570* V_0 = NULL;
@@ -13479,7 +13479,7 @@ IL_0020:
 		return;
 	}
 }
-// Method Definition Index: 97036
+// Method Definition Index: 97042
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DelegateList_1_Remove_mEFBEA6E141B165406D73BF30F6B6D0C793DB3701_gshared (DelegateList_1_t472259E3E09904EE80A15B306399DBFE8998BAAD* __this, Action_1_t310F18CB4338A2740CA701F160C62E2C3198E66A* ___0_action, const RuntimeMethod* method) 
 {
 	LinkedListNode_1_tA5F5865A8D41D4FB06E830D5700EB0C46383C570* V_0 = NULL;
@@ -13578,7 +13578,7 @@ IL_0055:
 		return;
 	}
 }
-// Method Definition Index: 97037
+// Method Definition Index: 97043
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DelegateList_1_Invoke_mFB21D7BA92CFEAA67905C35AAD3291DE4557CD8A_gshared (DelegateList_1_t472259E3E09904EE80A15B306399DBFE8998BAAD* __this, float ___0_res, const RuntimeMethod* method) 
 {
 	LinkedListNode_1_tA5F5865A8D41D4FB06E830D5700EB0C46383C570* V_0 = NULL;
@@ -13742,7 +13742,7 @@ IL_0081:
 		return;
 	}
 }
-// Method Definition Index: 97038
+// Method Definition Index: 97044
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DelegateList_1_Clear_mEF3F4312F8DB91F4F6D38C3FE79045851A357541_gshared (DelegateList_1_t472259E3E09904EE80A15B306399DBFE8998BAAD* __this, const RuntimeMethod* method) 
 {
 	LinkedListNode_1_tA5F5865A8D41D4FB06E830D5700EB0C46383C570* V_0 = NULL;
@@ -13805,7 +13805,7 @@ IL_0036:
 		return;
 	}
 }
-// Method Definition Index: 97039
+// Method Definition Index: 97045
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR DelegateList_1_t472259E3E09904EE80A15B306399DBFE8998BAAD* DelegateList_1_CreateWithGlobalCache_m731B9B6E166927090467A5FF5644157A1127195F_gshared (const RuntimeMethod* method) 
 {
 	{
@@ -13842,7 +13842,7 @@ IL_000e:
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 97033
+// Method Definition Index: 97039
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DelegateList_1__ctor_m26320CB7F6E30616C92A084D55E76510DF380ED2_gshared (DelegateList_1_t40770067A487CCFF02A439BCE45BB5D36D0D9326* __this, Func_2_t72F73A981E77EF0176530986EE4026C48BE66CC7* ___0_acquireFunc, Action_1_t22CDAAD1EC63BD8481AD2EDE23D4D2B056524964* ___1_releaseFunc, const RuntimeMethod* method) 
 {
 	{
@@ -13892,7 +13892,7 @@ IL_0022:
 		return;
 	}
 }
-// Method Definition Index: 97034
+// Method Definition Index: 97040
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t DelegateList_1_get_Count_m307914634D3D3F3CF72B50684A165181AB21830E_gshared (DelegateList_1_t40770067A487CCFF02A439BCE45BB5D36D0D9326* __this, const RuntimeMethod* method) 
 {
 	{
@@ -13916,7 +13916,7 @@ IL_0014:
 		return 0;
 	}
 }
-// Method Definition Index: 97035
+// Method Definition Index: 97041
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DelegateList_1_Add_mF94D5266D13D71671CEDFF012260A53E665E2008_gshared (DelegateList_1_t40770067A487CCFF02A439BCE45BB5D36D0D9326* __this, Action_1_t923A20D1D4F6B55B2ED5AE21B90F1A0CE0450D99* ___0_action, const RuntimeMethod* method) 
 {
 	LinkedListNode_1_t05AA6EC4CEAE4854309B62F8C1B02F3FD79BBA60* V_0 = NULL;
@@ -13954,7 +13954,7 @@ IL_0020:
 		return;
 	}
 }
-// Method Definition Index: 97036
+// Method Definition Index: 97042
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DelegateList_1_Remove_m1147B3828ED929B3D01FF85125E73BFD014CFDFE_gshared (DelegateList_1_t40770067A487CCFF02A439BCE45BB5D36D0D9326* __this, Action_1_t923A20D1D4F6B55B2ED5AE21B90F1A0CE0450D99* ___0_action, const RuntimeMethod* method) 
 {
 	LinkedListNode_1_t05AA6EC4CEAE4854309B62F8C1B02F3FD79BBA60* V_0 = NULL;
@@ -14053,7 +14053,7 @@ IL_0055:
 		return;
 	}
 }
-// Method Definition Index: 97037
+// Method Definition Index: 97043
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DelegateList_1_Invoke_mB59C08065F8DB06BAA18A04ADCDCB72A450E8C13_gshared (DelegateList_1_t40770067A487CCFF02A439BCE45BB5D36D0D9326* __this, Il2CppFullySharedGenericAny ___0_res, const RuntimeMethod* method) 
 {
 	const uint32_t SizeOf_T_tFE3B10388C5E3D61DCFFF7195A8DF4E939B6E933 = il2cpp_codegen_sizeof(il2cpp_rgctx_data_no_init(method->klass->rgctx_data, 16));
@@ -14219,7 +14219,7 @@ IL_0081:
 		return;
 	}
 }
-// Method Definition Index: 97038
+// Method Definition Index: 97044
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DelegateList_1_Clear_m2251A449073070F2C5D7B4FFCEF04FEEFC805ED7_gshared (DelegateList_1_t40770067A487CCFF02A439BCE45BB5D36D0D9326* __this, const RuntimeMethod* method) 
 {
 	LinkedListNode_1_t05AA6EC4CEAE4854309B62F8C1B02F3FD79BBA60* V_0 = NULL;
@@ -14282,7 +14282,7 @@ IL_0036:
 		return;
 	}
 }
-// Method Definition Index: 97039
+// Method Definition Index: 97045
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR DelegateList_1_t40770067A487CCFF02A439BCE45BB5D36D0D9326* DelegateList_1_CreateWithGlobalCache_m84326643E50C3E20D9C3116B4E6EDFFBAAC5E6D9_gshared (const RuntimeMethod* method) 
 {
 	{
@@ -14319,7 +14319,7 @@ IL_000e:
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 99151
+// Method Definition Index: 99157
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR String_t* DelegateProperty_2_get_Name_mEED824A0D241861F8FC2831C7A27631DDE0459B0_gshared (DelegateProperty_2_t01193E1768A8EAF3454CBFF6D25951EB24A714D4* __this, const RuntimeMethod* method) 
 {
 	{
@@ -14327,7 +14327,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR String_t* DelegateProperty_2_get_Name_mEED824
 		return L_0;
 	}
 }
-// Method Definition Index: 99152
+// Method Definition Index: 99158
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool DelegateProperty_2_get_IsReadOnly_mD522F1948CF2E8AF2F7786EE2030F227C9286545_gshared (DelegateProperty_2_t01193E1768A8EAF3454CBFF6D25951EB24A714D4* __this, const RuntimeMethod* method) 
 {
 	{
@@ -14335,7 +14335,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool DelegateProperty_2_get_IsReadOnly_mD522F
 		return (bool)((((RuntimeObject*)(PropertySetter_2_t797AB5E970C439127F7C26A99ECABAEB82F8DDDA*)L_0) == ((RuntimeObject*)(RuntimeObject*)NULL))? 1 : 0);
 	}
 }
-// Method Definition Index: 99153
+// Method Definition Index: 99159
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DelegateProperty_2__ctor_mCC0F3ACE346BA3B05952715FFDB8B276B2F0B6FA_gshared (DelegateProperty_2_t01193E1768A8EAF3454CBFF6D25951EB24A714D4* __this, String_t* ___0_name, PropertyGetter_2_tD8230F45A3604AE20647869510A7F5AB8FD35963* ___1_getter, PropertySetter_2_t797AB5E970C439127F7C26A99ECABAEB82F8DDDA* ___2_setter, const RuntimeMethod* method) 
 {
 	PropertyGetter_2_tD8230F45A3604AE20647869510A7F5AB8FD35963* G_B2_0 = NULL;
@@ -14375,7 +14375,7 @@ IL_0020:
 		return;
 	}
 }
-// Method Definition Index: 99154
+// Method Definition Index: 99160
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DelegateProperty_2_GetValue_mE40B88CF84908429BD6DD401955A242745C708D2_gshared (DelegateProperty_2_t01193E1768A8EAF3454CBFF6D25951EB24A714D4* __this, Il2CppFullySharedGenericAny* ___0_container, Il2CppFullySharedGenericAny* il2cppRetVal, const RuntimeMethod* method) 
 {
 	const uint32_t SizeOf_TValue_t987955C6D2FF8BE32FB47E71809652F2E2793DBC = il2cpp_codegen_sizeof(il2cpp_rgctx_data_no_init(method->klass->rgctx_data, 7));
@@ -14399,7 +14399,7 @@ IL_0010:
 		return;
 	}
 }
-// Method Definition Index: 99155
+// Method Definition Index: 99161
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DelegateProperty_2_SetValue_m97C1CB1264A355CD345C8C2F4E32A6064599C223_gshared (DelegateProperty_2_t01193E1768A8EAF3454CBFF6D25951EB24A714D4* __this, Il2CppFullySharedGenericAny* ___0_container, Il2CppFullySharedGenericAny ___1_value, const RuntimeMethod* method) 
 {
 	const uint32_t SizeOf_TValue_t987955C6D2FF8BE32FB47E71809652F2E2793DBC = il2cpp_codegen_sizeof(il2cpp_rgctx_data_no_init(method->klass->rgctx_data, 7));
@@ -14463,7 +14463,7 @@ int32_t DeleteListDelegate_Invoke_m28029ECB42EDD0A1B4EBDF970C4CB4D28451B58A_Open
 	typedef int32_t (*FunctionPointerType) (intptr_t, const RuntimeMethod*);
 	return ((FunctionPointerType)__this->___method_ptr)(___0_listHandle, method);
 }
-// Method Definition Index: 96847
+// Method Definition Index: 96853
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DeleteListDelegate__ctor_m8B8FDA71A3DEC55C7859A5D6DA08F7349739C0F9_gshared (DeleteListDelegate_tAAC373D504CFCE3DF59DD32E148158814E0CE2A6* __this, RuntimeObject* ___0_object, intptr_t ___1_method, const RuntimeMethod* method) 
 {
 	__this->___method_ptr = (intptr_t)il2cpp_codegen_get_method_pointer((RuntimeMethod*)___1_method);
@@ -14492,20 +14492,20 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DeleteListDelegate__ctor_m8B8FDA71A3DEC5
 	}
 	__this->___extra_arg = (intptr_t)&DeleteListDelegate_Invoke_m28029ECB42EDD0A1B4EBDF970C4CB4D28451B58A_Multicast;
 }
-// Method Definition Index: 96848
+// Method Definition Index: 96854
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t DeleteListDelegate_Invoke_m28029ECB42EDD0A1B4EBDF970C4CB4D28451B58A_gshared (DeleteListDelegate_tAAC373D504CFCE3DF59DD32E148158814E0CE2A6* __this, intptr_t ___0_listHandle, const RuntimeMethod* method) 
 {
 	typedef int32_t (*FunctionPointerType) (RuntimeObject*, intptr_t, const RuntimeMethod*);
 	return ((FunctionPointerType)__this->___invoke_impl)((Il2CppObject*)__this->___method_code, ___0_listHandle, reinterpret_cast<RuntimeMethod*>(__this->___method));
 }
-// Method Definition Index: 96849
+// Method Definition Index: 96855
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* DeleteListDelegate_BeginInvoke_m19C2B50B13C2C46222E8FBFD53DDD5DF19898A24_gshared (DeleteListDelegate_tAAC373D504CFCE3DF59DD32E148158814E0CE2A6* __this, intptr_t ___0_listHandle, AsyncCallback_t7FEF460CBDCFB9C5FA2EF776984778B9A4145F4C* ___1_callback, RuntimeObject* ___2_object, const RuntimeMethod* method) 
 {
 	void *__d_args[2] = {0};
 	__d_args[0] = Box(il2cpp_defaults.int_class, &___0_listHandle);
 	return (RuntimeObject*)il2cpp_codegen_delegate_begin_invoke((RuntimeDelegate*)__this, __d_args, (RuntimeDelegate*)___1_callback, (RuntimeObject*)___2_object);
 }
-// Method Definition Index: 96850
+// Method Definition Index: 96856
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t DeleteListDelegate_EndInvoke_mA04DB04DE0766E25A8C9F378269577AD151D72BC_gshared (DeleteListDelegate_tAAC373D504CFCE3DF59DD32E148158814E0CE2A6* __this, RuntimeObject* ___0_result, const RuntimeMethod* method) 
 {
 	RuntimeObject *__result = il2cpp_codegen_delegate_end_invoke((Il2CppAsyncResult*) ___0_result, 0);
@@ -14542,7 +14542,7 @@ int32_t DeleteListDelegate_Invoke_m5C6F720E380E62D3330213C38AB521771625DC0C_Open
 	typedef int32_t (*FunctionPointerType) (intptr_t, const RuntimeMethod*);
 	return ((FunctionPointerType)__this->___method_ptr)(___0_listHandle, method);
 }
-// Method Definition Index: 96847
+// Method Definition Index: 96853
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DeleteListDelegate__ctor_m1A37FC302F15A3A2C5CCBCEEBA256968C433E55E_gshared (DeleteListDelegate_t4F43A208509F7D91EE24C2EC4E7D9838058A4AA4* __this, RuntimeObject* ___0_object, intptr_t ___1_method, const RuntimeMethod* method) 
 {
 	__this->___method_ptr = (intptr_t)il2cpp_codegen_get_method_pointer((RuntimeMethod*)___1_method);
@@ -14571,20 +14571,20 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DeleteListDelegate__ctor_m1A37FC302F15A3
 	}
 	__this->___extra_arg = (intptr_t)&DeleteListDelegate_Invoke_m5C6F720E380E62D3330213C38AB521771625DC0C_Multicast;
 }
-// Method Definition Index: 96848
+// Method Definition Index: 96854
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t DeleteListDelegate_Invoke_m5C6F720E380E62D3330213C38AB521771625DC0C_gshared (DeleteListDelegate_t4F43A208509F7D91EE24C2EC4E7D9838058A4AA4* __this, intptr_t ___0_listHandle, const RuntimeMethod* method) 
 {
 	typedef int32_t (*FunctionPointerType) (RuntimeObject*, intptr_t, const RuntimeMethod*);
 	return ((FunctionPointerType)__this->___invoke_impl)((Il2CppObject*)__this->___method_code, ___0_listHandle, reinterpret_cast<RuntimeMethod*>(__this->___method));
 }
-// Method Definition Index: 96849
+// Method Definition Index: 96855
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* DeleteListDelegate_BeginInvoke_m84B51A604C5139452884B3A8D844854648468AC8_gshared (DeleteListDelegate_t4F43A208509F7D91EE24C2EC4E7D9838058A4AA4* __this, intptr_t ___0_listHandle, AsyncCallback_t7FEF460CBDCFB9C5FA2EF776984778B9A4145F4C* ___1_callback, RuntimeObject* ___2_object, const RuntimeMethod* method) 
 {
 	void *__d_args[2] = {0};
 	__d_args[0] = Box(il2cpp_defaults.int_class, &___0_listHandle);
 	return (RuntimeObject*)il2cpp_codegen_delegate_begin_invoke((RuntimeDelegate*)__this, __d_args, (RuntimeDelegate*)___1_callback, (RuntimeObject*)___2_object);
 }
-// Method Definition Index: 96850
+// Method Definition Index: 96856
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t DeleteListDelegate_EndInvoke_m13E03EDC4F6CEB20B6E8D113485B9CB38A71B7D8_gshared (DeleteListDelegate_t4F43A208509F7D91EE24C2EC4E7D9838058A4AA4* __this, RuntimeObject* ___0_result, const RuntimeMethod* method) 
 {
 	RuntimeObject *__result = il2cpp_codegen_delegate_end_invoke((Il2CppAsyncResult*) ___0_result, 0);
@@ -14621,7 +14621,7 @@ int32_t DeleteListDelegate_Invoke_mA138D65A4F6289E1B3BC7E7A78086F7BFB394D81_Open
 	typedef int32_t (*FunctionPointerType) (intptr_t, const RuntimeMethod*);
 	return ((FunctionPointerType)__this->___method_ptr)(___0_listHandle, method);
 }
-// Method Definition Index: 96847
+// Method Definition Index: 96853
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DeleteListDelegate__ctor_m9BB348005F41001685C35401C492E02D3CAB7A93_gshared (DeleteListDelegate_tA2E6CDE68686D811E1976532813465847FC4D49A* __this, RuntimeObject* ___0_object, intptr_t ___1_method, const RuntimeMethod* method) 
 {
 	__this->___method_ptr = (intptr_t)il2cpp_codegen_get_method_pointer((RuntimeMethod*)___1_method);
@@ -14650,20 +14650,20 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DeleteListDelegate__ctor_m9BB348005F4100
 	}
 	__this->___extra_arg = (intptr_t)&DeleteListDelegate_Invoke_mA138D65A4F6289E1B3BC7E7A78086F7BFB394D81_Multicast;
 }
-// Method Definition Index: 96848
+// Method Definition Index: 96854
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t DeleteListDelegate_Invoke_mA138D65A4F6289E1B3BC7E7A78086F7BFB394D81_gshared (DeleteListDelegate_tA2E6CDE68686D811E1976532813465847FC4D49A* __this, intptr_t ___0_listHandle, const RuntimeMethod* method) 
 {
 	typedef int32_t (*FunctionPointerType) (RuntimeObject*, intptr_t, const RuntimeMethod*);
 	return ((FunctionPointerType)__this->___invoke_impl)((Il2CppObject*)__this->___method_code, ___0_listHandle, reinterpret_cast<RuntimeMethod*>(__this->___method));
 }
-// Method Definition Index: 96849
+// Method Definition Index: 96855
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* DeleteListDelegate_BeginInvoke_m5F120C6A03FD439D50990036D68C7A3B2022BAAE_gshared (DeleteListDelegate_tA2E6CDE68686D811E1976532813465847FC4D49A* __this, intptr_t ___0_listHandle, AsyncCallback_t7FEF460CBDCFB9C5FA2EF776984778B9A4145F4C* ___1_callback, RuntimeObject* ___2_object, const RuntimeMethod* method) 
 {
 	void *__d_args[2] = {0};
 	__d_args[0] = Box(il2cpp_defaults.int_class, &___0_listHandle);
 	return (RuntimeObject*)il2cpp_codegen_delegate_begin_invoke((RuntimeDelegate*)__this, __d_args, (RuntimeDelegate*)___1_callback, (RuntimeObject*)___2_object);
 }
-// Method Definition Index: 96850
+// Method Definition Index: 96856
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t DeleteListDelegate_EndInvoke_mE80D399021AD2A1D71C0C2634EF81323C2B79ED0_gshared (DeleteListDelegate_tA2E6CDE68686D811E1976532813465847FC4D49A* __this, RuntimeObject* ___0_result, const RuntimeMethod* method) 
 {
 	RuntimeObject *__result = il2cpp_codegen_delegate_end_invoke((Il2CppAsyncResult*) ___0_result, 0);
@@ -14700,7 +14700,7 @@ int32_t DeleteListDelegate_Invoke_mB27179E5560DA3453302E4B2F0D3E52BCE7E016E_Open
 	typedef int32_t (*FunctionPointerType) (intptr_t, const RuntimeMethod*);
 	return ((FunctionPointerType)__this->___method_ptr)(___0_listHandle, method);
 }
-// Method Definition Index: 96847
+// Method Definition Index: 96853
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DeleteListDelegate__ctor_m55C3B7B23C2465F8408772ECFCFBB22AA23B7B97_gshared (DeleteListDelegate_t9164AF3F1E7559EA5860DFF003D035268C0DCA4D* __this, RuntimeObject* ___0_object, intptr_t ___1_method, const RuntimeMethod* method) 
 {
 	__this->___method_ptr = (intptr_t)il2cpp_codegen_get_method_pointer((RuntimeMethod*)___1_method);
@@ -14729,20 +14729,20 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DeleteListDelegate__ctor_m55C3B7B23C2465
 	}
 	__this->___extra_arg = (intptr_t)&DeleteListDelegate_Invoke_mB27179E5560DA3453302E4B2F0D3E52BCE7E016E_Multicast;
 }
-// Method Definition Index: 96848
+// Method Definition Index: 96854
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t DeleteListDelegate_Invoke_mB27179E5560DA3453302E4B2F0D3E52BCE7E016E_gshared (DeleteListDelegate_t9164AF3F1E7559EA5860DFF003D035268C0DCA4D* __this, intptr_t ___0_listHandle, const RuntimeMethod* method) 
 {
 	typedef int32_t (*FunctionPointerType) (RuntimeObject*, intptr_t, const RuntimeMethod*);
 	return ((FunctionPointerType)__this->___invoke_impl)((Il2CppObject*)__this->___method_code, ___0_listHandle, reinterpret_cast<RuntimeMethod*>(__this->___method));
 }
-// Method Definition Index: 96849
+// Method Definition Index: 96855
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* DeleteListDelegate_BeginInvoke_m365EA445A304FF57028F310B9D51884ED4F6A28F_gshared (DeleteListDelegate_t9164AF3F1E7559EA5860DFF003D035268C0DCA4D* __this, intptr_t ___0_listHandle, AsyncCallback_t7FEF460CBDCFB9C5FA2EF776984778B9A4145F4C* ___1_callback, RuntimeObject* ___2_object, const RuntimeMethod* method) 
 {
 	void *__d_args[2] = {0};
 	__d_args[0] = Box(il2cpp_defaults.int_class, &___0_listHandle);
 	return (RuntimeObject*)il2cpp_codegen_delegate_begin_invoke((RuntimeDelegate*)__this, __d_args, (RuntimeDelegate*)___1_callback, (RuntimeObject*)___2_object);
 }
-// Method Definition Index: 96850
+// Method Definition Index: 96856
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t DeleteListDelegate_EndInvoke_m08E60F0AE1CE91516EDE7B870A8F44386D7FD1D5_gshared (DeleteListDelegate_t9164AF3F1E7559EA5860DFF003D035268C0DCA4D* __this, RuntimeObject* ___0_result, const RuntimeMethod* method) 
 {
 	RuntimeObject *__result = il2cpp_codegen_delegate_end_invoke((Il2CppAsyncResult*) ___0_result, 0);
@@ -14779,7 +14779,7 @@ int32_t DeleteListDelegate_Invoke_m506EA8A8B828F0376D9E3CC64C0C95E9EC74C675_Open
 	typedef int32_t (*FunctionPointerType) (intptr_t, const RuntimeMethod*);
 	return ((FunctionPointerType)__this->___method_ptr)(___0_listHandle, method);
 }
-// Method Definition Index: 96847
+// Method Definition Index: 96853
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DeleteListDelegate__ctor_m986BC3DF3E05D126C23485E1510EA5A16AE9C4C5_gshared (DeleteListDelegate_tE8EF04B6FD076EDA53ADA117B4FA3EA643AE1DCD* __this, RuntimeObject* ___0_object, intptr_t ___1_method, const RuntimeMethod* method) 
 {
 	__this->___method_ptr = (intptr_t)il2cpp_codegen_get_method_pointer((RuntimeMethod*)___1_method);
@@ -14808,20 +14808,20 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DeleteListDelegate__ctor_m986BC3DF3E05D1
 	}
 	__this->___extra_arg = (intptr_t)&DeleteListDelegate_Invoke_m506EA8A8B828F0376D9E3CC64C0C95E9EC74C675_Multicast;
 }
-// Method Definition Index: 96848
+// Method Definition Index: 96854
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t DeleteListDelegate_Invoke_m506EA8A8B828F0376D9E3CC64C0C95E9EC74C675_gshared (DeleteListDelegate_tE8EF04B6FD076EDA53ADA117B4FA3EA643AE1DCD* __this, intptr_t ___0_listHandle, const RuntimeMethod* method) 
 {
 	typedef int32_t (*FunctionPointerType) (RuntimeObject*, intptr_t, const RuntimeMethod*);
 	return ((FunctionPointerType)__this->___invoke_impl)((Il2CppObject*)__this->___method_code, ___0_listHandle, reinterpret_cast<RuntimeMethod*>(__this->___method));
 }
-// Method Definition Index: 96849
+// Method Definition Index: 96855
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* DeleteListDelegate_BeginInvoke_mA093E7265C7A9C137E7C459FA323808D30FF6972_gshared (DeleteListDelegate_tE8EF04B6FD076EDA53ADA117B4FA3EA643AE1DCD* __this, intptr_t ___0_listHandle, AsyncCallback_t7FEF460CBDCFB9C5FA2EF776984778B9A4145F4C* ___1_callback, RuntimeObject* ___2_object, const RuntimeMethod* method) 
 {
 	void *__d_args[2] = {0};
 	__d_args[0] = Box(il2cpp_defaults.int_class, &___0_listHandle);
 	return (RuntimeObject*)il2cpp_codegen_delegate_begin_invoke((RuntimeDelegate*)__this, __d_args, (RuntimeDelegate*)___1_callback, (RuntimeObject*)___2_object);
 }
-// Method Definition Index: 96850
+// Method Definition Index: 96856
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t DeleteListDelegate_EndInvoke_mC28E56C44D88344CA24E87FD836215BEA5AB5948_gshared (DeleteListDelegate_tE8EF04B6FD076EDA53ADA117B4FA3EA643AE1DCD* __this, RuntimeObject* ___0_result, const RuntimeMethod* method) 
 {
 	RuntimeObject *__result = il2cpp_codegen_delegate_end_invoke((Il2CppAsyncResult*) ___0_result, 0);
@@ -14858,7 +14858,7 @@ int32_t DeleteListDelegate_Invoke_mB2D1BA1EBB10AFA4B8BC1AACD912AE61DD8412D5_Open
 	typedef int32_t (*FunctionPointerType) (intptr_t, const RuntimeMethod*);
 	return ((FunctionPointerType)__this->___method_ptr)(___0_listHandle, method);
 }
-// Method Definition Index: 96847
+// Method Definition Index: 96853
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DeleteListDelegate__ctor_m7A43785172A6FBE866C21FF421FCEDB0076FB20B_gshared (DeleteListDelegate_tB02BE101F9FD7BD562DD744A1D1202E4F9F8C4EC* __this, RuntimeObject* ___0_object, intptr_t ___1_method, const RuntimeMethod* method) 
 {
 	__this->___method_ptr = (intptr_t)il2cpp_codegen_get_method_pointer((RuntimeMethod*)___1_method);
@@ -14887,20 +14887,20 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DeleteListDelegate__ctor_m7A43785172A6FB
 	}
 	__this->___extra_arg = (intptr_t)&DeleteListDelegate_Invoke_mB2D1BA1EBB10AFA4B8BC1AACD912AE61DD8412D5_Multicast;
 }
-// Method Definition Index: 96848
+// Method Definition Index: 96854
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t DeleteListDelegate_Invoke_mB2D1BA1EBB10AFA4B8BC1AACD912AE61DD8412D5_gshared (DeleteListDelegate_tB02BE101F9FD7BD562DD744A1D1202E4F9F8C4EC* __this, intptr_t ___0_listHandle, const RuntimeMethod* method) 
 {
 	typedef int32_t (*FunctionPointerType) (RuntimeObject*, intptr_t, const RuntimeMethod*);
 	return ((FunctionPointerType)__this->___invoke_impl)((Il2CppObject*)__this->___method_code, ___0_listHandle, reinterpret_cast<RuntimeMethod*>(__this->___method));
 }
-// Method Definition Index: 96849
+// Method Definition Index: 96855
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* DeleteListDelegate_BeginInvoke_m3A804B0341E9FBC8D0F3D3D85F6CE78C26F5C14D_gshared (DeleteListDelegate_tB02BE101F9FD7BD562DD744A1D1202E4F9F8C4EC* __this, intptr_t ___0_listHandle, AsyncCallback_t7FEF460CBDCFB9C5FA2EF776984778B9A4145F4C* ___1_callback, RuntimeObject* ___2_object, const RuntimeMethod* method) 
 {
 	void *__d_args[2] = {0};
 	__d_args[0] = Box(il2cpp_defaults.int_class, &___0_listHandle);
 	return (RuntimeObject*)il2cpp_codegen_delegate_begin_invoke((RuntimeDelegate*)__this, __d_args, (RuntimeDelegate*)___1_callback, (RuntimeObject*)___2_object);
 }
-// Method Definition Index: 96850
+// Method Definition Index: 96856
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t DeleteListDelegate_EndInvoke_m04726E29821E4F4ADD3B4166EF3FE00D66223F21_gshared (DeleteListDelegate_tB02BE101F9FD7BD562DD744A1D1202E4F9F8C4EC* __this, RuntimeObject* ___0_result, const RuntimeMethod* method) 
 {
 	RuntimeObject *__result = il2cpp_codegen_delegate_end_invoke((Il2CppAsyncResult*) ___0_result, 0);
@@ -14937,7 +14937,7 @@ int32_t DeleteListDelegate_Invoke_m0CE6970E2CC8CED8F187DA157E354EC347FCEF32_Open
 	typedef int32_t (*FunctionPointerType) (intptr_t, const RuntimeMethod*);
 	return ((FunctionPointerType)__this->___method_ptr)(___0_listHandle, method);
 }
-// Method Definition Index: 96847
+// Method Definition Index: 96853
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DeleteListDelegate__ctor_m4790A50FD9FAB61BD09CD4F78967939AAA34EC74_gshared (DeleteListDelegate_t02467635DBBF610E855E473071C1708768D871B0* __this, RuntimeObject* ___0_object, intptr_t ___1_method, const RuntimeMethod* method) 
 {
 	__this->___method_ptr = (intptr_t)il2cpp_codegen_get_method_pointer((RuntimeMethod*)___1_method);
@@ -14966,20 +14966,20 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DeleteListDelegate__ctor_m4790A50FD9FAB6
 	}
 	__this->___extra_arg = (intptr_t)&DeleteListDelegate_Invoke_m0CE6970E2CC8CED8F187DA157E354EC347FCEF32_Multicast;
 }
-// Method Definition Index: 96848
+// Method Definition Index: 96854
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t DeleteListDelegate_Invoke_m0CE6970E2CC8CED8F187DA157E354EC347FCEF32_gshared (DeleteListDelegate_t02467635DBBF610E855E473071C1708768D871B0* __this, intptr_t ___0_listHandle, const RuntimeMethod* method) 
 {
 	typedef int32_t (*FunctionPointerType) (RuntimeObject*, intptr_t, const RuntimeMethod*);
 	return ((FunctionPointerType)__this->___invoke_impl)((Il2CppObject*)__this->___method_code, ___0_listHandle, reinterpret_cast<RuntimeMethod*>(__this->___method));
 }
-// Method Definition Index: 96849
+// Method Definition Index: 96855
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* DeleteListDelegate_BeginInvoke_mA3290383242DA8169D580E00EAD7B290E49D9517_gshared (DeleteListDelegate_t02467635DBBF610E855E473071C1708768D871B0* __this, intptr_t ___0_listHandle, AsyncCallback_t7FEF460CBDCFB9C5FA2EF776984778B9A4145F4C* ___1_callback, RuntimeObject* ___2_object, const RuntimeMethod* method) 
 {
 	void *__d_args[2] = {0};
 	__d_args[0] = Box(il2cpp_defaults.int_class, &___0_listHandle);
 	return (RuntimeObject*)il2cpp_codegen_delegate_begin_invoke((RuntimeDelegate*)__this, __d_args, (RuntimeDelegate*)___1_callback, (RuntimeObject*)___2_object);
 }
-// Method Definition Index: 96850
+// Method Definition Index: 96856
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t DeleteListDelegate_EndInvoke_m4730442307834CFD8E3E58FA7DDA49E2A8648FF9_gshared (DeleteListDelegate_t02467635DBBF610E855E473071C1708768D871B0* __this, RuntimeObject* ___0_result, const RuntimeMethod* method) 
 {
 	RuntimeObject *__result = il2cpp_codegen_delegate_end_invoke((Il2CppAsyncResult*) ___0_result, 0);
@@ -15016,7 +15016,7 @@ int32_t DeleteListDelegate_Invoke_m5D6FF94CA686A2301F0CFF67966922D270697844_Open
 	typedef int32_t (*FunctionPointerType) (intptr_t, const RuntimeMethod*);
 	return ((FunctionPointerType)__this->___method_ptr)(___0_listHandle, method);
 }
-// Method Definition Index: 96847
+// Method Definition Index: 96853
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DeleteListDelegate__ctor_m8C6F2CEBF224D76BF1B627EB028F403B3A70DF6F_gshared (DeleteListDelegate_tCF7E67177B9C6D11A58BC69A88BE82D624CB63CF* __this, RuntimeObject* ___0_object, intptr_t ___1_method, const RuntimeMethod* method) 
 {
 	__this->___method_ptr = (intptr_t)il2cpp_codegen_get_method_pointer((RuntimeMethod*)___1_method);
@@ -15045,20 +15045,20 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DeleteListDelegate__ctor_m8C6F2CEBF224D7
 	}
 	__this->___extra_arg = (intptr_t)&DeleteListDelegate_Invoke_m5D6FF94CA686A2301F0CFF67966922D270697844_Multicast;
 }
-// Method Definition Index: 96848
+// Method Definition Index: 96854
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t DeleteListDelegate_Invoke_m5D6FF94CA686A2301F0CFF67966922D270697844_gshared (DeleteListDelegate_tCF7E67177B9C6D11A58BC69A88BE82D624CB63CF* __this, intptr_t ___0_listHandle, const RuntimeMethod* method) 
 {
 	typedef int32_t (*FunctionPointerType) (RuntimeObject*, intptr_t, const RuntimeMethod*);
 	return ((FunctionPointerType)__this->___invoke_impl)((Il2CppObject*)__this->___method_code, ___0_listHandle, reinterpret_cast<RuntimeMethod*>(__this->___method));
 }
-// Method Definition Index: 96849
+// Method Definition Index: 96855
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* DeleteListDelegate_BeginInvoke_mA6A0BEC535F4F2CCCD15E5941DB84850C10975DF_gshared (DeleteListDelegate_tCF7E67177B9C6D11A58BC69A88BE82D624CB63CF* __this, intptr_t ___0_listHandle, AsyncCallback_t7FEF460CBDCFB9C5FA2EF776984778B9A4145F4C* ___1_callback, RuntimeObject* ___2_object, const RuntimeMethod* method) 
 {
 	void *__d_args[2] = {0};
 	__d_args[0] = Box(il2cpp_defaults.int_class, &___0_listHandle);
 	return (RuntimeObject*)il2cpp_codegen_delegate_begin_invoke((RuntimeDelegate*)__this, __d_args, (RuntimeDelegate*)___1_callback, (RuntimeObject*)___2_object);
 }
-// Method Definition Index: 96850
+// Method Definition Index: 96856
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t DeleteListDelegate_EndInvoke_mCF013C2A29DB7513D06B73A0D1EFF4053FCFFB4D_gshared (DeleteListDelegate_tCF7E67177B9C6D11A58BC69A88BE82D624CB63CF* __this, RuntimeObject* ___0_result, const RuntimeMethod* method) 
 {
 	RuntimeObject *__result = il2cpp_codegen_delegate_end_invoke((Il2CppAsyncResult*) ___0_result, 0);
@@ -15095,7 +15095,7 @@ int32_t DeleteListDelegate_Invoke_m3C8FFB3DB286764D623B7575A5E8396D8FEEC8A5_Open
 	typedef int32_t (*FunctionPointerType) (intptr_t, const RuntimeMethod*);
 	return ((FunctionPointerType)__this->___method_ptr)(___0_listHandle, method);
 }
-// Method Definition Index: 96847
+// Method Definition Index: 96853
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DeleteListDelegate__ctor_m799E81D9A23219386352AF5D3A6C545CFAB04BE3_gshared (DeleteListDelegate_t1CC75DDA7B5CB7D1F66CEB65AA4ECB861B5A374A* __this, RuntimeObject* ___0_object, intptr_t ___1_method, const RuntimeMethod* method) 
 {
 	__this->___method_ptr = (intptr_t)il2cpp_codegen_get_method_pointer((RuntimeMethod*)___1_method);
@@ -15124,20 +15124,20 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DeleteListDelegate__ctor_m799E81D9A23219
 	}
 	__this->___extra_arg = (intptr_t)&DeleteListDelegate_Invoke_m3C8FFB3DB286764D623B7575A5E8396D8FEEC8A5_Multicast;
 }
-// Method Definition Index: 96848
+// Method Definition Index: 96854
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t DeleteListDelegate_Invoke_m3C8FFB3DB286764D623B7575A5E8396D8FEEC8A5_gshared (DeleteListDelegate_t1CC75DDA7B5CB7D1F66CEB65AA4ECB861B5A374A* __this, intptr_t ___0_listHandle, const RuntimeMethod* method) 
 {
 	typedef int32_t (*FunctionPointerType) (RuntimeObject*, intptr_t, const RuntimeMethod*);
 	return ((FunctionPointerType)__this->___invoke_impl)((Il2CppObject*)__this->___method_code, ___0_listHandle, reinterpret_cast<RuntimeMethod*>(__this->___method));
 }
-// Method Definition Index: 96849
+// Method Definition Index: 96855
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* DeleteListDelegate_BeginInvoke_m75475A58DE98ABAD7DC018F0846C98524A0C5AE9_gshared (DeleteListDelegate_t1CC75DDA7B5CB7D1F66CEB65AA4ECB861B5A374A* __this, intptr_t ___0_listHandle, AsyncCallback_t7FEF460CBDCFB9C5FA2EF776984778B9A4145F4C* ___1_callback, RuntimeObject* ___2_object, const RuntimeMethod* method) 
 {
 	void *__d_args[2] = {0};
 	__d_args[0] = Box(il2cpp_defaults.int_class, &___0_listHandle);
 	return (RuntimeObject*)il2cpp_codegen_delegate_begin_invoke((RuntimeDelegate*)__this, __d_args, (RuntimeDelegate*)___1_callback, (RuntimeObject*)___2_object);
 }
-// Method Definition Index: 96850
+// Method Definition Index: 96856
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t DeleteListDelegate_EndInvoke_mE0516BB3B8ABFC3DBAB402EE90F89367A9E47A32_gshared (DeleteListDelegate_t1CC75DDA7B5CB7D1F66CEB65AA4ECB861B5A374A* __this, RuntimeObject* ___0_result, const RuntimeMethod* method) 
 {
 	RuntimeObject *__result = il2cpp_codegen_delegate_end_invoke((Il2CppAsyncResult*) ___0_result, 0);
@@ -15174,7 +15174,7 @@ int32_t DeleteSetDelegate_Invoke_mE674EAB607D916239AE1A8183D26AC6323BA2831_OpenS
 	typedef int32_t (*FunctionPointerType) (intptr_t, const RuntimeMethod*);
 	return ((FunctionPointerType)__this->___method_ptr)(___0_setHandle, method);
 }
-// Method Definition Index: 96667
+// Method Definition Index: 96673
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DeleteSetDelegate__ctor_mA3F0278B217D4765623B1B7C1320EC6650D6BC8F_gshared (DeleteSetDelegate_t0E20C61E94E41DBE77ED3C7427B6E817EE8BAABD* __this, RuntimeObject* ___0_object, intptr_t ___1_method, const RuntimeMethod* method) 
 {
 	__this->___method_ptr = (intptr_t)il2cpp_codegen_get_method_pointer((RuntimeMethod*)___1_method);
@@ -15203,20 +15203,20 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DeleteSetDelegate__ctor_mA3F0278B217D476
 	}
 	__this->___extra_arg = (intptr_t)&DeleteSetDelegate_Invoke_mE674EAB607D916239AE1A8183D26AC6323BA2831_Multicast;
 }
-// Method Definition Index: 96668
+// Method Definition Index: 96674
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t DeleteSetDelegate_Invoke_mE674EAB607D916239AE1A8183D26AC6323BA2831_gshared (DeleteSetDelegate_t0E20C61E94E41DBE77ED3C7427B6E817EE8BAABD* __this, intptr_t ___0_setHandle, const RuntimeMethod* method) 
 {
 	typedef int32_t (*FunctionPointerType) (RuntimeObject*, intptr_t, const RuntimeMethod*);
 	return ((FunctionPointerType)__this->___invoke_impl)((Il2CppObject*)__this->___method_code, ___0_setHandle, reinterpret_cast<RuntimeMethod*>(__this->___method));
 }
-// Method Definition Index: 96669
+// Method Definition Index: 96675
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* DeleteSetDelegate_BeginInvoke_mDF1A29482A3EAD935F5CF4233B12408E73D401CE_gshared (DeleteSetDelegate_t0E20C61E94E41DBE77ED3C7427B6E817EE8BAABD* __this, intptr_t ___0_setHandle, AsyncCallback_t7FEF460CBDCFB9C5FA2EF776984778B9A4145F4C* ___1_callback, RuntimeObject* ___2_object, const RuntimeMethod* method) 
 {
 	void *__d_args[2] = {0};
 	__d_args[0] = Box(il2cpp_defaults.int_class, &___0_setHandle);
 	return (RuntimeObject*)il2cpp_codegen_delegate_begin_invoke((RuntimeDelegate*)__this, __d_args, (RuntimeDelegate*)___1_callback, (RuntimeObject*)___2_object);
 }
-// Method Definition Index: 96670
+// Method Definition Index: 96676
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t DeleteSetDelegate_EndInvoke_mD2F2B8365AFA6A3B326DCCA93A72D36B652B33CB_gshared (DeleteSetDelegate_t0E20C61E94E41DBE77ED3C7427B6E817EE8BAABD* __this, RuntimeObject* ___0_result, const RuntimeMethod* method) 
 {
 	RuntimeObject *__result = il2cpp_codegen_delegate_end_invoke((Il2CppAsyncResult*) ___0_result, 0);
@@ -15253,7 +15253,7 @@ int32_t DeleteSetDelegate_Invoke_m37D14C863F168F58D17F8D469CD2B61088C74D17_OpenS
 	typedef int32_t (*FunctionPointerType) (intptr_t, const RuntimeMethod*);
 	return ((FunctionPointerType)__this->___method_ptr)(___0_setHandle, method);
 }
-// Method Definition Index: 96667
+// Method Definition Index: 96673
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DeleteSetDelegate__ctor_m4E36E2AB38EFF1169AF5752D06ADC70B248B27B5_gshared (DeleteSetDelegate_tDF74CBDC484BB9E04CD5942ADB095C8E420C9E78* __this, RuntimeObject* ___0_object, intptr_t ___1_method, const RuntimeMethod* method) 
 {
 	__this->___method_ptr = (intptr_t)il2cpp_codegen_get_method_pointer((RuntimeMethod*)___1_method);
@@ -15282,20 +15282,20 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DeleteSetDelegate__ctor_m4E36E2AB38EFF11
 	}
 	__this->___extra_arg = (intptr_t)&DeleteSetDelegate_Invoke_m37D14C863F168F58D17F8D469CD2B61088C74D17_Multicast;
 }
-// Method Definition Index: 96668
+// Method Definition Index: 96674
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t DeleteSetDelegate_Invoke_m37D14C863F168F58D17F8D469CD2B61088C74D17_gshared (DeleteSetDelegate_tDF74CBDC484BB9E04CD5942ADB095C8E420C9E78* __this, intptr_t ___0_setHandle, const RuntimeMethod* method) 
 {
 	typedef int32_t (*FunctionPointerType) (RuntimeObject*, intptr_t, const RuntimeMethod*);
 	return ((FunctionPointerType)__this->___invoke_impl)((Il2CppObject*)__this->___method_code, ___0_setHandle, reinterpret_cast<RuntimeMethod*>(__this->___method));
 }
-// Method Definition Index: 96669
+// Method Definition Index: 96675
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* DeleteSetDelegate_BeginInvoke_m450C56BB7AAF1183297A6EB0B687713ECDE3E485_gshared (DeleteSetDelegate_tDF74CBDC484BB9E04CD5942ADB095C8E420C9E78* __this, intptr_t ___0_setHandle, AsyncCallback_t7FEF460CBDCFB9C5FA2EF776984778B9A4145F4C* ___1_callback, RuntimeObject* ___2_object, const RuntimeMethod* method) 
 {
 	void *__d_args[2] = {0};
 	__d_args[0] = Box(il2cpp_defaults.int_class, &___0_setHandle);
 	return (RuntimeObject*)il2cpp_codegen_delegate_begin_invoke((RuntimeDelegate*)__this, __d_args, (RuntimeDelegate*)___1_callback, (RuntimeObject*)___2_object);
 }
-// Method Definition Index: 96670
+// Method Definition Index: 96676
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t DeleteSetDelegate_EndInvoke_m127B44D3217985E1D7FBEF44E040B9082BE6E50F_gshared (DeleteSetDelegate_tDF74CBDC484BB9E04CD5942ADB095C8E420C9E78* __this, RuntimeObject* ___0_result, const RuntimeMethod* method) 
 {
 	RuntimeObject *__result = il2cpp_codegen_delegate_end_invoke((Il2CppAsyncResult*) ___0_result, 0);
@@ -16339,14 +16339,14 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DictionaryPool_2__cctor_mDA7E85399F499BF
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 99261
+// Method Definition Index: 99267
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t DictionaryPropertyBag_2_get_InstantiationKind_m641573CD1323CD15A7F099323BA1B2546F063182_gshared (DictionaryPropertyBag_2_tB597C417CF7505B25BF7B87BA095BDE4F999B934* __this, const RuntimeMethod* method) 
 {
 	{
 		return (int32_t)(1);
 	}
 }
-// Method Definition Index: 99262
+// Method Definition Index: 99268
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Dictionary_2_t5C32AF17A5801FB3109E5B0E622BA8402A04E08E* DictionaryPropertyBag_2_Instantiate_m7778199CDF045586687AB5A9F377D8FB3786C1E0_gshared (DictionaryPropertyBag_2_tB597C417CF7505B25BF7B87BA095BDE4F999B934* __this, const RuntimeMethod* method) 
 {
 	{
@@ -16355,7 +16355,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Dictionary_2_t5C32AF17A5801FB3109E5B0E622BA84
 		return L_0;
 	}
 }
-// Method Definition Index: 99263
+// Method Definition Index: 99269
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void DictionaryPropertyBag_2__ctor_m8FC636BBC54135160381FA25CF825CCC925E5E33_gshared (DictionaryPropertyBag_2_tB597C417CF7505B25BF7B87BA095BDE4F999B934* __this, const RuntimeMethod* method) 
 {
 	{

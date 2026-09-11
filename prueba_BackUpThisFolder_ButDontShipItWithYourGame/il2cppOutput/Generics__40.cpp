@@ -44376,7 +44376,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Entry__ctor_m048B8DCA25269A57966121E109E
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 97302
+// Method Definition Index: 97308
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool Entry_Equals_m8C7A2CB636D79D12AFACD6957620DED9CCB73DCD_gshared (Entry_t1FBFB504C989AF41DB9CD98FC8812617114C2564* __this, Entry_t1FBFB504C989AF41DB9CD98FC8812617114C2564 ___0_other, const RuntimeMethod* method) 
 {
 	{
@@ -44400,7 +44400,7 @@ IL2CPP_EXTERN_C  bool Entry_Equals_m8C7A2CB636D79D12AFACD6957620DED9CCB73DCD_Adj
 	_returnValue = Entry_Equals_m8C7A2CB636D79D12AFACD6957620DED9CCB73DCD(_thisAdjusted, ___0_other, method);
 	return _returnValue;
 }
-// Method Definition Index: 97303
+// Method Definition Index: 97309
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t Entry_GetHashCode_m60518F16A07B9D3EBAC6E4EC8ADF46484FF31EF8_gshared (Entry_t1FBFB504C989AF41DB9CD98FC8812617114C2564* __this, const RuntimeMethod* method) 
 {
 	{
@@ -44487,7 +44487,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Entry__ctor_m2F1C9A616BEC4E7A6E2CC1EC557
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 97302
+// Method Definition Index: 97308
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool Entry_Equals_mBFB6A92F0B14AAD6C51562D8835117551C72C9AB_gshared (Entry_t27A12FF83E74E8E62C194CB2DC007E06A9DC6647* __this, Entry_t27A12FF83E74E8E62C194CB2DC007E06A9DC6647 ___0_other, const RuntimeMethod* method) 
 {
 	const uint32_t SizeOf_Entry_t29BEACB44DD47A0502B9DB93139B3DE0E8E6381B = il2cpp_codegen_sizeof(il2cpp_rgctx_data_no_init(InitializedTypeInfo(method->klass)->rgctx_data, 0));
@@ -44511,7 +44511,7 @@ IL2CPP_EXTERN_C  bool Entry_Equals_mBFB6A92F0B14AAD6C51562D8835117551C72C9AB_Adj
 	_returnValue = Entry_Equals_mBFB6A92F0B14AAD6C51562D8835117551C72C9AB(_thisAdjusted, ___0_other, method);
 	return _returnValue;
 }
-// Method Definition Index: 97303
+// Method Definition Index: 97309
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t Entry_GetHashCode_m09C086F7EF04553E32666EFE594DBFC677FD6061_gshared (Entry_t27A12FF83E74E8E62C194CB2DC007E06A9DC6647* __this, const RuntimeMethod* method) 
 {
 	void* L_0 = alloca(Il2CppFakeBoxBuffer::SizeNeededFor(il2cpp_rgctx_data(InitializedTypeInfo(method->klass)->rgctx_data, 1)));
@@ -46950,7 +46950,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void EnumParameter_1__ctor_m3F5099D74547B43A1
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 99320
+// Method Definition Index: 99326
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Enumerable__ctor_m9088B0F646E8EF80BCDA3B11D884763A9A817E61_gshared (Enumerable_tA45ABDBCF76DD463AFA99468C131E653CCBB9B4D* __this, Il2CppFullySharedGenericAny ___0_dictionary, KeyValuePairProperty_t1FD0D2BA91EB5ACD2513F7960E2C302BD70E47FA* ___1_property, const RuntimeMethod* method) 
 {
 	const uint32_t SizeOf_TDictionary_tB89BF58A5B296A96FB64214566FBA5560743F6C7 = il2cpp_codegen_sizeof(il2cpp_rgctx_data_no_init(InitializedTypeInfo(method->klass)->rgctx_data, 0));
@@ -46970,7 +46970,7 @@ IL2CPP_EXTERN_C  void Enumerable__ctor_m9088B0F646E8EF80BCDA3B11D884763A9A817E61
 	_thisAdjusted = reinterpret_cast<Enumerable_tA45ABDBCF76DD463AFA99468C131E653CCBB9B4D*>(__this + _offset);
 	Enumerable__ctor_m9088B0F646E8EF80BCDA3B11D884763A9A817E61(_thisAdjusted, ___0_dictionary, ___1_property, method);
 }
-// Method Definition Index: 99321
+// Method Definition Index: 99327
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* Enumerable_System_Collections_IEnumerable_GetEnumerator_m22D9023302E21EDDA6EDAB5AB7C40055EF33EBF4_gshared (Enumerable_tA45ABDBCF76DD463AFA99468C131E653CCBB9B4D* __this, const RuntimeMethod* method) 
 {
 	const uint32_t SizeOf_TDictionary_tB89BF58A5B296A96FB64214566FBA5560743F6C7 = il2cpp_codegen_sizeof(il2cpp_rgctx_data_no_init(InitializedTypeInfo(method->klass)->rgctx_data, 0));
@@ -46992,7 +46992,7 @@ IL2CPP_EXTERN_C  RuntimeObject* Enumerable_System_Collections_IEnumerable_GetEnu
 	_returnValue = Enumerable_System_Collections_IEnumerable_GetEnumerator_m22D9023302E21EDDA6EDAB5AB7C40055EF33EBF4(_thisAdjusted, method);
 	return _returnValue;
 }
-// Method Definition Index: 99322
+// Method Definition Index: 99328
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* Enumerable_System_Collections_Generic_IEnumerableU3CUnity_Properties_IPropertyU3CTDictionaryU3EU3E_GetEnumerator_m3A72329B599B83EC044C68832928DC458ACC6501_gshared (Enumerable_tA45ABDBCF76DD463AFA99468C131E653CCBB9B4D* __this, const RuntimeMethod* method) 
 {
 	const uint32_t SizeOf_TDictionary_tB89BF58A5B296A96FB64214566FBA5560743F6C7 = il2cpp_codegen_sizeof(il2cpp_rgctx_data_no_init(InitializedTypeInfo(method->klass)->rgctx_data, 0));

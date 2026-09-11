@@ -590,7 +590,7 @@ IL2CPP_EXTERN_C int32_t CDECL sqlite3_libversion_number();
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 92420
+// Method Definition Index: 92426
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR String_t* Binding_get_Name_m36460244708DECF7462EC96985049395A01BEE4F (Binding_t846C16F3FF76025D82F878E8E00A5894741580FD* __this, const RuntimeMethod* method) 
 {
 	{
@@ -599,7 +599,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR String_t* Binding_get_Name_m36460244708DECF74
 		return L_0;
 	}
 }
-// Method Definition Index: 92421
+// Method Definition Index: 92427
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Binding_set_Name_m6605B567612DDFD3FA9FC4557DD0F03ABE7698F8 (Binding_t846C16F3FF76025D82F878E8E00A5894741580FD* __this, String_t* ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -610,7 +610,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Binding_set_Name_m6605B567612DDFD3FA9FC4
 		return;
 	}
 }
-// Method Definition Index: 92422
+// Method Definition Index: 92428
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* Binding_get_Value_mC2E67931562F6A62D66038EBEA50BA9395C77785 (Binding_t846C16F3FF76025D82F878E8E00A5894741580FD* __this, const RuntimeMethod* method) 
 {
 	{
@@ -619,7 +619,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* Binding_get_Value_mC2E67931562
 		return L_0;
 	}
 }
-// Method Definition Index: 92423
+// Method Definition Index: 92429
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Binding_set_Value_m63DB4E8880807D0480D3ED195430FE33717FBAD0 (Binding_t846C16F3FF76025D82F878E8E00A5894741580FD* __this, RuntimeObject* ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -630,7 +630,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Binding_set_Value_m63DB4E8880807D0480D3E
 		return;
 	}
 }
-// Method Definition Index: 92424
+// Method Definition Index: 92430
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t Binding_get_Index_m5456E8E974EFC63C021CCF2AD8FC8036E8AA2C91 (Binding_t846C16F3FF76025D82F878E8E00A5894741580FD* __this, const RuntimeMethod* method) 
 {
 	{
@@ -639,7 +639,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t Binding_get_Index_m5456E8E974EFC63C02
 		return L_0;
 	}
 }
-// Method Definition Index: 92425
+// Method Definition Index: 92431
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Binding_set_Index_mD5F67E97A91ED368AF1055F65734E8FA474C3AB1 (Binding_t846C16F3FF76025D82F878E8E00A5894741580FD* __this, int32_t ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -649,7 +649,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Binding_set_Index_mD5F67E97A91ED368AF105
 		return;
 	}
 }
-// Method Definition Index: 92426
+// Method Definition Index: 92432
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Binding__ctor_m13CB4B80C3F97D812D6E871A671E2EADC50DDEDB (Binding_t846C16F3FF76025D82F878E8E00A5894741580FD* __this, const RuntimeMethod* method) 
 {
 	{
@@ -665,7 +665,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Binding__ctor_m13CB4B80C3F97D812D6E871A6
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 92437
+// Method Definition Index: 92443
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool PreparedSqlLiteInsertCommand_get_Initialized_mCA24A887ADAD977158DC4E161DC05D6A0041703B (PreparedSqlLiteInsertCommand_t2E0FDB355A754A9BB3DCC8163BA880F5B8161CC6* __this, const RuntimeMethod* method) 
 {
 	{
@@ -674,7 +674,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool PreparedSqlLiteInsertCommand_get_Initial
 		return L_0;
 	}
 }
-// Method Definition Index: 92438
+// Method Definition Index: 92444
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PreparedSqlLiteInsertCommand_set_Initialized_mEE003DDBDE4E99119A83428683D170BBB556ADAB (PreparedSqlLiteInsertCommand_t2E0FDB355A754A9BB3DCC8163BA880F5B8161CC6* __this, bool ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -684,7 +684,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PreparedSqlLiteInsertCommand_set_Initial
 		return;
 	}
 }
-// Method Definition Index: 92439
+// Method Definition Index: 92445
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR SQLiteConnection_t7E2BA1E4CC3809FD458BFD2813B706A91189DCC4* PreparedSqlLiteInsertCommand_get_Connection_mBB8F6B07CDA2CF1A8386A0FBE5C3FD61E15E74CA (PreparedSqlLiteInsertCommand_t2E0FDB355A754A9BB3DCC8163BA880F5B8161CC6* __this, const RuntimeMethod* method) 
 {
 	{
@@ -693,7 +693,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR SQLiteConnection_t7E2BA1E4CC3809FD458BFD2813B
 		return L_0;
 	}
 }
-// Method Definition Index: 92440
+// Method Definition Index: 92446
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PreparedSqlLiteInsertCommand_set_Connection_mCCBE4206E6F940C3762DDF7EC4E7C75174145E23 (PreparedSqlLiteInsertCommand_t2E0FDB355A754A9BB3DCC8163BA880F5B8161CC6* __this, SQLiteConnection_t7E2BA1E4CC3809FD458BFD2813B706A91189DCC4* ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -704,7 +704,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PreparedSqlLiteInsertCommand_set_Connect
 		return;
 	}
 }
-// Method Definition Index: 92441
+// Method Definition Index: 92447
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR String_t* PreparedSqlLiteInsertCommand_get_CommandText_m1774FAC339AF3EE7649470C4F02912EFED8E9214 (PreparedSqlLiteInsertCommand_t2E0FDB355A754A9BB3DCC8163BA880F5B8161CC6* __this, const RuntimeMethod* method) 
 {
 	{
@@ -713,7 +713,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR String_t* PreparedSqlLiteInsertCommand_get_Co
 		return L_0;
 	}
 }
-// Method Definition Index: 92442
+// Method Definition Index: 92448
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PreparedSqlLiteInsertCommand_set_CommandText_mF815B54C9CC7655C4EFD985B018A7F2BCB801D25 (PreparedSqlLiteInsertCommand_t2E0FDB355A754A9BB3DCC8163BA880F5B8161CC6* __this, String_t* ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -724,7 +724,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PreparedSqlLiteInsertCommand_set_Command
 		return;
 	}
 }
-// Method Definition Index: 92443
+// Method Definition Index: 92449
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR intptr_t PreparedSqlLiteInsertCommand_get_Statement_m29BC704221EF28CEECA30BFE4E52217430CC719D (PreparedSqlLiteInsertCommand_t2E0FDB355A754A9BB3DCC8163BA880F5B8161CC6* __this, const RuntimeMethod* method) 
 {
 	{
@@ -733,7 +733,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR intptr_t PreparedSqlLiteInsertCommand_get_Sta
 		return L_0;
 	}
 }
-// Method Definition Index: 92444
+// Method Definition Index: 92450
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PreparedSqlLiteInsertCommand_set_Statement_mC87A23AD8B6856E34DC7B2020EA0188AFA737D07 (PreparedSqlLiteInsertCommand_t2E0FDB355A754A9BB3DCC8163BA880F5B8161CC6* __this, intptr_t ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -743,7 +743,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PreparedSqlLiteInsertCommand_set_Stateme
 		return;
 	}
 }
-// Method Definition Index: 92445
+// Method Definition Index: 92451
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PreparedSqlLiteInsertCommand__ctor_mAC78E6F9CAB8A87FD6340F01B89E74B2303A439D (PreparedSqlLiteInsertCommand_t2E0FDB355A754A9BB3DCC8163BA880F5B8161CC6* __this, SQLiteConnection_t7E2BA1E4CC3809FD458BFD2813B706A91189DCC4* ___0_conn, const RuntimeMethod* method) 
 {
 	{
@@ -756,7 +756,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PreparedSqlLiteInsertCommand__ctor_mAC78
 		return;
 	}
 }
-// Method Definition Index: 92446
+// Method Definition Index: 92452
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t PreparedSqlLiteInsertCommand_ExecuteNonQuery_mB3C230E1C516704102397C40F4755B5B814C621E (PreparedSqlLiteInsertCommand_t2E0FDB355A754A9BB3DCC8163BA880F5B8161CC6* __this, ObjectU5BU5D_t8061030B0A12A55D5AD8652A20C922FE99450918* ___0_source, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -988,7 +988,7 @@ IL_0108:
 		IL2CPP_RAISE_MANAGED_EXCEPTION(L_52, ((RuntimeMethod*)il2cpp_codegen_initialize_runtime_metadata_inline((uintptr_t*)&PreparedSqlLiteInsertCommand_ExecuteNonQuery_mB3C230E1C516704102397C40F4755B5B814C621E_RuntimeMethod_var)));
 	}
 }
-// Method Definition Index: 92447
+// Method Definition Index: 92453
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR intptr_t PreparedSqlLiteInsertCommand_Prepare_m6E268A673856876CD0CA204DE8259957F8B02451 (PreparedSqlLiteInsertCommand_t2E0FDB355A754A9BB3DCC8163BA880F5B8161CC6* __this, const RuntimeMethod* method) 
 {
 	{
@@ -1006,7 +1006,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR intptr_t PreparedSqlLiteInsertCommand_Prepare
 		return L_3;
 	}
 }
-// Method Definition Index: 92448
+// Method Definition Index: 92454
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PreparedSqlLiteInsertCommand_Dispose_mCA54621740609D3A5DC1952524DFCB280474E8C7 (PreparedSqlLiteInsertCommand_t2E0FDB355A754A9BB3DCC8163BA880F5B8161CC6* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -1025,7 +1025,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PreparedSqlLiteInsertCommand_Dispose_mCA
 		return;
 	}
 }
-// Method Definition Index: 92449
+// Method Definition Index: 92455
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PreparedSqlLiteInsertCommand_Dispose_m520FE32389F4CCEFB755F387EEDD744E73B3CC6D (PreparedSqlLiteInsertCommand_t2E0FDB355A754A9BB3DCC8163BA880F5B8161CC6* __this, bool ___0_disposing, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -1083,7 +1083,7 @@ IL_0033:
 		return;
 	}
 }
-// Method Definition Index: 92450
+// Method Definition Index: 92456
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void PreparedSqlLiteInsertCommand_Finalize_mFFAC493B286CD66A02BB8F9ACA85A0597B2E7D3A (PreparedSqlLiteInsertCommand_t2E0FDB355A754A9BB3DCC8163BA880F5B8161CC6* __this, const RuntimeMethod* method) 
 {
 	{
@@ -1123,7 +1123,7 @@ IL_0010:
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 92451
+// Method Definition Index: 92457
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void BaseTableQuery__ctor_m1E504A1BD11D864668DCEC1731386EC3AF1E6196 (BaseTableQuery_t28D9E3082475EF8E0FC7E8F87FA0174C247BED7D* __this, const RuntimeMethod* method) 
 {
 	{
@@ -1139,7 +1139,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void BaseTableQuery__ctor_m1E504A1BD11D864668
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 92452
+// Method Definition Index: 92458
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR String_t* Ordering_get_ColumnName_mC65267E5811EE3F8CE0CAD868BFBCCD226385E95 (Ordering_t8D3129D3E036EA513954A3A76CC9E1B92E633826* __this, const RuntimeMethod* method) 
 {
 	{
@@ -1148,7 +1148,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR String_t* Ordering_get_ColumnName_mC65267E581
 		return L_0;
 	}
 }
-// Method Definition Index: 92453
+// Method Definition Index: 92459
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Ordering_set_ColumnName_m66126D3284499DA6728C00293B9FB4A7F8C04671 (Ordering_t8D3129D3E036EA513954A3A76CC9E1B92E633826* __this, String_t* ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -1159,7 +1159,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Ordering_set_ColumnName_m66126D3284499DA
 		return;
 	}
 }
-// Method Definition Index: 92454
+// Method Definition Index: 92460
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool Ordering_get_Ascending_mF30E94AF04081D605BCFEC595157DF5FAB62E1AF (Ordering_t8D3129D3E036EA513954A3A76CC9E1B92E633826* __this, const RuntimeMethod* method) 
 {
 	{
@@ -1168,7 +1168,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool Ordering_get_Ascending_mF30E94AF04081D60
 		return L_0;
 	}
 }
-// Method Definition Index: 92455
+// Method Definition Index: 92461
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Ordering_set_Ascending_m6270DD4601CFE7194398EAE9556B39F55FBA418D (Ordering_t8D3129D3E036EA513954A3A76CC9E1B92E633826* __this, bool ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -1178,7 +1178,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Ordering_set_Ascending_m6270DD4601CFE719
 		return;
 	}
 }
-// Method Definition Index: 92456
+// Method Definition Index: 92462
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Ordering__ctor_mA2CD0E3D3D8AEF7298884B644C1FE3D89CA7B308 (Ordering_t8D3129D3E036EA513954A3A76CC9E1B92E633826* __this, const RuntimeMethod* method) 
 {
 	{
@@ -1194,7 +1194,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Ordering__ctor_mA2CD0E3D3D8AEF7298884B64
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 92497
+// Method Definition Index: 92503
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_Open_m80808E4C10BC275172A8A7D7FD25787117AB60EF (String_t* ___0_filename, intptr_t* ___1_db, const RuntimeMethod* method) 
 {
 	typedef int32_t (CDECL *PInvokeFunc) (char*, intptr_t*);
@@ -1222,7 +1222,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_Open_m80808E4C10BC275172A8A7D
 
 	return returnValue;
 }
-// Method Definition Index: 92498
+// Method Definition Index: 92504
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_Open_m3B612E922040951B5531825004CC8749B619EC17 (String_t* ___0_filename, intptr_t* ___1_db, int32_t ___2_flags, intptr_t ___3_zvfs, const RuntimeMethod* method) 
 {
 	typedef int32_t (CDECL *PInvokeFunc) (char*, intptr_t*, int32_t, intptr_t);
@@ -1250,7 +1250,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_Open_m3B612E922040951B5531825
 
 	return returnValue;
 }
-// Method Definition Index: 92499
+// Method Definition Index: 92505
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_Open_m6CDE6E15A1A94A043FF483B84715932A526DFDD7 (ByteU5BU5D_tA6237BF417AE52AD70CFB4EF24A7A82613DF9031* ___0_filename, intptr_t* ___1_db, int32_t ___2_flags, intptr_t ___3_zvfs, const RuntimeMethod* method) 
 {
 	typedef int32_t (CDECL *PInvokeFunc) (uint8_t*, intptr_t*, int32_t, intptr_t);
@@ -1278,7 +1278,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_Open_m6CDE6E15A1A94A043FF483B
 
 	return returnValue;
 }
-// Method Definition Index: 92500
+// Method Definition Index: 92506
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_Open16_mC73D15AD3440EF2661F8EFC2A867EE31C9C93E3D (String_t* ___0_filename, intptr_t* ___1_db, const RuntimeMethod* method) 
 {
 	typedef int32_t (CDECL *PInvokeFunc) (Il2CppChar*, intptr_t*);
@@ -1306,7 +1306,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_Open16_mC73D15AD3440EF2661F8E
 
 	return returnValue;
 }
-// Method Definition Index: 92501
+// Method Definition Index: 92507
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_EnableLoadExtension_mAFFAC5F15C09EDBB8C427BBDD27B7252BC672037 (intptr_t ___0_db, int32_t ___1_onoff, const RuntimeMethod* method) 
 {
 	typedef int32_t (CDECL *PInvokeFunc) (intptr_t, int32_t);
@@ -1328,7 +1328,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_EnableLoadExtension_mAFFAC5F1
 
 	return returnValue;
 }
-// Method Definition Index: 92502
+// Method Definition Index: 92508
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_Close_mAAF5375BAD5920E5280ACC6423C639415E7EFA78 (intptr_t ___0_db, const RuntimeMethod* method) 
 {
 	typedef int32_t (CDECL *PInvokeFunc) (intptr_t);
@@ -1350,7 +1350,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_Close_mAAF5375BAD5920E5280ACC
 
 	return returnValue;
 }
-// Method Definition Index: 92503
+// Method Definition Index: 92509
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_Initialize_m304F435124113B0A8178ABDC44AFD44FACF463D6 (const RuntimeMethod* method) 
 {
 	typedef int32_t (CDECL *PInvokeFunc) ();
@@ -1372,7 +1372,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_Initialize_m304F435124113B0A8
 
 	return returnValue;
 }
-// Method Definition Index: 92504
+// Method Definition Index: 92510
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_Shutdown_m3FD675F1451569EDB62639896490F10C75FABA3C (const RuntimeMethod* method) 
 {
 	typedef int32_t (CDECL *PInvokeFunc) ();
@@ -1394,7 +1394,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_Shutdown_m3FD675F1451569EDB62
 
 	return returnValue;
 }
-// Method Definition Index: 92505
+// Method Definition Index: 92511
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_Config_mCAB0267D34E08352FD7C4A4CB222DFD3ABCC5E62 (int32_t ___0_option, const RuntimeMethod* method) 
 {
 	typedef int32_t (CDECL *PInvokeFunc) (int32_t);
@@ -1416,7 +1416,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_Config_mCAB0267D34E08352FD7C4
 
 	return returnValue;
 }
-// Method Definition Index: 92506
+// Method Definition Index: 92512
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_SetDirectory_m3B30799E1F40465A1676B6A05C9972313DC768D3 (uint32_t ___0_directoryType, String_t* ___1_directoryPath, const RuntimeMethod* method) 
 {
 	typedef int32_t (CDECL *PInvokeFunc) (uint32_t, Il2CppChar*);
@@ -1444,7 +1444,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_SetDirectory_m3B30799E1F40465
 
 	return returnValue;
 }
-// Method Definition Index: 92507
+// Method Definition Index: 92513
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_BusyTimeout_m66EA8D13E5A32D6BCA1E16FE7D8AAED356CE2FF5 (intptr_t ___0_db, int32_t ___1_milliseconds, const RuntimeMethod* method) 
 {
 	typedef int32_t (CDECL *PInvokeFunc) (intptr_t, int32_t);
@@ -1466,7 +1466,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_BusyTimeout_m66EA8D13E5A32D6B
 
 	return returnValue;
 }
-// Method Definition Index: 92508
+// Method Definition Index: 92514
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_Changes_m0CA6C84B391B75B9B89D5115175F51D4B81BCEAC (intptr_t ___0_db, const RuntimeMethod* method) 
 {
 	typedef int32_t (CDECL *PInvokeFunc) (intptr_t);
@@ -1488,7 +1488,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_Changes_m0CA6C84B391B75B9B89D
 
 	return returnValue;
 }
-// Method Definition Index: 92509
+// Method Definition Index: 92515
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_Prepare2_m5531D11AAAEFE4C51DB0CF750D4D073930A58019 (intptr_t ___0_db, String_t* ___1_sql, int32_t ___2_numBytes, intptr_t* ___3_stmt, intptr_t ___4_pzTail, const RuntimeMethod* method) 
 {
 	typedef int32_t (CDECL *PInvokeFunc) (intptr_t, char*, int32_t, intptr_t*, intptr_t);
@@ -1516,7 +1516,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_Prepare2_m5531D11AAAEFE4C51DB
 
 	return returnValue;
 }
-// Method Definition Index: 92510
+// Method Definition Index: 92516
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR intptr_t SQLite3_Prepare2_mBC0448C52B777A3323376C9B59F4903D11B0D9D2 (intptr_t ___0_db, String_t* ___1_query, const RuntimeMethod* method) 
 {
 	intptr_t V_0;
@@ -1560,7 +1560,7 @@ IL_002a:
 		return L_11;
 	}
 }
-// Method Definition Index: 92511
+// Method Definition Index: 92517
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_Step_m47764101C949500F2E1E61DDAF4BCC215C342950 (intptr_t ___0_stmt, const RuntimeMethod* method) 
 {
 	typedef int32_t (CDECL *PInvokeFunc) (intptr_t);
@@ -1582,7 +1582,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_Step_m47764101C949500F2E1E61D
 
 	return returnValue;
 }
-// Method Definition Index: 92512
+// Method Definition Index: 92518
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_Reset_mCCF573AD24F220FBAEA8E6C154B7737E9B45AD4E (intptr_t ___0_stmt, const RuntimeMethod* method) 
 {
 	typedef int32_t (CDECL *PInvokeFunc) (intptr_t);
@@ -1604,7 +1604,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_Reset_mCCF573AD24F220FBAEA8E6
 
 	return returnValue;
 }
-// Method Definition Index: 92513
+// Method Definition Index: 92519
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_Finalize_m109856BC23FA51D5AE62948F98C9381A9EA08CAC (intptr_t ___0_stmt, const RuntimeMethod* method) 
 {
 	typedef int32_t (CDECL *PInvokeFunc) (intptr_t);
@@ -1626,7 +1626,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_Finalize_m109856BC23FA51D5AE6
 
 	return returnValue;
 }
-// Method Definition Index: 92514
+// Method Definition Index: 92520
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int64_t SQLite3_LastInsertRowid_mDD625CFDF511A0167D291F719DB860ED845B82D1 (intptr_t ___0_db, const RuntimeMethod* method) 
 {
 	typedef int64_t (CDECL *PInvokeFunc) (intptr_t);
@@ -1648,7 +1648,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int64_t SQLite3_LastInsertRowid_mDD625CFDF511
 
 	return returnValue;
 }
-// Method Definition Index: 92515
+// Method Definition Index: 92521
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR intptr_t SQLite3_Errmsg_m6FE2B877839224BC999C20A5D835A6B1103EBD2A (intptr_t ___0_db, const RuntimeMethod* method) 
 {
 	typedef intptr_t (CDECL *PInvokeFunc) (intptr_t);
@@ -1670,7 +1670,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR intptr_t SQLite3_Errmsg_m6FE2B877839224BC999C
 
 	return returnValue;
 }
-// Method Definition Index: 92516
+// Method Definition Index: 92522
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR String_t* SQLite3_GetErrmsg_mB88E872BC14EC299C209139E3567210B559F51F5 (intptr_t ___0_db, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -1690,7 +1690,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR String_t* SQLite3_GetErrmsg_mB88E872BC14EC299
 		return L_2;
 	}
 }
-// Method Definition Index: 92517
+// Method Definition Index: 92523
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_BindParameterIndex_m7E9EAA9E6291ADD9991140E8B9DD82A3AEBCA572 (intptr_t ___0_stmt, String_t* ___1_name, const RuntimeMethod* method) 
 {
 	typedef int32_t (CDECL *PInvokeFunc) (intptr_t, char*);
@@ -1718,7 +1718,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_BindParameterIndex_m7E9EAA9E6
 
 	return returnValue;
 }
-// Method Definition Index: 92518
+// Method Definition Index: 92524
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_BindNull_m9C7AB23E02A0AF38C0ECEE46561509A7BD54862F (intptr_t ___0_stmt, int32_t ___1_index, const RuntimeMethod* method) 
 {
 	typedef int32_t (CDECL *PInvokeFunc) (intptr_t, int32_t);
@@ -1740,7 +1740,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_BindNull_m9C7AB23E02A0AF38C0E
 
 	return returnValue;
 }
-// Method Definition Index: 92519
+// Method Definition Index: 92525
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_BindInt_m1F381D218E2410E2CA18A516F1B80CB001226BE3 (intptr_t ___0_stmt, int32_t ___1_index, int32_t ___2_val, const RuntimeMethod* method) 
 {
 	typedef int32_t (CDECL *PInvokeFunc) (intptr_t, int32_t, int32_t);
@@ -1762,7 +1762,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_BindInt_m1F381D218E2410E2CA18
 
 	return returnValue;
 }
-// Method Definition Index: 92520
+// Method Definition Index: 92526
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_BindInt64_mE1BEDBBE8D71846441873D76975FDF084497283E (intptr_t ___0_stmt, int32_t ___1_index, int64_t ___2_val, const RuntimeMethod* method) 
 {
 	typedef int32_t (CDECL *PInvokeFunc) (intptr_t, int32_t, int64_t);
@@ -1784,7 +1784,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_BindInt64_mE1BEDBBE8D71846441
 
 	return returnValue;
 }
-// Method Definition Index: 92521
+// Method Definition Index: 92527
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_BindDouble_mEDD937BE65B3E374F9AFCDA8D482F9F1292C4290 (intptr_t ___0_stmt, int32_t ___1_index, double ___2_val, const RuntimeMethod* method) 
 {
 	typedef int32_t (CDECL *PInvokeFunc) (intptr_t, int32_t, double);
@@ -1806,7 +1806,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_BindDouble_mEDD937BE65B3E374F
 
 	return returnValue;
 }
-// Method Definition Index: 92522
+// Method Definition Index: 92528
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_BindText_mEDC93F5CA420D62CE61DC2624453A3C76670056A (intptr_t ___0_stmt, int32_t ___1_index, String_t* ___2_val, int32_t ___3_n, intptr_t ___4_free, const RuntimeMethod* method) 
 {
 	typedef int32_t (CDECL *PInvokeFunc) (intptr_t, int32_t, Il2CppChar*, int32_t, intptr_t);
@@ -1834,7 +1834,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_BindText_mEDC93F5CA420D62CE61
 
 	return returnValue;
 }
-// Method Definition Index: 92523
+// Method Definition Index: 92529
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_BindBlob_mECFD37EFD7AE1CE6A7B5A63D630CC1E15CF1206A (intptr_t ___0_stmt, int32_t ___1_index, ByteU5BU5D_tA6237BF417AE52AD70CFB4EF24A7A82613DF9031* ___2_val, int32_t ___3_n, intptr_t ___4_free, const RuntimeMethod* method) 
 {
 	typedef int32_t (CDECL *PInvokeFunc) (intptr_t, int32_t, uint8_t*, int32_t, intptr_t);
@@ -1862,7 +1862,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_BindBlob_mECFD37EFD7AE1CE6A7B
 
 	return returnValue;
 }
-// Method Definition Index: 92524
+// Method Definition Index: 92530
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_ColumnCount_m1A6B1056CFC8E099C137988758E46FAF32DBCAE9 (intptr_t ___0_stmt, const RuntimeMethod* method) 
 {
 	typedef int32_t (CDECL *PInvokeFunc) (intptr_t);
@@ -1884,7 +1884,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_ColumnCount_m1A6B1056CFC8E099
 
 	return returnValue;
 }
-// Method Definition Index: 92525
+// Method Definition Index: 92531
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR intptr_t SQLite3_ColumnName_mE48860BBB774B8D30E0B8F628D05DDC85C914F34 (intptr_t ___0_stmt, int32_t ___1_index, const RuntimeMethod* method) 
 {
 	typedef intptr_t (CDECL *PInvokeFunc) (intptr_t, int32_t);
@@ -1906,7 +1906,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR intptr_t SQLite3_ColumnName_mE48860BBB774B8D3
 
 	return returnValue;
 }
-// Method Definition Index: 92526
+// Method Definition Index: 92532
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR intptr_t SQLite3_ColumnName16Internal_m296D10EEB4C133C71292AD9AD27E6032C9E5D760 (intptr_t ___0_stmt, int32_t ___1_index, const RuntimeMethod* method) 
 {
 	typedef intptr_t (CDECL *PInvokeFunc) (intptr_t, int32_t);
@@ -1928,7 +1928,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR intptr_t SQLite3_ColumnName16Internal_m296D10
 
 	return returnValue;
 }
-// Method Definition Index: 92527
+// Method Definition Index: 92533
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR String_t* SQLite3_ColumnName16_mFF172F2610B235D30624EEFC6A10BA7AE6B69844 (intptr_t ___0_stmt, int32_t ___1_index, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -1949,7 +1949,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR String_t* SQLite3_ColumnName16_mFF172F2610B23
 		return L_3;
 	}
 }
-// Method Definition Index: 92528
+// Method Definition Index: 92534
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_ColumnType_m4449C0C57377694A1CA0C50EC93C67D5BB2D65BC (intptr_t ___0_stmt, int32_t ___1_index, const RuntimeMethod* method) 
 {
 	typedef int32_t (CDECL *PInvokeFunc) (intptr_t, int32_t);
@@ -1971,7 +1971,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_ColumnType_m4449C0C57377694A1
 
 	return returnValue;
 }
-// Method Definition Index: 92529
+// Method Definition Index: 92535
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_ColumnInt_m3674CF3E07B2D0127DDA59AE7C154E402A5160EF (intptr_t ___0_stmt, int32_t ___1_index, const RuntimeMethod* method) 
 {
 	typedef int32_t (CDECL *PInvokeFunc) (intptr_t, int32_t);
@@ -1993,7 +1993,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_ColumnInt_m3674CF3E07B2D0127D
 
 	return returnValue;
 }
-// Method Definition Index: 92530
+// Method Definition Index: 92536
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int64_t SQLite3_ColumnInt64_m72215BA39F473B24D8442AAA50A12D37024C7A08 (intptr_t ___0_stmt, int32_t ___1_index, const RuntimeMethod* method) 
 {
 	typedef int64_t (CDECL *PInvokeFunc) (intptr_t, int32_t);
@@ -2015,7 +2015,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int64_t SQLite3_ColumnInt64_m72215BA39F473B24
 
 	return returnValue;
 }
-// Method Definition Index: 92531
+// Method Definition Index: 92537
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR double SQLite3_ColumnDouble_mE4F9CDF44BEF62E61DB8EDB332865923E7B17A7B (intptr_t ___0_stmt, int32_t ___1_index, const RuntimeMethod* method) 
 {
 	typedef double (CDECL *PInvokeFunc) (intptr_t, int32_t);
@@ -2037,7 +2037,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR double SQLite3_ColumnDouble_mE4F9CDF44BEF62E6
 
 	return returnValue;
 }
-// Method Definition Index: 92532
+// Method Definition Index: 92538
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR intptr_t SQLite3_ColumnText_m2DD2B44A67887C7864DE4A87EB464D618DD962FB (intptr_t ___0_stmt, int32_t ___1_index, const RuntimeMethod* method) 
 {
 	typedef intptr_t (CDECL *PInvokeFunc) (intptr_t, int32_t);
@@ -2059,7 +2059,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR intptr_t SQLite3_ColumnText_m2DD2B44A67887C78
 
 	return returnValue;
 }
-// Method Definition Index: 92533
+// Method Definition Index: 92539
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR intptr_t SQLite3_ColumnText16_m17C0B6B852576E3369DBF3C8C8F1BA3D7C002254 (intptr_t ___0_stmt, int32_t ___1_index, const RuntimeMethod* method) 
 {
 	typedef intptr_t (CDECL *PInvokeFunc) (intptr_t, int32_t);
@@ -2081,7 +2081,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR intptr_t SQLite3_ColumnText16_m17C0B6B852576E
 
 	return returnValue;
 }
-// Method Definition Index: 92534
+// Method Definition Index: 92540
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR intptr_t SQLite3_ColumnBlob_mB0E992DF4C8C119993796A69B160153D91688D35 (intptr_t ___0_stmt, int32_t ___1_index, const RuntimeMethod* method) 
 {
 	typedef intptr_t (CDECL *PInvokeFunc) (intptr_t, int32_t);
@@ -2103,7 +2103,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR intptr_t SQLite3_ColumnBlob_mB0E992DF4C8C1199
 
 	return returnValue;
 }
-// Method Definition Index: 92535
+// Method Definition Index: 92541
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_ColumnBytes_m79D6917064332E241C14666AC5E17E07782A554B (intptr_t ___0_stmt, int32_t ___1_index, const RuntimeMethod* method) 
 {
 	typedef int32_t (CDECL *PInvokeFunc) (intptr_t, int32_t);
@@ -2125,7 +2125,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_ColumnBytes_m79D6917064332E24
 
 	return returnValue;
 }
-// Method Definition Index: 92536
+// Method Definition Index: 92542
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR String_t* SQLite3_ColumnString_mC7495ED684AF170F31724D26EF5BB4EBA78E0E94 (intptr_t ___0_stmt, int32_t ___1_index, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -2146,7 +2146,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR String_t* SQLite3_ColumnString_mC7495ED684AF1
 		return L_3;
 	}
 }
-// Method Definition Index: 92537
+// Method Definition Index: 92543
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR ByteU5BU5D_tA6237BF417AE52AD70CFB4EF24A7A82613DF9031* SQLite3_ColumnByteArray_m09025DD6AB983E61366EFCB4F1500F7EA24CEC5E (intptr_t ___0_stmt, int32_t ___1_index, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -2195,7 +2195,7 @@ IL_0022:
 		return L_11;
 	}
 }
-// Method Definition Index: 92538
+// Method Definition Index: 92544
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_ExtendedErrCode_mE53EAE79412B17719370EA83EF845896409E4E68 (intptr_t ___0_db, const RuntimeMethod* method) 
 {
 	typedef int32_t (CDECL *PInvokeFunc) (intptr_t);
@@ -2217,7 +2217,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_ExtendedErrCode_mE53EAE79412B
 
 	return returnValue;
 }
-// Method Definition Index: 92539
+// Method Definition Index: 92545
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_LibVersionNumber_m2C388472E0DC6C13BA5F5A2DD8BB226EA30D52C5 (const RuntimeMethod* method) 
 {
 	typedef int32_t (CDECL *PInvokeFunc) ();
@@ -2279,7 +2279,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t SQLite3_LibVersionNumber_m2C388472E0D
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 92540
+// Method Definition Index: 92546
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR uint32_t U3CPrivateImplementationDetailsU3E_ComputeStringHash_m6EA1F233618497AEFF8902A5EDFA24C74E2F2876 (String_t* ___0_s, const RuntimeMethod* method) 
 {
 	uint32_t V_0 = 0;
@@ -2348,7 +2348,7 @@ IL_002a:
 #ifdef __clang__
 #pragma clang diagnostic pop
 #endif
-// Method Definition Index: 92440
+// Method Definition Index: 92446
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void PreparedSqlLiteInsertCommand_set_Connection_mCCBE4206E6F940C3762DDF7EC4E7C75174145E23_inline (PreparedSqlLiteInsertCommand_t2E0FDB355A754A9BB3DCC8163BA880F5B8161CC6* __this, SQLiteConnection_t7E2BA1E4CC3809FD458BFD2813B706A91189DCC4* ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -2359,7 +2359,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void PreparedSqlLiteInsertCommand
 		return;
 	}
 }
-// Method Definition Index: 92439
+// Method Definition Index: 92445
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR SQLiteConnection_t7E2BA1E4CC3809FD458BFD2813B706A91189DCC4* PreparedSqlLiteInsertCommand_get_Connection_mBB8F6B07CDA2CF1A8386A0FBE5C3FD61E15E74CA_inline (PreparedSqlLiteInsertCommand_t2E0FDB355A754A9BB3DCC8163BA880F5B8161CC6* __this, const RuntimeMethod* method) 
 {
 	{
@@ -2368,7 +2368,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR SQLiteConnection_t7E2BA1E4CC3809F
 		return L_0;
 	}
 }
-// Method Definition Index: 92198
+// Method Definition Index: 92204
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool SQLiteConnection_get_Trace_mFF9F2DB848A04CF036DD487904E7DF71837855E2_inline (SQLiteConnection_t7E2BA1E4CC3809FD458BFD2813B706A91189DCC4* __this, const RuntimeMethod* method) 
 {
 	{
@@ -2377,7 +2377,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool SQLiteConnection_get_Trace_m
 		return L_0;
 	}
 }
-// Method Definition Index: 92441
+// Method Definition Index: 92447
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR String_t* PreparedSqlLiteInsertCommand_get_CommandText_m1774FAC339AF3EE7649470C4F02912EFED8E9214_inline (PreparedSqlLiteInsertCommand_t2E0FDB355A754A9BB3DCC8163BA880F5B8161CC6* __this, const RuntimeMethod* method) 
 {
 	{
@@ -2386,7 +2386,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR String_t* PreparedSqlLiteInsertCo
 		return L_0;
 	}
 }
-// Method Definition Index: 92437
+// Method Definition Index: 92443
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool PreparedSqlLiteInsertCommand_get_Initialized_mCA24A887ADAD977158DC4E161DC05D6A0041703B_inline (PreparedSqlLiteInsertCommand_t2E0FDB355A754A9BB3DCC8163BA880F5B8161CC6* __this, const RuntimeMethod* method) 
 {
 	{
@@ -2395,7 +2395,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool PreparedSqlLiteInsertCommand
 		return L_0;
 	}
 }
-// Method Definition Index: 92444
+// Method Definition Index: 92450
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void PreparedSqlLiteInsertCommand_set_Statement_mC87A23AD8B6856E34DC7B2020EA0188AFA737D07_inline (PreparedSqlLiteInsertCommand_t2E0FDB355A754A9BB3DCC8163BA880F5B8161CC6* __this, intptr_t ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -2405,7 +2405,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void PreparedSqlLiteInsertCommand
 		return;
 	}
 }
-// Method Definition Index: 92438
+// Method Definition Index: 92444
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void PreparedSqlLiteInsertCommand_set_Initialized_mEE003DDBDE4E99119A83428683D170BBB556ADAB_inline (PreparedSqlLiteInsertCommand_t2E0FDB355A754A9BB3DCC8163BA880F5B8161CC6* __this, bool ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -2415,7 +2415,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void PreparedSqlLiteInsertCommand
 		return;
 	}
 }
-// Method Definition Index: 92443
+// Method Definition Index: 92449
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR intptr_t PreparedSqlLiteInsertCommand_get_Statement_m29BC704221EF28CEECA30BFE4E52217430CC719D_inline (PreparedSqlLiteInsertCommand_t2E0FDB355A754A9BB3DCC8163BA880F5B8161CC6* __this, const RuntimeMethod* method) 
 {
 	{
@@ -2424,7 +2424,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR intptr_t PreparedSqlLiteInsertCom
 		return L_0;
 	}
 }
-// Method Definition Index: 92208
+// Method Definition Index: 92214
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool SQLiteConnection_get_StoreDateTimeAsTicks_m4F0D2FE9AD61981FA554273C956E335B1C1F9929_inline (SQLiteConnection_t7E2BA1E4CC3809FD458BFD2813B706A91189DCC4* __this, const RuntimeMethod* method) 
 {
 	{
@@ -2433,7 +2433,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR bool SQLiteConnection_get_StoreDa
 		return L_0;
 	}
 }
-// Method Definition Index: 92194
+// Method Definition Index: 92200
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR intptr_t SQLiteConnection_get_Handle_m5199E6BE8B689983C361CF5766A9E54B867EB1BD_inline (SQLiteConnection_t7E2BA1E4CC3809FD458BFD2813B706A91189DCC4* __this, const RuntimeMethod* method) 
 {
 	{

@@ -9,6 +9,8 @@ public class UserSessionManager : MonoBehaviour
 {
     public static UserSessionManager Instance { get; private set; }
 
+    public static UserModel SelectedUserForView { get; set; }
+
     public UserModel CurrentUser { get; private set; }
 
     /// <summary>
@@ -16,6 +18,10 @@ public class UserSessionManager : MonoBehaviour
     /// Se inicializa cuando está disponible.
     /// </summary>
     private IAutoLoginService autoLoginService;
+
+    public static string PreviousSceneName { get; set; }
+
+    
 
     /// <summary>
     /// Garantiza una unica instancia viva durante toda la aplicacion.

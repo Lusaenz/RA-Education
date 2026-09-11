@@ -22572,7 +22572,7 @@ IL_005f:
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 96388
+// Method Definition Index: 96394
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ObjectPool_1__ctor_m12BEA6F55CACDA86829D3A8FB054DEC73DA80D8B_gshared (ObjectPool_1_t5B34C8253D9C765A8BD030051DE12C7B49CD78D5* __this, InstanceCtor_t6ACDC5874FE50D1AC465207ADCE80BA8707B6E1F* ___0_instanceCtor, InstanceDtor_t368A2FD9F88C865C6168235E3D1A0F5E401257C1* ___1_instanceDtor, const RuntimeMethod* method) 
 {
 	{
@@ -22590,7 +22590,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ObjectPool_1__ctor_m12BEA6F55CACDA86829D
 		return;
 	}
 }
-// Method Definition Index: 96389
+// Method Definition Index: 96395
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ObjectPool_1_Dispose_mA2F129800A091902D81AC63466D4CD981A658386_gshared (ObjectPool_1_t5B34C8253D9C765A8BD030051DE12C7B49CD78D5* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -22684,7 +22684,7 @@ IL_005f:
 		return;
 	}
 }
-// Method Definition Index: 96390
+// Method Definition Index: 96396
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* ObjectPool_1_Take_m420AD37B4E3B58FD772E3EB4EEC84A567E7FD5E1_gshared (ObjectPool_1_t5B34C8253D9C765A8BD030051DE12C7B49CD78D5* __this, const RuntimeMethod* method) 
 {
 	{
@@ -22716,7 +22716,7 @@ IL_0028:
 		return L_6;
 	}
 }
-// Method Definition Index: 96391
+// Method Definition Index: 96397
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ObjectPool_1_Put_mB653285873D09B23A17D93ADEF224EA9A27D1FFC_gshared (ObjectPool_1_t5B34C8253D9C765A8BD030051DE12C7B49CD78D5* __this, RuntimeObject* ___0_obj, const RuntimeMethod* method) 
 {
 	{
@@ -24306,7 +24306,7 @@ IL2CPP_EXTERN_C  void Observable_1__ctor_mE311BE8E92F3AD5C6D8E2AD82CBB247DAF266A
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 96400
+// Method Definition Index: 96406
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* ObservationList_1_get_Observations_mD940406BF884AFC80588DDD0D1727AC1E0E3320A_gshared (ObservationList_1_tDA62C25C9968F399C7CD31A3F888CF5254A924E3* __this, const RuntimeMethod* method) 
 {
 	{
@@ -24314,7 +24314,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* ObservationList_1_get_Observat
 		return (RuntimeObject*)L_0;
 	}
 }
-// Method Definition Index: 96401
+// Method Definition Index: 96407
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ObservationList_1__ctor_m3732AA0DEF43C48C26B4BA059E224CA0DA5583AE_gshared (ObservationList_1_tDA62C25C9968F399C7CD31A3F888CF5254A924E3* __this, ObservationManager_t99938AFA7E9803564F4E20B3E0B9BB3B0C0E251C* ___0_observationManager, VuObservationList_t20B399EFFCF0E69CE6B59AB8F90141D8169D6336* ___1_nativeObservationList, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -24375,7 +24375,7 @@ IL_0049:
 		return;
 	}
 }
-// Method Definition Index: 96402
+// Method Definition Index: 96408
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ObservationList_1_Finalize_m9C088C80E9D2EDB4EB5657EFB8F2513EF2EEE8EF_gshared (ObservationList_1_tDA62C25C9968F399C7CD31A3F888CF5254A924E3* __this, const RuntimeMethod* method) 
 {
 	{
@@ -24405,7 +24405,7 @@ IL_0010:
 		return;
 	}
 }
-// Method Definition Index: 96403
+// Method Definition Index: 96409
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ObservationList_1_Dispose_m12D9E18F3417F09382DF5248A834096C9AD45D6C_gshared (ObservationList_1_tDA62C25C9968F399C7CD31A3F888CF5254A924E3* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -24421,7 +24421,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ObservationList_1_Dispose_m12D9E18F3417F
 		return;
 	}
 }
-// Method Definition Index: 96404
+// Method Definition Index: 96410
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ObservationList_1_Dispose_m262DB84478C030C85C5EA6901415ED048F8EB37E_gshared (ObservationList_1_tDA62C25C9968F399C7CD31A3F888CF5254A924E3* __this, bool ___0_disposing, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -24529,7 +24529,7 @@ IL_006a:
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 96400
+// Method Definition Index: 96406
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* ObservationList_1_get_Observations_m436A14504059EC546DB1A009A3790A5D7FB2D75C_gshared (ObservationList_1_tA291AF303AC889D6352F3007951B8D6132BAB531* __this, const RuntimeMethod* method) 
 {
 	{
@@ -24537,7 +24537,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RuntimeObject* ObservationList_1_get_Observat
 		return (RuntimeObject*)L_0;
 	}
 }
-// Method Definition Index: 96401
+// Method Definition Index: 96407
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ObservationList_1__ctor_m56743793BD7ED17B8B9350D7A5EB697051ACAA21_gshared (ObservationList_1_tA291AF303AC889D6352F3007951B8D6132BAB531* __this, ObservationManager_t99938AFA7E9803564F4E20B3E0B9BB3B0C0E251C* ___0_observationManager, VuObservationList_t20B399EFFCF0E69CE6B59AB8F90141D8169D6336* ___1_nativeObservationList, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -24601,7 +24601,7 @@ IL_0049:
 		return;
 	}
 }
-// Method Definition Index: 96402
+// Method Definition Index: 96408
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ObservationList_1_Finalize_m0323F486B951E91F96F057F0F6DEA50B1C27E4B0_gshared (ObservationList_1_tA291AF303AC889D6352F3007951B8D6132BAB531* __this, const RuntimeMethod* method) 
 {
 	{
@@ -24631,7 +24631,7 @@ IL_0010:
 		return;
 	}
 }
-// Method Definition Index: 96403
+// Method Definition Index: 96409
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ObservationList_1_Dispose_mE77FAC3D3A54014294D372137F1BD9618F1FD691_gshared (ObservationList_1_tA291AF303AC889D6352F3007951B8D6132BAB531* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -24647,7 +24647,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ObservationList_1_Dispose_mE77FAC3D3A540
 		return;
 	}
 }
-// Method Definition Index: 96404
+// Method Definition Index: 96410
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void ObservationList_1_Dispose_mD01445BCA927A3F1D90E78F468EDC2A8890D1FC8_gshared (ObservationList_1_tA291AF303AC889D6352F3007951B8D6132BAB531* __this, bool ___0_disposing, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -27447,7 +27447,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void UnityAction_1_Invoke_m777839
 	typedef void (*FunctionPointerType) (RuntimeObject*, RuntimeObject*, const RuntimeMethod*);
 	((FunctionPointerType)__this->___invoke_impl)((Il2CppObject*)__this->___method_code, ___0_arg0, reinterpret_cast<RuntimeMethod*>(__this->___method));
 }
-// Method Definition Index: 96397
+// Method Definition Index: 96403
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void InstanceDtor_Invoke_m91B4004CABA40FF32FFB9104AD3B03FE5D1163B2_gshared_inline (InstanceDtor_t368A2FD9F88C865C6168235E3D1A0F5E401257C1* __this, RuntimeObject* ___0_instance, const RuntimeMethod* method) 
 {
 	typedef void (*FunctionPointerType) (RuntimeObject*, RuntimeObject*, const RuntimeMethod*);
@@ -27461,7 +27461,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t Queue_1_get_Count_m1768AD
 		return L_0;
 	}
 }
-// Method Definition Index: 96393
+// Method Definition Index: 96399
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR RuntimeObject* InstanceCtor_Invoke_mC58A065E18688528E65888DC4245FCF4ABCECB97_gshared_inline (InstanceCtor_t6ACDC5874FE50D1AC465207ADCE80BA8707B6E1F* __this, const RuntimeMethod* method) 
 {
 	typedef RuntimeObject* (*FunctionPointerType) (RuntimeObject*, const RuntimeMethod*);
