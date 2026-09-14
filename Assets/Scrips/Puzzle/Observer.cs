@@ -14,6 +14,9 @@ public class Observer : MonoBehaviour
     [Tooltip("Distancia extra hacia ATRÁS para el modelo fijo (valores positivos lo alejan más)")]
     public float fixedModelDepthOffset = 0.3f; // <--- NUEVA VARIABLE
 
+    [Tooltip("Si está activo, aleja el modelo central aplicando el offset. Si no, todos quedan a la misma distancia.")]
+public bool applyDepthOffsetToFixedModel = true;
+
     [Tooltip("Radio del círculo alrededor del modelo central")]
     public float radiusOffset = 0.25f;
 
@@ -88,8 +91,9 @@ public class Observer : MonoBehaviour
         // 1. Posicionar el modelo fijo MÁS ATRÁS en el eje Z
         if (fixedModel != null)
         {
+            float offset = applyDepthOffsetToFixedModel ? fixedModelDepthOffset : 0f;
             // Sumamos fixedModelDepthOffset para alejarlo más de la cámara
-            Vector3 fixedPosition = new Vector3(0f, 0f, distanceFromCamera + fixedModelDepthOffset);
+            Vector3 fixedPosition = new Vector3(0f, 0f, distanceFromCamera + offset);
             
             fixedModel.localPosition = fixedPosition;
             fixedModel.localRotation = defaultRotation;

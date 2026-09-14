@@ -6,13 +6,13 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 
-/// <summary>
+/// 
 /// Lógica principal del Drag & Drop:
 /// - Carga BD
 /// - Configura escena
 /// - Maneja score
 /// - Detecta victoria
-/// </summary>
+/// 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
@@ -24,11 +24,10 @@ public class GameManager : MonoBehaviour
     public int puntosIncorrecto = 0;
 
     [Header("UI Referencias")]
+    [Tooltip("Arrastra aquí el Panel o Canvas del minijuego que debe ocultarse al ganar")]
+    public GameObject gameInfoUI;
     public TMP_Text scoreText;
     public TMP_Text instructionText;
-
-    [Header("Victory UI (DEPENDENCIA)")]
-    public VictoryUIManager victoryUI;
 
     [Header("Gameplay")]
     public DragHandler[] items = new DragHandler[4];
@@ -53,7 +52,7 @@ public class GameManager : MonoBehaviour
     private ActivityService activityService;
     private ResultActivityService resultService;
 
-    private readonly List<AsyncOperationHandle<Sprite>> handles = new();
+    private readonly List<AsyncOperationHandle> handles = new List<AsyncOperationHandle>();
 
     private const int DefaultGameActivityId = 1;
 
@@ -69,11 +68,26 @@ public class GameManager : MonoBehaviour
         gameActivityService = new GameActivityService();
         activityService = new ActivityService();
         resultService = new ResultActivityService();
+
+        RegistrarUI();
     }
 
     private void Start()
     {
+        if (VictoryUIManager.Instance != null)
+        {
+            VictoryUIManager.Instance.ResetUI();
+        }
+
         StartCoroutine(BootstrapGame());
+    }
+
+    private void RegistrarUI()
+    {
+        if (VictoryUIManager.Instance != null && gameInfoUI != null)
+        {
+            VictoryUIManager.Instance.SetInfoUI(gameInfoUI);
+        }
     }
 
     private IEnumerator BootstrapGame()
@@ -102,17 +116,13 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator Setup(DragDropConfig config)
     {
-          Reset();
+        Reset();
         if (instructionText != null)
-{
-    instructionText.text = config.instruction;
-}
-      
-
+        {
+            instructionText.text = config.instruction;
+        }
 
         maxScore = Mathf.Max(1, activityData.max_score);
-
-        
 
         totalItems = config.items.Count;
         totalZones = config.zones.Count;
@@ -159,8 +169,7 @@ public class GameManager : MonoBehaviour
         wrongPenalty = pointsPerZone;
 
         puntosCorrecto = Mathf.Max(1, Mathf.RoundToInt(pointsPerZone));
-    puntosIncorrecto = -Mathf.Max(1, Mathf.RoundToInt(wrongPenalty));
-;
+        puntosIncorrecto = -Mathf.Max(1, Mathf.RoundToInt(wrongPenalty));
     }
 
     private void RecalculateScore()
@@ -188,8 +197,15 @@ public class GameManager : MonoBehaviour
 
         int stars = CalculateStars();
 
-    // Solo muestra la UI
-    victoryUI.ShowVictory(score, maxScore, stars);
+        if (VictoryUIManager.Instance != null)
+        {
+            RegistrarUI();
+            VictoryUIManager.Instance.ShowVictory(score, maxScore, stars);
+        }
+        else
+        {
+            Debug.LogError("No se encontró la instancia de VictoryUIManager en la escena.");
+        }
 
         SaveResult(stars);
     }
@@ -226,18 +242,18 @@ public class GameManager : MonoBehaviour
     }
 
     private int CalculateStars()
-{
-    if (activityData == null || activityData.max_star <= 0 || maxScore <= 0)
-        return 0;
+    {
+        if (activityData == null || activityData.max_star <= 0 || maxScore <= 0)
+            return 0;
 
-    float progreso = Mathf.Clamp01(score / (float)maxScore);
+        float progreso = Mathf.Clamp01(score / (float)maxScore);
 
-    return Mathf.Clamp(
-        Mathf.RoundToInt(progreso * activityData.max_star),
-        0,
-        activityData.max_star
-    );
-}
+        return Mathf.Clamp(
+            Mathf.RoundToInt(progreso * activityData.max_star),
+            0,
+            activityData.max_star
+        );
+    }
 
     private void OnDestroy()
     {

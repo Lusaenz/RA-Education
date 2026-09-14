@@ -22,7 +22,12 @@ public class SceneLoader : MonoBehaviour
             Debug.LogError("[SceneLoader] sceneName no está configurado en el Inspector");
             return;
         }
-
+    GameObject winPanel = GameObject.Find("WinPanel"); 
+       
+        if (winPanel != null)
+        {
+            winPanel.SetActive(false);
+        }
         Debug.Log($"[SceneLoader] Cargando escena: {sceneName}");
         SceneManager.LoadScene(sceneName);
     }

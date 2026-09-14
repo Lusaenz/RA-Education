@@ -12,10 +12,10 @@ public class PuzzleManager : MonoBehaviour
 
     private bool hasWon = false;
 
-    [Header("Victory UI")]
-    public VictoryUIManager victoryUI;
+    [Header("UI del Minijuego")]
+    [Tooltip("Arrastra aquí el Panel o Canvas del minijuego que debe ocultarse al ganar")]
+    public GameObject gameInfoUI;
 
-    [Header("UI")]
     public TMP_Text scoreText;
     public TMP_Text puntos;
 
@@ -25,14 +25,30 @@ public class PuzzleManager : MonoBehaviour
     public TMP_Text nombrePiezaText;
     public TMP_Text targetNameText;
 
-
     void Awake()
     {
         instance = this;
-
         maxScore = totalItems * 10;
-
         ActualizarScoreUI();
+
+        // REGISTRO INMEDIATO: Registramos el panel info tan pronto despierta el Manager
+        RegistrarUI();
+    }
+
+    void Start()
+    {
+        if (VictoryUIManager.Instance != null)
+        {
+            VictoryUIManager.Instance.ResetUI();
+        }
+    }
+
+    private void RegistrarUI()
+    {
+        if (VictoryUIManager.Instance != null && gameInfoUI != null)
+        {
+            VictoryUIManager.Instance.SetInfoUI(gameInfoUI);
+        }
     }
 
     public void ItemCorrecto()
@@ -43,13 +59,15 @@ public class PuzzleManager : MonoBehaviour
 
         correctItems++;
         score += 10;
-        puntos.text="Item Correcto";
+        puntos.text = "Item Correcto";
 
         ActualizarScoreUI();
-
         VerificarVictoria();
 
-        SoundManager.instance.PlayCorrect();
+        if (SoundManager.instance != null)
+        {
+            SoundManager.instance.PlayCorrect();
+        }
     }
 
     void VerificarVictoria()
@@ -58,14 +76,17 @@ public class PuzzleManager : MonoBehaviour
         {
             hasWon = true;
 
-            if (victoryUI != null)
+            if (VictoryUIManager.Instance != null)
             {
-                victoryUI.ShowVictory(score, maxScore, maxStars);
+                // Nos aseguramos nuevamente de que la referencia de la UI esté asignada justo antes de lanzar la victoria
+                RegistrarUI();
+                
+                VictoryUIManager.Instance.ShowVictory(score, maxScore, maxStars);
                 Debug.Log("¡Puzzle completo!");
             }
             else
             {
-                Debug.LogError("No se asignó el VictoryUIManager en el PuzzleManager.");
+                Debug.LogError("No se encontró la instancia de VictoryUIManager en la escena.");
             }
         }
     }
@@ -77,13 +98,16 @@ public class PuzzleManager : MonoBehaviour
         if (hasWon) return;
 
         score -= 10;
-        puntos.text="Item correcto";
-        if(score <0)
-        score=0;
+        puntos.text = "Item incorrecto";
+        if (score < 0)
+            score = 0;
 
         ActualizarScoreUI();
 
-        SoundManager.instance.PlayWrong();
+        if (SoundManager.instance != null)
+        {
+            SoundManager.instance.PlayWrong();
+        }
     }
 
     void ActualizarScoreUI()
@@ -91,30 +115,30 @@ public class PuzzleManager : MonoBehaviour
         if (scoreText != null)
         {
             scoreText.text = "Puntaje: " + score;
-           
         }
     }
 
     public void MostrarNombre(string nombre)
-{
-    if (nombrePiezaText != null)
     {
-        nombrePiezaText.text = "Pieza: "+nombre;
+        if (nombrePiezaText != null)
+        {
+            nombrePiezaText.text = "Pieza: " + nombre;
+        }
     }
-}
 
-public void OcultarNombre()
-{
-    if (nombrePiezaText != null)
+    public void OcultarNombre()
     {
-        nombrePiezaText.text = "Pieza: ";
+        if (nombrePiezaText != null)
+        {
+            nombrePiezaText.text = "Pieza: ";
+        }
     }
-}
-public void MostrarTarget(string nombre)
+
+    public void MostrarTarget(string nombre)
     {
         if (targetNameText != null)
         {
-            targetNameText.text ="Objetivo: "+ nombre;
+            targetNameText.text = "Objetivo: " + nombre;
         }
     }
 
@@ -125,5 +149,4 @@ public void MostrarTarget(string nombre)
             targetNameText.text = "Objetivo: -";
         }
     }
-
 }

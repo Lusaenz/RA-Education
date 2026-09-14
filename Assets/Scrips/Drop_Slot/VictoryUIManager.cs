@@ -5,21 +5,23 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-/// <summary>
+/// 
 /// Maneja TODO lo visual de victoria:
 /// - Panel
 /// - Animación
 /// - Estrellas
 /// Persistente entre escenas (Singleton)
-/// </summary>
+/// 
 public class VictoryUIManager : MonoBehaviour
 {
-    // Instancia global accesible desde cualquier minijuego
     public static VictoryUIManager Instance { get; private set; }
 
     [Header("Panel")]
     public GameObject winPanel;
-    public GameObject info;
+
+    [Header("Efectos Visuales")]
+    public ParticleSystem confettiFX; // <--- Asigna aquí tu Particle System
+    public GameObject info; // Se asigna dinámicamente desde el minijuego activo
 
     [Header("Estrellas")]
     public Image[] estrellas;
@@ -27,16 +29,15 @@ public class VictoryUIManager : MonoBehaviour
     public Sprite estrellaVacia;
     public Transform container;
 
-    public Vector2 size = new(90, 90);
+    public Vector2 size = new Vector2(90f, 90f);
     public float arcHeight = 70f;
 
-    private readonly List<GameObject> generated = new();
+    private GameObject[] generated = new GameObject[0];
 
     public int lastStars;
 
     private void Awake()
     {
-        // Control para evitar duplicados al regresar al GameSelector
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
@@ -44,12 +45,20 @@ public class VictoryUIManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject); // Evita que se destruya al cambiar de escena
+        DontDestroyOnLoad(gameObject);
     }
 
-    /// <summary>
-    /// Oculta el panel de victoria y limpia las estrellas para preparar un nuevo minijuego
-    /// </summary>
+    /// 
+    /// Asigna la UI de información del minijuego actual
+    /// 
+    public void SetInfoUI(GameObject gameInfoUI)
+    {
+        info = gameInfoUI;
+    }
+
+    /// 
+    /// Oculta el panel de victoria y se asegura de habilitar el panel HUD si existe
+    /// 
     public void ResetUI()
     {
         if (winPanel != null) winPanel.SetActive(false);
@@ -76,22 +85,41 @@ public class VictoryUIManager : MonoBehaviour
 
     private IEnumerator AnimatePanel()
     {
-        winPanel.SetActive(true);
-        if (info != null) info.SetActive(false);
-        winPanel.transform.localScale = Vector3.zero;
+        // 1. Activar panel de victoria
+        if (winPanel != null) winPanel.SetActive(true);
 
-        float t = 0;
-        const float duration = 0.4f;
-
-        while (t < duration)
+        if (confettiFX != null)
         {
-            t += Time.deltaTime;
-            float s = Mathf.Lerp(0, 1, t / duration);
-            winPanel.transform.localScale = Vector3.one * s;
-            yield return null;
+            confettiFX.Play();
         }
 
-        winPanel.transform.localScale = Vector3.one;
+        // 2. Ocultar OBLIGATORIAMENTE el panel info registrado
+        if (info != null)
+        {
+            info.SetActive(false);
+        }
+        else
+        {
+            Debug.LogWarning("VictoryUIManager: No hay un GameObject 'info' registrado para ocultar.");
+        }
+
+        if (winPanel != null)
+        {
+            winPanel.transform.localScale = Vector3.zero;
+
+            float t = 0;
+            const float duration = 0.4f;
+
+            while (t < duration)
+            {
+                t += Time.deltaTime;
+                float s = Mathf.Lerp(0, 1, t / duration);
+                winPanel.transform.localScale = Vector3.one * s;
+                yield return null;
+            }
+
+            winPanel.transform.localScale = Vector3.one;
+        }
     }
 
     private int CalculateStars(int score, int maxScore, int maxStars)
@@ -115,13 +143,14 @@ public class VictoryUIManager : MonoBehaviour
         if (count <= 0) count = 1;
 
         estrellas = new Image[count];
+        generated = new GameObject[count];
 
         for (int i = 0; i < count; i++)
         {
             GameObject go = new GameObject($"Star_{i}", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
             go.transform.SetParent(container, false);
 
-            RectTransform rt = go.GetComponent<RectTransform>();
+            RectTransform rt = (RectTransform)go.GetComponent(typeof(RectTransform));
 
             rt.anchorMin = new Vector2(0.5f, 0.5f);
             rt.anchorMax = new Vector2(0.5f, 0.5f);
@@ -131,14 +160,14 @@ public class VictoryUIManager : MonoBehaviour
             rt.localScale = Vector3.one;
             rt.anchoredPosition = GetPos(i, count);
 
-            Image img = go.GetComponent<Image>();
+            Image img = (Image)go.GetComponent(typeof(Image));
             img.sprite = estrellaLlena;
             img.color = Color.white;
             img.preserveAspect = true;
             img.raycastTarget = false;
 
             estrellas[i] = img;
-            generated.Add(go);
+            generated[i] = go;
         }
     }
 
@@ -165,9 +194,13 @@ public class VictoryUIManager : MonoBehaviour
 
     private void Clear()
     {
-        foreach (var g in generated)
-            Destroy(g);
+        if (generated == null) return;
 
-        generated.Clear();
+        foreach (var g in generated)
+        {
+            if (g != null) Destroy(g);
+        }
+
+        generated = new GameObject[0];
     }
 }
