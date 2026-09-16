@@ -43,6 +43,7 @@ public class GameManagerFood : MonoBehaviour
     private GameActivityService _gameActivityService;
     private ActivityService _activityService;
     private ResultActivityService _resultService;
+    private ProgressService _progressService;
     private ActivityData _activityData;
 
     private readonly List<AsyncOperationHandle<Sprite>> _handles = new();
@@ -50,6 +51,8 @@ public class GameManagerFood : MonoBehaviour
 
     private float _activityStartTime = 0f;
     private int _idActivity;
+    private int _idModule;
+    private int _idGameActivity;
     private int _attempts = 0;
 
     private void Awake()
@@ -59,6 +62,7 @@ public class GameManagerFood : MonoBehaviour
         _gameActivityService = new GameActivityService();
         _activityService = new ActivityService();
         _resultService = new ResultActivityService();
+        _progressService = new ProgressService();
     }
 
     private void Start()
@@ -98,6 +102,8 @@ public class GameManagerFood : MonoBehaviour
         }
 
         _idActivity = data.id_activity;
+        _idModule = data.id_module;
+        _idGameActivity = data.id_game_activity;
 
         yield return StartCoroutine(_activityService.GetActivity(_idActivity, result => _activityData = result));
 
@@ -252,6 +258,9 @@ public class GameManagerFood : MonoBehaviour
             stars,
             _attempts,
             GetElapsedTime());
+
+        // Marca este minijuego como item completado del modulo (solo si stars >= 1).
+        _progressService.MarkGameCompleted(user.id_user, _idModule, _idGameActivity, stars);
     }
 
     private IEnumerator AnimarPanelVictoria()
@@ -277,18 +286,37 @@ public class GameManagerFood : MonoBehaviour
     private int CalcularEstrellas()
     {
         if (maxScore <= 0) return 0;
+
+        // El número máximo de estrellas se toma de la actividad (max_star). Si la BD no lo
+        // define, se usa el array de UI (si está asignado) y, como último recurso, 3.
+        // Antes se usaba estrellas.Length directamente: si el array del Inspector estaba
+        // vacío el resultado era siempre 0 y así se guardaba en result_activity.
+        int maxStars = _activityData != null && _activityData.max_star > 0
+            ? _activityData.max_star
+            : (estrellas != null && estrellas.Length > 0 ? estrellas.Length : 3);
+
         float p = Mathf.Clamp01((float)score / maxScore);
-        int maxStars = estrellas != null ? estrellas.Length : 3;
-        return Mathf.RoundToInt(p * maxStars);
+        return Mathf.Clamp(Mathf.RoundToInt(p * maxStars), 0, maxStars);
     }
 
     private void ActualizarEstrellas(int numEstrellas)
     {
         if (estrellas == null || estrellas.Length == 0) return;
+
+        // Si el array de UI tiene menos slots que el máximo real de estrellas, se escala
+        // para que lo mostrado sea proporcional al puntaje y no dé "todas llenas" antes de tiempo.
+        int maxStars = _activityData != null && _activityData.max_star > 0
+            ? _activityData.max_star
+            : estrellas.Length;
+
+        int llenas = maxStars == estrellas.Length
+            ? numEstrellas
+            : Mathf.RoundToInt((float)numEstrellas / maxStars * estrellas.Length);
+
         for (int i = 0; i < estrellas.Length; i++)
         {
             if (estrellas[i] != null)
-                estrellas[i].sprite = i < numEstrellas ? estrellaLlena : estrellaVacia;
+                estrellas[i].sprite = i < llenas ? estrellaLlena : estrellaVacia;
         }
     }
 

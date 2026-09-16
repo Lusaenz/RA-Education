@@ -1,14 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using SQLite4Unity3d;
+using System.Collections;
 using UnityEngine;
-using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
 
 /// <summary>
-/// Manager encargado de la logica relacionada con los modulos.
-/// Permite obtener informacion de los modulos desde la base de datos y manejar su visualizacion.
+/// Manager encargado de mostrar el estado/avance de los modulos en el mapa.
+/// Lee el avance calculado por <see cref="ProgressService"/> (basado en la tabla "progress")
+/// y lo refleja en el indicador de anillo de cada isla, ademas del color del rotulo.
 /// </summary>
 public class EstadoManager : MonoBehaviour
 {
@@ -16,9 +12,9 @@ public class EstadoManager : MonoBehaviour
     private const string StatusInProgress = "inprogress";
     private const string StatusCompleted = "completed";
 
-    [Header("Status Sprites")]
-    [SerializeField] private SpriteRenderer statusCell;
-    [SerializeField] private SpriteRenderer statusDigestive;
+    [Header("Indicadores de estado (anillo por isla)")]
+    [SerializeField] private ModuleStatusIndicator digestiveIndicator;
+    [SerializeField] private ModuleStatusIndicator cellIndicator;
 
     [Header("Status Text Sprites")]
     [SerializeField] private SpriteRenderer textCell;
@@ -33,18 +29,10 @@ public class EstadoManager : MonoBehaviour
     [SerializeField] private int digestiveModuleId = 1;
     [SerializeField] private int cellModuleId = 2;
 
-    [Header("Status Addressables")]
-    [SerializeField] private string notStartedStatusKey = "estados/notstarted";
-    [SerializeField] private string completedStatusKey = "estados/completed";
-    [SerializeField] private string inProgressStatusKey = "estados/inprogress";
-
     public static EstadoManager Instance { get; private set; }
 
     private ModulesRepository modulesRepository;
-    private ProgressRepository progressRepository;
-    private readonly Dictionary<string, AsyncOperationHandle<Sprite>> spriteHandles = new Dictionary<string, AsyncOperationHandle<Sprite>>();
-    private readonly Dictionary<string, Sprite> spriteCache = new Dictionary<string, Sprite>();
-    private readonly Dictionary<string, List<SpriteRenderer>> pendingSpriteTargets = new Dictionary<string, List<SpriteRenderer>>();
+    private ProgressService progressService;
 
     private void Awake()
     {
@@ -57,41 +45,44 @@ public class EstadoManager : MonoBehaviour
         Instance = this;
     }
 
-    private void Start()
+    private void OnEnable()
     {
-        if (DatabaseManager.Instance == null)
+        // Al volver a esta escena (p.ej. tras salir de un minijuego) refrescamos el avance.
+        if (progressService != null && modulesRepository != null)
         {
-            Debug.LogError("ModuleManager: DatabaseManager no esta disponible.");
-            return;
-        }
-
-        if (DatabaseManager.Instance.IsReady)
-        {
-            InitializeRepositories();
             LoadUserModuleStatuses();
-            return;
         }
-
-        DatabaseManager.Instance.OnReady += OnDatabaseReady;
     }
 
-    public void GetAndLogModuleName(int moduleId)
+    private void Start()
     {
-        if (!EnsureRepositoriesReady())
+        StartCoroutine(InitializeWhenReady());
+    }
+
+    /// <summary>
+    /// Espera a que la BD y la sesion de usuario esten disponibles y aplica el estado guardado.
+    /// Evita carreras de inicializacion entre DatabaseManager, UserSessionManager y esta escena.
+    /// </summary>
+    private IEnumerator InitializeWhenReady()
+    {
+        float elapsed = 0f;
+        const float userWaitTimeout = 5f;
+
+        while (DatabaseManager.Instance == null || !DatabaseManager.Instance.IsReady)
         {
-            return;
+            yield return null;
         }
 
-        ModuleModel module = modulesRepository.GetModuleById(moduleId);
+        InitializeServices();
 
-        if (module == null)
+        // Damos un margen para que el auto-login / login termine de poblar la sesion.
+        while (GetCurrentUserId() <= 0 && elapsed < userWaitTimeout)
         {
-            Debug.LogWarning($"ModuleManager: No se encontro un modulo con ID {moduleId} en la base de datos.");
-            return;
+            elapsed += Time.deltaTime;
+            yield return null;
         }
 
-        Debug.Log($"Modulo detectado: {module.name}");
-        MarkModuleAsInProgress(moduleId);
+        LoadUserModuleStatuses();
     }
 
     private void OnDestroy()
@@ -100,66 +91,87 @@ public class EstadoManager : MonoBehaviour
         {
             Instance = null;
         }
-
-        if (DatabaseManager.Instance != null)
-        {
-            DatabaseManager.Instance.OnReady -= OnDatabaseReady;
-        }
-
-        foreach (AsyncOperationHandle<Sprite> handle in spriteHandles.Values)
-        {
-            if (handle.IsValid())
-            {
-                Addressables.Release(handle);
-            }
-        }
-
-        spriteHandles.Clear();
-        spriteCache.Clear();
-        pendingSpriteTargets.Clear();
     }
 
-    private void OnDatabaseReady()
-    {
-        if (DatabaseManager.Instance != null)
-        {
-            DatabaseManager.Instance.OnReady -= OnDatabaseReady;
-        }
-
-        InitializeRepositories();
-        LoadUserModuleStatuses();
-    }
-
-    private void InitializeRepositories()
+    private void InitializeServices()
     {
         try
         {
             modulesRepository = new ModulesRepository();
-            progressRepository = new ProgressRepository();
+            progressService = new ProgressService();
         }
-        catch (Exception ex)
+        catch (System.Exception ex)
         {
             modulesRepository = null;
-            progressRepository = null;
-            Debug.LogError($"ModuleManager: Error al inicializar repositorios: {ex.Message}");
+            progressService = null;
+            Debug.LogError($"EstadoManager: Error al inicializar servicios: {ex.Message}");
         }
     }
 
-    private bool EnsureRepositoriesReady()
+    private bool EnsureServicesReady()
     {
-        if (modulesRepository != null && progressRepository != null)
+        if (progressService != null && modulesRepository != null)
         {
             return true;
         }
 
         if (DatabaseManager.Instance == null || !DatabaseManager.Instance.IsReady)
         {
-            Debug.LogWarning("ModuleManager: La base de datos todavia no esta lista.");
+            Debug.LogWarning("EstadoManager: La base de datos todavia no esta lista.");
             return false;
         }
 
-        InitializeRepositories();
-        return modulesRepository != null && progressRepository != null;
+        InitializeServices();
+        return progressService != null && modulesRepository != null;
+    }
+
+    /// <summary>
+    /// Llamado por IslandInteraction al tocar una isla: registra el modulo como iniciado
+    /// (sin degradar avance existente) y refresca su indicador.
+    /// </summary>
+    public void GetAndLogModuleName(int moduleId)
+    {
+        if (!EnsureServicesReady())
+        {
+            return;
+        }
+
+        ModuleModel module = modulesRepository.GetModuleById(moduleId);
+        if (module == null)
+        {
+            Debug.LogWarning($"EstadoManager: No se encontro un modulo con ID {moduleId} en la base de datos.");
+        }
+        else
+        {
+            Debug.Log($"Modulo detectado: {module.name}");
+        }
+
+        int userId = GetCurrentUserId();
+        if (userId > 0)
+        {
+            progressService.EnsureModuleStarted(userId, moduleId);
+        }
+
+        ApplySavedStatusToModule(moduleId);
+    }
+
+    /// <summary>
+    /// Vuelve a leer el avance del modulo y actualiza su indicador. Pensado para llamarse
+    /// en vivo desde el libro cuando el usuario avanza de tema.
+    /// </summary>
+    public void RefreshModule(int moduleId)
+    {
+        if (moduleId != digestiveModuleId && moduleId != cellModuleId)
+        {
+            return;
+        }
+
+        if (!EnsureServicesReady())
+        {
+            return;
+        }
+
+        ApplySavedStatusToModule(moduleId);
     }
 
     private void LoadUserModuleStatuses()
@@ -170,97 +182,44 @@ public class EstadoManager : MonoBehaviour
 
     private void ApplySavedStatusToModule(int moduleId)
     {
-        string status = GetModuleStatusForCurrentUser(moduleId);
-        UpdateModuleStatusImage(moduleId, status);
-    }
+        ModuleStatusIndicator indicator = GetIndicatorForModule(moduleId);
 
-    private string GetModuleStatusForCurrentUser(int moduleId)
-    {
-        if (progressRepository == null)
+        string status = StatusNotStarted;
+        int percentage = 0;
+
+        int userId = GetCurrentUserId();
+        if (userId > 0 && progressService != null)
         {
-            return StatusNotStarted;
-        }
-
-        UserModel currentUser = UserSessionManager.Instance?.CurrentUser;
-        if (currentUser == null)
-        {
-            return StatusNotStarted;
-        }
-
-        ProgressModel progress = progressRepository.GetByUserAndModule(currentUser.id_user, moduleId);
-        return progress == null ? StatusNotStarted : NormalizeStatus(progress.status);
-    }
-
-    private void MarkModuleAsInProgress(int moduleId)
-    {
-        if (progressRepository == null)
-        {
-            Debug.LogWarning("ModuleManager: ProgressRepository no esta disponible.");
-            return;
-        }
-
-        UserModel currentUser = UserSessionManager.Instance?.CurrentUser;
-        if (currentUser == null)
-        {
-            Debug.LogWarning("ModuleManager: No hay un usuario en sesion para guardar el progreso.");
-            return;
-        }
-
-        ProgressModel progress = progressRepository.GetByUserAndModule(currentUser.id_user, moduleId);
-
-        if (progress == null)
-        {
-            progress = new ProgressModel
+            ModuleProgressInfo info = progressService.GetModuleProgress(userId, moduleId);
+            if (info != null)
             {
-                id_user = currentUser.id_user,
-                id_module = moduleId,
-                punctuation = null,
-                percentage_completed = null,
-                completad_at = null,
-                status = StatusInProgress
-            };
-
-            progressRepository.Insert(progress);
-            UpdateModuleStatusImage(moduleId, StatusInProgress);
-            return;
+                status = info.status;
+                percentage = info.percentage;
+            }
         }
 
-        string normalizedStatus = NormalizeStatus(progress.status);
-        if (normalizedStatus == StatusCompleted)
+        if (indicator != null)
         {
-            UpdateModuleStatusImage(moduleId, StatusCompleted);
-            return;
+            indicator.SetProgress(status, percentage / 100f);
         }
-
-        progress.status = StatusInProgress;
-        progressRepository.Update(progress);
-        UpdateModuleStatusImage(moduleId, StatusInProgress);
-    }
-
-    private void UpdateModuleStatusImage(int moduleId, string status)
-    {
-        SpriteRenderer targetRenderer = GetRendererForModule(moduleId);
-        if (targetRenderer == null)
+        else
         {
-            Debug.LogWarning($"ModuleManager: No hay SpriteRenderer asignado para el modulo {moduleId}.");
-            return;
+            Debug.LogWarning($"EstadoManager: No hay ModuleStatusIndicator asignado para el modulo {moduleId}.");
         }
 
-        string addressableKey = GetAddressableKeyForStatus(status);
-        LoadStatusSprite(targetRenderer, addressableKey);
         ApplyTextColor(moduleId, status);
     }
 
-    private SpriteRenderer GetRendererForModule(int moduleId)
+    private ModuleStatusIndicator GetIndicatorForModule(int moduleId)
     {
         if (moduleId == digestiveModuleId)
         {
-            return statusDigestive;
+            return digestiveIndicator;
         }
 
         if (moduleId == cellModuleId)
         {
-            return statusCell;
+            return cellIndicator;
         }
 
         return null;
@@ -302,16 +261,6 @@ public class EstadoManager : MonoBehaviour
         };
     }
 
-    private string GetAddressableKeyForStatus(string status)
-    {
-        return NormalizeStatus(status) switch
-        {
-            StatusCompleted => completedStatusKey,
-            StatusInProgress => inProgressStatusKey,
-            _ => notStartedStatusKey
-        };
-    }
-
     private string NormalizeStatus(string status)
     {
         if (string.IsNullOrWhiteSpace(status))
@@ -332,100 +281,9 @@ public class EstadoManager : MonoBehaviour
         };
     }
 
-    private void LoadStatusSprite(SpriteRenderer targetRenderer, string addressableKey)
+    private int GetCurrentUserId()
     {
-        if (targetRenderer == null || string.IsNullOrWhiteSpace(addressableKey))
-        {
-            return;
-        }
-
-        if (spriteCache.TryGetValue(addressableKey, out Sprite cachedSprite))
-        {
-            targetRenderer.sprite = cachedSprite;
-            return;
-        }
-
-        if (pendingSpriteTargets.TryGetValue(addressableKey, out List<SpriteRenderer> waitingTargets))
-        {
-            waitingTargets.Add(targetRenderer);
-            return;
-        }
-
-        pendingSpriteTargets[addressableKey] = new List<SpriteRenderer> { targetRenderer };
-
-        AsyncOperationHandle<Sprite> loadHandle = Addressables.LoadAssetAsync<Sprite>(addressableKey);
-        loadHandle.Completed += handle =>
-        {
-            if (!pendingSpriteTargets.TryGetValue(addressableKey, out List<SpriteRenderer> targets))
-            {
-                if (handle.IsValid())
-                {
-                    Addressables.Release(handle);
-                }
-
-                return;
-            }
-
-            pendingSpriteTargets.Remove(addressableKey);
-
-            if (handle.Status != AsyncOperationStatus.Succeeded)
-            {
-                Debug.LogError($"ModuleManager: No se pudo cargar el sprite de estado '{addressableKey}'.");
-                if (handle.IsValid())
-                {
-                    Addressables.Release(handle);
-                }
-                return;
-            }
-
-            spriteHandles[addressableKey] = handle;
-            spriteCache[addressableKey] = handle.Result;
-
-            foreach (SpriteRenderer renderer in targets)
-            {
-                if (renderer != null)
-                {
-                    renderer.sprite = handle.Result;
-                }
-            }
-        };
-    }
-}
-
-internal class ProgressRepository
-{
-    private readonly SQLiteConnection connectionDb;
-
-    public ProgressRepository()
-    {
-        if (DatabaseManager.Instance == null)
-        {
-            Debug.LogError("ProgressRepository: DatabaseManager.Instance es null.");
-            throw new InvalidOperationException("DatabaseManager.Instance es null.");
-        }
-
-        connectionDb = DatabaseManager.Instance.GetConnection();
-
-        if (connectionDb == null)
-        {
-            Debug.LogError("ProgressRepository: la conexion de base de datos es null.");
-            throw new InvalidOperationException("La conexion de base de datos es null.");
-        }
-    }
-
-    public ProgressModel GetByUserAndModule(int userId, int moduleId)
-    {
-        return connectionDb.Table<ProgressModel>()
-            .FirstOrDefault(x => x.id_user == userId && x.id_module == moduleId);
-    }
-
-    public void Insert(ProgressModel progress)
-    {
-        connectionDb.Insert(progress);
-    }
-
-    public void Update(ProgressModel progress)
-    {
-        connectionDb.Update(progress);
+        UserModel currentUser = UserSessionManager.Instance?.CurrentUser;
+        return currentUser?.id_user ?? 0;
     }
 }

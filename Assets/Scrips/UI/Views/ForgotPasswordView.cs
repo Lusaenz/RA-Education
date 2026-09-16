@@ -241,7 +241,7 @@ public class ForgotPasswordView : MonoBehaviour
 
         // Éxito - mostrar mensaje y redirigir al login correspondiente según rol
         Debug.Log($"[ForgotPasswordView] Contraseña cambiada exitosamente. Usuario: {currentUser.name}, Rol ID: {currentUser.id_role}");
-        PlayerPrefs.SetString("LoginMessage", "✓ Tu contraseña ha sido cambiada correctamente. Por favor inicia sesión.");
+        PlayerPrefs.SetString("LoginMessage", "Tu contraseña ha sido cambiada correctamente. Por favor inicia sesión.");
         
         // Cargar login según el rol del usuario recuperado
         SceneLoader sceneLoader = FindFirstObjectByType<SceneLoader>();

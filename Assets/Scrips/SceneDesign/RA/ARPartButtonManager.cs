@@ -8,21 +8,26 @@ using TMPro;
 /// Instancia un EyeButton por cada subparte del modelo 3D y lo sigue en pantalla.
 /// Coloca este script en el GameObject 3DModels de cada ImageTarget.
 /// Escucha los eventos OnTargetFound/OnTargetLost del DefaultObserverEventHandler.
+///
+/// El modelo permanece FIJO al ImageTarget (comportamiento por defecto de
+/// Vuforia). Este manager solo gestiona los eye buttons de las partes y el panel
+/// de contenido: al encontrar el marcador aparecen los botones, al perderlo se
+/// ocultan.
 /// </summary>
 public class ARPartButtonManager : MonoBehaviour
 {
     [Header("UI")]
-    [Tooltip("Prefab del botón EyeButton (Image + Button)")]
+    [Tooltip("Prefab del boton EyeButton (Image + Button)")]
     public GameObject eyeButtonPrefab;
-    [Tooltip("RectTransform raíz del Canvas donde se instanciarán los botones")]
+    [Tooltip("RectTransform raiz del Canvas donde se instanciaran los botones")]
     public RectTransform canvasRect;
-    [Tooltip("Panel único que muestra las content_sections del topic de la parte seleccionada")]
+    [Tooltip("Panel unico que muestra las content_sections del topic de la parte seleccionada")]
     public TopicContentPanel contentPanel;
 
     [Header("Mapeo de partes a topics (BD)")]
-    [Tooltip("Mapeo explícito nombre de parte (GameObject) -> id_topic. Tiene prioridad sobre defaultTopicId.")]
+    [Tooltip("Mapeo explicito nombre de parte (GameObject) -> id_topic. Tiene prioridad sobre defaultTopicId.")]
     public List<PartTopicOverride> partTopicOverrides = new List<PartTopicOverride>();
-    [Tooltip("id_topic usado cuando la parte no está en partTopicOverrides (0 = ninguno). Útil cuando todas las partes comparten un mismo topic, como los orgánulos de una célula.")]
+    [Tooltip("id_topic usado cuando la parte no esta en partTopicOverrides (0 = ninguno). Util cuando todas las partes comparten un mismo topic, como los organulos de una celula.")]
     public int defaultTopicId = 0;
     public int defaultContentId = 0;
 
@@ -54,10 +59,10 @@ public class ARPartButtonManager : MonoBehaviour
 
     private Camera _arCamera;
     private bool _isTracking;
-    private bool _attachedToCamera;
 
     private DefaultObserverEventHandler _handler;
     private ARModelControllerPro _modelController;
+
     private Transform _focusedPart;
     private Transform _modelRoot;
     private Dictionary<string, int> _topicByPart;
@@ -109,23 +114,16 @@ public class ARPartButtonManager : MonoBehaviour
 
     void Start()
     {
-        _topicByPart = new Dictionary<string, int>(System.StringComparer.OrdinalIgnoreCase);
-        foreach (var entry in partTopicOverrides)
-        {
-            if (!string.IsNullOrEmpty(entry.partName))
-                _topicByPart[entry.partName] = entry.idTopic;
-
-        }
-
-        _contentSectionByPart = new Dictionary<string, int>(System.StringComparer.OrdinalIgnoreCase);
-        foreach (var entry in partTopicOverrides)
-        {
-            if (!string.IsNullOrEmpty(entry.partName))
-                _contentSectionByPart[entry.partName] = entry.idContentSection;
-        }
+        BuildTopicMaps();
 
         _arCamera = Camera.main;
         _modelController = GetComponent<ARModelControllerPro>();
+
+        if (contentPanel != null)
+        {
+            contentPanel.OnClosed += ClearFocusAndHighlight;
+            contentPanel.OnSectionChanged += OnPanelSectionChanged;
+        }
 
         _handler = GetComponentInParent<DefaultObserverEventHandler>();
         if (_handler != null)
@@ -135,13 +133,20 @@ public class ARPartButtonManager : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("[ARPartButtonManager] No se encontró DefaultObserverEventHandler en el padre.", this);
+            Debug.LogWarning("[ARPartButtonManager] No se encontro DefaultObserverEventHandler en el padre.", this);
         }
+    }
 
-        if (contentPanel != null)
+    void BuildTopicMaps()
+    {
+        _topicByPart = new Dictionary<string, int>(System.StringComparer.OrdinalIgnoreCase);
+        _contentSectionByPart = new Dictionary<string, int>(System.StringComparer.OrdinalIgnoreCase);
+
+        foreach (var entry in partTopicOverrides)
         {
-            contentPanel.OnClosed += ClearFocusAndHighlight;
-            contentPanel.OnSectionChanged += OnPanelSectionChanged;
+            if (string.IsNullOrEmpty(entry.partName)) continue;
+            _topicByPart[entry.partName] = entry.idTopic;
+            _contentSectionByPart[entry.partName] = entry.idContentSection;
         }
     }
 
@@ -166,52 +171,25 @@ public class ARPartButtonManager : MonoBehaviour
             UpdatePositions();
     }
 
-void OnTrackingFound()
+    void OnTrackingFound()
     {
         _isTracking = true;
         SpawnButtons();
-        AttachToCamera();
         ShowFindHint();
     }
 
-void OnTrackingLost()
+    void OnTrackingLost()
     {
-        // Una vez el modelo quedo anclado a la camara ya no depende de
-        // seguir viendo el target fisico, asi que se mantiene visible.
-        if (_attachedToCamera) return;
-
         _isTracking = false;
         HideButtons();
         HideFindHint(true);
-    }
-
-    // Desancla el modelo 3D del ImageTarget y lo mueve bajo la camara AR,
-    // conservando su pose actual, para que a partir de ahora se mueva junto
-    // con la camara en vez de quedarse fijo sobre el marcador.
-    void AttachToCamera()
-    {
-        if (_attachedToCamera || _arCamera == null) return;
-
-        // Se conserva la distancia a la que estaba el modelo respecto a la
-        // camara, pero se coloca sobre su eje local +Z (adelante), en vez de
-        // preservar el offset mundial tal cual: con worldPositionStays=true
-        // la rotacion local resultante suele tener componente Z, y
-        // ARModelControllerPro solo reconstruye rotacion en X/Y cada frame
-        // (ver SmoothRotation), lo que dejaba el modelo mal orientado o
-        // fuera del frustum apenas la camara giraba.
-        float distance = Vector3.Distance(transform.position, _arCamera.transform.position);
-        if (distance < 0.5f) distance = 0.5f;
-
-        transform.SetParent(_arCamera.transform, false);
-        transform.localPosition = new Vector3(0f, 0f, distance);
-        transform.localRotation = Quaternion.identity;
-
-        _attachedToCamera = true;
 
         if (_modelController != null)
-            _modelController.SyncRotationFromTransform();
-    }
+            _modelController.ClearFocus();
 
+        if (contentPanel != null && contentPanel.IsOpen)
+            contentPanel.Close();
+    }
 
     // Los eye buttons se poolean (ver EnsureButtonPool) en vez de destruirse y
     // recrearse en cada ciclo de deteccion/perdida del target: en AR el mismo
@@ -222,7 +200,7 @@ void OnTrackingLost()
         if (eyeButtonPrefab == null || canvasRect == null) return;
         if (transform.childCount == 0) return;
 
-        // Primer hijo de 3DModels = raíz del modelo (ej. Aparato_Digestivo)
+        // Primer hijo de 3DModels = raiz del modelo (ej. Aparato_Digestivo)
         Transform modelRoot = transform.GetChild(0);
         _modelRoot = modelRoot;
 
@@ -288,7 +266,7 @@ void OnTrackingLost()
     // (abrir, cambiar de parte, o cerrar via toggle del mismo eyebutton).
     // idContentSection (opcional, 0 = ninguno) abre el panel directamente en esa
     // content_section en vez de la primera del topic.
-void SelectPart(Transform part, int idTopic, int idContentSection = 0)
+    void SelectPart(Transform part, int idTopic, int idContentSection = 0)
     {
         if (contentPanel == null || (idTopic <= 0 && idContentSection <= 0))
         {
@@ -397,7 +375,7 @@ void SelectPart(Transform part, int idTopic, int idContentSection = 0)
         }
     }
 
-IEnumerator FindHintRoutine()
+    IEnumerator FindHintRoutine()
     {
         hintTextObject.SetActive(true);
         yield return FadeCanvasGroup(_hintCanvasGroup, 0f, 1f, 0.25f);
@@ -512,7 +490,7 @@ IEnumerator FindHintRoutine()
     // "badge" con contador a las que caen a menos de clusterRadius pixeles entre
     // si (ej. organulos concentricos dentro de una celula), evitando que sus
     // eye buttons se vean amontonados/superpuestos. Tocar el badge expande sus
-    // miembros en un pequeño abanico alrededor del centroide del grupo.
+    // miembros en un pequeno abanico alrededor del centroide del grupo.
     void UpdatePositions()
     {
         if (_arCamera == null) return;

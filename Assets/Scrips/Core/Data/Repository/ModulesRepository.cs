@@ -135,6 +135,34 @@ public class ModulesRepository
         return resultadoFinal;
     }
 
+    /// <summary>
+    /// Devuelve los id_topic del modulo ordenados por order_index (y luego por id_topic).
+    /// Se usa para calcular la cantidad de "items de lectura" de un modulo y su posicion
+    /// dentro del bitmask de avance (ver ProgressService).
+    /// </summary>
+    public List<int> GetTopicIdsByModule(int id_module)
+    {
+        try
+        {
+            // La proyeccion .Select(...) sobre TableQuery de SQLite4Unity3d no es fiable;
+            // materializamos primero y ordenamos/proyectamos en memoria.
+            List<TopicModel> topics = ConnectionDb.Table<TopicModel>()
+                .Where(t => t.id_module == id_module)
+                .ToList();
+
+            return topics
+                .OrderBy(t => t.order_index)
+                .ThenBy(t => t.id_topic)
+                .Select(t => t.id_topic)
+                .ToList();
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"ModulesRepository: Error al obtener los temas del modulo {id_module}: {ex.Message}");
+            return new List<int>();
+        }
+    }
+
     public ModuleModel ObtenerModulo(int id_module)
     {
         try 
@@ -155,13 +183,14 @@ public class ModulesRepository
 
 
 [Table("topics")] // Carga de Tabla "topics"
-public class TopicModel 
+public class TopicModel
 {
     [PrimaryKey]
     public int id_topic { get; set; }
     public string name { get; set; }
     public string image { get; set; }
     public int id_module { get; set; }
+    public int order_index { get; set; }
 }
 
 [Table("content_sections")] // Carga de Tabla "content_sections"

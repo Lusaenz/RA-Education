@@ -18,7 +18,7 @@ private TagPointInfo ultimoSnap;
 {
     arCamera = Camera.main;
     info = GetComponent<PuzzlePieceInfo>();
-    snapPoints = FindObjectsOfType<TagPointInfo>();
+    snapPoints = FindObjectsByType<TagPointInfo>(FindObjectsSortMode.None);
 }
 
     void Update()

@@ -23,8 +23,6 @@ public class LoginStudentView : MonoBehaviour
     public Text NameErrorText;
     public Text PasswordErrorText;
     public Text MessageErrorLoginText;
-    [SerializeField] private Image MessageWelcomeBackground;
-    [SerializeField] private Image MessageWelcomeIcon;
 
     private LoginPresenter loginPresenter;
     private ISessionPersistence sessionPersistence;
@@ -187,10 +185,6 @@ public class LoginStudentView : MonoBehaviour
         MessageTextWelcome.color = color;
         MessageTextWelcome.gameObject.SetActive(true);
 
-        if (MessageWelcomeBackground != null)
-            MessageWelcomeBackground.gameObject.SetActive(showBackground);
-        if (MessageWelcomeIcon != null)
-            MessageWelcomeIcon.gameObject.SetActive(showBackground);
     }
 
     /// <summary>
@@ -204,10 +198,6 @@ public class LoginStudentView : MonoBehaviour
 
         SetWelcomeMessage(cleanMessage, SuccessWelcomeColor, showBackground: true);
 
-        if (MessageWelcomeBackground != null)
-            MessageWelcomeBackground.color = SuccessWelcomeBackgroundColor;
-        if (MessageWelcomeIcon != null)
-            MessageWelcomeIcon.color = SuccessWelcomeColor;
 
         StartCoroutine(AnimateWelcomeMessageIn());
         StartCoroutine(RevertWelcomeMessageAfter(5f, fallbackMessage));

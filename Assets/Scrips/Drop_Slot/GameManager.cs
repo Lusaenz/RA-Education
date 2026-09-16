@@ -46,12 +46,15 @@ public class GameManager : MonoBehaviour
 
     private ActivityData activityData;
     private int idActivity;
+    private int idModule;
+    private int idGameActivity;
     private int idUser;
     private int attempts;
 
     private GameActivityService gameActivityService;
     private ActivityService activityService;
     private ResultActivityService resultService;
+    private ProgressService progressService;
 
     private readonly List<AsyncOperationHandle<Sprite>> handles = new();
 
@@ -69,6 +72,7 @@ public class GameManager : MonoBehaviour
         gameActivityService = new GameActivityService();
         activityService = new ActivityService();
         resultService = new ResultActivityService();
+        progressService = new ProgressService();
     }
 
     private void Start()
@@ -92,6 +96,8 @@ public class GameManager : MonoBehaviour
         if (data == null) yield break;
 
         idActivity = data.id_activity;
+        idModule = data.id_module;
+        idGameActivity = data.id_game_activity;
 
         yield return StartCoroutine(activityService.GetActivity(idActivity, r => activityData = r));
 
@@ -209,6 +215,9 @@ public class GameManager : MonoBehaviour
             attempts,
             GetTime()
         );
+
+        // Marca este minijuego como item completado del modulo (solo si stars >= 1).
+        progressService.MarkGameCompleted(user.id_user, idModule, idGameActivity, stars);
     }
 
     private string GetTime()
