@@ -194,4 +194,4 @@ void DetectarSnapPointCercano()
 }
 
     
-}
+} 

@@ -3061,6 +3061,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c64a9dc8aea155e49a3f151c977b5ac9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SessionButtons
+  backButton: {fileID: 1381225455}
   logoutButton: {fileID: 1839841411}
   exitButton: {fileID: 0}
 --- !u!1 &1707770078

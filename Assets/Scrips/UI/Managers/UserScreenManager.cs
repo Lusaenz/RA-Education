@@ -14,6 +14,8 @@ public class UserScreenManager : MonoBehaviour
     private UserScreenPresenter presenter;
     private DegreeService degreeService;
     private ResultActivityService resultActivityService;
+    // Guardará temporalmente el estudiante seleccionado cuando el profesor presione "Ver Progreso"
+public static UserModel SelectedUserForView { get; set; }
 
     private void Start()
     {
@@ -49,49 +51,53 @@ public class UserScreenManager : MonoBehaviour
     /// Obtiene datos del usuario, los formatea y los envía a la vista.
     /// </summary>
     private void LoadAndDisplayUserData()
+{
+    if (presenter == null || userScreenView == null)
     {
-        if (presenter == null || userScreenView == null)
-        {
-            Debug.LogWarning("[UserScreenManager] Presenter o Vista no inicializados");
-            return;
-        }
-
-        if (UserSessionManager.Instance == null || UserSessionManager.Instance.CurrentUser == null)
-        {
-            Debug.LogWarning("[UserScreenManager] No hay usuario autenticado");
-            userScreenView.DisplayError("No hay sesión activa");
-            return;
-        }
-
-        try
-        {
-            UserModel currentUser = UserSessionManager.Instance.CurrentUser;
-
-            int totalStars = GetTotalStarsForUser(currentUser.id_user);
-
-            var formattedData = new UserScreenView.FormattedUserData
-            {
-                UserName = currentUser.name ?? "Usuario",
-                RoleName = presenter.FormatRoleName(GetRoleNameFromId(currentUser.id_role)),
-                DegreeName = presenter.FormatDegreeName(GetDegreeNameFromId(currentUser.id_degree)),
-                TotalStars = presenter.FormatTotalStars(totalStars),
-                DayLastLogin = "",
-                DateLastLogin = ""
-            };
-
-            var lastLoginInfo = presenter.FormatLastLogin(currentUser.last_login);
-            formattedData.DayLastLogin = lastLoginInfo.DayOnly;
-            formattedData.DateLastLogin = lastLoginInfo.MonthAndYear;
-
-            userScreenView.DisplayUserData(formattedData);
-            Debug.Log($"[UserScreenManager] Datos cargados para usuario: {currentUser.name}");
-        }
-        catch (System.Exception ex)
-        {
-            Debug.LogError($"[UserScreenManager] Error al cargar datos: {ex.Message}");
-            userScreenView.DisplayError("Error al cargar datos del usuario");
-        }
+        Debug.LogWarning("[UserScreenManager] Presenter o Vista no inicializados");
+        return;
     }
+
+    // 1. Priorizar el estudiante seleccionado desde la lista. Si es null, usar el logueado.
+    UserModel targetUser = UserSessionManager.SelectedUserForView ?? UserSessionManager.Instance?.CurrentUser;
+
+    // 2. Limpiar la variable estática para no dejar residuos si regresa al menú
+    UserSessionManager.SelectedUserForView = null;
+
+    if (targetUser == null)
+    {
+        Debug.LogWarning("[UserScreenManager] No se especificó usuario ni hay sesión activa");
+        userScreenView.DisplayError("No hay sesión activa");
+        return;
+    }
+
+    try
+    {
+        int totalStars = GetTotalStarsForUser(targetUser.id_user);
+
+        var formattedData = new UserScreenView.FormattedUserData
+        {
+            UserName = targetUser.name ?? "Usuario",
+            RoleName = presenter.FormatRoleName(GetRoleNameFromId(targetUser.id_role)),
+            DegreeName = presenter.FormatDegreeName(GetDegreeNameFromId(targetUser.id_degree)),
+            TotalStars = presenter.FormatTotalStars(totalStars),
+            DayLastLogin = "",
+            DateLastLogin = ""
+        };
+
+        var lastLoginInfo = presenter.FormatLastLogin(targetUser.last_login);
+        formattedData.DayLastLogin = lastLoginInfo.DayOnly;
+        formattedData.DateLastLogin = lastLoginInfo.MonthAndYear;
+
+        userScreenView.DisplayUserData(formattedData);
+        Debug.Log($"[UserScreenManager] Datos cargados correctamente para: {targetUser.name}");
+    }
+    catch (System.Exception ex)
+    {
+        Debug.LogError($"[UserScreenManager] Error al cargar datos: {ex.Message}");
+        userScreenView.DisplayError("Error al cargar datos del usuario");
+    }
+}
 
     /// <summary>
     /// Obtiene el nombre del rol desde su ID.

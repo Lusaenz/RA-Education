@@ -596,6 +596,7 @@ MonoBehaviour:
   m_LineType: 0
   m_HideMobileInput: 1
   m_HideSoftKeyboard: 0
+  m_HideSoftKeyboard: 0
   m_CharacterValidation: 0
   m_RegexValue: 
   m_GlobalPointSize: 14
@@ -625,7 +626,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_CustomCaretColor: 0
+  m_CustomCaretColor: 1
   m_SelectionColor: {r: 0, g: 0, b: 0, a: 1}
   m_Text: 
   m_CaretBlinkRate: 1
@@ -641,7 +642,7 @@ MonoBehaviour:
   m_LineLimit: 0
   isAlert: 0
   m_InputValidator: {fileID: 0}
-  m_ShouldActivateOnSelect: 0
+  m_ShouldActivateOnSelect: 1
 --- !u!114 &164008796
 MonoBehaviour:
   m_ObjectHideFlags: 0

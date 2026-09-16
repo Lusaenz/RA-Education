@@ -18,15 +18,11 @@ public class GameManagerFood : MonoBehaviour
     public int maxScore = 0;
 
     [Header("UI")]
+    [Tooltip("Arrastra aquí el Canvas o Panel del HUD del juego que debe ocultarse al ganar")]
+    public GameObject gameInfoUI;
     public TMP_Text scoreText;
-    public GameObject winPanel;
     public TMP_Text textoInstruccion;
     public TMP_Text textoAcertijo;
-
-    [Header("Estrellas")]
-    public Image[] estrellas;
-    public Sprite estrellaLlena;
-    public Sprite estrellaVacia;
 
     [Header("Items en escena (mismo orden que config_json)")]
     public DragHandler[] items;
@@ -46,8 +42,10 @@ public class GameManagerFood : MonoBehaviour
     private ProgressService _progressService;
     private ActivityData _activityData;
 
-    private readonly List<AsyncOperationHandle<Sprite>> _handles = new();
-    private static readonly WaitForSeconds WaitOneSecond = new(1f);
+    
+
+    private readonly List<AsyncOperationHandle> _handles = new List<AsyncOperationHandle>();
+    private static readonly WaitForSeconds WaitOneSecond = new WaitForSeconds(1f);
 
     private float _activityStartTime = 0f;
     private int _idActivity;
@@ -67,18 +65,24 @@ public class GameManagerFood : MonoBehaviour
 
     private void Start()
     {
+        if (VictoryUIManager.Instance != null)
+        {
+            VictoryUIManager.Instance.ResetUI();
+        }
+
         StartCoroutine(BootstrapGame());
+    }
+
+    private void RegistrarUI()
+    {
+        if (VictoryUIManager.Instance != null && gameInfoUI != null)
+        {
+            VictoryUIManager.Instance.SetInfoUI(gameInfoUI);
+        }
     }
 
     private IEnumerator BootstrapGame()
     {
-        if (winPanel != null)
-        {
-            winPanel.SetActive(false);
-            winPanel.transform.localScale = Vector3.one;
-        }
-
-
         yield return new WaitUntil(() => DatabaseManager.Instance != null);
         yield return new WaitUntil(() => DatabaseManager.Instance.IsReady);
 
@@ -163,12 +167,12 @@ public class GameManagerFood : MonoBehaviour
 
                 if (string.IsNullOrWhiteSpace(foodItem.addressableKey)) continue;
 
-                AsyncOperationHandle<Sprite> handle = Addressables.LoadAssetAsync<Sprite>(foodItem.addressableKey);
+                AsyncOperationHandle handle = Addressables.LoadAssetAsync<Sprite>(foodItem.addressableKey);
                 _handles.Add(handle);
                 yield return handle;
 
                 if (handle.Status == AsyncOperationStatus.Succeeded)
-                    items[i].SetSprite(handle.Result);
+                    items[i].SetSprite((Sprite)handle.Result);
                 else
                     Debug.LogWarning($"[GameManagerFood] Sprite no encontrado: {foodItem.addressableKey}");
             }
@@ -236,10 +240,18 @@ public class GameManagerFood : MonoBehaviour
     private IEnumerator MostrarVictoria()
     {
         yield return WaitOneSecond;
-        yield return StartCoroutine(AnimarPanelVictoria());
 
         int stars = CalcularEstrellas();
-        ActualizarEstrellas(stars);
+
+        if (VictoryUIManager.Instance != null)
+        {
+            RegistrarUI();
+            VictoryUIManager.Instance.ShowVictory(score, maxScore, stars);
+        }
+        else
+        {
+            Debug.LogError("No se encontró la instancia de VictoryUIManager en la escena.");
+        }
 
         _attempts++;
 
@@ -258,9 +270,6 @@ public class GameManagerFood : MonoBehaviour
             stars,
             _attempts,
             GetElapsedTime());
-
-        // Marca este minijuego como item completado del modulo (solo si stars >= 1).
-        _progressService.MarkGameCompleted(user.id_user, _idModule, _idGameActivity, stars);
     }
 
     private IEnumerator AnimarPanelVictoria()
@@ -324,5 +333,11 @@ public class GameManagerFood : MonoBehaviour
     {
         float t = Time.time - _activityStartTime;
         return $"{Mathf.FloorToInt(t / 60):00}:{Mathf.FloorToInt(t % 60):00}";
+    }
+
+    private void OnDestroy()
+    {
+        foreach (var h in _handles)
+            if (h.IsValid()) Addressables.Release(h);
     }
 }
