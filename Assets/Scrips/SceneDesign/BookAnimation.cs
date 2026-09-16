@@ -46,8 +46,33 @@ public class BookAnimation : MonoBehaviour
     {
         if (temasCargados != null && temasCargados.Count > idAct)
         {
-            visualizador.RenderizarUnicoTema(temasCargados[idAct]);
+            TopicJson tema = temasCargados[idAct];
+            visualizador.RenderizarUnicoTema(tema);
+            RegistrarTemaVisto(tema);
         }
+    }
+
+    /// <summary>
+    /// Marca el tema actual como visto para el avance del modulo. La pagina de introduccion
+    /// (topic_id == -1) no cuenta como item.
+    /// </summary>
+    private void RegistrarTemaVisto(TopicJson tema)
+    {
+        if (tema == null || tema.topic_id <= 0)
+        {
+            return;
+        }
+
+        int moduleId = PlayerPrefs.GetInt("selected_module_id", 0);
+        int userId = UserSessionManager.Instance?.CurrentUser?.id_user ?? 0;
+
+        if (moduleId <= 0 || userId <= 0)
+        {
+            return;
+        }
+
+        new ProgressService().MarkTopicViewed(userId, moduleId, tema.topic_id);
+        EstadoManager.Instance?.RefreshModule(moduleId);
     }
 
     public void TurnPage()

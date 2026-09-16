@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 public class BoxGameSelector : MonoBehaviour
 {
     public GameInfoUI gameInfoUI;
-    [SerializeField] private bool showAndroidTouchMessages = true;
 
     /// <summary>
     /// Si es mayor que 0, este crate abre directamente esa game_activity ignorando el módulo.

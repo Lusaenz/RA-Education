@@ -2,6 +2,16 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// Gestos de rotacion / zoom para el modelo 3D de la escena RAScreen.
+///
+/// El modelo permanece FIJO al ImageTarget (comportamiento por defecto de
+/// Vuforia: es hijo del marcador y el DefaultObserverEventHandler lo muestra u
+/// oculta segun el tracking). Este componente solo anade que, mientras el
+/// marcador esta a la vista, el usuario pueda girar y hacer zoom sobre el modelo
+/// (y sobre la parte aislada cuando se abre el panel de contenido) sin moverlo
+/// de su sitio sobre el marcador.
+/// </summary>
 public class ARModelControllerPro : MonoBehaviour
 {
     [Header("Rotation")]
@@ -10,8 +20,12 @@ public class ARModelControllerPro : MonoBehaviour
 
     [Header("Zoom")]
     public float zoomSpeed = 0.3f;
+    [Tooltip("Sensibilidad del zoom multiplicativo: cuanto crece/decrece la escala por unidad de gesto. Mas alto = zoom mas rapido.")]
+    public float zoomResponse = 2.5f;
+    [Tooltip("Escala minima permitida al hacer zoom out.")]
     public float minScale = 0.05f;
-    public float maxScale = 0.35f;
+    [Tooltip("Escala maxima permitida al hacer zoom in.")]
+    public float maxScale = 1f;
 
     [Header("Vertical Rotation Limits")]
     public float minRotationX = -80f;
@@ -56,7 +70,7 @@ public class ARModelControllerPro : MonoBehaviour
     // de la escena aunque solo uno estuviera en camara: cualquier scroll o
     // pinch accidental (ruido de touchpad, por ejemplo) reescalaba tambien los
     // modelos de los otros dos targets que ni siquiera estaban a la vista,
-    // dejandolos con un tamaño incorrecto la proxima vez que se encontraban.
+    // dejandolos con un tamano incorrecto la proxima vez que se encontraban.
     private bool _canInteract;
 
     // Foco sobre una parte (ver FocusOnPart/ClearFocus): mientras esta activo
@@ -75,18 +89,40 @@ public class ARModelControllerPro : MonoBehaviour
     // unico frame de transicion en vez de aplicarlo.
     private int _previousTouchCount = -1;
 
-void Start()
+    // Modelo que actualmente recibe los gestos de rotacion/zoom. Con varios
+    // ImageTargets a la vista solo uno responde a los gestos, para que un
+    // pinch/scroll accidental no reescale/rote a todos.
+    public static ARModelControllerPro ActiveController { get; private set; }
+
+    private DefaultObserverEventHandler _markerHandler;
+
+    // Habilita los gestos para este modelo y lo marca como el modelo activo.
+    public void EnableInteraction()
+    {
+        _canInteract = true;
+        SyncRotationFromTransform();
+        ActiveController = this;
+    }
+
+    void OnDestroy()
+    {
+        if (_markerHandler != null)
+            _markerHandler.OnTargetFound.RemoveListener(EnableInteraction);
+        if (ActiveController == this)
+            ActiveController = null;
+    }
+
+    void Start()
     {
         SyncRotationFromTransform();
 
-        var handler = GetComponentInParent<DefaultObserverEventHandler>();
-        if (handler != null)
-            handler.OnTargetFound.AddListener(() => _canInteract = true);
+        _markerHandler = GetComponentInParent<DefaultObserverEventHandler>();
+        if (_markerHandler != null)
+            _markerHandler.OnTargetFound.AddListener(EnableInteraction);
     }
 
     // Recalcula los angulos base a partir del transform actual.
-    // Debe llamarse tras reparentar el modelo (ver ARPartButtonManager),
-    // ya que localEulerAngles cambia de significado con el nuevo padre.
+    // Debe llamarse tras cualquier cambio externo de la rotacion del modelo.
     public void SyncRotationFromTransform()
     {
         Vector3 angles = transform.localEulerAngles;
@@ -97,9 +133,11 @@ void Start()
         currentRotationX = angles.x;
         targetRotationX = angles.x;
     }
+
     void Update()
     {
         if (!_canInteract) return;
+        if (ActiveController != null && ActiveController != this) return;
         if (IsTouchOverUI()) return;
 
         bool touchCountChanged = Input.touchCount != _previousTouchCount;
@@ -136,8 +174,7 @@ void Start()
     {
         if (part == null) return;
 
-        if (_arCamera == null && transform.parent != null)
-            _arCamera = transform.parent.GetComponent<Camera>();
+        if (_arCamera == null) _arCamera = Camera.main;
         if (_arCamera == null) return;
 
         if (!_isFocused)
@@ -175,10 +212,14 @@ void Start()
             new Vector3(viewportTarget.x, viewportTarget.y, viewDistance)
         );
 
+        // Desplazamiento necesario del modelo para que la parte quede en el
+        // punto de viewport pedido, convertido al espacio local del padre
+        // (el ImageTarget) para poder animar transform.localPosition.
         Vector3 worldShift = targetWorldPoint - part.position;
-        Vector3 localShift = camTransform.InverseTransformVector(worldShift);
-
-        Vector3 targetLocalPosition = transform.localPosition + localShift;
+        Vector3 targetWorldPosition = transform.position + worldShift;
+        Vector3 targetLocalPosition = transform.parent != null
+            ? transform.parent.InverseTransformPoint(targetWorldPosition)
+            : targetWorldPosition;
 
         float targetScaleValue = Mathf.Clamp(
             transform.localScale.x * zoomMultiplier,
@@ -228,6 +269,7 @@ void Start()
         transform.localPosition = targetLocalPosition;
         transform.localScale = targetScale;
     }
+
     // Rotacion
     void HandleRotationInput()
     {
@@ -275,6 +317,7 @@ void Start()
 
         targetRotationY = NormalizeAngle(targetRotationY);
     }
+
     void SmoothRotation()
     {
         currentRotationY = Mathf.LerpAngle(
@@ -296,6 +339,7 @@ void Start()
                 0f
             );
     }
+
     // ZOOM
     void HandleZoom()
     {
@@ -307,7 +351,7 @@ void Start()
         if (scroll != 0)
             zoomInput = scroll;
 
-        // Pinch móvil
+        // Pinch movil
         if (Input.touchCount == 2)
         {
             Touch t1 = Input.GetTouch(0);
@@ -332,22 +376,19 @@ void Start()
 
     void ApplyZoom(float increment)
     {
-        Vector3 newScale =
-            transform.localScale +
-            Vector3.one * increment * zoomSpeed;
+        // Zoom multiplicativo: la escala se multiplica por e^(input*respuesta). Da
+        // una sensacion uniforme a cualquier tamano (un mismo gesto cambia el
+        // tamano aparente el mismo porcentaje) y responde mucho mas rapido que el
+        // esquema aditivo anterior, que apenas movia la escala.
+        float factor = Mathf.Exp(increment * zoomResponse);
 
         float clamped = Mathf.Clamp(
-            newScale.x,
+            transform.localScale.x * factor,
             minScale,
             maxScale
         );
 
-        transform.localScale =
-            new Vector3(
-                clamped,
-                clamped,
-                clamped
-            );
+        transform.localScale = new Vector3(clamped, clamped, clamped);
     }
 
     // Rotacion/zoom de la parte aislada (mientras esta enfocada)
@@ -440,7 +481,7 @@ void Start()
     void ApplyPartZoom(float increment)
     {
         _partScaleMultiplier = Mathf.Clamp(
-            _partScaleMultiplier + increment * partZoomSpeed,
+            _partScaleMultiplier * Mathf.Exp(increment * zoomResponse),
             partMinScaleMultiplier,
             partMaxScaleMultiplier
         );

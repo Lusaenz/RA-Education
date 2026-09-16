@@ -232,6 +232,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1062809322022750212}
   - component: {fileID: 3259202699124428946}
+  - component: {fileID: 7477388357724129976}
   m_Layer: 0
   m_Name: NotStarted
   m_TagString: Untagged
@@ -281,7 +282,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: 29379a81a824db74ea48f5e3f439e288, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -314,6 +315,19 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!114 &7477388357724129976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6538683084470266369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ccafee02d869b843a7c2b1f158d5909, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ModuleStatusIndicator
+  ring: {fileID: 3259202699124428946}
 --- !u!1 &8510821534649035917
 GameObject:
   m_ObjectHideFlags: 0

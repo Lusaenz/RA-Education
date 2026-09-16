@@ -38,7 +38,7 @@ public class RegisterStudentView : MonoBehaviour
     [SerializeField] float keyboardPadding = 80f;
     [SerializeField] float keyboardMoveSpeed = 12f;
     [SerializeField] float keyboardFallbackHeightRatio = 0.38f;
-    [SerializeField] float maxKeyboardShift = 500f;
+    [SerializeField] float maxKeyboardShift = 800f;
 
     RegisterPresenter presenter;
     DegreeSelector degreeSelector;
@@ -418,8 +418,26 @@ public class RegisterStudentView : MonoBehaviour
         }
 
         float overlap = CalculateInputOverlapWithKeyboard(selectedInput, keyboardHeight);
-        float targetShift = Mathf.Clamp(overlap, 0f, maxKeyboardShift);
+
+        // 'overlap' se mide sobre la posicion ACTUAL del campo, que ya incluye el
+        // desplazamiento aplicado. Si se usara directamente como objetivo, cada frame
+        // reduciria el solape a la mitad y el lazo se estabilizaria a mitad del
+        // desplazamiento necesario, dejando el campo (p. ej. la respuesta de seguridad)
+        // tapado por el teclado. Sumar el desplazamiento actual mantiene el objetivo
+        // fijo en el valor real requerido.
+        float requiredShift = currentKeyboardShift + ScreenPixelsToShiftUnits(overlap);
+        float targetShift = Mathf.Clamp(requiredShift, 0f, maxKeyboardShift);
         MoveKeyboardShiftTowards(targetShift);
+    }
+
+    /// <summary>
+    /// Convierte una distancia en pixeles de pantalla a las unidades locales del
+    /// contenedor que se desplaza (afectadas por el CanvasScaler).
+    /// </summary>
+    float ScreenPixelsToShiftUnits(float screenPixels)
+    {
+        float scale = (rootCanvas != null && rootCanvas.scaleFactor > 0f) ? rootCanvas.scaleFactor : 1f;
+        return screenPixels / scale;
     }
 
     TMP_InputField GetSelectedInputField()

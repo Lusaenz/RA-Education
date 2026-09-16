@@ -5966,7 +5966,7 @@ MonoBehaviour:
   keyboardPadding: 80
   keyboardMoveSpeed: 12
   keyboardFallbackHeightRatio: 0.38
-  maxKeyboardShift: 500
+  maxKeyboardShift: 800
 --- !u!1 &1245594361
 GameObject:
   m_ObjectHideFlags: 0
