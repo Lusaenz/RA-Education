@@ -94,6 +94,9 @@ public class TopicContentPanel : MonoBehaviour
         if (panelRoot != null) panelRoot.SetActive(true);
         if (buttonsRoot != null) buttonsRoot.SetActive(true);
 
+        BackNavigationManager.PopOverride(HandleBackOverride);
+        BackNavigationManager.PushOverride(HandleBackOverride);
+
         RenderCurrentSection();
     }
 
@@ -136,7 +139,15 @@ public class TopicContentPanel : MonoBehaviour
         if (panelRoot != null) panelRoot.SetActive(false);
         if (buttonsRoot != null) buttonsRoot.SetActive(false);
 
+        BackNavigationManager.PopOverride(HandleBackOverride);
+
         OnClosed?.Invoke();
+    }
+
+    private bool HandleBackOverride()
+    {
+        Close();
+        return true;
     }
 
     void RenderCurrentSection()

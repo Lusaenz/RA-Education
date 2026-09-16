@@ -272,61 +272,21 @@ public class GameManagerFood : MonoBehaviour
             GetElapsedTime());
     }
 
-    private IEnumerator AnimarPanelVictoria()
-    {
-        if (winPanel == null) yield break;
 
-        winPanel.SetActive(true);
-        winPanel.transform.localScale = Vector3.zero;
-
-        float t = 0f;
-        const float dur = 0.4f;
-        while (t < dur)
-        {
-            t += Time.deltaTime;
-            float s = Mathf.Lerp(0f, 1f, t / dur);
-            winPanel.transform.localScale = new Vector3(s, s, s);
-            yield return null;
-        }
-
-        winPanel.transform.localScale = Vector3.one;
-    }
 
     private int CalcularEstrellas()
     {
         if (maxScore <= 0) return 0;
 
         // El número máximo de estrellas se toma de la actividad (max_star). Si la BD no lo
-        // define, se usa el array de UI (si está asignado) y, como último recurso, 3.
-        // Antes se usaba estrellas.Length directamente: si el array del Inspector estaba
-        // vacío el resultado era siempre 0 y así se guardaba en result_activity.
+        // define, se usa 3 como último recurso. La construcción visual de las estrellas
+        // la hace VictoryUIManager, que ya calcula y dibuja su propio arreglo.
         int maxStars = _activityData != null && _activityData.max_star > 0
             ? _activityData.max_star
-            : (estrellas != null && estrellas.Length > 0 ? estrellas.Length : 3);
+            : 3;
 
         float p = Mathf.Clamp01((float)score / maxScore);
         return Mathf.Clamp(Mathf.RoundToInt(p * maxStars), 0, maxStars);
-    }
-
-    private void ActualizarEstrellas(int numEstrellas)
-    {
-        if (estrellas == null || estrellas.Length == 0) return;
-
-        // Si el array de UI tiene menos slots que el máximo real de estrellas, se escala
-        // para que lo mostrado sea proporcional al puntaje y no dé "todas llenas" antes de tiempo.
-        int maxStars = _activityData != null && _activityData.max_star > 0
-            ? _activityData.max_star
-            : estrellas.Length;
-
-        int llenas = maxStars == estrellas.Length
-            ? numEstrellas
-            : Mathf.RoundToInt((float)numEstrellas / maxStars * estrellas.Length);
-
-        for (int i = 0; i < estrellas.Length; i++)
-        {
-            if (estrellas[i] != null)
-                estrellas[i].sprite = i < llenas ? estrellaLlena : estrellaVacia;
-        }
     }
 
     private string GetElapsedTime()

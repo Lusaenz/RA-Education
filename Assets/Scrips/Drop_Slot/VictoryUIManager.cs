@@ -64,6 +64,14 @@ public class VictoryUIManager : MonoBehaviour
         if (winPanel != null) winPanel.SetActive(false);
         if (info != null) info.SetActive(true);
         Clear();
+
+        BackNavigationManager.PopOverride(HandleBackOverride);
+    }
+
+    private bool HandleBackOverride()
+    {
+        ResetUI();
+        return true;
     }
 
     public int ShowVictory(int score, int maxScore, int maxStars)
@@ -86,7 +94,12 @@ public class VictoryUIManager : MonoBehaviour
     private IEnumerator AnimatePanel()
     {
         // 1. Activar panel de victoria
-        if (winPanel != null) winPanel.SetActive(true);
+        if (winPanel != null)
+        {
+            winPanel.SetActive(true);
+            BackNavigationManager.PopOverride(HandleBackOverride);
+            BackNavigationManager.PushOverride(HandleBackOverride);
+        }
 
         if (confettiFX != null)
         {
