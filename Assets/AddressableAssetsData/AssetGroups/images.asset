@@ -25,6 +25,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7ed6304bbe2ca9148a2b233f5b7e91b2
+    m_Address: images/puzzledigestive
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b84995120522ee142afc2978292bd7e0
     m_Address: images/puzzlecell
     m_ReadOnly: 0

@@ -22,6 +22,7 @@ public class PreviewImageLoader : MonoBehaviour
     [SerializeField] private string cellImageKey = "images/cell";
     [SerializeField] private string foodRiddlesImageKey = "images/food_riddles";
     [SerializeField] private string puzzleCellsImageKey = "images/puzzlecell";
+    [SerializeField] private string puzzleDigestiveImageKey = "images/puzzledigestive";
 
     // ── Internos ─────────────────────────────────────────────────────────
     private AsyncOperationHandle<Sprite> _currentHandle;
@@ -92,6 +93,7 @@ public class PreviewImageLoader : MonoBehaviour
             2 => cellImageKey,             // Célula
             3 => foodRiddlesImageKey,
             4 => puzzleCellsImageKey,
+            5 => puzzleDigestiveImageKey,
            // Food Riddles
             _ => null
         };
@@ -113,6 +115,7 @@ public class PreviewImageLoader : MonoBehaviour
             "drag_drop_cell" or "cell" or "célula" or "celula" => cellImageKey,
             "food_riddles" or "foodriddle" or "foodriddles" => foodRiddlesImageKey,
             "puzzle_cells" or "puzzlecell" or "puzzle_cells" => puzzleCellsImageKey,
+            "puzzle_digestive" or "puzzledigestive" or "puzzle_digestivo" => puzzleDigestiveImageKey,
             _ => null
         };
     }

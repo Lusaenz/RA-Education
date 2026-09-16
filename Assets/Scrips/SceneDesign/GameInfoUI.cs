@@ -182,6 +182,8 @@ public class GameInfoUI : MonoBehaviour
         if (panel != null)
         {
             panel.SetActive(true);
+            BackNavigationManager.PopOverride(HandleBackOverride);
+            BackNavigationManager.PushOverride(HandleBackOverride);
         }
     }
 
@@ -191,6 +193,14 @@ public class GameInfoUI : MonoBehaviour
         {
             panel.SetActive(false);
         }
+
+        BackNavigationManager.PopOverride(HandleBackOverride);
+    }
+
+    private bool HandleBackOverride()
+    {
+        ClosePanel();
+        return true;
     }
 
     public void PlayGame()
@@ -270,6 +280,7 @@ public class GameInfoUI : MonoBehaviour
         {
             "drag_drop_digestive_system" or "drag_drop_cell" => "DragAndDrop",
             "food_riddles" or "foodriddles" => "FoodRiddles", "Puzzle_Cells" or "puzzle_cells" => "PuzzleCells",
+            "Puzzle_Digestive" or "puzzle_digestive" => "PuzzleDigestive",
             _ => "DragAndDrop"
         };
     }

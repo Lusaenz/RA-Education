@@ -64,39 +64,12 @@ public class PuzzleManager : MonoBehaviour
         StartCoroutine(LoadActivityData());
     }
 
-    private IEnumerator LoadActivityData()
+    private void RegistrarUI()
     {
-        yield return new WaitUntil(() => DatabaseManager.Instance != null);
-        yield return new WaitUntil(() => DatabaseManager.Instance.IsReady);
-
-        int gameActivityId = PlayerPrefs.GetInt("selected_activity_id", DefaultGameActivityId);
-        gameActivityId = gameActivityId > 0 ? gameActivityId : DefaultGameActivityId;
-
-        GameActivityData data = null;
-        yield return StartCoroutine(_gameActivityService.GetGameActivity(gameActivityId, r => data = r));
-
-        if (data == null)
+        if (VictoryUIManager.Instance != null && gameInfoUI != null)
         {
-            Debug.LogWarning($"[PuzzleManager] No se encontro game_activity con id {gameActivityId}. No se podra registrar el avance del modulo.");
-            yield break;
+            VictoryUIManager.Instance.SetInfoUI(gameInfoUI);
         }
-
-        _idActivity = data.id_activity;
-        _idModule = data.id_module;
-        _idGameActivity = data.id_game_activity;
-
-        ActivityData activity = null;
-        yield return StartCoroutine(_activityService.GetActivity(_idActivity, r => activity = r));
-        if (activity != null && activity.max_star > 0)
-        {
-            _maxStarFromDb = activity.max_star;
-        }
-    }
-
-    void Start()
-    {
-        _startTime = Time.time;
-        StartCoroutine(LoadActivityData());
     }
 
     private IEnumerator LoadActivityData()
