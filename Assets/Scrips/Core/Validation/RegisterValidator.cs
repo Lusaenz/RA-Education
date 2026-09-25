@@ -23,6 +23,10 @@ public static class RegisterValidator
             errors["name"] = "El nombre es obligatorio.";
         else if (!Regex.IsMatch(name, PatronName))
             errors["name"] = "Nombre inválido";
+        else if (name.Length < 6)
+            errors["name"] = "El nombre debe contener al menos 6 caracteres.";
+        else if (name.Length > 20)
+            errors["name"] = "El nombre no puede contener mas de 20 caracteres.";
 
         if (degreeId <= 0)
             errors["degree"] = "El grado es obligatorio.";
@@ -31,6 +35,8 @@ public static class RegisterValidator
             errors["password"] = "La contraseña es obligatoria.";
         else if (pass.Length < 6)
             errors["password"] = "La contraseña debe tener al menos 6 caracteres.";
+        else if (pass.Contains(" "))
+            errors["password"] = "La contraseña no puede contener espacios.";
 
         if (!int.TryParse(ageText, out int age))
             errors["age"] = "Edad inválida.";
@@ -52,6 +58,10 @@ public static class RegisterValidator
             errors["name"] = "Escribe tu nombre completo";
         else if (!Regex.IsMatch(name, PatronName))
             errors["name"] = "El nombre solo puede contener letras y espacios";
+        else if (name.Length < 6)
+            errors["name"] = "El nombre debe contener al menos 6 caracteres.";
+        else if (name.Length > 20)
+            errors["name"] = "El nombre no puede contener mas de 20 caracteres.";
 
         if (string.IsNullOrEmpty(email))
             errors["email"] = "El email es obligatorio.";
@@ -65,6 +75,8 @@ public static class RegisterValidator
             errors["password"] = "La contraseña es obligatoria.";
         else if (pass.Length < 6)
             errors["password"] = "La contraseña debe tener al menos 6 caracteres.";
+        else if (pass.Contains(" "))
+            errors["password"] = "La contraseña no puede contener espacios.";
 
         return errors;
     }

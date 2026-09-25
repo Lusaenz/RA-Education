@@ -159,6 +159,13 @@ public class ForgotPasswordPresenter
             result.FieldErrors["password"] = "La contraseña no puede exceder 50 caracteres.";
             return result;
         }
+        
+        //Verificar espacios en contraseña
+        if (newPassword.Contains(" "))
+        {
+            result.FieldErrors["password"] = "La contraseña no puede contener espacios.";
+            return result;
+        }
 
         try
         {
