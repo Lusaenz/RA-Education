@@ -11,6 +11,12 @@ public static class RegisterValidator
 {
     public const string PatronName  = @"^[A-Za-zÁÉÍÓÚáéíóúñÑ]+(\s[A-Za-zÁÉÍÓÚáéíóúñÑ]+)+$";
     public const string PatronEmail = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+    // Exige que el dominio contenga ".edu" (ej: institucion.edu, institucion.edu.co) para restringir el rol de profesor a correos institucionales.
+    public const string PatronEmailEducativo = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.edu(\.[a-zA-Z]{2,4})?$";
+
+    public static bool IsValidEmailFormat(string email) => Regex.IsMatch(email ?? string.Empty, PatronEmail);
+
+    public static bool IsEducationalEmail(string email) => Regex.IsMatch(email ?? string.Empty, PatronEmailEducativo);
 
     public static Dictionary<string, string> ValidateStudent(string name, int degreeId, string ageText, string pass)
     {
@@ -67,6 +73,8 @@ public static class RegisterValidator
             errors["email"] = "El email es obligatorio.";
         else if (!Regex.IsMatch(email, PatronEmail))
             errors["email"] = "Escribe un correo válido";
+        else if (!IsEducationalEmail(email))
+            errors["email"] = "Debes usar tu correo institucional educativo (ejemplo: nombre@institucion.edu.co)";
 
         if (degreeId <= 0)
             errors["degree"] = "Campo obligatorio";

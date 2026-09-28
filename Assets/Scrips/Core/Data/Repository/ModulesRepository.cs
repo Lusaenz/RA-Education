@@ -110,9 +110,9 @@ public class ModulesRepository
     public List<TopicJson> ObtenerEstructuraCompleta(int id_module)
     {
         List<TopicJson> resultadoFinal = new List<TopicJson>();
-        
+
         ModuleModel infoModulo = ObtenerModulo(id_module);
-        
+
         if (infoModulo != null) {
             resultadoFinal.Add(new TopicJson {
                 topic_id = -1,
@@ -123,7 +123,11 @@ public class ModulesRepository
             });
         }
 
-        var topics = ConnectionDb.Table<TopicModel>().Where(t => t.id_module == id_module).ToList();
+        var topics = ConnectionDb.Table<TopicModel>()
+            .Where(t => t.id_module == id_module)
+            .OrderBy(t => t.order_index)
+            .ThenBy(t => t.id_topic)
+            .ToList();
         foreach (var t in topics) {
             resultadoFinal.Add(new TopicJson {
                 topic_id = t.id_topic,

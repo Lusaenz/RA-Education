@@ -596,7 +596,6 @@ MonoBehaviour:
   m_LineType: 0
   m_HideMobileInput: 1
   m_HideSoftKeyboard: 0
-  m_HideSoftKeyboard: 0
   m_CharacterValidation: 0
   m_RegexValue: 
   m_GlobalPointSize: 14
@@ -1590,8 +1589,6 @@ MonoBehaviour:
   NameErrorText: {fileID: 1521378288}
   PasswordErrorText: {fileID: 1526687180}
   MessageErrorLoginText: {fileID: 1614513222}
-  MessageWelcomeBackground: {fileID: 0}
-  MessageWelcomeIcon: {fileID: 0}
 --- !u!1 &820520959
 GameObject:
   m_ObjectHideFlags: 0
@@ -2925,8 +2922,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -112, y: 74}
-  m_SizeDelta: {x: 500, y: 50}
+  m_AnchoredPosition: {x: 9, y: 74}
+  m_SizeDelta: {x: 800, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1521378288
 MonoBehaviour:

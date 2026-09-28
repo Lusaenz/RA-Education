@@ -868,13 +868,13 @@ MonoBehaviour:
   PreviewVisible: 1
   RuntimeOcclusion: 0
   RuntimeCollider: 0
-  mTrackableName: targetsistemdigestive
+  mTrackableName: markerdigestive
   mInitializedInEditor: 1
-  mDataSetPath: Vuforia/cienciaViva.xml
-  mAspectRatio: 1
+  mDataSetPath: Vuforia/MakersCienciaViva.xml
+  mAspectRatio: 1.1208333
   mImageTargetType: 0
-  mWidth: 0.5
-  mHeight: 0.5
+  mWidth: 0.15
+  mHeight: 0.168125
   mRuntimeTexture: {fileID: 0}
   mMotionHint: 1
   mTrackingOptimization: 0
@@ -938,8 +938,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Vuforia.Unity.Engine.dll::Vuforia.ImageTargetPreview
   mObserverBehaviour: {fileID: 477891363}
   mHiddenRoot: {fileID: 0}
-  mTargetName: targetsistemdigestive
-  mDatasetName: Vuforia/cienciaViva.xml
+  mTargetName: markerdigestive
+  mDatasetName: Vuforia/MakersCienciaViva.xml
   mCastedBehaviour: {fileID: 477891363}
   mMeshFilter: {fileID: 0}
   mMeshRenderer: {fileID: 0}

@@ -142,7 +142,7 @@ public class RegisterTeacherTests
     [Test]
     public void Email_FormatoValido_NoDebeRetornarError()
     {
-        var errors = RegisterValidator.ValidateTeacher("Carlos López", 1, "correo@dominio.com", "pass123");
+        var errors = RegisterValidator.ValidateTeacher("Carlos López", 1, "correo@dominio.edu.co", "pass123");
 
         Assert.IsFalse(errors.ContainsKey("email"), "Email válido no debe generar error");
     }
@@ -151,9 +151,19 @@ public class RegisterTeacherTests
     public void Email_ConMayusculas_SeNormalizaYNoRetornaError()
     {
         // El validator convierte a lowercase antes de validar
-        var errors = RegisterValidator.ValidateTeacher("Carlos López", 1, "CORREO@DOMINIO.COM", "pass123");
+        var errors = RegisterValidator.ValidateTeacher("Carlos López", 1, "CORREO@DOMINIO.EDU.CO", "pass123");
 
         Assert.IsFalse(errors.ContainsKey("email"), "Email con mayúsculas se normaliza, no debe ser error");
+    }
+
+    [Test]
+    public void Email_NoEducativo_DebeRetornarError()
+    {
+        // Formato válido en general, pero el dominio no es institucional (.edu)
+        var errors = RegisterValidator.ValidateTeacher("Carlos López", 1, "profesor@gmail.com", "pass123");
+
+        Assert.IsTrue(errors.ContainsKey("email"));
+        Assert.AreEqual("Debes usar tu correo institucional educativo (ejemplo: nombre@institucion.edu.co)", errors["email"]);
     }
 
     [Test]

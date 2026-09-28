@@ -67,6 +67,11 @@ public class LoginPresenter
 
         if (string.IsNullOrEmpty(normalizedEmail))
             result.NameError = "Escribe tu correo electrónico.";
+        else if (!RegisterValidator.IsValidEmailFormat(normalizedEmail))
+            result.NameError = "Escribe un correo válido.";
+        else if (!RegisterValidator.IsEducationalEmail(normalizedEmail))
+            result.NameError = "Debes ingresar con tu correo institucional educativo.";
+
         if (string.IsNullOrEmpty(pass))
             result.PasswordError = "La contraseña no es correcta. Inténtalo otra vez.";
 
