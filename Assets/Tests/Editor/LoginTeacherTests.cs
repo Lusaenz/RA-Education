@@ -61,11 +61,23 @@ public class LoginTeacherTests
     {
         using var context = new TeacherLoginTestContext();
 
-        var result = context.Presenter.LoginTeacher("profesor@correo.com", "");
+        var result = context.Presenter.LoginTeacher("profesor@escuela.edu.co", "");
 
         Assert.IsFalse(result.IsSuccess);
         Assert.AreEqual("La contraseña no es correcta. Inténtalo otra vez.", result.PasswordError);
         Assert.IsNull(result.NameError);
+        Assert.IsNull(result.GeneralMessage);
+    }
+
+    [Test]
+    public void LoginTeacher_EmailNoEducativo_DebeRetornarErrorDeEmail()
+    {
+        using var context = new TeacherLoginTestContext();
+
+        var result = context.Presenter.LoginTeacher("profesor@gmail.com", "clave123");
+
+        Assert.IsFalse(result.IsSuccess);
+        Assert.AreEqual("Debes ingresar con tu correo institucional educativo.", result.NameError);
         Assert.IsNull(result.GeneralMessage);
     }
 
@@ -87,7 +99,7 @@ public class LoginTeacherTests
     {
         using var context = new TeacherLoginTestContext();
 
-        var result = context.Presenter.LoginTeacher("inexistente@correo.com", "clave123");
+        var result = context.Presenter.LoginTeacher("inexistente@escuela.edu.co", "clave123");
 
         Assert.IsFalse(result.IsSuccess);
         Assert.AreEqual("No encontramos tu cuenta. Revisa tus datos o regístrate", result.GeneralMessage);
@@ -98,9 +110,9 @@ public class LoginTeacherTests
     public void LoginTeacher_ContrasenaIncorrecta_DebeRetornarMensajeGeneral()
     {
         using var context = new TeacherLoginTestContext();
-        context.SeedTeacher("Carlos Martinez", PasswordHasher.HashPassword("claveCorrecta"), "carlos@correo.com");
+        context.SeedTeacher("Carlos Martinez", PasswordHasher.HashPassword("claveCorrecta"), "carlos@escuela.edu.co");
 
-        var result = context.Presenter.LoginTeacher("carlos@correo.com", "claveIncorrecta");
+        var result = context.Presenter.LoginTeacher("carlos@escuela.edu.co", "claveIncorrecta");
 
         Assert.IsFalse(result.IsSuccess);
         Assert.AreEqual("No encontramos tu cuenta. Revisa tus datos o regístrate", result.GeneralMessage);
@@ -111,10 +123,10 @@ public class LoginTeacherTests
     public void LoginTeacher_EmailConEspaciosAlrededor_DebeAutenticar()
     {
         using var context = new TeacherLoginTestContext();
-        context.SeedTeacher("Sofia Rojas", PasswordHasher.HashPassword("clave123"), "sofia@correo.com");
+        context.SeedTeacher("Sofia Rojas", PasswordHasher.HashPassword("clave123"), "sofia@escuela.edu.co");
         LogAssert.Expect(LogType.Error, "UserSessionManager no está disponible.");
 
-        var result = context.Presenter.LoginTeacher("  sofia@correo.com  ", "clave123");
+        var result = context.Presenter.LoginTeacher("  sofia@escuela.edu.co  ", "clave123");
 
         Assert.IsTrue(result.IsSuccess);
         Assert.IsNotNull(result.User);
@@ -126,10 +138,10 @@ public class LoginTeacherTests
     public void LoginTeacher_DatosValidos_DebeRetornarUsuario()
     {
         using var context = new TeacherLoginTestContext();
-        var expectedUser = context.SeedTeacher("Juan Mendez", PasswordHasher.HashPassword("miClave99"), "juan@correo.com");
+        var expectedUser = context.SeedTeacher("Juan Mendez", PasswordHasher.HashPassword("miClave99"), "juan@escuela.edu.co");
         LogAssert.Expect(LogType.Error, "UserSessionManager no está disponible.");
 
-        var result = context.Presenter.LoginTeacher("juan@correo.com", "miClave99");
+        var result = context.Presenter.LoginTeacher("juan@escuela.edu.co", "miClave99");
 
         Assert.IsTrue(result.IsSuccess);
         Assert.IsNotNull(result.User);

@@ -692,13 +692,13 @@ MonoBehaviour:
   PreviewVisible: 1
   RuntimeOcclusion: 0
   RuntimeCollider: 0
-  mTrackableName: targetanimalcell
+  mTrackableName: markercellanimal
   mInitializedInEditor: 1
-  mDataSetPath: Vuforia/cienciaViva.xml
-  mAspectRatio: 1
+  mDataSetPath: Vuforia/MakersCienciaViva.xml
+  mAspectRatio: 0.79234
   mImageTargetType: 0
-  mWidth: 0.5
-  mHeight: 0.5
+  mWidth: 0.15
+  mHeight: 0.118851
   mRuntimeTexture: {fileID: 0}
   mMotionHint: 1
   mTrackingOptimization: 0
@@ -752,8 +752,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Vuforia.Unity.Engine.dll::Vuforia.ImageTargetPreview
   mObserverBehaviour: {fileID: 128092898}
   mHiddenRoot: {fileID: 0}
-  mTargetName: targetanimalcell
-  mDatasetName: Vuforia/cienciaViva.xml
+  mTargetName: markercellanimal
+  mDatasetName: Vuforia/MakersCienciaViva.xml
   mCastedBehaviour: {fileID: 128092898}
   mMeshFilter: {fileID: 0}
   mMeshRenderer: {fileID: 0}
@@ -3108,13 +3108,13 @@ MonoBehaviour:
   PreviewVisible: 1
   RuntimeOcclusion: 0
   RuntimeCollider: 0
-  mTrackableName: targetsistemdigestive
+  mTrackableName: markerdigestive
   mInitializedInEditor: 1
-  mDataSetPath: Vuforia/cienciaViva.xml
-  mAspectRatio: 1
+  mDataSetPath: Vuforia/MakersCienciaViva.xml
+  mAspectRatio: 1.1208333
   mImageTargetType: 0
-  mWidth: 0.5
-  mHeight: 0.5
+  mWidth: 0.15
+  mHeight: 0.168125
   mRuntimeTexture: {fileID: 0}
   mMotionHint: 1
   mTrackingOptimization: 0
@@ -3168,8 +3168,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Vuforia.Unity.Engine.dll::Vuforia.ImageTargetPreview
   mObserverBehaviour: {fileID: 1345592194}
   mHiddenRoot: {fileID: 0}
-  mTargetName: targetsistemdigestive
-  mDatasetName: Vuforia/cienciaViva.xml
+  mTargetName: markerdigestive
+  mDatasetName: Vuforia/MakersCienciaViva.xml
   mCastedBehaviour: {fileID: 1345592194}
   mMeshFilter: {fileID: 0}
   mMeshRenderer: {fileID: 0}
@@ -3325,13 +3325,13 @@ MonoBehaviour:
   PreviewVisible: 1
   RuntimeOcclusion: 0
   RuntimeCollider: 0
-  mTrackableName: targetvegetalcell
+  mTrackableName: markercellvegetal
   mInitializedInEditor: 1
-  mDataSetPath: Vuforia/cienciaViva.xml
-  mAspectRatio: 0.89369
+  mDataSetPath: Vuforia/MakersCienciaViva.xml
+  mAspectRatio: 0.89649326
   mImageTargetType: 0
-  mWidth: 0.5
-  mHeight: 0.446845
+  mWidth: 0.15
+  mHeight: 0.134474
   mRuntimeTexture: {fileID: 0}
   mMotionHint: 1
   mTrackingOptimization: 0
@@ -3385,8 +3385,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Vuforia.Unity.Engine.dll::Vuforia.ImageTargetPreview
   mObserverBehaviour: {fileID: 1441629029}
   mHiddenRoot: {fileID: 0}
-  mTargetName: targetvegetalcell
-  mDatasetName: Vuforia/cienciaViva.xml
+  mTargetName: markercellvegetal
+  mDatasetName: Vuforia/MakersCienciaViva.xml
   mCastedBehaviour: {fileID: 1441629029}
   mMeshFilter: {fileID: 0}
   mMeshRenderer: {fileID: 0}

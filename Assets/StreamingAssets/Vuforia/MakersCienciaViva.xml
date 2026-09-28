@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<QCARConfig>
+  <Tracking>
+    <ImageTarget name="markercellanimal" size="0.150000 0.118851" />
+    <ImageTarget name="markercellvegetal" size="0.150000 0.134474" />
+    <ImageTarget name="markerdigestive" size="0.150000 0.168125" />
+  </Tracking>
+</QCARConfig>
