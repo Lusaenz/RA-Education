@@ -15,33 +15,8 @@ MonoBehaviour:
   m_GroupName: foods
   m_GUID: b8c5caeb84590324bbe6018e51428b10
   m_SerializeEntries:
-  - m_GUID: 25f0ea4476ec742bd8bfa32d7305ec07
-    m_Address: food_fruits
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 2c2399a478c4e49d384da76fa4c964ed
-    m_Address: food_lettuce
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 328c451d9923a495791872b57ad251fc
-    m_Address: food_burger
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: b9fe4b4ab3da6404d98407cb8c4ad24a
-    m_Address: food_chips
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d2ffb72c05a754f568b32e1b5f088277
-    m_Address: food_soda
-    m_ReadOnly: 0
-    m_SerializedLabels: []
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: d5aaad833cdd540f98aa40677747c8c6
-    m_Address: food_water
+  - m_GUID: 6f60f51d0b4d54d47832aa35118be7e9
+    m_Address: food
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

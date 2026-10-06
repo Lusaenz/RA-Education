@@ -43,6 +43,7 @@ public class DatabaseManager : MonoBehaviour
     {
         IsReady = false;
         string dbPath = Path.Combine(Application.persistentDataPath, DbName);
+        Debug.Log($"DatabaseManager: Ruta de la DB: {dbPath}");
 
         yield return StartCoroutine(EnsureDatabaseFileExists(dbPath));
 
@@ -318,8 +319,33 @@ public class DatabaseManager : MonoBehaviour
         return Connection;
     }
 
+    /// <summary>
+    /// Pasa al archivo .db lo que está pendiente en ciencia_viva.db-wal.
+    /// Así una copia solo del .db (adb pull, USB) incluye los usuarios recién creados.
+    /// </summary>
+    public void CheckpointWal()
+    {
+        if (!IsReady || Connection == null) return;
+
+        try
+        {
+            Connection.ExecuteScalar<int>("PRAGMA wal_checkpoint(TRUNCATE);");
+        }
+        catch (Exception ex)
+        {
+            Debug.LogWarning($"DatabaseManager: No se pudo hacer checkpoint del WAL: {ex.Message}");
+        }
+    }
+
+    // En Android OnApplicationQuit casi nunca se llama; la app se pausa y el sistema la mata.
+    void OnApplicationPause(bool paused)
+    {
+        if (paused) CheckpointWal();
+    }
+
     void OnApplicationQuit()
     {
+        CheckpointWal();
         Connection?.Close();
     }
 }
