@@ -131,9 +131,8 @@ extern void DatabaseManager_CheckAndUpdateIfModified_m17CB68360320F5036622AB4183
 extern void DatabaseManager_MigrateContentTables_m43865CDE89657A6063ADE81E1613C144055BB005 (void);
 extern void DatabaseManager_CopyDatabaseFile_mA05B5F4F656D762A855BC1D335433B07AEA67546 (void);
 extern void DatabaseManager_CalculateHash_m75875E89421124182227D7C363D3221B7DA6B8FA (void);
+extern void DatabaseManager_RepairUsersTableIfNeeded_m461433CD8CD400FD694B3631D4A174AB8070BADD (void);
 extern void DatabaseManager_GetConnection_m56D33E86181AA9BE91807712C7C4D6D5D72E8D5B (void);
-extern void DatabaseManager_CheckpointWal_mB208BB1A65EB14B1B75B821A289E78AACC5A6C58 (void);
-extern void DatabaseManager_OnApplicationPause_m0FC493E595EF7D24785EDC0CF9D24AF9D312F0DD (void);
 extern void DatabaseManager_OnApplicationQuit_mA4068FA6D050F2F3AA814672394F3DF73CC994C0 (void);
 extern void DatabaseManager__ctor_m4B7E159F9E2AD28A3985BD287AC0137AF60987C5 (void);
 extern void DatabaseManager__cctor_m4A80918BCDE880B2C39EC77F945C90D43FA46C51 (void);
@@ -1706,7 +1705,7 @@ extern void SQLite3_ColumnByteArray_m09025DD6AB983E61366EFCB4F1500F7EA24CEC5E (v
 extern void SQLite3_ExtendedErrCode_mE53EAE79412B17719370EA83EF845896409E4E68 (void);
 extern void SQLite3_LibVersionNumber_m2C388472E0DC6C13BA5F5A2DD8BB226EA30D52C5 (void);
 extern void U3CPrivateImplementationDetailsU3E_ComputeStringHash_m6EA1F233618497AEFF8902A5EDFA24C74E2F2876 (void);
-static Il2CppMethodPointer s_methodPointers[1779] = 
+static Il2CppMethodPointer s_methodPointers[1778] = 
 {
 	SimpleClient_get_Instance_mDC1DDA8FC69B0D48B9F438B77369309975F84CF6,
 	SimpleClient_set_Instance_m6A3F53421EF9256A41C5D7A33DC21BAF67390B74,
@@ -1832,9 +1831,8 @@ static Il2CppMethodPointer s_methodPointers[1779] =
 	DatabaseManager_MigrateContentTables_m43865CDE89657A6063ADE81E1613C144055BB005,
 	DatabaseManager_CopyDatabaseFile_mA05B5F4F656D762A855BC1D335433B07AEA67546,
 	DatabaseManager_CalculateHash_m75875E89421124182227D7C363D3221B7DA6B8FA,
+	DatabaseManager_RepairUsersTableIfNeeded_m461433CD8CD400FD694B3631D4A174AB8070BADD,
 	DatabaseManager_GetConnection_m56D33E86181AA9BE91807712C7C4D6D5D72E8D5B,
-	DatabaseManager_CheckpointWal_mB208BB1A65EB14B1B75B821A289E78AACC5A6C58,
-	DatabaseManager_OnApplicationPause_m0FC493E595EF7D24785EDC0CF9D24AF9D312F0DD,
 	DatabaseManager_OnApplicationQuit_mA4068FA6D050F2F3AA814672394F3DF73CC994C0,
 	DatabaseManager__ctor_m4B7E159F9E2AD28A3985BD287AC0137AF60987C5,
 	DatabaseManager__cctor_m4A80918BCDE880B2C39EC77F945C90D43FA46C51,
@@ -3539,7 +3537,7 @@ static Il2CppTokenAdjustorThunkPair s_adjustorThunks[24] =
 	{ 0x06000059, U3CSendStudentU3Ed__12_MoveNext_m8328D4A88BD55B1417C421730B56BBE72A19A038_AdjustorThunk },
 	{ 0x0600005A, U3CSendStudentU3Ed__12_SetStateMachine_mB0D5F2D956C26AED67260EF847C2477DF1FEE921_AdjustorThunk },
 };
-static const int32_t s_InvokerIndices[1779] = 
+static const int32_t s_InvokerIndices[1778] = 
 {
 	27920,
 	26700,
@@ -3665,9 +3663,8 @@ static const int32_t s_InvokerIndices[1779] =
 	4005,
 	4930,
 	10881,
-	16344,
 	16580,
-	12407,
+	16344,
 	16580,
 	16580,
 	28021,
@@ -5327,33 +5324,33 @@ static const Il2CppTokenRangePair s_rgctxIndices[31] =
 	{ 0x0200012D, { 64, 49 } },
 	{ 0x0200012E, { 134, 1 } },
 	{ 0x0200012F, { 135, 5 } },
-	{ 0x060005B4, { 0, 1 } },
-	{ 0x060005B5, { 1, 1 } },
-	{ 0x060005B6, { 2, 1 } },
-	{ 0x060005BC, { 3, 2 } },
-	{ 0x060005C2, { 5, 2 } },
-	{ 0x060005C3, { 7, 2 } },
-	{ 0x060005C4, { 9, 2 } },
-	{ 0x060005C7, { 11, 2 } },
-	{ 0x060005C8, { 13, 6 } },
-	{ 0x060005C9, { 19, 6 } },
-	{ 0x060005CA, { 25, 6 } },
-	{ 0x060005CC, { 31, 6 } },
-	{ 0x060005E5, { 37, 1 } },
-	{ 0x060005E6, { 38, 1 } },
-	{ 0x0600066C, { 39, 3 } },
-	{ 0x0600066D, { 42, 5 } },
-	{ 0x0600066E, { 47, 4 } },
-	{ 0x06000670, { 51, 3 } },
-	{ 0x06000671, { 54, 2 } },
-	{ 0x060006A6, { 113, 2 } },
-	{ 0x060006AC, { 115, 2 } },
-	{ 0x060006AD, { 117, 2 } },
-	{ 0x060006AE, { 119, 2 } },
-	{ 0x060006AF, { 121, 2 } },
-	{ 0x060006B0, { 123, 1 } },
-	{ 0x060006B2, { 124, 7 } },
-	{ 0x060006B3, { 131, 3 } },
+	{ 0x060005B3, { 0, 1 } },
+	{ 0x060005B4, { 1, 1 } },
+	{ 0x060005B5, { 2, 1 } },
+	{ 0x060005BB, { 3, 2 } },
+	{ 0x060005C1, { 5, 2 } },
+	{ 0x060005C2, { 7, 2 } },
+	{ 0x060005C3, { 9, 2 } },
+	{ 0x060005C6, { 11, 2 } },
+	{ 0x060005C7, { 13, 6 } },
+	{ 0x060005C8, { 19, 6 } },
+	{ 0x060005C9, { 25, 6 } },
+	{ 0x060005CB, { 31, 6 } },
+	{ 0x060005E4, { 37, 1 } },
+	{ 0x060005E5, { 38, 1 } },
+	{ 0x0600066B, { 39, 3 } },
+	{ 0x0600066C, { 42, 5 } },
+	{ 0x0600066D, { 47, 4 } },
+	{ 0x0600066F, { 51, 3 } },
+	{ 0x06000670, { 54, 2 } },
+	{ 0x060006A5, { 113, 2 } },
+	{ 0x060006AB, { 115, 2 } },
+	{ 0x060006AC, { 117, 2 } },
+	{ 0x060006AD, { 119, 2 } },
+	{ 0x060006AE, { 121, 2 } },
+	{ 0x060006AF, { 123, 1 } },
+	{ 0x060006B1, { 124, 7 } },
+	{ 0x060006B2, { 131, 3 } },
 };
 extern const uint32_t g_rgctx_T_t3F54073FBC2F54FED5400403A98E24B1366F9EF6;
 extern const uint32_t g_rgctx_T_t3814F1FCC50BFF1CE6D1FD34B76B9083E207AC49;
@@ -5642,7 +5639,7 @@ IL2CPP_EXTERN_C const Il2CppCodeGenModule g_AssemblyU2DCSharp_CodeGenModule;
 const Il2CppCodeGenModule g_AssemblyU2DCSharp_CodeGenModule = 
 {
 	"Assembly-CSharp.dll",
-	1779,
+	1778,
 	s_methodPointers,
 	24,
 	s_adjustorThunks,

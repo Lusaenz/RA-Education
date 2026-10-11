@@ -43,7 +43,6 @@ public class DatabaseManager : MonoBehaviour
     {
         IsReady = false;
         string dbPath = Path.Combine(Application.persistentDataPath, DbName);
-        Debug.Log($"DatabaseManager: Ruta de la DB: {dbPath}");
 
         yield return StartCoroutine(EnsureDatabaseFileExists(dbPath));
 
@@ -61,6 +60,8 @@ public class DatabaseManager : MonoBehaviour
                 Connection.BusyTimeout = TimeSpan.FromSeconds(15);
                 Connection.ExecuteScalar<string>("PRAGMA journal_mode=WAL;");
                 Connection.Execute("PRAGMA synchronous=NORMAL;");
+
+                RepairUsersTableIfNeeded();
 
                 IsReady = true;
                 Debug.Log("DatabaseManager: Conectado a DB");
@@ -314,38 +315,65 @@ public class DatabaseManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Si la tabla users quedó con id_user TEXT (id aleatorio en hex), el código no puede
+    /// relacionarla con teachers/students/progress, que guardan el id como entero
+    /// (sqlite-net asigna el rowid). Se reconstruye con id_user INTEGER usando el rowid,
+    /// que es justo el valor que ya quedó guardado en las demás tablas.
+    /// </summary>
+    private void RepairUsersTableIfNeeded()
+    {
+        string ddl = Connection.ExecuteScalar<string>(
+            "SELECT sql FROM sqlite_master WHERE type='table' AND name='users';");
+
+        if (string.IsNullOrEmpty(ddl) ||
+            ddl.IndexOf("id_user TEXT", StringComparison.OrdinalIgnoreCase) < 0)
+            return;
+
+        Debug.LogWarning("DatabaseManager: users.id_user es TEXT. Reparando tabla users...");
+
+        Connection.Execute("BEGIN TRANSACTION;");
+        try
+        {
+            Connection.Execute(@"CREATE TABLE users_new (
+                id_user INTEGER PRIMARY KEY AUTOINCREMENT,
+                name TEXT NOT NULL,
+                password TEXT NOT NULL,
+                id_degree INTEGER,
+                id_role INTEGER,
+                id_security_question INTEGER,
+                security_asnwer_hash TEXT NOT NULL,
+                last_login TEXT,
+                CONSTRAINT id_degree FOREIGN KEY (id_degree) REFERENCES degrees (id_degree),
+                CONSTRAINT id_role FOREIGN KEY (id_role) REFERENCES roles (id_role),
+                CONSTRAINT id_security_question FOREIGN KEY (id_security_question) REFERENCES security_questions (id_question)
+            );");
+
+            Connection.Execute(@"INSERT INTO users_new
+                (id_user, name, password, id_degree, id_role, id_security_question, security_asnwer_hash, last_login)
+                SELECT rowid, name, password, id_degree, id_role, id_security_question, security_asnwer_hash, last_login
+                FROM users;");
+
+            Connection.Execute("DROP TABLE users;");
+            Connection.Execute("ALTER TABLE users_new RENAME TO users;");
+            Connection.Execute("COMMIT;");
+
+            Debug.Log("DatabaseManager: tabla users reparada (id_user INTEGER).");
+        }
+        catch (Exception ex)
+        {
+            Connection.Execute("ROLLBACK;");
+            Debug.LogError($"DatabaseManager: no se pudo reparar la tabla users: {ex.Message}");
+        }
+    }
+
     public SQLiteConnection GetConnection()
     {
         return Connection;
     }
 
-    /// <summary>
-    /// Pasa al archivo .db lo que está pendiente en ciencia_viva.db-wal.
-    /// Así una copia solo del .db (adb pull, USB) incluye los usuarios recién creados.
-    /// </summary>
-    public void CheckpointWal()
-    {
-        if (!IsReady || Connection == null) return;
-
-        try
-        {
-            Connection.ExecuteScalar<int>("PRAGMA wal_checkpoint(TRUNCATE);");
-        }
-        catch (Exception ex)
-        {
-            Debug.LogWarning($"DatabaseManager: No se pudo hacer checkpoint del WAL: {ex.Message}");
-        }
-    }
-
-    // En Android OnApplicationQuit casi nunca se llama; la app se pausa y el sistema la mata.
-    void OnApplicationPause(bool paused)
-    {
-        if (paused) CheckpointWal();
-    }
-
     void OnApplicationQuit()
     {
-        CheckpointWal();
         Connection?.Close();
     }
 }

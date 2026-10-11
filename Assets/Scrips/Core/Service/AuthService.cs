@@ -54,12 +54,15 @@ public class AuthService
         UserModel user = userRepository.LoginTeacher(email);
         if (user == null)
         {
+            // Diagnóstico (ver con: adb logcat -s Unity). No muestra la contraseña.
+            UnityEngine.Debug.LogWarning($"[AuthService] LoginTeacher: no existe profesor con correo '{email}' (longitud {email?.Length ?? 0}).");
             return null;
         }
 
         bool isValid = PasswordHasher.VerifyPassword(pass, user.password);
         if (!isValid)
         {
+            UnityEngine.Debug.LogWarning($"[AuthService] LoginTeacher: correo '{email}' encontrado, pero la contraseña no coincide (longitud recibida {pass?.Length ?? 0}).");
             return null;
         }
 

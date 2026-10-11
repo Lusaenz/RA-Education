@@ -22,6 +22,7 @@ public class StudentService
         }
 
         var db = DatabaseManager.Instance.GetConnection();
+        var progressService = new ProgressService();
 
         try
         {
@@ -35,17 +36,19 @@ public class StudentService
                 string degreeName = degreeObj != null ? degreeObj.name : "N/A";
 
                 // --- CÁLCULO REAL DESDE LA BASE DE DATOS ---
-                // Cuenta cuantas actividades o temas ha completado el estudiante en la tabla result_activity
-                int completedCount = db.Table<ResultActivityData>()
-                                       .Where(r => r.id_user == student.id_user)
-                                       .Count();
-
-                int totalTopics = 2; // O el total de temas/módulos que tenga tu curso
+                // Minijuegos distintos completados (tabla progress) sobre el total de game_activity.
+                // Antes se contaban filas de result_activity (cada intento sumaba) contra un total fijo de 2.
+                int completedCount = progressService.CountCompletedGames(student.id_user, out int totalTopics);
                 string completedTopics = $"{completedCount}/{totalTopics}";
 
-                // Determinar el estado automáticamente
-                string status = completedCount == 0 ? "No Iniciado" : 
-                               (completedCount >= totalTopics ? "Completado" : "En Progreso");
+                // notstarted: ninguno | inprogress: al menos uno | completed: todos
+                string status;
+                if (completedCount <= 0)
+                    status = "No Iniciado";
+                else if (totalTopics > 0 && completedCount >= totalTopics)
+                    status = "Completado";
+                else
+                    status = "En Progreso";
 
                 // Dentro de GetStudentsForCards():
 studentsCardsList.Add(new StudentCardData(student, studentName, degreeName, completedTopics, status));

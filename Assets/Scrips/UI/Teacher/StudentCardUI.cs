@@ -31,7 +31,7 @@ public class StudentCardUI : MonoBehaviour
             : $"{studentData.Degree}";
         degreeText.text = degreeFormatted;
 
-        completedTopicsText.text = $"Temas Completados: {studentData.CompletedTopicsText}";
+        completedTopicsText.text = $"{studentData.CompletedTopicsText}";
         statusText.text = studentData.Status;
 
         UpdateStatusSprite(studentData.Status);

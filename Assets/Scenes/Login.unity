@@ -4925,7 +4925,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SimpleClient
   serverIPInput: {fileID: 0}
   messageInput: {fileID: 0}
-  statusText: {fileID: 0}
+  statusText: {fileID: 543864878}
   receivedText: {fileID: 0}
 --- !u!4 &2108361927
 Transform:
