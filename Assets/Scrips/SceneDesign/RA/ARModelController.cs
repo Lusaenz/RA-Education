@@ -96,6 +96,26 @@ public class ARModelControllerPro : MonoBehaviour
 
     private DefaultObserverEventHandler _markerHandler;
 
+    // Orientacion de reposo del modelo respecto al ImageTarget, tomada de la
+    // rotacion que tiene 3DModels en la escena (ej. (90,0,0) para que el frente
+    // -Z del modelo mire hacia la camara, que ve el marcador por su normal +Y).
+    // Los gestos de rotacion se aplican ENCIMA de esta base: si se escribiera
+    // Euler(x,y,0) directamente se perderia la orientacion de la escena.
+    private Quaternion _baseLocalRotation = Quaternion.identity;
+    private bool _baseCaptured;
+
+    void Awake()
+    {
+        CaptureBaseRotation();
+    }
+
+    void CaptureBaseRotation()
+    {
+        if (_baseCaptured) return;
+        _baseLocalRotation = transform.localRotation;
+        _baseCaptured = true;
+    }
+
     // Habilita los gestos para este modelo y lo marca como el modelo activo.
     public void EnableInteraction()
     {
@@ -121,17 +141,22 @@ public class ARModelControllerPro : MonoBehaviour
             _markerHandler.OnTargetFound.AddListener(EnableInteraction);
     }
 
-    // Recalcula los angulos base a partir del transform actual.
-    // Debe llamarse tras cualquier cambio externo de la rotacion del modelo.
+    // Recalcula los angulos de gesto a partir del transform actual (relativos a
+    // la orientacion base). Debe llamarse tras cualquier cambio externo de la
+    // rotacion del modelo.
     public void SyncRotationFromTransform()
     {
-        Vector3 angles = transform.localEulerAngles;
+        CaptureBaseRotation();
+        Vector3 angles = (Quaternion.Inverse(_baseLocalRotation) * transform.localRotation).eulerAngles;
 
         currentRotationY = angles.y;
         targetRotationY = angles.y;
 
-        currentRotationX = angles.x;
-        targetRotationX = angles.x;
+        // eulerAngles devuelve 0..360: se pasa a -180..180 para que una
+        // inclinacion negativa (ej. 350) no se recorte a maxRotationX.
+        float x = Mathf.DeltaAngle(0f, angles.x);
+        currentRotationX = x;
+        targetRotationX = x;
     }
 
     void Update()
@@ -333,6 +358,7 @@ public class ARModelControllerPro : MonoBehaviour
         );
 
         transform.localRotation =
+            _baseLocalRotation *
             Quaternion.Euler(
                 currentRotationX,
                 currentRotationY,
