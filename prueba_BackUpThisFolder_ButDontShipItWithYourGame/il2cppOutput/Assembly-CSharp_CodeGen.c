@@ -450,6 +450,7 @@ extern void ProgressService_GetModuleProgress_m502B62984CB08FDE40B87AC81F9C8BC2C
 extern void ProgressService_EnsureModuleStarted_m54041C2A2A13FDFD2DE3410B83EB5EB99AD4E1E0 (void);
 extern void ProgressService_MarkTopicViewed_mE677E718B4281B27237E3206DA7EBA624BEF9E1E (void);
 extern void ProgressService_MarkGameCompleted_mEBCE2E5CB97DDF6821AFDE7DA4E205736979EDA0 (void);
+extern void ProgressService_CountCompletedGames_mFCB85254D83B1A82D67F3DEB3A9EA1EBD2CB12B9 (void);
 extern void ProgressService_RecomputeAndPersist_mBD7890A4233B2950C16E18C529B46B17B1B04359 (void);
 extern void ProgressService_BuildInfo_mC900429D641E3A7DDDCA8077FA14F0199DC054C7 (void);
 extern void ProgressService_GetTotalItems_m157AA150D630A6F79BC9B1595349DE6673E00B1D (void);
@@ -459,8 +460,9 @@ extern void ModuleItemLayout_get_TotalItems_m9497E49F17F7A928BCC7DFF0F1613C1464A
 extern void ModuleItemLayout__ctor_m375F7A12A5E4D4AF6EE073FBD071A976D7A69007 (void);
 extern void U3CU3Ec__cctor_mE5F3031B667FCF027678F9A4CE87B98EFA754A68 (void);
 extern void U3CU3Ec__ctor_m83A51E1E09E91069492AF0ED9282461ADD38F640 (void);
-extern void U3CU3Ec_U3CGetLayoutU3Eb__15_0_mE392354B26F98C1A15E3BEAA3E13B521EB7B2521 (void);
-extern void U3CU3Ec_U3CGetLayoutU3Eb__15_1_m86443AE037C13F156CF1173B84B830FAF648EBC2 (void);
+extern void U3CU3Ec_U3CCountCompletedGamesU3Eb__12_0_m755FCD70922E5BE6434FF8837D07A59B54443A3C (void);
+extern void U3CU3Ec_U3CGetLayoutU3Eb__16_0_m58E6ED5EBA54F502C91DF60A8C040AE350BB8D93 (void);
+extern void U3CU3Ec_U3CGetLayoutU3Eb__16_1_mE907DE3E07F42A386B12B7E384359B7BD2389C0E (void);
 extern void ResultActivityService_SaveResult_m65BD9108BBE08E91AEEF4D50D394B2204DB3B6D4 (void);
 extern void ResultActivityService_GetTotalStarsForUser_mC0153D1D615A184792EA370411A3FFC9248AD252 (void);
 extern void ResultActivityService_EnsureRepository_m5B13357CEC46CF8DC12316242D284776E416FA6E (void);
@@ -1258,7 +1260,6 @@ extern void StudentService__ctor_m3B9BDAA9FB345446716A51880246B1630E6A34FC (void
 extern void StudentService_GetStudentsForCards_m9355C521549196D4502E84355D78BC5F0C2E48A0 (void);
 extern void U3CU3Ec__cctor_m26246E232F32B0DB5098501B2DB1525EB121F06C (void);
 extern void U3CU3Ec__ctor_m1A9358898A10D923F05E7E8463DC53BECE4C6AF5 (void);
-extern void U3CU3Ec__DisplayClass2_0__ctor_m84C04E33FE76F855DF68BD5C284B4018035F6312 (void);
 extern void ForgotPasswordView_Start_m071A886F9D970A919C8C2D00F28BC6746C004A07 (void);
 extern void ForgotPasswordView_InitializeWhenDatabaseReady_m0BF71499352ECF7D80B750A5477706209C21DB1C (void);
 extern void ForgotPasswordView_OnDisable_m85FBB7EFF8999DABEFFDB9B26C3CE22C44027E4C (void);
@@ -1705,7 +1706,7 @@ extern void SQLite3_ColumnByteArray_m09025DD6AB983E61366EFCB4F1500F7EA24CEC5E (v
 extern void SQLite3_ExtendedErrCode_mE53EAE79412B17719370EA83EF845896409E4E68 (void);
 extern void SQLite3_LibVersionNumber_m2C388472E0DC6C13BA5F5A2DD8BB226EA30D52C5 (void);
 extern void U3CPrivateImplementationDetailsU3E_ComputeStringHash_m6EA1F233618497AEFF8902A5EDFA24C74E2F2876 (void);
-static Il2CppMethodPointer s_methodPointers[1778] = 
+static Il2CppMethodPointer s_methodPointers[1779] = 
 {
 	SimpleClient_get_Instance_mDC1DDA8FC69B0D48B9F438B77369309975F84CF6,
 	SimpleClient_set_Instance_m6A3F53421EF9256A41C5D7A33DC21BAF67390B74,
@@ -2150,6 +2151,7 @@ static Il2CppMethodPointer s_methodPointers[1778] =
 	ProgressService_EnsureModuleStarted_m54041C2A2A13FDFD2DE3410B83EB5EB99AD4E1E0,
 	ProgressService_MarkTopicViewed_mE677E718B4281B27237E3206DA7EBA624BEF9E1E,
 	ProgressService_MarkGameCompleted_mEBCE2E5CB97DDF6821AFDE7DA4E205736979EDA0,
+	ProgressService_CountCompletedGames_mFCB85254D83B1A82D67F3DEB3A9EA1EBD2CB12B9,
 	ProgressService_RecomputeAndPersist_mBD7890A4233B2950C16E18C529B46B17B1B04359,
 	ProgressService_BuildInfo_mC900429D641E3A7DDDCA8077FA14F0199DC054C7,
 	ProgressService_GetTotalItems_m157AA150D630A6F79BC9B1595349DE6673E00B1D,
@@ -2159,8 +2161,9 @@ static Il2CppMethodPointer s_methodPointers[1778] =
 	ModuleItemLayout__ctor_m375F7A12A5E4D4AF6EE073FBD071A976D7A69007,
 	U3CU3Ec__cctor_mE5F3031B667FCF027678F9A4CE87B98EFA754A68,
 	U3CU3Ec__ctor_m83A51E1E09E91069492AF0ED9282461ADD38F640,
-	U3CU3Ec_U3CGetLayoutU3Eb__15_0_mE392354B26F98C1A15E3BEAA3E13B521EB7B2521,
-	U3CU3Ec_U3CGetLayoutU3Eb__15_1_m86443AE037C13F156CF1173B84B830FAF648EBC2,
+	U3CU3Ec_U3CCountCompletedGamesU3Eb__12_0_m755FCD70922E5BE6434FF8837D07A59B54443A3C,
+	U3CU3Ec_U3CGetLayoutU3Eb__16_0_m58E6ED5EBA54F502C91DF60A8C040AE350BB8D93,
+	U3CU3Ec_U3CGetLayoutU3Eb__16_1_mE907DE3E07F42A386B12B7E384359B7BD2389C0E,
 	ResultActivityService_SaveResult_m65BD9108BBE08E91AEEF4D50D394B2204DB3B6D4,
 	ResultActivityService_GetTotalStarsForUser_mC0153D1D615A184792EA370411A3FFC9248AD252,
 	ResultActivityService_EnsureRepository_m5B13357CEC46CF8DC12316242D284776E416FA6E,
@@ -2965,7 +2968,6 @@ static Il2CppMethodPointer s_methodPointers[1778] =
 	StudentService_GetStudentsForCards_m9355C521549196D4502E84355D78BC5F0C2E48A0,
 	U3CU3Ec__cctor_m26246E232F32B0DB5098501B2DB1525EB121F06C,
 	U3CU3Ec__ctor_m1A9358898A10D923F05E7E8463DC53BECE4C6AF5,
-	U3CU3Ec__DisplayClass2_0__ctor_m84C04E33FE76F855DF68BD5C284B4018035F6312,
 	ForgotPasswordView_Start_m071A886F9D970A919C8C2D00F28BC6746C004A07,
 	ForgotPasswordView_InitializeWhenDatabaseReady_m0BF71499352ECF7D80B750A5477706209C21DB1C,
 	ForgotPasswordView_OnDisable_m85FBB7EFF8999DABEFFDB9B26C3CE22C44027E4C,
@@ -3537,7 +3539,7 @@ static Il2CppTokenAdjustorThunkPair s_adjustorThunks[24] =
 	{ 0x06000059, U3CSendStudentU3Ed__12_MoveNext_m8328D4A88BD55B1417C421730B56BBE72A19A038_AdjustorThunk },
 	{ 0x0600005A, U3CSendStudentU3Ed__12_SetStateMachine_mB0D5F2D956C26AED67260EF847C2477DF1FEE921_AdjustorThunk },
 };
-static const int32_t s_InvokerIndices[1778] = 
+static const int32_t s_InvokerIndices[1779] = 
 {
 	27920,
 	26700,
@@ -3982,6 +3984,7 @@ static const int32_t s_InvokerIndices[1778] =
 	5884,
 	2846,
 	1983,
+	4488,
 	1984,
 	4910,
 	10230,
@@ -3991,6 +3994,7 @@ static const int32_t s_InvokerIndices[1778] =
 	16580,
 	28021,
 	16580,
+	10287,
 	10287,
 	10287,
 	482,
@@ -4798,7 +4802,6 @@ static const int32_t s_InvokerIndices[1778] =
 	28021,
 	16580,
 	16580,
-	16580,
 	16344,
 	16580,
 	16580,
@@ -5320,37 +5323,37 @@ static const int32_t s_InvokerIndices[1778] =
 };
 static const Il2CppTokenRangePair s_rgctxIndices[31] = 
 {
-	{ 0x02000129, { 56, 8 } },
-	{ 0x0200012D, { 64, 49 } },
-	{ 0x0200012E, { 134, 1 } },
-	{ 0x0200012F, { 135, 5 } },
-	{ 0x060005B3, { 0, 1 } },
-	{ 0x060005B4, { 1, 1 } },
-	{ 0x060005B5, { 2, 1 } },
-	{ 0x060005BB, { 3, 2 } },
-	{ 0x060005C1, { 5, 2 } },
-	{ 0x060005C2, { 7, 2 } },
-	{ 0x060005C3, { 9, 2 } },
-	{ 0x060005C6, { 11, 2 } },
-	{ 0x060005C7, { 13, 6 } },
-	{ 0x060005C8, { 19, 6 } },
-	{ 0x060005C9, { 25, 6 } },
-	{ 0x060005CB, { 31, 6 } },
-	{ 0x060005E4, { 37, 1 } },
-	{ 0x060005E5, { 38, 1 } },
-	{ 0x0600066B, { 39, 3 } },
-	{ 0x0600066C, { 42, 5 } },
-	{ 0x0600066D, { 47, 4 } },
-	{ 0x0600066F, { 51, 3 } },
-	{ 0x06000670, { 54, 2 } },
-	{ 0x060006A5, { 113, 2 } },
-	{ 0x060006AB, { 115, 2 } },
-	{ 0x060006AC, { 117, 2 } },
-	{ 0x060006AD, { 119, 2 } },
-	{ 0x060006AE, { 121, 2 } },
-	{ 0x060006AF, { 123, 1 } },
-	{ 0x060006B1, { 124, 7 } },
-	{ 0x060006B2, { 131, 3 } },
+	{ 0x02000128, { 56, 8 } },
+	{ 0x0200012C, { 64, 49 } },
+	{ 0x0200012D, { 134, 1 } },
+	{ 0x0200012E, { 135, 5 } },
+	{ 0x060005B4, { 0, 1 } },
+	{ 0x060005B5, { 1, 1 } },
+	{ 0x060005B6, { 2, 1 } },
+	{ 0x060005BC, { 3, 2 } },
+	{ 0x060005C2, { 5, 2 } },
+	{ 0x060005C3, { 7, 2 } },
+	{ 0x060005C4, { 9, 2 } },
+	{ 0x060005C7, { 11, 2 } },
+	{ 0x060005C8, { 13, 6 } },
+	{ 0x060005C9, { 19, 6 } },
+	{ 0x060005CA, { 25, 6 } },
+	{ 0x060005CC, { 31, 6 } },
+	{ 0x060005E5, { 37, 1 } },
+	{ 0x060005E6, { 38, 1 } },
+	{ 0x0600066C, { 39, 3 } },
+	{ 0x0600066D, { 42, 5 } },
+	{ 0x0600066E, { 47, 4 } },
+	{ 0x06000670, { 51, 3 } },
+	{ 0x06000671, { 54, 2 } },
+	{ 0x060006A6, { 113, 2 } },
+	{ 0x060006AC, { 115, 2 } },
+	{ 0x060006AD, { 117, 2 } },
+	{ 0x060006AE, { 119, 2 } },
+	{ 0x060006AF, { 121, 2 } },
+	{ 0x060006B0, { 123, 1 } },
+	{ 0x060006B2, { 124, 7 } },
+	{ 0x060006B3, { 131, 3 } },
 };
 extern const uint32_t g_rgctx_T_t3F54073FBC2F54FED5400403A98E24B1366F9EF6;
 extern const uint32_t g_rgctx_T_t3814F1FCC50BFF1CE6D1FD34B76B9083E207AC49;
@@ -5639,7 +5642,7 @@ IL2CPP_EXTERN_C const Il2CppCodeGenModule g_AssemblyU2DCSharp_CodeGenModule;
 const Il2CppCodeGenModule g_AssemblyU2DCSharp_CodeGenModule = 
 {
 	"Assembly-CSharp.dll",
-	1778,
+	1779,
 	s_methodPointers,
 	24,
 	s_adjustorThunks,

@@ -35201,7 +35201,7 @@ IL2CPP_EXTERN_C  void NativeList_1_CheckHandleMatches_m026A318C05A1DDD2B0CC57B35
 #ifdef __clang__
 #pragma clang diagnostic pop
 #endif
-// Method Definition Index: 96886
+// Method Definition Index: 96887
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR intptr_t UnmanagedObjectWrapper_get_Ptr_m540985524180A79F5C25688B8C97BAA59801A37A_inline (UnmanagedObjectWrapper_tE827048241A4D402AAA4E0FA6C91FD03B1E4733B* __this, const RuntimeMethod* method) 
 {
 	{
