@@ -22,11 +22,11 @@ static Il2CppMethodPointer s_methodPointers[5] =
 };
 static const int32_t s_InvokerIndices[5] = 
 {
-	26226,
-	25801,
-	22362,
-	28066,
-	16585,
+	26219,
+	25794,
+	22355,
+	28059,
+	16580,
 };
 IL2CPP_EXTERN_C const Il2CppCodeGenModule g_RAU2DEducation_Security_CodeGenModule;
 const Il2CppCodeGenModule g_RAU2DEducation_Security_CodeGenModule = 

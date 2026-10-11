@@ -14,6 +14,7 @@ public class ResultActivityRepository
     public void Insert(ResultActivityData result)
     {
         _connection.Insert(result);
+        UserSyncService.NotifyResultSaved(result);
         Debug.Log("[ResultActivityRepository] Resultado guardado correctamente.");
     }
 

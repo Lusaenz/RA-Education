@@ -44,6 +44,9 @@ public class StudentListController : MonoBehaviour
             // Esperar a que la BD termine de inicializarse
             DatabaseManager.Instance.OnReady += LoadStudentsFromDatabase;
         }
+
+        // Refrescar las cards cuando llegan cambios desde un dispositivo cliente.
+        UserSyncService.OnDataSynced += LoadStudentsFromDatabase;
     }
 
     private void OnDestroy()
@@ -52,6 +55,8 @@ public class StudentListController : MonoBehaviour
         {
             DatabaseManager.Instance.OnReady -= LoadStudentsFromDatabase;
         }
+
+        UserSyncService.OnDataSynced -= LoadStudentsFromDatabase;
     }
 
     /// <summary>
@@ -59,6 +64,9 @@ public class StudentListController : MonoBehaviour
     /// </summary>
     public void LoadStudentsFromDatabase()
     {
+        if (this == null || cardsContainer == null)
+            return;
+
         List<StudentCardData> realStudents = studentService.GetStudentsForCards();
         GenerateStudentCards(realStudents);
     }

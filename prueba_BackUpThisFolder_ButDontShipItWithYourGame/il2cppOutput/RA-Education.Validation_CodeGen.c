@@ -18,12 +18,14 @@ extern void RegisterResult_set_UserId_m53AF5452D4B298EA792A0CF123F53F256BB916FF 
 extern void RegisterResult__ctor_m1ABE422118F52920FA8DFAA1B1BE267B33EFCB6E (void);
 extern void RegisterResult_SuccessResult_m2587FCBC1621CD77AB457AD5C8B1EADB49ECDFE8 (void);
 extern void RegisterResult_ErrorResult_mA8A02CF9FC219311B57893EE297D3C3B6F67A6C0 (void);
+extern void RegisterValidator_IsValidEmailFormat_m142E530384BB458BB1BFE25E88056273D6EDF823 (void);
+extern void RegisterValidator_IsEducationalEmail_mBE3B8B861C6E672506CCD44197643EF62777D09E (void);
 extern void RegisterValidator_ValidateStudent_m6EAEE3169CA18D9CB1EA838AEDFD1A76DAABD8B6 (void);
 extern void RegisterValidator_ValidateTeacher_m5F205772999DC990547CA6DD614B054FBD2E9160 (void);
 extern void RegisterValidator_ValidateSecurityQuestion_m965F57458B91AD749068758FB55ED48FB79CEE31 (void);
 extern void UnitySourceGeneratedAssemblyMonoScriptTypes_v1_Get_m057065A2EB93F8F7D333C7549AB4CF7A62E020CF (void);
 extern void UnitySourceGeneratedAssemblyMonoScriptTypes_v1__ctor_m17AAB3DB3A7ACFCF57A326150E64225D204B8E96 (void);
-static Il2CppMethodPointer s_methodPointers[16] = 
+static Il2CppMethodPointer s_methodPointers[18] = 
 {
 	RegisterResult_get_Success_mCFDFB1911773652F92FA166F81B3745EF1CE15CB,
 	RegisterResult_set_Success_mCB4B9919F34B89B106AABD8E20F0508DD349862F,
@@ -36,36 +38,40 @@ static Il2CppMethodPointer s_methodPointers[16] =
 	RegisterResult__ctor_m1ABE422118F52920FA8DFAA1B1BE267B33EFCB6E,
 	RegisterResult_SuccessResult_m2587FCBC1621CD77AB457AD5C8B1EADB49ECDFE8,
 	RegisterResult_ErrorResult_mA8A02CF9FC219311B57893EE297D3C3B6F67A6C0,
+	RegisterValidator_IsValidEmailFormat_m142E530384BB458BB1BFE25E88056273D6EDF823,
+	RegisterValidator_IsEducationalEmail_mBE3B8B861C6E672506CCD44197643EF62777D09E,
 	RegisterValidator_ValidateStudent_m6EAEE3169CA18D9CB1EA838AEDFD1A76DAABD8B6,
 	RegisterValidator_ValidateTeacher_m5F205772999DC990547CA6DD614B054FBD2E9160,
 	RegisterValidator_ValidateSecurityQuestion_m965F57458B91AD749068758FB55ED48FB79CEE31,
 	UnitySourceGeneratedAssemblyMonoScriptTypes_v1_Get_m057065A2EB93F8F7D333C7549AB4CF7A62E020CF,
 	UnitySourceGeneratedAssemblyMonoScriptTypes_v1__ctor_m17AAB3DB3A7ACFCF57A326150E64225D204B8E96,
 };
-static const int32_t s_InvokerIndices[16] = 
+static const int32_t s_InvokerIndices[18] = 
 {
-	16138,
-	12411,
-	16349,
-	12620,
-	16349,
-	12620,
-	16280,
-	12553,
-	16585,
-	26220,
-	26226,
-	19470,
-	19470,
-	22847,
-	28067,
-	16585,
+	16133,
+	12407,
+	16344,
+	12616,
+	16344,
+	12616,
+	16275,
+	12549,
+	16580,
+	26213,
+	26219,
+	25794,
+	25794,
+	19463,
+	19463,
+	22840,
+	28060,
+	16580,
 };
 IL2CPP_EXTERN_C const Il2CppCodeGenModule g_RAU2DEducation_Validation_CodeGenModule;
 const Il2CppCodeGenModule g_RAU2DEducation_Validation_CodeGenModule = 
 {
 	"RA-Education.Validation.dll",
-	16,
+	18,
 	s_methodPointers,
 	0,
 	NULL,
