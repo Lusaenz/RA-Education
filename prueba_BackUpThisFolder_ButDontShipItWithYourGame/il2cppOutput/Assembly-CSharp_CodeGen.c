@@ -132,6 +132,8 @@ extern void DatabaseManager_MigrateContentTables_m43865CDE89657A6063ADE81E1613C1
 extern void DatabaseManager_CopyDatabaseFile_mA05B5F4F656D762A855BC1D335433B07AEA67546 (void);
 extern void DatabaseManager_CalculateHash_m75875E89421124182227D7C363D3221B7DA6B8FA (void);
 extern void DatabaseManager_GetConnection_m56D33E86181AA9BE91807712C7C4D6D5D72E8D5B (void);
+extern void DatabaseManager_CheckpointWal_mB208BB1A65EB14B1B75B821A289E78AACC5A6C58 (void);
+extern void DatabaseManager_OnApplicationPause_m0FC493E595EF7D24785EDC0CF9D24AF9D312F0DD (void);
 extern void DatabaseManager_OnApplicationQuit_mA4068FA6D050F2F3AA814672394F3DF73CC994C0 (void);
 extern void DatabaseManager__ctor_m4B7E159F9E2AD28A3985BD287AC0137AF60987C5 (void);
 extern void DatabaseManager__cctor_m4A80918BCDE880B2C39EC77F945C90D43FA46C51 (void);
@@ -812,6 +814,8 @@ extern void PreviewImageLoader_OnDestroy_m062096D99C31141BA473F08E761D44AAB7829C
 extern void PreviewImageLoader__ctor_mDD3C8284CA7654B63B7635D086AEF7770439C379 (void);
 extern void ARModelControllerPro_get_ActiveController_m3779EA13184CB34318B10E0725429ACC7FF859C3 (void);
 extern void ARModelControllerPro_set_ActiveController_m5F350D80B83EFBD99F98033102D72DD3CD882B07 (void);
+extern void ARModelControllerPro_Awake_m562E69673D59A1D1ED2F497786619A460BE876E5 (void);
+extern void ARModelControllerPro_CaptureBaseRotation_mD6124EF75E5D3F345A9A6DE2481F47C66D69965B (void);
 extern void ARModelControllerPro_EnableInteraction_m6D4F03F6DD4F3826F7112827960780E48A38B368 (void);
 extern void ARModelControllerPro_OnDestroy_mCCE8D885A2F3AF612DB14E488738EC8B57A1B4E5 (void);
 extern void ARModelControllerPro_Start_m2A5CCE1E1E7888366595052940965A4EFB544E5E (void);
@@ -832,12 +836,12 @@ extern void ARModelControllerPro_ApplyPartZoom_m903F891ECE6F1EF470611E5068B4244A
 extern void ARModelControllerPro_NormalizeAngle_m8F66F08E9C248C83647035B3FACFA7150CAB4E6D (void);
 extern void ARModelControllerPro_IsTouchOverUI_m31E877B97C14D0E7BA0AE62B82D5F4596137A355 (void);
 extern void ARModelControllerPro__ctor_mD92D5BA8182551725137E07D9B033CDAA6C85B8E (void);
-extern void U3CAnimateTransformU3Ed__48__ctor_m0656CBDB472052A2FB043E2AFB9C5014090F9C96 (void);
-extern void U3CAnimateTransformU3Ed__48_System_IDisposable_Dispose_mCB49D3BF7C72DFE646E61299EED78527A7742AA0 (void);
-extern void U3CAnimateTransformU3Ed__48_MoveNext_m452EE85CF7025F7F46811727A50055FE6649EECC (void);
-extern void U3CAnimateTransformU3Ed__48_System_Collections_Generic_IEnumeratorU3CSystem_ObjectU3E_get_Current_mB69B6CDBDC9CB59A7425EB03EA31DF0F45B6F56B (void);
-extern void U3CAnimateTransformU3Ed__48_System_Collections_IEnumerator_Reset_m3C46E4D97D4438262FA36954DD4C8B88139531C6 (void);
-extern void U3CAnimateTransformU3Ed__48_System_Collections_IEnumerator_get_Current_mF6872A1CC64F9752A0A2817A6C373386E9710A4F (void);
+extern void U3CAnimateTransformU3Ed__52__ctor_m7C02751DC38BEE82EB7992987BF3BEA36D86992F (void);
+extern void U3CAnimateTransformU3Ed__52_System_IDisposable_Dispose_mDFE23E591882C9F9CAD8F6B9D32D11E823284052 (void);
+extern void U3CAnimateTransformU3Ed__52_MoveNext_m5AE0401598EFF8A7F749F6A83B0F5A394051C405 (void);
+extern void U3CAnimateTransformU3Ed__52_System_Collections_Generic_IEnumeratorU3CSystem_ObjectU3E_get_Current_mEBB4F06E1F8CCF0A1A8D20BA7A2CA3DE279BEEEB (void);
+extern void U3CAnimateTransformU3Ed__52_System_Collections_IEnumerator_Reset_mCA2AAD08DB6799D74678E56BBF9FFF9B79FA2C99 (void);
+extern void U3CAnimateTransformU3Ed__52_System_Collections_IEnumerator_get_Current_m53A40F361E323FB35C88F773A79F87F039A168EB (void);
 extern void ARPartButtonManager_Start_mF06C09C75DEE65BBCE24347A41E2CF3060FDDEA3 (void);
 extern void ARPartButtonManager_BuildTopicMaps_m5F1B3FB5AB4A9AC366FF1BA1726F3B820E13EED1 (void);
 extern void ARPartButtonManager_OnDestroy_mF9AB62F18FF8BFAFAEDFD456E41CBD7B812EDF7B (void);
@@ -1702,7 +1706,7 @@ extern void SQLite3_ColumnByteArray_m09025DD6AB983E61366EFCB4F1500F7EA24CEC5E (v
 extern void SQLite3_ExtendedErrCode_mE53EAE79412B17719370EA83EF845896409E4E68 (void);
 extern void SQLite3_LibVersionNumber_m2C388472E0DC6C13BA5F5A2DD8BB226EA30D52C5 (void);
 extern void U3CPrivateImplementationDetailsU3E_ComputeStringHash_m6EA1F233618497AEFF8902A5EDFA24C74E2F2876 (void);
-static Il2CppMethodPointer s_methodPointers[1775] = 
+static Il2CppMethodPointer s_methodPointers[1779] = 
 {
 	SimpleClient_get_Instance_mDC1DDA8FC69B0D48B9F438B77369309975F84CF6,
 	SimpleClient_set_Instance_m6A3F53421EF9256A41C5D7A33DC21BAF67390B74,
@@ -1829,6 +1833,8 @@ static Il2CppMethodPointer s_methodPointers[1775] =
 	DatabaseManager_CopyDatabaseFile_mA05B5F4F656D762A855BC1D335433B07AEA67546,
 	DatabaseManager_CalculateHash_m75875E89421124182227D7C363D3221B7DA6B8FA,
 	DatabaseManager_GetConnection_m56D33E86181AA9BE91807712C7C4D6D5D72E8D5B,
+	DatabaseManager_CheckpointWal_mB208BB1A65EB14B1B75B821A289E78AACC5A6C58,
+	DatabaseManager_OnApplicationPause_m0FC493E595EF7D24785EDC0CF9D24AF9D312F0DD,
 	DatabaseManager_OnApplicationQuit_mA4068FA6D050F2F3AA814672394F3DF73CC994C0,
 	DatabaseManager__ctor_m4B7E159F9E2AD28A3985BD287AC0137AF60987C5,
 	DatabaseManager__cctor_m4A80918BCDE880B2C39EC77F945C90D43FA46C51,
@@ -2516,6 +2522,8 @@ static Il2CppMethodPointer s_methodPointers[1775] =
 	PreviewImageLoader__ctor_mDD3C8284CA7654B63B7635D086AEF7770439C379,
 	ARModelControllerPro_get_ActiveController_m3779EA13184CB34318B10E0725429ACC7FF859C3,
 	ARModelControllerPro_set_ActiveController_m5F350D80B83EFBD99F98033102D72DD3CD882B07,
+	ARModelControllerPro_Awake_m562E69673D59A1D1ED2F497786619A460BE876E5,
+	ARModelControllerPro_CaptureBaseRotation_mD6124EF75E5D3F345A9A6DE2481F47C66D69965B,
 	ARModelControllerPro_EnableInteraction_m6D4F03F6DD4F3826F7112827960780E48A38B368,
 	ARModelControllerPro_OnDestroy_mCCE8D885A2F3AF612DB14E488738EC8B57A1B4E5,
 	ARModelControllerPro_Start_m2A5CCE1E1E7888366595052940965A4EFB544E5E,
@@ -2536,12 +2544,12 @@ static Il2CppMethodPointer s_methodPointers[1775] =
 	ARModelControllerPro_NormalizeAngle_m8F66F08E9C248C83647035B3FACFA7150CAB4E6D,
 	ARModelControllerPro_IsTouchOverUI_m31E877B97C14D0E7BA0AE62B82D5F4596137A355,
 	ARModelControllerPro__ctor_mD92D5BA8182551725137E07D9B033CDAA6C85B8E,
-	U3CAnimateTransformU3Ed__48__ctor_m0656CBDB472052A2FB043E2AFB9C5014090F9C96,
-	U3CAnimateTransformU3Ed__48_System_IDisposable_Dispose_mCB49D3BF7C72DFE646E61299EED78527A7742AA0,
-	U3CAnimateTransformU3Ed__48_MoveNext_m452EE85CF7025F7F46811727A50055FE6649EECC,
-	U3CAnimateTransformU3Ed__48_System_Collections_Generic_IEnumeratorU3CSystem_ObjectU3E_get_Current_mB69B6CDBDC9CB59A7425EB03EA31DF0F45B6F56B,
-	U3CAnimateTransformU3Ed__48_System_Collections_IEnumerator_Reset_m3C46E4D97D4438262FA36954DD4C8B88139531C6,
-	U3CAnimateTransformU3Ed__48_System_Collections_IEnumerator_get_Current_mF6872A1CC64F9752A0A2817A6C373386E9710A4F,
+	U3CAnimateTransformU3Ed__52__ctor_m7C02751DC38BEE82EB7992987BF3BEA36D86992F,
+	U3CAnimateTransformU3Ed__52_System_IDisposable_Dispose_mDFE23E591882C9F9CAD8F6B9D32D11E823284052,
+	U3CAnimateTransformU3Ed__52_MoveNext_m5AE0401598EFF8A7F749F6A83B0F5A394051C405,
+	U3CAnimateTransformU3Ed__52_System_Collections_Generic_IEnumeratorU3CSystem_ObjectU3E_get_Current_mEBB4F06E1F8CCF0A1A8D20BA7A2CA3DE279BEEEB,
+	U3CAnimateTransformU3Ed__52_System_Collections_IEnumerator_Reset_mCA2AAD08DB6799D74678E56BBF9FFF9B79FA2C99,
+	U3CAnimateTransformU3Ed__52_System_Collections_IEnumerator_get_Current_m53A40F361E323FB35C88F773A79F87F039A168EB,
 	ARPartButtonManager_Start_mF06C09C75DEE65BBCE24347A41E2CF3060FDDEA3,
 	ARPartButtonManager_BuildTopicMaps_m5F1B3FB5AB4A9AC366FF1BA1726F3B820E13EED1,
 	ARPartButtonManager_OnDestroy_mF9AB62F18FF8BFAFAEDFD456E41CBD7B812EDF7B,
@@ -3531,7 +3539,7 @@ static Il2CppTokenAdjustorThunkPair s_adjustorThunks[24] =
 	{ 0x06000059, U3CSendStudentU3Ed__12_MoveNext_m8328D4A88BD55B1417C421730B56BBE72A19A038_AdjustorThunk },
 	{ 0x0600005A, U3CSendStudentU3Ed__12_SetStateMachine_mB0D5F2D956C26AED67260EF847C2477DF1FEE921_AdjustorThunk },
 };
-static const int32_t s_InvokerIndices[1775] = 
+static const int32_t s_InvokerIndices[1779] = 
 {
 	27920,
 	26700,
@@ -3658,6 +3666,8 @@ static const int32_t s_InvokerIndices[1775] =
 	4930,
 	10881,
 	16344,
+	16580,
+	12407,
 	16580,
 	16580,
 	28021,
@@ -4345,6 +4355,8 @@ static const int32_t s_InvokerIndices[1775] =
 	16580,
 	27920,
 	26700,
+	16580,
+	16580,
 	16580,
 	16580,
 	16580,
@@ -5315,33 +5327,33 @@ static const Il2CppTokenRangePair s_rgctxIndices[31] =
 	{ 0x0200012D, { 64, 49 } },
 	{ 0x0200012E, { 134, 1 } },
 	{ 0x0200012F, { 135, 5 } },
-	{ 0x060005B0, { 0, 1 } },
-	{ 0x060005B1, { 1, 1 } },
-	{ 0x060005B2, { 2, 1 } },
-	{ 0x060005B8, { 3, 2 } },
-	{ 0x060005BE, { 5, 2 } },
-	{ 0x060005BF, { 7, 2 } },
-	{ 0x060005C0, { 9, 2 } },
-	{ 0x060005C3, { 11, 2 } },
-	{ 0x060005C4, { 13, 6 } },
-	{ 0x060005C5, { 19, 6 } },
-	{ 0x060005C6, { 25, 6 } },
-	{ 0x060005C8, { 31, 6 } },
-	{ 0x060005E1, { 37, 1 } },
-	{ 0x060005E2, { 38, 1 } },
-	{ 0x06000668, { 39, 3 } },
-	{ 0x06000669, { 42, 5 } },
-	{ 0x0600066A, { 47, 4 } },
-	{ 0x0600066C, { 51, 3 } },
-	{ 0x0600066D, { 54, 2 } },
-	{ 0x060006A2, { 113, 2 } },
-	{ 0x060006A8, { 115, 2 } },
-	{ 0x060006A9, { 117, 2 } },
-	{ 0x060006AA, { 119, 2 } },
-	{ 0x060006AB, { 121, 2 } },
-	{ 0x060006AC, { 123, 1 } },
-	{ 0x060006AE, { 124, 7 } },
-	{ 0x060006AF, { 131, 3 } },
+	{ 0x060005B4, { 0, 1 } },
+	{ 0x060005B5, { 1, 1 } },
+	{ 0x060005B6, { 2, 1 } },
+	{ 0x060005BC, { 3, 2 } },
+	{ 0x060005C2, { 5, 2 } },
+	{ 0x060005C3, { 7, 2 } },
+	{ 0x060005C4, { 9, 2 } },
+	{ 0x060005C7, { 11, 2 } },
+	{ 0x060005C8, { 13, 6 } },
+	{ 0x060005C9, { 19, 6 } },
+	{ 0x060005CA, { 25, 6 } },
+	{ 0x060005CC, { 31, 6 } },
+	{ 0x060005E5, { 37, 1 } },
+	{ 0x060005E6, { 38, 1 } },
+	{ 0x0600066C, { 39, 3 } },
+	{ 0x0600066D, { 42, 5 } },
+	{ 0x0600066E, { 47, 4 } },
+	{ 0x06000670, { 51, 3 } },
+	{ 0x06000671, { 54, 2 } },
+	{ 0x060006A6, { 113, 2 } },
+	{ 0x060006AC, { 115, 2 } },
+	{ 0x060006AD, { 117, 2 } },
+	{ 0x060006AE, { 119, 2 } },
+	{ 0x060006AF, { 121, 2 } },
+	{ 0x060006B0, { 123, 1 } },
+	{ 0x060006B2, { 124, 7 } },
+	{ 0x060006B3, { 131, 3 } },
 };
 extern const uint32_t g_rgctx_T_t3F54073FBC2F54FED5400403A98E24B1366F9EF6;
 extern const uint32_t g_rgctx_T_t3814F1FCC50BFF1CE6D1FD34B76B9083E207AC49;
@@ -5630,7 +5642,7 @@ IL2CPP_EXTERN_C const Il2CppCodeGenModule g_AssemblyU2DCSharp_CodeGenModule;
 const Il2CppCodeGenModule g_AssemblyU2DCSharp_CodeGenModule = 
 {
 	"Assembly-CSharp.dll",
-	1775,
+	1779,
 	s_methodPointers,
 	24,
 	s_adjustorThunks,

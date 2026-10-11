@@ -32059,7 +32059,7 @@ struct AnchorPose_tCE0852BC709B8B4971C58EEF93648080FC568B9F_marshaled_com
 	float ___rotationData[9];
 };
 #pragma pack(pop, tp)
-struct U3CAnimateTransformU3Ed__48_t7471B52C5CF97415233D3ED388D5024562F51ACB  : public RuntimeObject
+struct U3CAnimateTransformU3Ed__52_t45CF9609B280570E2996A655DE6BFD4ACE7607B5  : public RuntimeObject
 {
 	int32_t ___U3CU3E1__state;
 	RuntimeObject* ___U3CU3E2__current;
@@ -47033,6 +47033,8 @@ struct ARModelControllerPro_t50251E571DF0CB27EF0DEC43562BBC5E30F12A1C  : public 
 	Camera_tA92CC927D7439999BC82DBEDC0AA45B470F9E184* ____arCamera;
 	int32_t ____previousTouchCount;
 	DefaultObserverEventHandler_t7CF27A0CC5B1FAEDDB5964C3A11F29C2A14E1FC0* ____markerHandler;
+	Quaternion_tDA59F214EF07D7700B26E40E562F267AF7306974 ____baseLocalRotation;
+	bool ____baseCaptured;
 };
 struct ARPartButtonManager_tD0A1E7BC38170D12BA23A1F5D69322F6E7A09F40  : public MonoBehaviour_t532A11E69716D348D8AA7F854AFCBFCB8AD17F71
 {
@@ -64860,7 +64862,7 @@ const Il2CppTypeDefinitionSizes g_typeDefinitionSize10750 = { sizeof(ModuleStatu
 IL2CPP_EXTERN_C_CONST Il2CppTypeDefinitionSizes g_typeDefinitionSize10751;
 const Il2CppTypeDefinitionSizes g_typeDefinitionSize10751 = { sizeof(PreviewImageLoader_tFD7B6A63D05E137BCF134A251ACE732F3B381C0F), -1, 0, 0 };
 IL2CPP_EXTERN_C_CONST Il2CppTypeDefinitionSizes g_typeDefinitionSize10752;
-const Il2CppTypeDefinitionSizes g_typeDefinitionSize10752 = { sizeof(U3CAnimateTransformU3Ed__48_t7471B52C5CF97415233D3ED388D5024562F51ACB), -1, 0, 0 };
+const Il2CppTypeDefinitionSizes g_typeDefinitionSize10752 = { sizeof(U3CAnimateTransformU3Ed__52_t45CF9609B280570E2996A655DE6BFD4ACE7607B5), -1, 0, 0 };
 IL2CPP_EXTERN_C_CONST Il2CppTypeDefinitionSizes g_typeDefinitionSize10753;
 const Il2CppTypeDefinitionSizes g_typeDefinitionSize10753 = { sizeof(ARModelControllerPro_t50251E571DF0CB27EF0DEC43562BBC5E30F12A1C), -1, sizeof(ARModelControllerPro_t50251E571DF0CB27EF0DEC43562BBC5E30F12A1C_StaticFields), 0 };
 IL2CPP_EXTERN_C_CONST Il2CppTypeDefinitionSizes g_typeDefinitionSize10754;
