@@ -8,7 +8,6 @@ public class SnapPiece : MonoBehaviour
     public float snapDistance = 0.05f;
 
     private bool isSnapped = false;
-    private float debugDistance;
 
     private SnapPiece[] allPieces;
 
@@ -17,9 +16,26 @@ public class SnapPiece : MonoBehaviour
         allPieces = FindObjectsByType<SnapPiece>(FindObjectsSortMode.None);
     }
 
-    void OnGUI()
+    /// <summary>
+    /// Distancia entre dos puntos tal como se ven en pantalla, expresada en metros
+    /// a la profundidad de <paramref name="b"/>. La pieza se arrastra a profundidad
+    /// constante y el modelo fijo esta mas lejos (e inclinado), asi que la distancia
+    /// 3D nunca coincide con lo que el usuario ve alineado; se ignora la profundidad.
+    /// </summary>
+    public static float ScreenAlignedDistance(Vector3 a, Vector3 b)
     {
-        GUI.Label(new Rect(10, 10, 400, 40), "Prueba: " + debugDistance);
+        Camera cam = Camera.main;
+        if (cam == null)
+            return Vector3.Distance(a, b);
+
+        Vector3 la = cam.transform.InverseTransformPoint(a);
+        Vector3 lb = cam.transform.InverseTransformPoint(b);
+
+        if (la.z <= 0f || lb.z <= 0f)
+            return float.PositiveInfinity;
+
+        Vector2 pa = new Vector2(la.x, la.y) * (lb.z / la.z);
+        return Vector2.Distance(pa, new Vector2(lb.x, lb.y));
     }
 
    
@@ -111,7 +127,7 @@ if (drag != null)
         
         if (targetSnapPoint != null)
         {
-            float distance = Vector3.Distance(
+            float distance = ScreenAlignedDistance(
                 snapPoint.position,
                 targetSnapPoint.position);
 
@@ -120,7 +136,6 @@ if (drag != null)
                 Snap(targetSnapPoint);
                 return true;
             }
-            Debug.Log("esteeee");
         }
 
        
@@ -131,9 +146,9 @@ if (drag != null)
 
             if (piece.targetSnapPoint == snapPoint)
             {
-                float distance = Vector3.Distance(
-                    piece.snapPoint.position,
-                    snapPoint.position);
+                float distance = ScreenAlignedDistance(
+                    snapPoint.position,
+                    piece.snapPoint.position);
 
                 if (distance <= snapDistance)
                 {

@@ -42,12 +42,11 @@ public class GameManagerFood : MonoBehaviour
     private ProgressService _progressService;
     private ActivityData _activityData;
 
-    
-
     private readonly List<AsyncOperationHandle> _handles = new List<AsyncOperationHandle>();
     private static readonly WaitForSeconds WaitOneSecond = new WaitForSeconds(1f);
 
     private float _activityStartTime = 0f;
+    private string _elapsedTime;
     private int _idActivity;
     private int _idModule;
     private int _idGameActivity;
@@ -61,12 +60,16 @@ public class GameManagerFood : MonoBehaviour
         _activityService = new ActivityService();
         _resultService = new ResultActivityService();
         _progressService = new ProgressService();
+
+        if (dropSlot != null && dropSlot.gameManager == null)
+            dropSlot.gameManager = this;
     }
 
     private void Start()
     {
         if (VictoryUIManager.Instance != null)
         {
+            RegistrarUI();
             VictoryUIManager.Instance.ResetUI();
         }
 
@@ -182,7 +185,11 @@ public class GameManagerFood : MonoBehaviour
         ActualizarUI();
         ActualizarTexto();
         _activityStartTime = Time.time;
-        ModuleTimeTracker.Track(gameObject, UserSessionManager.Instance?.CurrentUser?.id_user ?? 0, _idModule);
+        _elapsedTime = null;
+
+        var session = UserSessionManager.Instance;
+        int userId = session != null && session.CurrentUser != null ? session.CurrentUser.id_user : 0;
+        ModuleTimeTracker.Track(gameObject, userId, _idModule);
     }
 
     public bool EvaluarItem(string idItem)
@@ -196,9 +203,15 @@ public class GameManagerFood : MonoBehaviour
             if (randomizador != null) randomizador.MezclarHijos();
 
             if (_indiceActual >= _levels.Count)
+            {
+                // Se toma el tiempo aquí para no incluir la espera de la animación de victoria.
+                _elapsedTime = GetElapsedTime();
                 StartCoroutine(MostrarVictoria());
+            }
             else
+            {
                 ActualizarTexto();
+            }
 
             return true;
         }
@@ -211,7 +224,11 @@ public class GameManagerFood : MonoBehaviour
 
     public void RespuestaCorrecta()
     {
-        int puntosCorrecto = Mathf.Max(1, maxScore / Mathf.Max(1, _levels != null ? _levels.Count : 1));
+        // Reparte maxScore entre los niveles sin perder el resto de la división entera,
+        // para que una partida perfecta llegue exactamente a maxScore.
+        int total = TotalNiveles();
+        int nivel = Mathf.Clamp(_indiceActual, 0, total - 1);
+        int puntosCorrecto = Mathf.Max(1, maxScore * (nivel + 1) / total - maxScore * nivel / total);
         score = Mathf.Min(score + puntosCorrecto, maxScore);
         ActualizarUI();
         if (SoundManager.instance != null) SoundManager.instance.PlayCorrect();
@@ -219,10 +236,15 @@ public class GameManagerFood : MonoBehaviour
 
     public void RespuestaIncorrecta()
     {
-        int puntosIncorrecto = Mathf.Max(1, maxScore / Mathf.Max(1, _levels != null ? _levels.Count : 1));
+        int puntosIncorrecto = Mathf.Max(1, maxScore / TotalNiveles());
         score = Mathf.Max(score - puntosIncorrecto, 0);
         ActualizarUI();
         if (SoundManager.instance != null) SoundManager.instance.PlayWrong();
+    }
+
+    private int TotalNiveles()
+    {
+        return Mathf.Max(1, _levels != null ? _levels.Count : 1);
     }
 
     private void ActualizarUI()
@@ -247,7 +269,8 @@ public class GameManagerFood : MonoBehaviour
         if (VictoryUIManager.Instance != null)
         {
             RegistrarUI();
-            VictoryUIManager.Instance.ShowVictory(score, maxScore, stars);
+            // ShowVictory recibe el máximo de estrellas y calcula por su cuenta las obtenidas.
+            VictoryUIManager.Instance.ShowVictory(score, maxScore, GetMaxStars());
         }
         else
         {
@@ -270,28 +293,27 @@ public class GameManagerFood : MonoBehaviour
             score,
             stars,
             _attempts,
-            GetElapsedTime());
+            _elapsedTime ?? GetElapsedTime());
 
         // Marca este minijuego como item completado del modulo (solo si stars >= 1).
         _progressService.MarkGameCompleted(user.id_user, _idModule, _idGameActivity, stars);
-
-        // Marca este minijuego como completado en el progreso del modulo (solo si stars >= 1).
-        _progressService.MarkGameCompleted(user.id_user, _idModule, _idGameActivity, stars);
     }
 
-
+    // El número máximo de estrellas se toma de la actividad (max_star). Si la BD no lo
+    // define, se usa 3 como último recurso. La construcción visual de las estrellas
+    // la hace VictoryUIManager, que ya calcula y dibuja su propio arreglo.
+    private int GetMaxStars()
+    {
+        return _activityData != null && _activityData.max_star > 0
+            ? _activityData.max_star
+            : 3;
+    }
 
     private int CalcularEstrellas()
     {
         if (maxScore <= 0) return 0;
 
-        // El número máximo de estrellas se toma de la actividad (max_star). Si la BD no lo
-        // define, se usa 3 como último recurso. La construcción visual de las estrellas
-        // la hace VictoryUIManager, que ya calcula y dibuja su propio arreglo.
-        int maxStars = _activityData != null && _activityData.max_star > 0
-            ? _activityData.max_star
-            : 3;
-
+        int maxStars = GetMaxStars();
         float p = Mathf.Clamp01((float)score / maxScore);
         return Mathf.Clamp(Mathf.RoundToInt(p * maxStars), 0, maxStars);
     }
@@ -304,6 +326,8 @@ public class GameManagerFood : MonoBehaviour
 
     private void OnDestroy()
     {
+        if (instance == this) instance = null;
+
         foreach (var h in _handles)
             if (h.IsValid()) Addressables.Release(h);
     }
