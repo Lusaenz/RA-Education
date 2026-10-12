@@ -184,6 +184,44 @@ public class ProgressService
         RecomputeAndPersist(userId, moduleId, layout.topicIds.Count + gameIndex, layout);
     }
 
+    /// <summary>
+    /// Cuenta cuantos minijuegos (game_activity) tiene completados el usuario en todos
+    /// los modulos, leyendo los bits de juegos del bitmask de progress.
+    /// totalGames devuelve el total de minijuegos que existen en la base de datos.
+    /// </summary>
+    public int CountCompletedGames(int userId, out int totalGames)
+    {
+        totalGames = 0;
+
+        if (!EnsureRepositories() || userId <= 0)
+        {
+            return 0;
+        }
+
+        List<GameActivityData> allGames = gameActivityRepository.GetAll() ?? new List<GameActivityData>();
+        totalGames = allGames.Count;
+
+        int completed = 0;
+
+        foreach (int moduleId in allGames.Select(g => g.id_module).Distinct())
+        {
+            ModuleItemLayout layout = GetLayout(moduleId);
+            ProgressModel row = progressRepository.GetByUserAndModule(userId, moduleId);
+            int mask = row?.punctuation ?? 0;
+
+            for (int i = 0; i < layout.gameActivityIds.Count; i++)
+            {
+                int bit = layout.topicIds.Count + i;
+                if (bit < 31 && (mask & (1 << bit)) != 0)
+                {
+                    completed++;
+                }
+            }
+        }
+
+        return completed;
+    }
+
     // ---------------------------------------------------------------------
 
     private void RecomputeAndPersist(int userId, int moduleId, int bitIndex, ModuleItemLayout layout)

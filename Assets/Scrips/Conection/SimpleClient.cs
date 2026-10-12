@@ -2,6 +2,7 @@ using System;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
@@ -9,6 +10,10 @@ using UnityEngine;
 public class SimpleClient : MonoBehaviour
 {
     public static SimpleClient Instance { get; private set; }
+
+    // Segundos de espera antes de volver a buscar el servidor.
+    private const float ReconnectDelaySeconds = 5f;
+
     private void Awake()
 {
     if (Instance == null)
@@ -37,18 +42,40 @@ private void Start()
     private TcpClient client;
     private NetworkStream stream;
 
+    // Evita escrituras simultáneas en el stream (los mensajes se mezclarían).
+    private readonly SemaphoreSlim writeLock = new SemaphoreSlim(1, 1);
+
+    private bool isConnecting;
+    private bool isQuitting;
+
+    public bool IsConnected =>
+        client != null && client.Connected && stream != null;
+
+    // Los textos pueden destruirse al cambiar de escena (este objeto es DontDestroyOnLoad).
+    private void SetStatus(string text)
+    {
+        if (statusText != null)
+            statusText.text = text;
+    }
+
     public async void Connect()
     {
+        if (isConnecting || IsConnected || isQuitting)
+            return;
+
+        isConnecting = true;
+
         try
         {
-            statusText.text = "Buscando servidor...";
+            SetStatus("Buscando servidor...");
 
             string serverIP = await FindServer();
 
             if (string.IsNullOrEmpty(serverIP))
             {
-                statusText.text = "Servidor no encontrado";
+                SetStatus("Servidor no encontrado");
                 Debug.LogWarning("No se encontró ningún servidor.");
+                ScheduleReconnect();
                 return;
             }
 
@@ -58,9 +85,10 @@ private void Start()
             if (serverIPInput != null)
                 serverIPInput.text = serverIP;
 
-            statusText.text = "Servidor encontrado. Conectando...";
+            SetStatus("Servidor encontrado. Conectando...");
 
             client = new TcpClient();
+            client.NoDelay = true;
 
             await client.ConnectAsync(
                 serverIP,
@@ -69,16 +97,43 @@ private void Start()
 
             stream = client.GetStream();
 
-            statusText.text = "Conectado";
+            SetStatus("Conectado");
             Debug.Log("Cliente conectado correctamente");
 
-            _ = ReceiveMessages();
+            _ = ReceiveMessages(client, stream);
+
+            // Enviar todo lo que haya cambiado mientras no había conexión.
+            await UserSyncService.SendFullSync();
         }
         catch (Exception e)
         {
-            statusText.text = "Error de conexión";
+            SetStatus("Error de conexión");
             Debug.LogError(e);
+            CloseConnection();
+            ScheduleReconnect();
         }
+        finally
+        {
+            isConnecting = false;
+        }
+    }
+
+    private void ScheduleReconnect()
+    {
+        if (isQuitting || this == null)
+            return;
+
+        CancelInvoke(nameof(Connect));
+        Invoke(nameof(Connect), ReconnectDelaySeconds);
+    }
+
+    private void CloseConnection()
+    {
+        try { stream?.Close(); } catch { }
+        try { client?.Close(); } catch { }
+
+        stream = null;
+        client = null;
     }
 
     private async Task<string> FindServer()
@@ -138,66 +193,76 @@ private void Start()
         }
     }
 
-    async Task ReceiveMessages()
+    async Task ReceiveMessages(TcpClient currentClient, NetworkStream currentStream)
     {
-        byte[] buffer = new byte[1024];
+        byte[] buffer = new byte[4096];
+        char[] chars = new char[Encoding.UTF8.GetMaxCharCount(buffer.Length)];
+        Decoder decoder = Encoding.UTF8.GetDecoder();
+        StringBuilder pending = new StringBuilder();
 
-        while (client != null && client.Connected)
+        try
         {
-            int bytes = await stream.ReadAsync(
-                buffer,
-                0,
-                buffer.Length
-            );
+            while (currentClient.Connected)
+            {
+                int bytes = await currentStream.ReadAsync(
+                    buffer,
+                    0,
+                    buffer.Length
+                );
 
-            if (bytes <= 0)
-                break;
+                if (bytes <= 0)
+                    break;
 
-            string msg = Encoding.UTF8.GetString(
-                buffer,
-                0,
-                bytes
-            );
+                int charCount = decoder.GetChars(buffer, 0, bytes, chars, 0);
+                pending.Append(chars, 0, charCount);
 
-            receivedText.text = msg;
+                // Cada mensaje termina en '\n'. Un mismo Read puede traer
+                // varios mensajes o solo una parte de uno.
+                foreach (string msg in SimpleNetwork.ExtractMessages(pending))
+                {
+                    if (receivedText != null)
+                        receivedText.text = msg;
 
-if (UserSyncService.Instance != null)
-{
-    UserSyncService.Instance.ProcessMessage(msg);
-}
+                    if (UserSyncService.Instance != null)
+                    {
+                        UserSyncService.Instance.ProcessMessage(msg);
+                    }
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            if (!isQuitting)
+                Debug.LogWarning("SimpleClient: conexión perdida: " + e.Message);
         }
 
-        statusText.text = "Desconectado";
+        // Solo cerrar si sigue siendo la conexión activa (pudo reconectarse ya).
+        if (client == currentClient)
+        {
+            CloseConnection();
+            SetStatus("Desconectado");
+            ScheduleReconnect();
+        }
     }
 
     public async void SendMessage()
     {
-        if (stream == null)
+        if (stream == null || messageInput == null)
             return;
 
-        string msg = messageInput.text;
-
-        if (string.IsNullOrWhiteSpace(msg))
-            return;
-
-        byte[] data = Encoding.UTF8.GetBytes(msg);
-
-        await stream.WriteAsync(
-            data,
-            0,
-            data.Length
-        );
+        await SendRawMessage(messageInput.text);
     }
 
     private void OnApplicationQuit()
     {
-        stream?.Close();
-        client?.Close();
+        isQuitting = true;
+        CancelInvoke();
+        CloseConnection();
     }
 
     public async Task SendRawMessage(string msg)
 {
-    if (stream == null)
+    if (!IsConnected)
     {
         Debug.LogWarning(
             "SimpleClient: no hay conexión activa."
@@ -208,12 +273,38 @@ if (UserSyncService.Instance != null)
     if (string.IsNullOrWhiteSpace(msg))
         return;
 
-    byte[] data = Encoding.UTF8.GetBytes(msg);
+    // '\n' marca el final de cada mensaje.
+    byte[] data = Encoding.UTF8.GetBytes(msg.Trim() + "\n");
 
-    await stream.WriteAsync(
-        data,
-        0,
-        data.Length
-    );
+    await writeLock.WaitAsync();
+
+    NetworkStream currentStream = stream;
+
+    try
+    {
+        if (currentStream == null)
+            return;
+
+        await currentStream.WriteAsync(
+            data,
+            0,
+            data.Length
+        );
+    }
+    catch (Exception e)
+    {
+        Debug.LogWarning("SimpleClient: error enviando mensaje: " + e.Message);
+
+        if (stream == currentStream)
+        {
+            CloseConnection();
+            SetStatus("Desconectado");
+            ScheduleReconnect();
+        }
+    }
+    finally
+    {
+        writeLock.Release();
+    }
 }
 }

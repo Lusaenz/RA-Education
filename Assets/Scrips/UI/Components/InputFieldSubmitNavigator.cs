@@ -17,6 +17,11 @@ public static class InputFieldSubmitNavigator
     /// el click se procesa en Update()/EventSystem, que corre ANTES de ese LateUpdate: .text
     /// queda con el valor previo a la sincronización, aunque en pantalla ya se vea el texto
     /// autocompletado. Por eso hay que leer el teclado nativo directamente cuando está activo.
+    ///
+    /// IMPORTANTE: en Android el teclado nativo es UNO SOLO para todos los campos. Si se lee
+    /// keyboard.text desde un campo que ya no se está editando, devuelve el texto del ÚLTIMO
+    /// campo escrito (p. ej. la contraseña en lugar del correo). Por eso solo se usa el
+    /// teclado cuando este campo es el que tiene el foco en ese momento.
     /// </summary>
     public static string GetCommittedText(TMP_InputField field)
     {
@@ -24,7 +29,8 @@ public static class InputFieldSubmitNavigator
             return string.Empty;
 
         TouchScreenKeyboard keyboard = field.touchScreenKeyboard;
-        if (keyboard != null &&
+        if (field.isFocused &&
+            keyboard != null &&
             (keyboard.status == TouchScreenKeyboard.Status.Visible ||
              keyboard.status == TouchScreenKeyboard.Status.Done))
         {

@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Linq;
 
 /// <summary>
 /// Coordinador (Controller) para la pantalla de perfil del usuario.
@@ -21,6 +22,36 @@ public class UserScreenManager : MonoBehaviour
     private ProgressService progressService;
     // Guardará temporalmente el estudiante seleccionado cuando el profesor presione "Ver Progreso"
 public static UserModel SelectedUserForView { get; set; }
+
+    // Usuario mostrado actualmente (para refrescarlo cuando llegan datos por la red).
+    private UserModel displayedUser;
+
+    private void OnEnable()
+    {
+        UserSyncService.OnDataSynced += RefreshDisplayedUser;
+    }
+
+    private void OnDisable()
+    {
+        UserSyncService.OnDataSynced -= RefreshDisplayedUser;
+    }
+
+    /// <summary>
+    /// Vuelve a leer de SQLite el usuario mostrado y actualiza la vista.
+    /// </summary>
+    private void RefreshDisplayedUser()
+    {
+        if (displayedUser == null || presenter == null || userScreenView == null)
+            return;
+
+        int userId = displayedUser.id_user;
+        UserModel updated = DatabaseManager.Instance?.GetConnection()?
+            .Table<UserModel>()
+            .FirstOrDefault(u => u.id_user == userId);
+
+        UserSessionManager.SelectedUserForView = updated ?? displayedUser;
+        LoadAndDisplayUserData();
+    }
 
     private void Start()
     {
@@ -72,10 +103,13 @@ public static UserModel SelectedUserForView { get; set; }
 
     if (targetUser == null)
     {
+        displayedUser = null;
         Debug.LogWarning("[UserScreenManager] No se especificó usuario ni hay sesión activa");
         userScreenView.DisplayError("No hay sesión activa");
         return;
     }
+
+    displayedUser = targetUser;
 
     try
     {

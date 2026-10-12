@@ -23,10 +23,18 @@ public class SimpleServer : MonoBehaviour
     private UdpClient discoveryServer;
     private bool discoveryRunning;
 
+    // Los textos pueden destruirse al cambiar de escena mientras el servidor sigue activo.
+    private void SetStatus(string text)
+    {
+        if (statusText != null)
+            statusText.text = text;
+    }
+
     private void Start()
     {
-        myIPText.text = "IP: " + SimpleNetwork.GetLocalIPAddress();
-        statusText.text = "Servidor detenido";
+        if (myIPText != null)
+            myIPText.text = "IP: " + SimpleNetwork.GetLocalIPAddress();
+        SetStatus("Servidor detenido");
 
         StartServer();
     }
@@ -51,7 +59,7 @@ public class SimpleServer : MonoBehaviour
 
             listener.Start();
 
-            statusText.text = "Esperando conexiones...";
+            SetStatus("Esperando conexiones...");
 
             Debug.Log(
                 "SimpleServer: servidor TCP iniciado. " +
@@ -82,9 +90,9 @@ public class SimpleServer : MonoBehaviour
                     clientIP
                 );
 
-                statusText.text =
+                SetStatus(
                     "Clientes conectados: " +
-                    clients.Count;
+                    clients.Count);
 
                 // Cada cliente tiene su propio proceso de recepción
                 _ = ReceiveMessages(newClient);
@@ -98,7 +106,7 @@ public class SimpleServer : MonoBehaviour
         }
         catch (Exception e)
         {
-            statusText.text = "Error";
+            SetStatus("Error");
             Debug.LogError(
                 "SimpleServer: error en servidor: " +
                 e.Message
@@ -203,7 +211,10 @@ public class SimpleServer : MonoBehaviour
         NetworkStream currentStream =
             currentClient.GetStream();
 
-        byte[] buffer = new byte[1024];
+        byte[] buffer = new byte[4096];
+        char[] chars = new char[Encoding.UTF8.GetMaxCharCount(buffer.Length)];
+        Decoder decoder = Encoding.UTF8.GetDecoder();
+        StringBuilder pending = new StringBuilder();
 
         try
         {
@@ -221,39 +232,41 @@ public class SimpleServer : MonoBehaviour
                 if (bytes <= 0)
                     break;
 
-                string msg =
-                    Encoding.UTF8.GetString(
-                        buffer,
-                        0,
-                        bytes
-                    );
+                int charCount = decoder.GetChars(buffer, 0, bytes, chars, 0);
+                pending.Append(chars, 0, charCount);
 
-                receivedText.text = msg;
-
-                string clientIP =
-                    ((IPEndPoint)currentClient.Client.RemoteEndPoint)
-                    .Address
-                    .ToString();
-
-                Debug.Log(
-                    $"SYNC TEST 3: Mensaje recibido de {clientIP}: {msg}"
-                );
-
-                if (UserSyncService.Instance != null)
+                // Cada mensaje termina en '\n'. Un mismo Read puede traer
+                // varios mensajes o solo una parte de uno.
+                foreach (string msg in SimpleNetwork.ExtractMessages(pending))
                 {
+                    if (receivedText != null)
+                        receivedText.text = msg;
+
+                    string clientIP =
+                        ((IPEndPoint)currentClient.Client.RemoteEndPoint)
+                        .Address
+                        .ToString();
+
                     Debug.Log(
-                        "SYNC TEST 4: Enviando mensaje a UserSyncService."
+                        $"SYNC TEST 3: Mensaje recibido de {clientIP}: {msg}"
                     );
 
-                    UserSyncService.Instance.ProcessMessage(msg);
+                    if (UserSyncService.Instance != null)
+                    {
+                        Debug.Log(
+                            "SYNC TEST 4: Enviando mensaje a UserSyncService."
+                        );
+
+                        UserSyncService.Instance.ProcessMessage(msg);
+                    }
+                    else
+                    {
+                        Debug.LogError(
+                            "SYNC ERROR: UserSyncService.Instance es NULL."
+                        );
+                    }
+                    await BroadcastMessage(msg, currentClient);
                 }
-                else
-                {
-                    Debug.LogError(
-                        "SYNC ERROR: UserSyncService.Instance es NULL."
-                    );
-                }
-                await BroadcastMessage(msg, currentClient);
             }
         }
         catch (Exception e)
@@ -273,7 +286,7 @@ private async Task BroadcastMessage(
     TcpClient sender
 )
 {
-    byte[] data = Encoding.UTF8.GetBytes(msg);
+    byte[] data = Encoding.UTF8.GetBytes(msg + "\n");
 
     List<TcpClient> clientsCopy;
 
@@ -346,20 +359,23 @@ private async Task BroadcastMessage(
             clients.Count
         );
 
-        statusText.text =
+        SetStatus(
             "Clientes conectados: " +
-            clients.Count;
+            clients.Count);
     }
 
     public async void SendMessage()
     {
+        if (messageInput == null)
+            return;
+
         string msg = messageInput.text;
 
         if (string.IsNullOrWhiteSpace(msg))
             return;
 
         byte[] data =
-            Encoding.UTF8.GetBytes(msg);
+            Encoding.UTF8.GetBytes(msg.Trim() + "\n");
 
         List<TcpClient> clientsCopy;
 

@@ -27,6 +27,9 @@ IL2CPP_EXTERN_C RuntimeField* U3CPrivateImplementationDetailsU3E_tA83BEDE51F9F74
 IL2CPP_EXTERN_C String_t* _stringLiteral0980BD8B80DB0667167E8DA5F742991350BC498E;
 IL2CPP_EXTERN_C String_t* _stringLiteral12700238F61F9835CF04C02895B57A2DDCC107CF;
 IL2CPP_EXTERN_C String_t* _stringLiteral142454E6585766CA75224DFA3D9441049FD26DB3;
+IL2CPP_EXTERN_C String_t* _stringLiteral2386E77CF610F786B06A91AF2C1B3FD2282D2745;
+IL2CPP_EXTERN_C String_t* _stringLiteral2CEF63E5A80AE6668C9F9DB7BAFEAB79546C4B44;
+IL2CPP_EXTERN_C String_t* _stringLiteral353C796E3E826F5489EA0C197F764F35A47F9A0E;
 IL2CPP_EXTERN_C String_t* _stringLiteral4C68A94964380CDE72CA026C0BF9BA29904B8C89;
 IL2CPP_EXTERN_C String_t* _stringLiteral5018C0FBF3CE4715D5C300F2400BB261B1A56B14;
 IL2CPP_EXTERN_C String_t* _stringLiteral51921D99887DD5ED233F87333EF648AE91A8BF7C;
@@ -34,14 +37,17 @@ IL2CPP_EXTERN_C String_t* _stringLiteral551EA19FDAE06DD2BEBDFE3B9E158806CEED3C29
 IL2CPP_EXTERN_C String_t* _stringLiteral5700015ECFA52BE9BB3C777FDE7602CE16046F8A;
 IL2CPP_EXTERN_C String_t* _stringLiteral61CF971B511D5F5611E3856DAABEE42B3B828C29;
 IL2CPP_EXTERN_C String_t* _stringLiteral6350AD03147F46F4353E4D0D4AE23E4AE14353A6;
+IL2CPP_EXTERN_C String_t* _stringLiteral7635A3D95A112DDA382FC7970F33ED45FB12A2BF;
 IL2CPP_EXTERN_C String_t* _stringLiteral7EF8373E88E5292ED22772016DF8C014295AA785;
 IL2CPP_EXTERN_C String_t* _stringLiteral8264301E403748A99044F28D8929DCCCE57EB36A;
 IL2CPP_EXTERN_C String_t* _stringLiteral851264071B30A5E09A0BC57848596E5C9BFB96BE;
 IL2CPP_EXTERN_C String_t* _stringLiteral9C9D7423A10F6337B3A32DA1E209EE9297B9DC2F;
+IL2CPP_EXTERN_C String_t* _stringLiteralA363D7366D298840719A2A604DE113361F2D8320;
 IL2CPP_EXTERN_C String_t* _stringLiteralA4971B36114FE3A926E68051CA76143FB730C5E5;
 IL2CPP_EXTERN_C String_t* _stringLiteralB9BEFC0F85E6D3F824A63914B25EDB6A2E15815F;
 IL2CPP_EXTERN_C String_t* _stringLiteralCE18B047107AA23D1AA9B2ED32D316148E02655F;
 IL2CPP_EXTERN_C String_t* _stringLiteralCE2657D17C00F4338D09CBD8F11B3016B395D195;
+IL2CPP_EXTERN_C String_t* _stringLiteralD9D8A6931534088C112E246EF2365863413BB146;
 IL2CPP_EXTERN_C String_t* _stringLiteralE08AC655FFA8AD1AC2810BF0BA044AC237291230;
 IL2CPP_EXTERN_C String_t* _stringLiteralE1A36929E42167BC52FC3DC93DA7351861DAAA9F;
 IL2CPP_EXTERN_C String_t* _stringLiteralE8F97FBA9104D1EA5047948E6DFB67FACD9F5B73;
@@ -255,17 +261,19 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void RegisterResult_set_UserId_m5
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RegisterResult__ctor_m1ABE422118F52920FA8DFAA1B1BE267B33EFCB6E (RegisterResult_tA4A1A6D997497B91BBC5E9999A4431DFDECC5924* __this, const RuntimeMethod* method) ;
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void RegisterResult_set_Success_mCB4B9919F34B89B106AABD8E20F0508DD349862F_inline (RegisterResult_tA4A1A6D997497B91BBC5E9999A4431DFDECC5924* __this, bool ___0_value, const RuntimeMethod* method) ;
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void RegisterResult_set_ErrorMessage_m4B52319C3140870C2826614EC8384905803B0C15_inline (RegisterResult_tA4A1A6D997497B91BBC5E9999A4431DFDECC5924* __this, String_t* ___0_value, const RuntimeMethod* method) ;
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool Regex_IsMatch_m66D13054C7992322810B0CFC6B46AF11A927C9AA (String_t* ___0_input, String_t* ___1_pattern, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR String_t* String_Trim_mCD6D8C6D4CFD15225D12DB7D3E0544CA80FB8DA5 (String_t* __this, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool String_IsNullOrEmpty_mEA9E3FB005AC28FE02E69FCF95A7B8456192B478 (String_t* ___0_value, const RuntimeMethod* method) ;
 inline void Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2 (Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* __this, String_t* ___0_key, String_t* ___1_value, const RuntimeMethod* method)
 {
 	((  void (*) (Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83*, String_t*, String_t*, const RuntimeMethod*))Dictionary_2_set_Item_m1A840355E8EDAECEA9D0C6F5E51B248FAA449CBD_gshared)(__this, ___0_key, ___1_value, method);
 }
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool Regex_IsMatch_m66D13054C7992322810B0CFC6B46AF11A927C9AA (String_t* ___0_input, String_t* ___1_pattern, const RuntimeMethod* method) ;
-IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool String_IsNullOrWhiteSpace_m42E1F3B2C358068D645E46F01CF1834DC77A5A10 (String_t* ___0_value, const RuntimeMethod* method) ;
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR int32_t String_get_Length_m42625D67623FA5CC7A44D47425CE86FB946542D2_inline (String_t* __this, const RuntimeMethod* method) ;
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool String_IsNullOrWhiteSpace_m42E1F3B2C358068D645E46F01CF1834DC77A5A10 (String_t* ___0_value, const RuntimeMethod* method) ;
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool String_Contains_m6D77B121FADA7CA5F397C0FABB65DA62DF03B6C3 (String_t* __this, String_t* ___0_value, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool Int32_TryParse_mC928DE2FEC1C35ED5298BDDCA9868076E94B8A21 (String_t* ___0_s, int32_t* ___1_result, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR String_t* String_ToLowerInvariant_mBE32C93DE27C5353FEA3FA654FC1DDBE3D0EB0F2 (String_t* __this, const RuntimeMethod* method) ;
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RegisterValidator_IsEducationalEmail_mBE3B8B861C6E672506CCD44197643EF62777D09E (String_t* ___0_email, const RuntimeMethod* method) ;
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RuntimeHelpers_InitializeArray_m751372AA3F24FBF6DA9B9D687CBFA2DE436CAB9B (RuntimeArray* ___0_array, RuntimeFieldHandle_t6E4C45B6D2EA12FC99185805A7E77527899B25C5 ___1_fldHandle, const RuntimeMethod* method) ;
 #ifdef __clang__
 #pragma clang diagnostic push
@@ -280,7 +288,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RuntimeHelpers_InitializeArray_m751372AA
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 104818
+// Method Definition Index: 104976
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RegisterResult_get_Success_mCFDFB1911773652F92FA166F81B3745EF1CE15CB (RegisterResult_tA4A1A6D997497B91BBC5E9999A4431DFDECC5924* __this, const RuntimeMethod* method) 
 {
 	{
@@ -289,7 +297,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RegisterResult_get_Success_mCFDFB1911773
 		return L_0;
 	}
 }
-// Method Definition Index: 104819
+// Method Definition Index: 104977
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RegisterResult_set_Success_mCB4B9919F34B89B106AABD8E20F0508DD349862F (RegisterResult_tA4A1A6D997497B91BBC5E9999A4431DFDECC5924* __this, bool ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -299,7 +307,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RegisterResult_set_Success_mCB4B9919F34B
 		return;
 	}
 }
-// Method Definition Index: 104820
+// Method Definition Index: 104978
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR String_t* RegisterResult_get_ErrorMessage_mCDCE170AF17F73487BB8B6335C99FFD5F15DB80A (RegisterResult_tA4A1A6D997497B91BBC5E9999A4431DFDECC5924* __this, const RuntimeMethod* method) 
 {
 	{
@@ -308,7 +316,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR String_t* RegisterResult_get_ErrorMessage_mCD
 		return L_0;
 	}
 }
-// Method Definition Index: 104821
+// Method Definition Index: 104979
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RegisterResult_set_ErrorMessage_m4B52319C3140870C2826614EC8384905803B0C15 (RegisterResult_tA4A1A6D997497B91BBC5E9999A4431DFDECC5924* __this, String_t* ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -319,7 +327,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RegisterResult_set_ErrorMessage_m4B52319
 		return;
 	}
 }
-// Method Definition Index: 104822
+// Method Definition Index: 104980
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* RegisterResult_get_FieldErrors_m98BCFF3FE3199E9302BD030A9F6004C16F1F47DE (RegisterResult_tA4A1A6D997497B91BBC5E9999A4431DFDECC5924* __this, const RuntimeMethod* method) 
 {
 	{
@@ -328,7 +336,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Dictionary_2_t46B2DB028096FA2B828359E52F37F31
 		return L_0;
 	}
 }
-// Method Definition Index: 104823
+// Method Definition Index: 104981
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RegisterResult_set_FieldErrors_m0FDA1D0079D59727F5EE159F63CB9395C301B572 (RegisterResult_tA4A1A6D997497B91BBC5E9999A4431DFDECC5924* __this, Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -339,7 +347,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RegisterResult_set_FieldErrors_m0FDA1D00
 		return;
 	}
 }
-// Method Definition Index: 104824
+// Method Definition Index: 104982
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t RegisterResult_get_UserId_m480BF3AE3D06A3A53D9B624429438029185E00D7 (RegisterResult_tA4A1A6D997497B91BBC5E9999A4431DFDECC5924* __this, const RuntimeMethod* method) 
 {
 	{
@@ -348,7 +356,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR int32_t RegisterResult_get_UserId_m480BF3AE3D
 		return L_0;
 	}
 }
-// Method Definition Index: 104825
+// Method Definition Index: 104983
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RegisterResult_set_UserId_m53AF5452D4B298EA792A0CF123F53F256BB916FF (RegisterResult_tA4A1A6D997497B91BBC5E9999A4431DFDECC5924* __this, int32_t ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -358,7 +366,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RegisterResult_set_UserId_m53AF5452D4B29
 		return;
 	}
 }
-// Method Definition Index: 104826
+// Method Definition Index: 104984
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RegisterResult__ctor_m1ABE422118F52920FA8DFAA1B1BE267B33EFCB6E (RegisterResult_tA4A1A6D997497B91BBC5E9999A4431DFDECC5924* __this, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -381,7 +389,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void RegisterResult__ctor_m1ABE422118F52920FA
 		return;
 	}
 }
-// Method Definition Index: 104827
+// Method Definition Index: 104985
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RegisterResult_tA4A1A6D997497B91BBC5E9999A4431DFDECC5924* RegisterResult_SuccessResult_m2587FCBC1621CD77AB457AD5C8B1EADB49ECDFE8 (int32_t ___0_userId, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -413,7 +421,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RegisterResult_tA4A1A6D997497B91BBC5E9999A443
 		return L_4;
 	}
 }
-// Method Definition Index: 104828
+// Method Definition Index: 104986
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RegisterResult_tA4A1A6D997497B91BBC5E9999A4431DFDECC5924* RegisterResult_ErrorResult_mA8A02CF9FC219311B57893EE297D3C3B6F67A6C0 (String_t* ___0_message, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -448,7 +456,79 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR RegisterResult_tA4A1A6D997497B91BBC5E9999A443
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 104829
+// Method Definition Index: 104987
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RegisterValidator_IsValidEmailFormat_m142E530384BB458BB1BFE25E88056273D6EDF823 (String_t* ___0_email, const RuntimeMethod* method) 
+{
+	static bool s_Il2CppMethodInitialized;
+	if (!s_Il2CppMethodInitialized)
+	{
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Regex_tE773142C2BE45C5D362B0F815AFF831707A51772_il2cpp_TypeInfo_var);
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral7EF8373E88E5292ED22772016DF8C014295AA785);
+		s_Il2CppMethodInitialized = true;
+	}
+	String_t* G_B2_0 = NULL;
+	String_t* G_B1_0 = NULL;
+	{
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:17>
+		String_t* L_0 = ___0_email;
+		String_t* L_1 = L_0;
+		if (L_1)
+		{
+			G_B2_0 = L_1;
+			goto IL_000a;
+		}
+		G_B1_0 = L_1;
+	}
+	{
+		String_t* L_2 = ((String_t_StaticFields*)il2cpp_codegen_static_fields_for(il2cpp_defaults.string_class))->___Empty;
+		G_B2_0 = L_2;
+	}
+
+IL_000a:
+	{
+		il2cpp_codegen_runtime_class_init_inline(Regex_tE773142C2BE45C5D362B0F815AFF831707A51772_il2cpp_TypeInfo_var);
+		bool L_3;
+		L_3 = Regex_IsMatch_m66D13054C7992322810B0CFC6B46AF11A927C9AA(G_B2_0, _stringLiteral7EF8373E88E5292ED22772016DF8C014295AA785, NULL);
+		return L_3;
+	}
+}
+// Method Definition Index: 104988
+IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR bool RegisterValidator_IsEducationalEmail_mBE3B8B861C6E672506CCD44197643EF62777D09E (String_t* ___0_email, const RuntimeMethod* method) 
+{
+	static bool s_Il2CppMethodInitialized;
+	if (!s_Il2CppMethodInitialized)
+	{
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Regex_tE773142C2BE45C5D362B0F815AFF831707A51772_il2cpp_TypeInfo_var);
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral7635A3D95A112DDA382FC7970F33ED45FB12A2BF);
+		s_Il2CppMethodInitialized = true;
+	}
+	String_t* G_B2_0 = NULL;
+	String_t* G_B1_0 = NULL;
+	{
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:19>
+		String_t* L_0 = ___0_email;
+		String_t* L_1 = L_0;
+		if (L_1)
+		{
+			G_B2_0 = L_1;
+			goto IL_000a;
+		}
+		G_B1_0 = L_1;
+	}
+	{
+		String_t* L_2 = ((String_t_StaticFields*)il2cpp_codegen_static_fields_for(il2cpp_defaults.string_class))->___Empty;
+		G_B2_0 = L_2;
+	}
+
+IL_000a:
+	{
+		il2cpp_codegen_runtime_class_init_inline(Regex_tE773142C2BE45C5D362B0F815AFF831707A51772_il2cpp_TypeInfo_var);
+		bool L_3;
+		L_3 = Regex_IsMatch_m66D13054C7992322810B0CFC6B46AF11A927C9AA(G_B2_0, _stringLiteral7635A3D95A112DDA382FC7970F33ED45FB12A2BF, NULL);
+		return L_3;
+	}
+}
+// Method Definition Index: 104989
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* RegisterValidator_ValidateStudent_m6EAEE3169CA18D9CB1EA838AEDFD1A76DAABD8B6 (String_t* ___0_name, int32_t ___1_degreeId, String_t* ___2_ageText, String_t* ___3_pass, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -460,12 +540,16 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Dictionary_2_t46B2DB028096FA2B828359E52F37F31
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Regex_tE773142C2BE45C5D362B0F815AFF831707A51772_il2cpp_TypeInfo_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral12700238F61F9835CF04C02895B57A2DDCC107CF);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral142454E6585766CA75224DFA3D9441049FD26DB3);
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral2386E77CF610F786B06A91AF2C1B3FD2282D2745);
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral353C796E3E826F5489EA0C197F764F35A47F9A0E);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral4C68A94964380CDE72CA026C0BF9BA29904B8C89);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral5700015ECFA52BE9BB3C777FDE7602CE16046F8A);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral61CF971B511D5F5611E3856DAABEE42B3B828C29);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral851264071B30A5E09A0BC57848596E5C9BFB96BE);
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteralA363D7366D298840719A2A604DE113361F2D8320);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteralB9BEFC0F85E6D3F824A63914B25EDB6A2E15815F);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteralCE18B047107AA23D1AA9B2ED32D316148E02655F);
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteralD9D8A6931534088C112E246EF2365863413BB146);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteralE08AC655FFA8AD1AC2810BF0BA044AC237291230);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteralE8F97FBA9104D1EA5047948E6DFB67FACD9F5B73);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteralF4AE89B24C66F7A24DB5CF53ED37FF527817292C);
@@ -481,11 +565,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Dictionary_2_t46B2DB028096FA2B828359E52F37F31
 	String_t* G_B10_0 = NULL;
 	String_t* G_B9_0 = NULL;
 	{
-		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:17>
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:23>
 		Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* L_0 = (Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83*)il2cpp_codegen_object_new(Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83_il2cpp_TypeInfo_var);
 		Dictionary_2__ctor_m768E076F1E804CE4959F4E71D3E6A9ADE2F55052(L_0, Dictionary_2__ctor_m768E076F1E804CE4959F4E71D3E6A9ADE2F55052_RuntimeMethod_var);
 		V_0 = L_0;
-		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:19>
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:25>
 		String_t* L_1 = ___0_name;
 		if (L_1)
 		{
@@ -524,7 +608,7 @@ IL_0012:
 IL_001b:
 	{
 		___0_name = G_B5_0;
-		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:20>
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:26>
 		String_t* L_6 = ___3_pass;
 		if (L_6)
 		{
@@ -563,7 +647,7 @@ IL_0029:
 IL_0032:
 	{
 		___3_pass = G_B10_0;
-		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:22>
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:28>
 		String_t* L_11 = ___0_name;
 		bool L_12;
 		L_12 = String_IsNullOrEmpty_mEA9E3FB005AC28FE02E69FCF95A7B8456192B478(L_11, NULL);
@@ -573,138 +657,198 @@ IL_0032:
 		}
 	}
 	{
-		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:23>
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:29>
 		Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* L_13 = V_0;
 		NullCheck(L_13);
 		Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2(L_13, _stringLiteralCE18B047107AA23D1AA9B2ED32D316148E02655F, _stringLiteralF4AE89B24C66F7A24DB5CF53ED37FF527817292C, Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2_RuntimeMethod_var);
-		goto IL_006b;
+		goto IL_00a2;
 	}
 
 IL_004e:
 	{
-		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:24>
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:30>
 		String_t* L_14 = ___0_name;
 		il2cpp_codegen_runtime_class_init_inline(Regex_tE773142C2BE45C5D362B0F815AFF831707A51772_il2cpp_TypeInfo_var);
 		bool L_15;
 		L_15 = Regex_IsMatch_m66D13054C7992322810B0CFC6B46AF11A927C9AA(L_14, _stringLiteralB9BEFC0F85E6D3F824A63914B25EDB6A2E15815F, NULL);
 		if (L_15)
 		{
-			goto IL_006b;
-		}
-	}
-	{
-		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:25>
-		Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* L_16 = V_0;
-		NullCheck(L_16);
-		Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2(L_16, _stringLiteralCE18B047107AA23D1AA9B2ED32D316148E02655F, _stringLiteral851264071B30A5E09A0BC57848596E5C9BFB96BE, Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2_RuntimeMethod_var);
-	}
-
-IL_006b:
-	{
-		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:27>
-		int32_t L_17 = ___1_degreeId;
-		if ((((int32_t)L_17) > ((int32_t)0)))
-		{
-			goto IL_007f;
-		}
-	}
-	{
-		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:28>
-		Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* L_18 = V_0;
-		NullCheck(L_18);
-		Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2(L_18, _stringLiteral142454E6585766CA75224DFA3D9441049FD26DB3, _stringLiteral4C68A94964380CDE72CA026C0BF9BA29904B8C89, Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2_RuntimeMethod_var);
-	}
-
-IL_007f:
-	{
-		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:30>
-		String_t* L_19 = ___3_pass;
-		bool L_20;
-		L_20 = String_IsNullOrWhiteSpace_m42E1F3B2C358068D645E46F01CF1834DC77A5A10(L_19, NULL);
-		if (!L_20)
-		{
-			goto IL_0099;
+			goto IL_006d;
 		}
 	}
 	{
 		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:31>
-		Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* L_21 = V_0;
-		NullCheck(L_21);
-		Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2(L_21, _stringLiteralE8F97FBA9104D1EA5047948E6DFB67FACD9F5B73, _stringLiteral5700015ECFA52BE9BB3C777FDE7602CE16046F8A, Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2_RuntimeMethod_var);
-		goto IL_00b2;
+		Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* L_16 = V_0;
+		NullCheck(L_16);
+		Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2(L_16, _stringLiteralCE18B047107AA23D1AA9B2ED32D316148E02655F, _stringLiteral851264071B30A5E09A0BC57848596E5C9BFB96BE, Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2_RuntimeMethod_var);
+		goto IL_00a2;
 	}
 
-IL_0099:
+IL_006d:
 	{
 		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:32>
-		String_t* L_22 = ___3_pass;
-		NullCheck(L_22);
-		int32_t L_23;
-		L_23 = String_get_Length_m42625D67623FA5CC7A44D47425CE86FB946542D2_inline(L_22, NULL);
-		if ((((int32_t)L_23) >= ((int32_t)6)))
+		String_t* L_17 = ___0_name;
+		NullCheck(L_17);
+		int32_t L_18;
+		L_18 = String_get_Length_m42625D67623FA5CC7A44D47425CE86FB946542D2_inline(L_17, NULL);
+		if ((((int32_t)L_18) >= ((int32_t)6)))
 		{
-			goto IL_00b2;
+			goto IL_0088;
 		}
 	}
 	{
 		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:33>
-		Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* L_24 = V_0;
-		NullCheck(L_24);
-		Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2(L_24, _stringLiteralE8F97FBA9104D1EA5047948E6DFB67FACD9F5B73, _stringLiteralE08AC655FFA8AD1AC2810BF0BA044AC237291230, Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2_RuntimeMethod_var);
+		Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* L_19 = V_0;
+		NullCheck(L_19);
+		Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2(L_19, _stringLiteralCE18B047107AA23D1AA9B2ED32D316148E02655F, _stringLiteral353C796E3E826F5489EA0C197F764F35A47F9A0E, Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2_RuntimeMethod_var);
+		goto IL_00a2;
 	}
 
-IL_00b2:
+IL_0088:
+	{
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:34>
+		String_t* L_20 = ___0_name;
+		NullCheck(L_20);
+		int32_t L_21;
+		L_21 = String_get_Length_m42625D67623FA5CC7A44D47425CE86FB946542D2_inline(L_20, NULL);
+		if ((((int32_t)L_21) <= ((int32_t)((int32_t)20))))
+		{
+			goto IL_00a2;
+		}
+	}
 	{
 		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:35>
-		String_t* L_25 = ___2_ageText;
-		bool L_26;
-		L_26 = Int32_TryParse_mC928DE2FEC1C35ED5298BDDCA9868076E94B8A21(L_25, (&V_1), NULL);
-		if (L_26)
-		{
-			goto IL_00ce;
-		}
-	}
-	{
-		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:36>
-		Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* L_27 = V_0;
-		NullCheck(L_27);
-		Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2(L_27, _stringLiteral12700238F61F9835CF04C02895B57A2DDCC107CF, _stringLiteralFC075AEAD53DCD3E6BF0B475EE7839D602CB3DC9, Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2_RuntimeMethod_var);
-		goto IL_00e8;
+		Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* L_22 = V_0;
+		NullCheck(L_22);
+		Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2(L_22, _stringLiteralCE18B047107AA23D1AA9B2ED32D316148E02655F, _stringLiteralA363D7366D298840719A2A604DE113361F2D8320, Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2_RuntimeMethod_var);
 	}
 
-IL_00ce:
+IL_00a2:
 	{
 		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:37>
-		int32_t L_28 = V_1;
-		if ((((int32_t)L_28) < ((int32_t)((int32_t)10))))
+		int32_t L_23 = ___1_degreeId;
+		if ((((int32_t)L_23) > ((int32_t)0)))
 		{
-			goto IL_00d8;
+			goto IL_00b6;
 		}
 	}
-	{
-		int32_t L_29 = V_1;
-		if ((((int32_t)L_29) <= ((int32_t)((int32_t)15))))
-		{
-			goto IL_00e8;
-		}
-	}
-
-IL_00d8:
 	{
 		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:38>
-		Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* L_30 = V_0;
-		NullCheck(L_30);
-		Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2(L_30, _stringLiteral12700238F61F9835CF04C02895B57A2DDCC107CF, _stringLiteral61CF971B511D5F5611E3856DAABEE42B3B828C29, Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2_RuntimeMethod_var);
+		Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* L_24 = V_0;
+		NullCheck(L_24);
+		Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2(L_24, _stringLiteral142454E6585766CA75224DFA3D9441049FD26DB3, _stringLiteral4C68A94964380CDE72CA026C0BF9BA29904B8C89, Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2_RuntimeMethod_var);
 	}
 
-IL_00e8:
+IL_00b6:
 	{
 		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:40>
-		Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* L_31 = V_0;
-		return L_31;
+		String_t* L_25 = ___3_pass;
+		bool L_26;
+		L_26 = String_IsNullOrWhiteSpace_m42E1F3B2C358068D645E46F01CF1834DC77A5A10(L_25, NULL);
+		if (!L_26)
+		{
+			goto IL_00d0;
+		}
+	}
+	{
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:41>
+		Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* L_27 = V_0;
+		NullCheck(L_27);
+		Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2(L_27, _stringLiteralE8F97FBA9104D1EA5047948E6DFB67FACD9F5B73, _stringLiteral5700015ECFA52BE9BB3C777FDE7602CE16046F8A, Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2_RuntimeMethod_var);
+		goto IL_0108;
+	}
+
+IL_00d0:
+	{
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:42>
+		String_t* L_28 = ___3_pass;
+		NullCheck(L_28);
+		int32_t L_29;
+		L_29 = String_get_Length_m42625D67623FA5CC7A44D47425CE86FB946542D2_inline(L_28, NULL);
+		if ((((int32_t)L_29) >= ((int32_t)6)))
+		{
+			goto IL_00eb;
+		}
+	}
+	{
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:43>
+		Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* L_30 = V_0;
+		NullCheck(L_30);
+		Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2(L_30, _stringLiteralE8F97FBA9104D1EA5047948E6DFB67FACD9F5B73, _stringLiteralE08AC655FFA8AD1AC2810BF0BA044AC237291230, Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2_RuntimeMethod_var);
+		goto IL_0108;
+	}
+
+IL_00eb:
+	{
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:44>
+		String_t* L_31 = ___3_pass;
+		NullCheck(L_31);
+		bool L_32;
+		L_32 = String_Contains_m6D77B121FADA7CA5F397C0FABB65DA62DF03B6C3(L_31, _stringLiteral2386E77CF610F786B06A91AF2C1B3FD2282D2745, NULL);
+		if (!L_32)
+		{
+			goto IL_0108;
+		}
+	}
+	{
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:45>
+		Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* L_33 = V_0;
+		NullCheck(L_33);
+		Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2(L_33, _stringLiteralE8F97FBA9104D1EA5047948E6DFB67FACD9F5B73, _stringLiteralD9D8A6931534088C112E246EF2365863413BB146, Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2_RuntimeMethod_var);
+	}
+
+IL_0108:
+	{
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:47>
+		String_t* L_34 = ___2_ageText;
+		bool L_35;
+		L_35 = Int32_TryParse_mC928DE2FEC1C35ED5298BDDCA9868076E94B8A21(L_34, (&V_1), NULL);
+		if (L_35)
+		{
+			goto IL_0124;
+		}
+	}
+	{
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:48>
+		Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* L_36 = V_0;
+		NullCheck(L_36);
+		Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2(L_36, _stringLiteral12700238F61F9835CF04C02895B57A2DDCC107CF, _stringLiteralFC075AEAD53DCD3E6BF0B475EE7839D602CB3DC9, Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2_RuntimeMethod_var);
+		goto IL_013e;
+	}
+
+IL_0124:
+	{
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:49>
+		int32_t L_37 = V_1;
+		if ((((int32_t)L_37) < ((int32_t)((int32_t)10))))
+		{
+			goto IL_012e;
+		}
+	}
+	{
+		int32_t L_38 = V_1;
+		if ((((int32_t)L_38) <= ((int32_t)((int32_t)15))))
+		{
+			goto IL_013e;
+		}
+	}
+
+IL_012e:
+	{
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:50>
+		Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* L_39 = V_0;
+		NullCheck(L_39);
+		Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2(L_39, _stringLiteral12700238F61F9835CF04C02895B57A2DDCC107CF, _stringLiteral61CF971B511D5F5611E3856DAABEE42B3B828C29, Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2_RuntimeMethod_var);
+	}
+
+IL_013e:
+	{
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:52>
+		Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* L_40 = V_0;
+		return L_40;
 	}
 }
-// Method Definition Index: 104830
+// Method Definition Index: 104990
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* RegisterValidator_ValidateTeacher_m5F205772999DC990547CA6DD614B054FBD2E9160 (String_t* ___0_name, int32_t ___1_degreeId, String_t* ___2_email, String_t* ___3_pass, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -715,15 +859,20 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Dictionary_2_t46B2DB028096FA2B828359E52F37F31
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83_il2cpp_TypeInfo_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&Regex_tE773142C2BE45C5D362B0F815AFF831707A51772_il2cpp_TypeInfo_var);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral142454E6585766CA75224DFA3D9441049FD26DB3);
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral2386E77CF610F786B06A91AF2C1B3FD2282D2745);
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral2CEF63E5A80AE6668C9F9DB7BAFEAB79546C4B44);
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral353C796E3E826F5489EA0C197F764F35A47F9A0E);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral5018C0FBF3CE4715D5C300F2400BB261B1A56B14);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral51921D99887DD5ED233F87333EF648AE91A8BF7C);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral551EA19FDAE06DD2BEBDFE3B9E158806CEED3C29);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral5700015ECFA52BE9BB3C777FDE7602CE16046F8A);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral7EF8373E88E5292ED22772016DF8C014295AA785);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteral9C9D7423A10F6337B3A32DA1E209EE9297B9DC2F);
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteralA363D7366D298840719A2A604DE113361F2D8320);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteralA4971B36114FE3A926E68051CA76143FB730C5E5);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteralB9BEFC0F85E6D3F824A63914B25EDB6A2E15815F);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteralCE18B047107AA23D1AA9B2ED32D316148E02655F);
+		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteralD9D8A6931534088C112E246EF2365863413BB146);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteralE08AC655FFA8AD1AC2810BF0BA044AC237291230);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteralE1A36929E42167BC52FC3DC93DA7351861DAAA9F);
 		il2cpp_codegen_initialize_runtime_metadata((uintptr_t*)&_stringLiteralE8F97FBA9104D1EA5047948E6DFB67FACD9F5B73);
@@ -740,11 +889,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Dictionary_2_t46B2DB028096FA2B828359E52F37F31
 	String_t* G_B15_0 = NULL;
 	String_t* G_B14_0 = NULL;
 	{
-		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:45>
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:57>
 		Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* L_0 = (Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83*)il2cpp_codegen_object_new(Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83_il2cpp_TypeInfo_var);
 		Dictionary_2__ctor_m768E076F1E804CE4959F4E71D3E6A9ADE2F55052(L_0, Dictionary_2__ctor_m768E076F1E804CE4959F4E71D3E6A9ADE2F55052_RuntimeMethod_var);
 		V_0 = L_0;
-		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:47>
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:59>
 		String_t* L_1 = ___0_name;
 		if (L_1)
 		{
@@ -783,7 +932,7 @@ IL_0012:
 IL_001b:
 	{
 		___0_name = G_B5_0;
-		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:48>
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:60>
 		String_t* L_6 = ___3_pass;
 		if (L_6)
 		{
@@ -822,7 +971,7 @@ IL_0029:
 IL_0032:
 	{
 		___3_pass = G_B10_0;
-		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:49>
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:61>
 		String_t* L_11 = ___2_email;
 		if (L_11)
 		{
@@ -864,7 +1013,7 @@ IL_0045:
 IL_004e:
 	{
 		___2_email = G_B15_0;
-		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:51>
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:63>
 		String_t* L_17 = ___0_name;
 		bool L_18;
 		L_18 = String_IsNullOrEmpty_mEA9E3FB005AC28FE02E69FCF95A7B8456192B478(L_17, NULL);
@@ -874,132 +1023,211 @@ IL_004e:
 		}
 	}
 	{
-		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:52>
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:64>
 		Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* L_19 = V_0;
 		NullCheck(L_19);
 		Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2(L_19, _stringLiteralCE18B047107AA23D1AA9B2ED32D316148E02655F, _stringLiteral551EA19FDAE06DD2BEBDFE3B9E158806CEED3C29, Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2_RuntimeMethod_var);
-		goto IL_0087;
+		goto IL_00be;
 	}
 
 IL_006a:
 	{
-		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:53>
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:65>
 		String_t* L_20 = ___0_name;
 		il2cpp_codegen_runtime_class_init_inline(Regex_tE773142C2BE45C5D362B0F815AFF831707A51772_il2cpp_TypeInfo_var);
 		bool L_21;
 		L_21 = Regex_IsMatch_m66D13054C7992322810B0CFC6B46AF11A927C9AA(L_20, _stringLiteralB9BEFC0F85E6D3F824A63914B25EDB6A2E15815F, NULL);
 		if (L_21)
 		{
-			goto IL_0087;
+			goto IL_0089;
 		}
 	}
 	{
-		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:54>
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:66>
 		Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* L_22 = V_0;
 		NullCheck(L_22);
 		Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2(L_22, _stringLiteralCE18B047107AA23D1AA9B2ED32D316148E02655F, _stringLiteral9C9D7423A10F6337B3A32DA1E209EE9297B9DC2F, Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2_RuntimeMethod_var);
-	}
-
-IL_0087:
-	{
-		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:56>
-		String_t* L_23 = ___2_email;
-		bool L_24;
-		L_24 = String_IsNullOrEmpty_mEA9E3FB005AC28FE02E69FCF95A7B8456192B478(L_23, NULL);
-		if (!L_24)
-		{
-			goto IL_00a1;
-		}
-	}
-	{
-		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:57>
-		Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* L_25 = V_0;
-		NullCheck(L_25);
-		Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2(L_25, _stringLiteral51921D99887DD5ED233F87333EF648AE91A8BF7C, _stringLiteralA4971B36114FE3A926E68051CA76143FB730C5E5, Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2_RuntimeMethod_var);
 		goto IL_00be;
 	}
 
-IL_00a1:
+IL_0089:
 	{
-		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:58>
-		String_t* L_26 = ___2_email;
-		il2cpp_codegen_runtime_class_init_inline(Regex_tE773142C2BE45C5D362B0F815AFF831707A51772_il2cpp_TypeInfo_var);
-		bool L_27;
-		L_27 = Regex_IsMatch_m66D13054C7992322810B0CFC6B46AF11A927C9AA(L_26, _stringLiteral7EF8373E88E5292ED22772016DF8C014295AA785, NULL);
-		if (L_27)
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:67>
+		String_t* L_23 = ___0_name;
+		NullCheck(L_23);
+		int32_t L_24;
+		L_24 = String_get_Length_m42625D67623FA5CC7A44D47425CE86FB946542D2_inline(L_23, NULL);
+		if ((((int32_t)L_24) >= ((int32_t)6)))
+		{
+			goto IL_00a4;
+		}
+	}
+	{
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:68>
+		Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* L_25 = V_0;
+		NullCheck(L_25);
+		Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2(L_25, _stringLiteralCE18B047107AA23D1AA9B2ED32D316148E02655F, _stringLiteral353C796E3E826F5489EA0C197F764F35A47F9A0E, Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2_RuntimeMethod_var);
+		goto IL_00be;
+	}
+
+IL_00a4:
+	{
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:69>
+		String_t* L_26 = ___0_name;
+		NullCheck(L_26);
+		int32_t L_27;
+		L_27 = String_get_Length_m42625D67623FA5CC7A44D47425CE86FB946542D2_inline(L_26, NULL);
+		if ((((int32_t)L_27) <= ((int32_t)((int32_t)20))))
 		{
 			goto IL_00be;
 		}
 	}
 	{
-		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:59>
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:70>
 		Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* L_28 = V_0;
 		NullCheck(L_28);
-		Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2(L_28, _stringLiteral51921D99887DD5ED233F87333EF648AE91A8BF7C, _stringLiteral5018C0FBF3CE4715D5C300F2400BB261B1A56B14, Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2_RuntimeMethod_var);
+		Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2(L_28, _stringLiteralCE18B047107AA23D1AA9B2ED32D316148E02655F, _stringLiteralA363D7366D298840719A2A604DE113361F2D8320, Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2_RuntimeMethod_var);
 	}
 
 IL_00be:
 	{
-		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:61>
-		int32_t L_29 = ___1_degreeId;
-		if ((((int32_t)L_29) > ((int32_t)0)))
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:72>
+		String_t* L_29 = ___2_email;
+		bool L_30;
+		L_30 = String_IsNullOrEmpty_mEA9E3FB005AC28FE02E69FCF95A7B8456192B478(L_29, NULL);
+		if (!L_30)
 		{
-			goto IL_00d2;
+			goto IL_00d8;
 		}
 	}
 	{
-		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:62>
-		Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* L_30 = V_0;
-		NullCheck(L_30);
-		Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2(L_30, _stringLiteral142454E6585766CA75224DFA3D9441049FD26DB3, _stringLiteralE1A36929E42167BC52FC3DC93DA7351861DAAA9F, Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2_RuntimeMethod_var);
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:73>
+		Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* L_31 = V_0;
+		NullCheck(L_31);
+		Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2(L_31, _stringLiteral51921D99887DD5ED233F87333EF648AE91A8BF7C, _stringLiteralA4971B36114FE3A926E68051CA76143FB730C5E5, Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2_RuntimeMethod_var);
+		goto IL_010f;
 	}
 
-IL_00d2:
+IL_00d8:
 	{
-		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:64>
-		String_t* L_31 = ___3_pass;
-		bool L_32;
-		L_32 = String_IsNullOrWhiteSpace_m42E1F3B2C358068D645E46F01CF1834DC77A5A10(L_31, NULL);
-		if (!L_32)
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:74>
+		String_t* L_32 = ___2_email;
+		il2cpp_codegen_runtime_class_init_inline(Regex_tE773142C2BE45C5D362B0F815AFF831707A51772_il2cpp_TypeInfo_var);
+		bool L_33;
+		L_33 = Regex_IsMatch_m66D13054C7992322810B0CFC6B46AF11A927C9AA(L_32, _stringLiteral7EF8373E88E5292ED22772016DF8C014295AA785, NULL);
+		if (L_33)
 		{
-			goto IL_00ec;
+			goto IL_00f7;
 		}
 	}
 	{
-		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:65>
-		Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* L_33 = V_0;
-		NullCheck(L_33);
-		Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2(L_33, _stringLiteralE8F97FBA9104D1EA5047948E6DFB67FACD9F5B73, _stringLiteral5700015ECFA52BE9BB3C777FDE7602CE16046F8A, Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2_RuntimeMethod_var);
-		goto IL_0105;
-	}
-
-IL_00ec:
-	{
-		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:66>
-		String_t* L_34 = ___3_pass;
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:75>
+		Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* L_34 = V_0;
 		NullCheck(L_34);
-		int32_t L_35;
-		L_35 = String_get_Length_m42625D67623FA5CC7A44D47425CE86FB946542D2_inline(L_34, NULL);
-		if ((((int32_t)L_35) >= ((int32_t)6)))
+		Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2(L_34, _stringLiteral51921D99887DD5ED233F87333EF648AE91A8BF7C, _stringLiteral5018C0FBF3CE4715D5C300F2400BB261B1A56B14, Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2_RuntimeMethod_var);
+		goto IL_010f;
+	}
+
+IL_00f7:
+	{
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:76>
+		String_t* L_35 = ___2_email;
+		bool L_36;
+		L_36 = RegisterValidator_IsEducationalEmail_mBE3B8B861C6E672506CCD44197643EF62777D09E(L_35, NULL);
+		if (L_36)
 		{
-			goto IL_0105;
+			goto IL_010f;
 		}
 	}
 	{
-		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:67>
-		Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* L_36 = V_0;
-		NullCheck(L_36);
-		Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2(L_36, _stringLiteralE8F97FBA9104D1EA5047948E6DFB67FACD9F5B73, _stringLiteralE08AC655FFA8AD1AC2810BF0BA044AC237291230, Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2_RuntimeMethod_var);
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:77>
+		Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* L_37 = V_0;
+		NullCheck(L_37);
+		Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2(L_37, _stringLiteral51921D99887DD5ED233F87333EF648AE91A8BF7C, _stringLiteral2CEF63E5A80AE6668C9F9DB7BAFEAB79546C4B44, Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2_RuntimeMethod_var);
 	}
 
-IL_0105:
+IL_010f:
 	{
-		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:69>
-		Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* L_37 = V_0;
-		return L_37;
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:79>
+		int32_t L_38 = ___1_degreeId;
+		if ((((int32_t)L_38) > ((int32_t)0)))
+		{
+			goto IL_0123;
+		}
+	}
+	{
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:80>
+		Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* L_39 = V_0;
+		NullCheck(L_39);
+		Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2(L_39, _stringLiteral142454E6585766CA75224DFA3D9441049FD26DB3, _stringLiteralE1A36929E42167BC52FC3DC93DA7351861DAAA9F, Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2_RuntimeMethod_var);
+	}
+
+IL_0123:
+	{
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:82>
+		String_t* L_40 = ___3_pass;
+		bool L_41;
+		L_41 = String_IsNullOrWhiteSpace_m42E1F3B2C358068D645E46F01CF1834DC77A5A10(L_40, NULL);
+		if (!L_41)
+		{
+			goto IL_013d;
+		}
+	}
+	{
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:83>
+		Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* L_42 = V_0;
+		NullCheck(L_42);
+		Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2(L_42, _stringLiteralE8F97FBA9104D1EA5047948E6DFB67FACD9F5B73, _stringLiteral5700015ECFA52BE9BB3C777FDE7602CE16046F8A, Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2_RuntimeMethod_var);
+		goto IL_0175;
+	}
+
+IL_013d:
+	{
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:84>
+		String_t* L_43 = ___3_pass;
+		NullCheck(L_43);
+		int32_t L_44;
+		L_44 = String_get_Length_m42625D67623FA5CC7A44D47425CE86FB946542D2_inline(L_43, NULL);
+		if ((((int32_t)L_44) >= ((int32_t)6)))
+		{
+			goto IL_0158;
+		}
+	}
+	{
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:85>
+		Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* L_45 = V_0;
+		NullCheck(L_45);
+		Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2(L_45, _stringLiteralE8F97FBA9104D1EA5047948E6DFB67FACD9F5B73, _stringLiteralE08AC655FFA8AD1AC2810BF0BA044AC237291230, Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2_RuntimeMethod_var);
+		goto IL_0175;
+	}
+
+IL_0158:
+	{
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:86>
+		String_t* L_46 = ___3_pass;
+		NullCheck(L_46);
+		bool L_47;
+		L_47 = String_Contains_m6D77B121FADA7CA5F397C0FABB65DA62DF03B6C3(L_46, _stringLiteral2386E77CF610F786B06A91AF2C1B3FD2282D2745, NULL);
+		if (!L_47)
+		{
+			goto IL_0175;
+		}
+	}
+	{
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:87>
+		Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* L_48 = V_0;
+		NullCheck(L_48);
+		Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2(L_48, _stringLiteralE8F97FBA9104D1EA5047948E6DFB67FACD9F5B73, _stringLiteralD9D8A6931534088C112E246EF2365863413BB146, Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2_RuntimeMethod_var);
+	}
+
+IL_0175:
+	{
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:89>
+		Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* L_49 = V_0;
+		return L_49;
 	}
 }
-// Method Definition Index: 104831
+// Method Definition Index: 104991
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* RegisterValidator_ValidateSecurityQuestion_m965F57458B91AD749068758FB55ED48FB79CEE31 (int32_t ___0_questionId, String_t* ___1_answer, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -1020,11 +1248,11 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Dictionary_2_t46B2DB028096FA2B828359E52F37F31
 	String_t* G_B7_0 = NULL;
 	String_t* G_B6_0 = NULL;
 	{
-		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:74>
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:94>
 		Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* L_0 = (Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83*)il2cpp_codegen_object_new(Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83_il2cpp_TypeInfo_var);
 		Dictionary_2__ctor_m768E076F1E804CE4959F4E71D3E6A9ADE2F55052(L_0, Dictionary_2__ctor_m768E076F1E804CE4959F4E71D3E6A9ADE2F55052_RuntimeMethod_var);
 		V_0 = L_0;
-		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:76>
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:96>
 		int32_t L_1 = ___0_questionId;
 		if ((((int32_t)L_1) > ((int32_t)0)))
 		{
@@ -1032,18 +1260,18 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR Dictionary_2_t46B2DB028096FA2B828359E52F37F31
 		}
 	}
 	{
-		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:78>
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:98>
 		Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* L_2 = V_0;
 		NullCheck(L_2);
 		Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2(L_2, _stringLiteral0980BD8B80DB0667167E8DA5F742991350BC498E, _stringLiteralCE2657D17C00F4338D09CBD8F11B3016B395D195, Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2_RuntimeMethod_var);
-		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:79>
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:99>
 		Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* L_3 = V_0;
 		return L_3;
 	}
 
 IL_001c:
 	{
-		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:82>
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:102>
 		String_t* L_4 = ___1_answer;
 		if (L_4)
 		{
@@ -1082,7 +1310,7 @@ IL_0028:
 IL_0031:
 	{
 		___1_answer = G_B7_0;
-		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:84>
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:104>
 		String_t* L_9 = ___1_answer;
 		bool L_10;
 		L_10 = String_IsNullOrEmpty_mEA9E3FB005AC28FE02E69FCF95A7B8456192B478(L_9, NULL);
@@ -1092,18 +1320,18 @@ IL_0031:
 		}
 	}
 	{
-		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:86>
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:106>
 		Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* L_11 = V_0;
 		NullCheck(L_11);
 		Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2(L_11, _stringLiteralF15E72E03C607420BD2E3D65E07F0C50155C1C30, _stringLiteral6350AD03147F46F4353E4D0D4AE23E4AE14353A6, Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2_RuntimeMethod_var);
-		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:87>
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:107>
 		Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* L_12 = V_0;
 		return L_12;
 	}
 
 IL_004d:
 	{
-		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:90>
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:110>
 		String_t* L_13 = ___1_answer;
 		NullCheck(L_13);
 		int32_t L_14;
@@ -1114,7 +1342,7 @@ IL_004d:
 		}
 	}
 	{
-		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:91>
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:111>
 		Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* L_15 = V_0;
 		NullCheck(L_15);
 		Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2(L_15, _stringLiteralF15E72E03C607420BD2E3D65E07F0C50155C1C30, _stringLiteral8264301E403748A99044F28D8929DCCCE57EB36A, Dictionary_2_set_Item_m9BF625649E96E60C1509898A992A6447E351D1A2_RuntimeMethod_var);
@@ -1122,7 +1350,7 @@ IL_004d:
 
 IL_0066:
 	{
-		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:93>
+		//<source_info:C:/Users/USER/Desktop/RA-education-main/RA-Education-main/Assets/Scrips/Core/Validation/RegisterValidator.cs:113>
 		Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* L_16 = V_0;
 		return L_16;
 	}
@@ -1135,7 +1363,7 @@ IL_0066:
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 104832
+// Method Definition Index: 104992
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR MonoScriptData_t42A7FACC2F3ACD13644D168D0F202716819A157F UnitySourceGeneratedAssemblyMonoScriptTypes_v1_Get_m057065A2EB93F8F7D333C7549AB4CF7A62E020CF (const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -1169,7 +1397,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR MonoScriptData_t42A7FACC2F3ACD13644D168D0F202
 		return L_6;
 	}
 }
-// Method Definition Index: 104833
+// Method Definition Index: 104993
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void UnitySourceGeneratedAssemblyMonoScriptTypes_v1__ctor_m17AAB3DB3A7ACFCF57A326150E64225D204B8E96 (UnitySourceGeneratedAssemblyMonoScriptTypes_v1_t4271D5F178810634CD330CF9F64E62AF97C2FDF1* __this, const RuntimeMethod* method) 
 {
 	{
@@ -1274,7 +1502,7 @@ IL2CPP_EXTERN_C void MonoScriptData_t42A7FACC2F3ACD13644D168D0F202716819A157F_ma
 #ifdef __clang__
 #pragma clang diagnostic pop
 #endif
-// Method Definition Index: 104823
+// Method Definition Index: 104981
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void RegisterResult_set_FieldErrors_m0FDA1D0079D59727F5EE159F63CB9395C301B572_inline (RegisterResult_tA4A1A6D997497B91BBC5E9999A4431DFDECC5924* __this, Dictionary_2_t46B2DB028096FA2B828359E52F37F3105A83AD83* ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -1285,7 +1513,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void RegisterResult_set_FieldErro
 		return;
 	}
 }
-// Method Definition Index: 104825
+// Method Definition Index: 104983
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void RegisterResult_set_UserId_m53AF5452D4B298EA792A0CF123F53F256BB916FF_inline (RegisterResult_tA4A1A6D997497B91BBC5E9999A4431DFDECC5924* __this, int32_t ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -1295,7 +1523,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void RegisterResult_set_UserId_m5
 		return;
 	}
 }
-// Method Definition Index: 104819
+// Method Definition Index: 104977
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void RegisterResult_set_Success_mCB4B9919F34B89B106AABD8E20F0508DD349862F_inline (RegisterResult_tA4A1A6D997497B91BBC5E9999A4431DFDECC5924* __this, bool ___0_value, const RuntimeMethod* method) 
 {
 	{
@@ -1305,7 +1533,7 @@ IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void RegisterResult_set_Success_m
 		return;
 	}
 }
-// Method Definition Index: 104821
+// Method Definition Index: 104979
 IL2CPP_MANAGED_FORCE_INLINE IL2CPP_METHOD_ATTR void RegisterResult_set_ErrorMessage_m4B52319C3140870C2826614EC8384905803B0C15_inline (RegisterResult_tA4A1A6D997497B91BBC5E9999A4431DFDECC5924* __this, String_t* ___0_value, const RuntimeMethod* method) 
 {
 	{

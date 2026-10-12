@@ -65,6 +65,7 @@ public class UserRepository
     public void InserStudent(StudentModel student)
     {
         ExecuteWriteWithRetry(() => ConnectionDb.Insert(student));
+        UserSyncService.NotifyUserChanged(student.id_user);
     }
 
     /// <summary>
@@ -120,6 +121,7 @@ public class UserRepository
                   SET password = ?
                   WHERE id_user = ?",
                 hashedPassword, userId));
+        UserSyncService.NotifyUserChanged(userId);
     }
 
     /// <summary>
@@ -133,6 +135,7 @@ public class UserRepository
                   SET id_security_question = ?, security_asnwer_hash = ?
                   WHERE id_user = ?",
                 questionId, encryptedAnswer, userId));
+        UserSyncService.NotifyUserChanged(userId);
     }
 
     /// <summary>
@@ -146,6 +149,7 @@ public class UserRepository
                   SET last_login = ?
                   WHERE id_user = ?",
                 lastLoginDateTime, userId));
+        UserSyncService.NotifyUserChanged(userId);
     }
 
     /// <summary>

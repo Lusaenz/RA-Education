@@ -38,11 +38,13 @@ public class ProgressRepository
     public void Insert(ProgressModel progress)
     {
         connectionDb.Insert(progress);
+        UserSyncService.NotifyProgressChanged(progress);
     }
 
     public void Update(ProgressModel progress)
     {
         connectionDb.Update(progress);
+        UserSyncService.NotifyProgressChanged(progress);
     }
 
     /// <summary>
@@ -63,5 +65,7 @@ public class ProgressRepository
         {
             connectionDb.Insert(progress);
         }
+
+        UserSyncService.NotifyProgressChanged(progress);
     }
 }

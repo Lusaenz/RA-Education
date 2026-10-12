@@ -109,7 +109,9 @@ public class GameManager : MonoBehaviour
 
         idActivity = data.id_activity;
         idModule = data.id_module;
-        idGameActivity = data.id_game_activity;
+        // "this." es necesario: el parametro de este metodo tambien se llama idGameActivity
+        // y sin él se asignaba al parametro, dejando el campo en 0 (el progreso no se marcaba).
+        this.idGameActivity = data.id_game_activity;
 
         yield return StartCoroutine(activityService.GetActivity(idActivity, r => activityData = r));
 
