@@ -118,7 +118,16 @@ public class LoginPresenter
     {
         try
         {
-            authService.UpdateLastLogin(userId);
+            string lastLogin = authService.UpdateLastLogin(userId);
+
+            // El usuario en sesión se cargó antes de escribir la fecha; se sincroniza para
+            // que UserScreen muestre la conexión actual y no la anterior.
+            UserModel current = UserSessionManager.Instance?.CurrentUser;
+            if (current != null && current.id_user == userId)
+            {
+                current.last_login = lastLogin;
+            }
+
             Debug.Log($"[LoginPresenter] Último login actualizado para usuario {userId}");
         }
         catch (System.Exception ex)

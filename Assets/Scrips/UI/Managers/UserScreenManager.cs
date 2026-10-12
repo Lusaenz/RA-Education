@@ -12,9 +12,14 @@ public class UserScreenManager : MonoBehaviour
 {
     [SerializeField] private UserScreenView userScreenView;
 
+    [Header("Modulos")]
+    [SerializeField] private int digestiveModuleId = 1;
+    [SerializeField] private int cellModuleId = 2;
+
     private UserScreenPresenter presenter;
     private DegreeService degreeService;
     private ResultActivityService resultActivityService;
+    private ProgressService progressService;
     // Guardará temporalmente el estudiante seleccionado cuando el profesor presione "Ver Progreso"
 public static UserModel SelectedUserForView { get; set; }
 
@@ -65,6 +70,7 @@ public static UserModel SelectedUserForView { get; set; }
         {
             degreeService = new DegreeService();
             resultActivityService = new ResultActivityService();
+            progressService = new ProgressService();
             presenter = new UserScreenPresenter();
 
             Debug.Log("[UserScreenManager] Inicializado correctamente");
@@ -123,6 +129,9 @@ public static UserModel SelectedUserForView { get; set; }
         formattedData.DayLastLogin = lastLoginInfo.DayOnly;
         formattedData.DateLastLogin = lastLoginInfo.MonthAndYear;
 
+        formattedData.DigestiveTime = presenter.FormatModuleTime(GetModuleProgress(targetUser.id_user, digestiveModuleId));
+        formattedData.CellTime = presenter.FormatModuleTime(GetModuleProgress(targetUser.id_user, cellModuleId));
+
         userScreenView.DisplayUserData(formattedData);
         Debug.Log($"[UserScreenManager] Datos cargados correctamente para: {targetUser.name}");
     }
@@ -165,6 +174,28 @@ public static UserModel SelectedUserForView { get; set; }
         catch (System.Exception ex)
         {
             Debug.LogError($"[UserScreenManager] Error al obtener grado: {ex.Message}");
+            return null;
+        }
+    }
+
+    /// <summary>
+    /// Obtiene el avance del módulo (estado, % y minutos al completar) desde ProgressService.
+    /// </summary>
+    private ModuleProgressInfo GetModuleProgress(int userId, int moduleId)
+    {
+        if (progressService == null)
+        {
+            Debug.LogWarning("[UserScreenManager] ProgressService no disponible");
+            return null;
+        }
+
+        try
+        {
+            return progressService.GetModuleProgress(userId, moduleId);
+        }
+        catch (System.Exception ex)
+        {
+            Debug.LogError($"[UserScreenManager] Error al obtener avance del módulo {moduleId}: {ex.Message}");
             return null;
         }
     }

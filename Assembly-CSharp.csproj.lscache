@@ -82,6 +82,7 @@ Assets/
     AuthService.cs
     DegreeService.cs
     GameActivityService.cs
+    ModuleTimeTracker.cs
     ProgressService.cs
     ResultActivityService.cs
     SecurityQuestionsService.cs
@@ -107,6 +108,7 @@ Assets/
    Observer.cs
    PuzzleManager.cs
    PuzzlePieceInfo.cs
+   PuzzleWrongMarkerGate.cs
    Snap.cs
    TagPointInfo.cs
   Ripples/
@@ -116,6 +118,7 @@ Assets/
    RA/
     ARModelController.cs
     ARPartButtonManager.cs
+    EyeButtonPressTracker.cs
     RAMarkerFeedback.cs
     RAMarkerModuleGate.cs
     TopicContentPanel.cs
@@ -136,6 +139,7 @@ Assets/
     InputFieldHandler.cs
     InputFieldSubmitNavigator.cs
     PasswordToggle.cs
+    SafeAreaFitter.cs
     Selector.cs
     SessionButtons.cs
     ToggleObjectButton.cs

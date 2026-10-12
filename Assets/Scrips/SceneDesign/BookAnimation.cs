@@ -16,6 +16,12 @@ public class BookAnimation : MonoBehaviour
         temasCargados = temas;
         idAct = 0;
         Debug.Log($"Libro inicializado con {temasCargados.Count} temas.");
+
+        // Tiempo activo del modulo: cuenta mientras el libro este activo
+        ModuleTimeTracker.Track(gameObject,
+            UserSessionManager.Instance?.CurrentUser?.id_user ?? 0,
+            PlayerPrefs.GetInt("selected_module_id", 0));
+
         ActualizarT();
     }
 

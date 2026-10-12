@@ -91,6 +91,40 @@ public class UserScreenPresenter
         }
     }
 
+    /// <summary>
+    /// Formatea el estado de un módulo en dos líneas: estado (pequeño) + dato principal.
+    /// Ej: "Terminado en / 1 h 05 min", "En progreso / 45%", "Sin iniciar".
+    /// </summary>
+    public string FormatModuleTime(ModuleProgressInfo info)
+    {
+        if (info == null || info.status == "nostarted")
+        {
+            return "Sin iniciar";
+        }
+
+        if (info.status != "completed")
+        {
+            return FormatTwoLines("En progreso", $"{info.percentage}%");
+        }
+
+        int minutes = info.completionMinutes;
+        if (minutes <= 0)
+        {
+            return "Completado";
+        }
+
+        string duration = minutes < 60
+            ? $"{minutes} min"
+            : $"{minutes / 60} h {minutes % 60:00} min";
+
+        return FormatTwoLines("Terminado en", duration);
+    }
+
+    private string FormatTwoLines(string caption, string value)
+    {
+        return $"<size=70%>{caption}</size>\n<b>{value}</b>";
+    }
+
     private string GetMonthNameInSpanish(int month)
     {
         return month switch

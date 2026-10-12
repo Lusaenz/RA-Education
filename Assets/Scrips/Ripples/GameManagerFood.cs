@@ -182,6 +182,7 @@ public class GameManagerFood : MonoBehaviour
         ActualizarUI();
         ActualizarTexto();
         _activityStartTime = Time.time;
+        ModuleTimeTracker.Track(gameObject, UserSessionManager.Instance?.CurrentUser?.id_user ?? 0, _idModule);
     }
 
     public bool EvaluarItem(string idItem)
@@ -270,6 +271,9 @@ public class GameManagerFood : MonoBehaviour
             stars,
             _attempts,
             GetElapsedTime());
+
+        // Marca este minijuego como item completado del modulo (solo si stars >= 1).
+        _progressService.MarkGameCompleted(user.id_user, _idModule, _idGameActivity, stars);
 
         // Marca este minijuego como completado en el progreso del modulo (solo si stars >= 1).
         _progressService.MarkGameCompleted(user.id_user, _idModule, _idGameActivity, stars);

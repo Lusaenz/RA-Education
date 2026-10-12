@@ -93,6 +93,8 @@ public class PuzzleManager : MonoBehaviour
         _idModule = data.id_module;
         _idGameActivity = data.id_game_activity;
 
+        ModuleTimeTracker.Track(gameObject, UserSessionManager.Instance?.CurrentUser?.id_user ?? 0, _idModule);
+
         ActivityData activity = null;
         yield return StartCoroutine(_activityService.GetActivity(_idActivity, r => activity = r));
         if (activity != null && activity.max_star > 0)

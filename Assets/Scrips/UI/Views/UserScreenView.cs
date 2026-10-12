@@ -17,6 +17,8 @@ public class UserScreenView : MonoBehaviour
     [SerializeField] private TextMeshProUGUI totalStarsText;
     [SerializeField] private TextMeshProUGUI dayLastLoginText;
     [SerializeField] private TextMeshProUGUI dateLastLoginText;
+    [SerializeField] private TextMeshProUGUI digestiveTimeText;
+    [SerializeField] private TextMeshProUGUI cellTimeText;
 
     /// <summary>
     /// Datos formateados listos para mostrar en UI.
@@ -29,6 +31,8 @@ public class UserScreenView : MonoBehaviour
         public string TotalStars { get; set; }
         public string DayLastLogin { get; set; }
         public string DateLastLogin { get; set; }
+        public string DigestiveTime { get; set; }
+        public string CellTime { get; set; }
     }
 
     /// <summary>
@@ -49,6 +53,8 @@ public class UserScreenView : MonoBehaviour
         DisplayText(totalStarsText, data.TotalStars, "totalStarsText");
         DisplayText(dayLastLoginText, data.DayLastLogin, "dayLastLoginText");
         DisplayText(dateLastLoginText, data.DateLastLogin, "dateLastLoginText");
+        DisplayText(digestiveTimeText, data.DigestiveTime, "digestiveTimeText");
+        DisplayText(cellTimeText, data.CellTime, "cellTimeText");
 
         Debug.Log($"[UserScreenView] Datos mostrados para usuario: {data.UserName}");
     }
