@@ -402,13 +402,13 @@ MonoBehaviour:
   zoomSpeed: 0.15
   zoomResponse: 2.5
   minScale: 0.1
-  maxScale: 1
+  maxScale: 2
   minRotationX: -80
   maxRotationX: 80
   partRotationSpeed: 0.2
   partZoomSpeed: 0.5
   partMinScaleMultiplier: 0.6
-  partMaxScaleMultiplier: 2.5
+  partMaxScaleMultiplier: 4
   partMinRotationX: -80
   partMaxRotationX: 80
   rotationDeadzone: 0.15
@@ -468,7 +468,14 @@ MonoBehaviour:
   defaultTopicId: 12
   defaultContentId: 0
   focusViewportTarget: {x: 0.5, y: 0.68}
-  focusZoomMultiplier: 1.6
+  focusZoomMultiplier: 1.5
+  buttonSize: 80
+  touchPadding: 25
+  badgeFontSize: 32
+  followSharpness: 18
+  buttonScaleAtBaseZoom: 0.5
+  minButtonScale: 0.4
+  maxButtonScale: 1.1
   clusterRadius: 90
   clusterExpandRadius: 110
   clusterBadgeColor: {r: 0.15, g: 0.4, b: 0.65, a: 0.9}
@@ -1191,13 +1198,13 @@ MonoBehaviour:
   zoomSpeed: 0.15
   zoomResponse: 2.5
   minScale: 0.1
-  maxScale: 1
+  maxScale: 2
   minRotationX: -80
   maxRotationX: 80
   partRotationSpeed: 0.2
   partZoomSpeed: 0.5
   partMinScaleMultiplier: 0.6
-  partMaxScaleMultiplier: 2.5
+  partMaxScaleMultiplier: 4
   partMinRotationX: -80
   partMaxRotationX: 80
   rotationDeadzone: 0.15
@@ -1254,7 +1261,14 @@ MonoBehaviour:
   defaultTopicId: 13
   defaultContentId: 0
   focusViewportTarget: {x: 0.5, y: 0.68}
-  focusZoomMultiplier: 1.6
+  focusZoomMultiplier: 2.2
+  buttonSize: 80
+  touchPadding: 25
+  badgeFontSize: 32
+  followSharpness: 18
+  buttonScaleAtBaseZoom: 0.5
+  minButtonScale: 0.4
+  maxButtonScale: 1.1
   clusterRadius: 90
   clusterExpandRadius: 110
   clusterBadgeColor: {r: 0.15, g: 0.4, b: 0.65, a: 0.9}
@@ -1672,13 +1686,13 @@ MonoBehaviour:
   zoomSpeed: 0.15
   zoomResponse: 2.5
   minScale: 0.1
-  maxScale: 1
+  maxScale: 2
   minRotationX: -80
   maxRotationX: 80
   partRotationSpeed: 0.2
   partZoomSpeed: 0.5
   partMinScaleMultiplier: 0.6
-  partMaxScaleMultiplier: 2.5
+  partMaxScaleMultiplier: 4
   partMinRotationX: -80
   partMaxRotationX: 80
   rotationDeadzone: 0.15
@@ -1732,7 +1746,14 @@ MonoBehaviour:
   defaultTopicId: 0
   defaultContentId: 0
   focusViewportTarget: {x: 0.5, y: 0.68}
-  focusZoomMultiplier: 1.6
+  focusZoomMultiplier: 2.2
+  buttonSize: 80
+  touchPadding: 25
+  badgeFontSize: 32
+  followSharpness: 18
+  buttonScaleAtBaseZoom: 0.5
+  minButtonScale: 0.4
+  maxButtonScale: 1.1
   clusterRadius: 90
   clusterExpandRadius: 110
   clusterBadgeColor: {r: 0.15, g: 0.4, b: 0.65, a: 0.9}

@@ -150,6 +150,7 @@ public class GameManager : MonoBehaviour
         }
 
         startTime = Time.time;
+        ModuleTimeTracker.Track(gameObject, UserSessionManager.Instance?.CurrentUser?.id_user ?? 0, idModule);
         UpdateUI();
     }
 

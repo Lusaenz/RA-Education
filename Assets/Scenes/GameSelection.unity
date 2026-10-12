@@ -949,11 +949,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
+  m_ReferenceResolution: {x: 1080, y: 1920}
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -1435,6 +1435,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -107
       objectReference: {fileID: 0}
+    - target: {fileID: 1251363393413505692, guid: 1c6a0c46d3e2d484e8694fc0d6f609ff, type: 3}
+      propertyPath: m_PreserveAspect
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1907209452588966740, guid: 1c6a0c46d3e2d484e8694fc0d6f609ff, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -19
@@ -1493,7 +1497,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3096751938484834534, guid: 1c6a0c46d3e2d484e8694fc0d6f609ff, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3107482605730704342, guid: 1c6a0c46d3e2d484e8694fc0d6f609ff, type: 3}
       propertyPath: m_Pivot.x
@@ -1599,6 +1603,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 245
       objectReference: {fileID: 0}
+    - target: {fileID: 4175745758872999546, guid: 1c6a0c46d3e2d484e8694fc0d6f609ff, type: 3}
+      propertyPath: m_PreserveAspect
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4486502353749170203, guid: 1c6a0c46d3e2d484e8694fc0d6f609ff, type: 3}
       propertyPath: m_Type
       value: 0
@@ -1650,6 +1658,18 @@ PrefabInstance:
     - target: {fileID: 4588087138848557519, guid: 1c6a0c46d3e2d484e8694fc0d6f609ff, type: 3}
       propertyPath: m_fontColor.r
       value: 0.066037714
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588087138848557519, guid: 1c6a0c46d3e2d484e8694fc0d6f609ff, type: 3}
+      propertyPath: m_fontSizeMax
+      value: 58.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588087138848557519, guid: 1c6a0c46d3e2d484e8694fc0d6f609ff, type: 3}
+      propertyPath: m_fontSizeMin
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 4588087138848557519, guid: 1c6a0c46d3e2d484e8694fc0d6f609ff, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4588087138848557519, guid: 1c6a0c46d3e2d484e8694fc0d6f609ff, type: 3}
       propertyPath: m_fontColor32.rgba
@@ -22298,7 +22318,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
