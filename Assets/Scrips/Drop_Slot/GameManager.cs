@@ -230,7 +230,8 @@ public class GameManager : MonoBehaviour
             score,
             stars,
             attempts,
-            GetTime()
+            GetTime(),
+            idGameActivity
         );
 
         // Marca este minijuego como item completado del modulo (solo si stars >= 1).

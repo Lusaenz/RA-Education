@@ -14,6 +14,12 @@ public static class SimpleNetwork
     public const string DISCOVERY_REQUEST = "CIENCIA_VIVA_DISCOVER";
     public const string DISCOVERY_RESPONSE = "CIENCIA_VIVA_SERVER";
 
+    // Latido que envía el cliente para indicar que sigue conectado.
+    public const string PING = "PING";
+
+    // Cada cuántos segundos el cliente envía el latido.
+    public const int PING_INTERVAL_MS = 10000;
+
     public static string GetLocalIPAddress()
     {
         var host = Dns.GetHostEntry(Dns.GetHostName());

@@ -116,7 +116,8 @@ public class UserSyncService : MonoBehaviour
             score = r.score,
             stars = r.stars,
             attempts = r.attempts,
-            completed_at = r.completed_at
+            completed_at = r.completed_at,
+            id_game_activity = r.id_game_activity
         };
 
         return MsgResult + JsonUtility.ToJson(data);
@@ -476,7 +477,8 @@ public class UserSyncService : MonoBehaviour
             score = data.score,
             stars = data.stars,
             attempts = data.attempts,
-            completed_at = data.completed_at
+            completed_at = data.completed_at,
+            id_game_activity = data.id_game_activity
         });
 
         Debug.Log($"UserSyncService: resultado de '{data.student_name}' en actividad {data.id_activity} guardado.");

@@ -4,7 +4,7 @@ public class ResultActivityService
 {
     private ResultActivityRepository repository;
 
-    public void SaveResult(int idUser, int idActivity, int score, int star, int attempts, string completedAt)
+    public void SaveResult(int idUser, int idActivity, int score, int star, int attempts, string completedAt, int idGameActivity = 0)
     {
         if (!EnsureRepository())
         {
@@ -19,7 +19,8 @@ public class ResultActivityService
             score = score,
             stars = star,
             attempts = attempts,
-            completed_at = completedAt
+            completed_at = completedAt,
+            id_game_activity = idGameActivity
         };
 
         repository.Insert(result);

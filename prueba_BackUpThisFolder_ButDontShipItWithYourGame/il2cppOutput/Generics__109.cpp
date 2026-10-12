@@ -13173,7 +13173,7 @@ IL2CPP_EXTERN_C  int32_t NativeSlice_1_GetHashCode_m7E5E1AD66A7AD902A4007AD8AA7E
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 96892
+// Method Definition Index: 97006
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void NativeStruct_1__ctor_mE30F763A2AAADA324B2D5773AAFE26C246BA9841_gshared (NativeStruct_1_t4C619F898F5E402A090A9706E75C2FCD329510DC* __this, DriverData_t76C1F3DBBF156D32BA906F2D172A20A1304ACB6E ___0_value, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -13203,7 +13203,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void NativeStruct_1__ctor_mE30F763A2AAADA324B
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 96892
+// Method Definition Index: 97006
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void NativeStruct_1__ctor_m6DB6F163614DB6DBE0FF763DC9189452FCDF4467_gshared (NativeStruct_1_tED67E69AA529445CA3D6316D1D3829B0543AEDCB* __this, Il2CppFullySharedGenericStruct ___0_value, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -13235,7 +13235,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void NativeStruct_1__ctor_m6DB6F163614DB6DBE0
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 96892
+// Method Definition Index: 97006
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void NativeStruct_1__ctor_mAD508714F36EF4FFA99BE8A2DD3B55517C1803B7_gshared (NativeStruct_1_tED32B48E1382B0B97B1169D92E75D0C5D83723F9* __this, FileDriverUserData_t238F94B01B8D5454BC293BCD33FF4353D42ED257 ___0_value, const RuntimeMethod* method) 
 {
 	static bool s_Il2CppMethodInitialized;
@@ -13573,7 +13573,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void Node__ctor_m9BEF41075B57C98D7C04F3FF85A2
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 71979
+// Method Definition Index: 71984
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void NodePath__ctor_m0FCF723AFBBA0142B8DC33B243EC222D8B3840F3_gshared (NodePath_tB9AD0BDC7882A6AFDAB81BD2039E0C5F7BEEEF50* __this, int32_t ___0_nodeID, int32_t ___1_mainTreeNodeID, const RuntimeMethod* method) 
 {
 	{
@@ -13599,7 +13599,7 @@ IL2CPP_EXTERN_C  void NodePath__ctor_m0FCF723AFBBA0142B8DC33B243EC222D8B3840F3_A
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 71979
+// Method Definition Index: 71984
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void NodePath__ctor_m78E9206041A7104A8531998AA3DF9EC7DE5E4A45_gshared (NodePath_tA355B40E34B64AADE90850F8BA7180852D3B1BD2* __this, int32_t ___0_nodeID, int32_t ___1_mainTreeNodeID, const RuntimeMethod* method) 
 {
 	{
@@ -13625,7 +13625,7 @@ IL2CPP_EXTERN_C  void NodePath__ctor_m78E9206041A7104A8531998AA3DF9EC7DE5E4A45_A
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 71979
+// Method Definition Index: 71984
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void NodePath__ctor_mA9A74612E0785F30CCC660C7936418FD57A9EB55_gshared (NodePath_tC3CDC05C2DFAD35988FD6B5F84FAD7417B313813* __this, int32_t ___0_nodeID, int32_t ___1_mainTreeNodeID, const RuntimeMethod* method) 
 {
 	{

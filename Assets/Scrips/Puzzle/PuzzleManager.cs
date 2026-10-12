@@ -171,7 +171,7 @@ public class PuzzleManager : MonoBehaviour
 
         _attempts++;
 
-        _resultService.SaveResult(user.id_user, _idActivity, score, stars, _attempts, GetElapsedTime());
+        _resultService.SaveResult(user.id_user, _idActivity, score, stars, _attempts, GetElapsedTime(), _idGameActivity);
         _progressService.MarkGameCompleted(user.id_user, _idModule, _idGameActivity, stars);
     }
 
