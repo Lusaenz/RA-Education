@@ -24476,7 +24476,7 @@ IL_002a:
 #pragma clang diagnostic ignored "-Winvalid-offsetof"
 #pragma clang diagnostic ignored "-Wunused-variable"
 #endif
-// Method Definition Index: 96569
+// Method Definition Index: 96575
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void NativeObservationPool_1__ctor_mF8CD7F301462288CC00025D2BEC4A495409CD46E_gshared (NativeObservationPool_1_t066CF75D8C78F546C8BBC862DAB56F2F478BFCE5* __this, InstanceCtor_t6ACDC5874FE50D1AC465207ADCE80BA8707B6E1F* ___0_instanceCtor, const RuntimeMethod* method) 
 {
 	InstanceDtor_t368A2FD9F88C865C6168235E3D1A0F5E401257C1* G_B2_0 = NULL;
@@ -24520,7 +24520,7 @@ IL_0021:
 		return;
 	}
 }
-// Method Definition Index: 96570
+// Method Definition Index: 96576
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR VuObservation_tF3C656C117A5A9B97D03528A95D6C91587107631* NativeObservationPool_1_Take_mDBC282A15C926D3309F5531052B5B12B7DAF608C_gshared (NativeObservationPool_1_t066CF75D8C78F546C8BBC862DAB56F2F478BFCE5* __this, const RuntimeMethod* method) 
 {
 	{
@@ -24530,7 +24530,7 @@ IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR VuObservation_tF3C656C117A5A9B97D03528A95D6C9
 		return (VuObservation_tF3C656C117A5A9B97D03528A95D6C91587107631*)L_0;
 	}
 }
-// Method Definition Index: 96571
+// Method Definition Index: 96577
 IL2CPP_EXTERN_C IL2CPP_METHOD_ATTR void NativeObservationPool_1_Put_m5DE7CC80E60303E94F2794C3B1D87D04687CD6AB_gshared (NativeObservationPool_1_t066CF75D8C78F546C8BBC862DAB56F2F478BFCE5* __this, VuObservation_tF3C656C117A5A9B97D03528A95D6C91587107631* ___0_observation, const RuntimeMethod* method) 
 {
 	{

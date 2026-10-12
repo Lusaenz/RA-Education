@@ -101,6 +101,7 @@ private void Start()
             Debug.Log("Cliente conectado correctamente");
 
             _ = ReceiveMessages(client, stream);
+            _ = HeartbeatLoop(client);
 
             // Enviar todo lo que haya cambiado mientras no había conexión.
             await UserSyncService.SendFullSync();
@@ -242,6 +243,23 @@ private void Start()
             CloseConnection();
             SetStatus("Desconectado");
             ScheduleReconnect();
+        }
+    }
+
+    /// <summary>
+    /// Envía un PING periódico. Le permite al servidor saber que el dispositivo sigue
+    /// conectado y al cliente detectar rápido si la conexión se cayó (falla el envío).
+    /// </summary>
+    private async Task HeartbeatLoop(TcpClient currentClient)
+    {
+        while (!isQuitting && client == currentClient && IsConnected)
+        {
+            await Task.Delay(SimpleNetwork.PING_INTERVAL_MS);
+
+            if (this == null || client != currentClient || !IsConnected)
+                break;
+
+            await SendRawMessage(SimpleNetwork.PING);
         }
     }
 

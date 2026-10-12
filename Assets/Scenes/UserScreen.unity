@@ -318,6 +318,15 @@ MonoBehaviour:
   totalStarsText: {fileID: 1335630908}
   dayLastLoginText: {fileID: 1871136591}
   dateLastLoginText: {fileID: 421737496}
+  studentNameText: {fileID: 0}
+  acquiredPositionText: {fileID: 0}
+  centerPositionText: {fileID: 0}
+  leftPositionText: {fileID: 0}
+  rightPositionText: {fileID: 0}
+  leftStair: {fileID: 0}
+  rightStair: {fileID: 0}
+  cellTimeText: {fileID: 0}
+  digestiveTimeText: {fileID: 0}
 --- !u!1 &152479966
 GameObject:
   m_ObjectHideFlags: 0
@@ -479,7 +488,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: -97.83627}
+  m_margin: {x: -67.314285, y: 0, z: -59.994995, w: -97.83627}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1419,7 +1428,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 17.874634, y: -82}
+  m_AnchoredPosition: {x: 41, y: -117}
   m_SizeDelta: {x: 153.7647, y: 76.2156}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &741596819
@@ -1508,7 +1517,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 6.245056, w: 0}
+  m_margin: {x: 0, y: 0, z: -174.8143, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2900,7 +2909,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2, y: -160.1079}
+  m_AnchoredPosition: {x: -25, y: -160.1079}
   m_SizeDelta: {x: 153.7647, y: 76.2156}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1623587755
@@ -2989,7 +2998,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 6.245056, w: 0}
+  m_margin: {x: 0, y: 0, z: -83.05127, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -3034,6 +3043,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UserScreenManager
   userScreenView: {fileID: 19338538}
+  cellModuleId: 2
+  digestiveModuleId: 1
 --- !u!4 &1663373731
 Transform:
   m_ObjectHideFlags: 0
@@ -3099,7 +3110,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -14.6217, y: 476.8575}
+  m_AnchoredPosition: {x: -78, y: 547}
   m_SizeDelta: {x: 309.3167, y: 84.9221}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1707770080
@@ -3188,7 +3199,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: -21.528442, z: 0, w: 0}
+  m_margin: {x: 0, y: -21.528442, z: -128.11508, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

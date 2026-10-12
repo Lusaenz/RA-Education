@@ -45,4 +45,5 @@ public class ResultSyncData
     public int stars;
     public int attempts;
     public string completed_at;
+    public int id_game_activity;
 }

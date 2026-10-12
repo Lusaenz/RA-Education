@@ -62,6 +62,7 @@ public class DatabaseManager : MonoBehaviour
                 Connection.Execute("PRAGMA synchronous=NORMAL;");
 
                 RepairUsersTableIfNeeded();
+                EnsureResultGameActivityColumn();
 
                 IsReady = true;
                 Debug.Log("DatabaseManager: Conectado a DB");
@@ -364,6 +365,37 @@ public class DatabaseManager : MonoBehaviour
         {
             Connection.Execute("ROLLBACK;");
             Debug.LogError($"DatabaseManager: no se pudo reparar la tabla users: {ex.Message}");
+        }
+    }
+
+    /// <summary>
+    /// Agrega la columna result_activity.id_game_activity si la BD instalada aún no la tiene.
+    /// </summary>
+    private void EnsureResultGameActivityColumn()
+    {
+        try
+        {
+            int exists = Connection.ExecuteScalar<int>(
+                "SELECT COUNT(*) FROM pragma_table_info('result_activity') WHERE name = 'id_game_activity';");
+
+            if (exists == 0)
+            {
+                Connection.Execute("ALTER TABLE result_activity ADD COLUMN id_game_activity INTEGER DEFAULT 0;");
+                Debug.Log("DatabaseManager: columna result_activity.id_game_activity agregada.");
+            }
+        }
+        catch (Exception ex)
+        {
+            // SQLite antiguo sin pragma_table_info: intentar agregarla directamente.
+            try
+            {
+                Connection.Execute("ALTER TABLE result_activity ADD COLUMN id_game_activity INTEGER DEFAULT 0;");
+            }
+            catch (Exception alterEx)
+            {
+                if (alterEx.Message.IndexOf("duplicate column", StringComparison.OrdinalIgnoreCase) < 0)
+                    Debug.LogError($"DatabaseManager: no se pudo agregar id_game_activity: {ex.Message} / {alterEx.Message}");
+            }
         }
     }
 

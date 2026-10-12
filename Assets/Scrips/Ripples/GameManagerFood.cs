@@ -269,7 +269,8 @@ public class GameManagerFood : MonoBehaviour
             score,
             stars,
             _attempts,
-            GetElapsedTime());
+            GetElapsedTime(),
+            _idGameActivity);
 
         // Marca este minijuego como completado en el progreso del modulo (solo si stars >= 1).
         _progressService.MarkGameCompleted(user.id_user, _idModule, _idGameActivity, stars);
