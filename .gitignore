@@ -89,3 +89,6 @@ Thumbs.db
 # Vuforia package (local tarball)
 Packages/com.ptc.vuforia.engine-*.tgz
 
+
+# IL2CPP build backups (solo para simbolizar crashes, no van en el APK)
+*_BackUpThisFolder_ButDontShipItWithYourGame/
