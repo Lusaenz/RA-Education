@@ -8,6 +8,7 @@ public class DragObject : MonoBehaviour
     private float zDistance;
     private bool isPlaced = false;
     private PuzzlePieceInfo info;
+    private SnapPiece snapPiece;
     
     private TagPointInfo[] snapPoints;
 private TagPointInfo ultimoSnap;
@@ -18,6 +19,7 @@ private TagPointInfo ultimoSnap;
 {
     arCamera = Camera.main;
     info = GetComponent<PuzzlePieceInfo>();
+    snapPiece = GetComponent<SnapPiece>();
     snapPoints = FindObjectsByType<TagPointInfo>(FindObjectsSortMode.None);
 }
 
@@ -29,6 +31,9 @@ private TagPointInfo ultimoSnap;
         {
             Touch touch = Input.GetTouch(0);
             HandleInput(touch.position, touch.phase);
+            // En el celular Unity tambien simula el mouse con el toque; sin este
+            // return la misma entrada se procesaba dos veces por frame.
+            return;
         }
 
         if (Input.GetMouseButtonDown(0))
@@ -53,12 +58,26 @@ private TagPointInfo ultimoSnap;
         {
             RaycastHit[] hits = Physics.RaycastAll(ray);
 
+            // Solo se arrastra la pieza mas cercana al rayo; antes se tomaban
+            // todas las piezas superpuestas a la vez.
+            DragObject closest = null;
+            float closestDistance = float.MaxValue;
+
             foreach (RaycastHit hit in hits)
             {
-                if (hit.transform == transform)
+                DragObject drag = hit.collider.GetComponentInParent<DragObject>();
+
+                if (drag != null && drag.enabled && hit.distance < closestDistance)
                 {
-                    isDragging = true;
-                    if (info != null && PuzzleManager.instance != null)
+                    closestDistance = hit.distance;
+                    closest = drag;
+                }
+            }
+
+            if (closest == this)
+            {
+                isDragging = true;
+                if (info != null && PuzzleManager.instance != null)
 {
     PuzzleManager.instance.MostrarNombre(info.nombrePieza);
 }
@@ -69,19 +88,17 @@ if (MembraneVisibility.Instance != null)
 }
 
 
-                    zDistance = arCamera.WorldToScreenPoint(transform.position).z;
+                zDistance = arCamera.WorldToScreenPoint(transform.position).z;
 
-                    Vector3 inputWorld = arCamera.ScreenToWorldPoint(
-                        new Vector3(
-                            inputPosition.x,
-                            inputPosition.y,
-                            zDistance
-                        )
-                    );
+                Vector3 inputWorld = arCamera.ScreenToWorldPoint(
+                    new Vector3(
+                        inputPosition.x,
+                        inputPosition.y,
+                        zDistance
+                    )
+                );
 
-                    offset = transform.position - inputWorld;
-                    break;
-                }
+                offset = transform.position - inputWorld;
             }
         }
 
@@ -118,7 +135,7 @@ if (MembraneVisibility.Instance != null)
     MembraneVisibility.Instance.Show();
 }
 
-            SnapPiece snap = GetComponent<SnapPiece>();
+            SnapPiece snap = snapPiece;
 
             if (snap != null)
             {
@@ -164,12 +181,17 @@ if (MembraneVisibility.Instance != null)
 
 void DetectarSnapPointCercano()
 {
-    float distanciaMinima = 0.07f;
+    // Se mide igual que SnapPiece.TrySnap (desde el snapPoint de la pieza y con la
+    // misma distancia en pantalla) para que el "Objetivo" mostrado sea el que encaja.
+    Vector3 origen = snapPiece != null && snapPiece.snapPoint != null
+        ? snapPiece.snapPoint.position
+        : transform.position;
+    float distanciaMinima = snapPiece != null ? snapPiece.snapDistance : 0.07f;
     TagPointInfo masCercano = null;
 
     foreach (TagPointInfo punto in snapPoints)
     {
-        float distancia = Vector3.Distance(transform.position, punto.transform.position);
+        float distancia = SnapPiece.ScreenAlignedDistance(origen, punto.transform.position);
 
         if (distancia < distanciaMinima)
         {
