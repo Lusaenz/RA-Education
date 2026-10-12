@@ -28,6 +28,7 @@ public bool applyDepthOffsetToFixedModel = true;
     private ObserverBehaviour observer;
     private List<Transform> models = new List<Transform>();
     private bool alreadyPlaced = false;
+    private bool isTracked = false;
 
     void Start()
     {
@@ -40,6 +41,11 @@ public bool applyDepthOffsetToFixedModel = true;
         foreach (Transform t in transform)
         {
             models.Add(t);
+
+            // Los modelos permanecen ocultos hasta que se detecte el marcador
+            // correcto. Si quedaran activos, se verian en cuanto Vuforia rastrea
+            // cualquier otro marcador (p. ej. uno incorrecto) y reubica el mundo.
+            t.gameObject.SetActive(false);
         }
 
         if (arCamera == null && Camera.main != null)
@@ -56,32 +62,47 @@ public bool applyDepthOffsetToFixedModel = true;
 
     private void OnTargetStatusChanged(ObserverBehaviour behaviour, TargetStatus status)
     {
-        if ((status.Status == Status.TRACKED || status.Status == Status.EXTENDED_TRACKED) && !alreadyPlaced)
+        isTracked = status.Status == Status.TRACKED || status.Status == Status.EXTENDED_TRACKED;
+        TryPlaceModels();
+    }
+
+    void Update()
+    {
+        // Si el marcador correcto se detecto mientras habia uno incorrecto a la
+        // vista, Vuforia no vuelve a notificar el cambio de estado: se reintenta aqui.
+        if (!alreadyPlaced && isTracked)
+            TryPlaceModels();
+    }
+
+    private void TryPlaceModels()
+    {
+        if (alreadyPlaced || !isTracked || arCamera == null) return;
+
+        // Con un marcador de otro tema delante no se arma el puzzle; el
+        // PuzzleWrongMarkerGate ya esta mostrando el mensaje al usuario.
+        if (PuzzleWrongMarkerGate.AnyWrongMarkerVisible) return;
+
+        alreadyPlaced = true;
+
+        foreach (Transform model in models)
         {
-            if (arCamera == null) return;
+            model.SetParent(arCamera, true);
 
-            alreadyPlaced = true;
-
-            foreach (Transform model in models)
+            if (model.GetComponent<Collider>() == null)
             {
-                model.SetParent(arCamera, true);
-
-                if (model.GetComponent<Collider>() == null)
-                {
-                    BoxCollider bc = model.gameObject.AddComponent<BoxCollider>();
-                    bc.isTrigger = true;
-                }
-
-                if (model != fixedModel && model.GetComponent<DragObject>() == null)
-                {
-                    model.gameObject.AddComponent<DragObject>();
-                }
-
-                model.gameObject.SetActive(true);
+                BoxCollider bc = model.gameObject.AddComponent<BoxCollider>();
+                bc.isTrigger = true;
             }
 
-            PositionInFrontOfCamera();
+            if (model != fixedModel && model.GetComponent<DragObject>() == null)
+            {
+                model.gameObject.AddComponent<DragObject>();
+            }
+
+            model.gameObject.SetActive(true);
         }
+
+        PositionInFrontOfCamera();
     }
 
     void PositionInFrontOfCamera()

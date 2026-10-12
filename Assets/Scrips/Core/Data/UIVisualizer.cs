@@ -27,6 +27,7 @@ public class UIVisualizer : MonoBehaviour
     public ModulesRepository repository;
 
     private List<GameObject> bloquesInstanciados = new List<GameObject>();
+    private ScrollRect scrollRect;
 
     void Start()
     {
@@ -68,6 +69,7 @@ public class UIVisualizer : MonoBehaviour
     {
         OcultarContenedor();
         LimpiarBloques();
+        ReiniciarScroll();
 
         if (tituloPrincipal != null) 
         {
@@ -240,5 +242,32 @@ public class UIVisualizer : MonoBehaviour
         {
             LayoutRebuilder.ForceRebuildLayoutImmediate(contenedorPrincipal);
         }
+
+        // Tras recalcular el alto del contenido, asegurar que la hoja quede al inicio
+        ReiniciarScroll();
+    }
+
+    /// <summary>
+    /// Lleva el scroll de la hoja al inicio para que al cambiar de pagina no se conserve
+    /// la posicion (p. ej. el final) de la hoja anterior.
+    /// </summary>
+    private void ReiniciarScroll()
+    {
+        if (contenedorPrincipal == null) return;
+
+        if (scrollRect == null)
+        {
+            scrollRect = contenedorPrincipal.GetComponentInParent<ScrollRect>(true);
+        }
+
+        if (scrollRect != null)
+        {
+            scrollRect.StopMovement();
+        }
+
+        // El contenido esta anclado arriba (pivot y = 1): y = 0 es el inicio del scroll.
+        // Se ajusta directo porque durante el PageEffect el libro puede estar inactivo.
+        Vector2 pos = contenedorPrincipal.anchoredPosition;
+        contenedorPrincipal.anchoredPosition = new Vector2(pos.x, 0f);
     }
 }

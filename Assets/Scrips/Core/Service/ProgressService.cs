@@ -12,6 +12,7 @@ public class ModuleProgressInfo
     public int totalItems;
     public int percentage;   // 0 - 100
     public string status;     // "nostarted" | "inprogress" | "completed"
+    public int completionMinutes; // minutos activos al completar; 0 = no completado o sin dato
 }
 
 /// <summary>
@@ -26,7 +27,9 @@ public class ModuleProgressInfo
 ///    Marcar un item es idempotente: punctuation |= (1 &lt;&lt; bit).
 ///  - progress.percentage_completed = round(popcount(punctuation) * 100 / totalItems).
 ///  - progress.status = "nostarted" (mask 0) | "completed" (todos los items) | "inprogress".
-///  - progress.completad_at = fecha yyyyMMdd la primera vez que el modulo se completa.
+///  - progress.completad_at = MINUTOS de tiempo activo (ModuleTimeTracker) que tomo completar
+///    el modulo; se escribe la primera vez que se completa. Filas antiguas pueden tener una
+///    fecha yyyyMMdd: se tratan como "completado sin duracion".
 ///
 /// Nota: se asume un maximo de 31 items por modulo (int de 32 bits). Hoy el modulo mayor
 /// tiene 12 items. Si algun modulo supera ese limite habria que migrar punctuation a long.
@@ -36,6 +39,9 @@ public class ProgressService
     private const string StatusNotStarted = "nostarted";
     private const string StatusInProgress = "inprogress";
     private const string StatusCompleted = "completed";
+
+    // completad_at >= este valor es una fecha yyyyMMdd heredada, no minutos.
+    private const int LegacyDateThreshold = 19000101;
 
     private ProgressRepository progressRepository;
     private ModulesRepository modulesRepository;
@@ -89,7 +95,15 @@ public class ProgressService
 
         ProgressModel row = progressRepository.GetByUserAndModule(userId, moduleId);
         int mask = row?.punctuation ?? 0;
-        return BuildInfo(mask, total);
+        ModuleProgressInfo info = BuildInfo(mask, total);
+
+        int storedMinutes = row?.completad_at ?? 0;
+        if (info.status == StatusCompleted && storedMinutes > 0 && storedMinutes < LegacyDateThreshold)
+        {
+            info.completionMinutes = storedMinutes;
+        }
+
+        return info;
     }
 
     /// <summary>
@@ -242,7 +256,8 @@ public class ProgressService
         bool justCompleted = info.status == StatusCompleted && (row.completad_at == null || row.completad_at == 0);
         if (justCompleted)
         {
-            row.completad_at = int.Parse(DateTime.Now.ToString("yyyyMMdd"));
+            float seconds = ModuleTimeTracker.GetTotalSeconds(userId, moduleId);
+            row.completad_at = Mathf.Max(1, Mathf.CeilToInt(seconds / 60f));
         }
 
         progressRepository.Upsert(row);

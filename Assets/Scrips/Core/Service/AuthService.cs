@@ -185,11 +185,13 @@ public class AuthService
 
     /// <summary>
     /// Actualiza el último login del usuario con la fecha actual en formato día/mes/año.
+    /// Devuelve la fecha guardada para que el llamador sincronice el usuario en memoria.
     /// </summary>
-    public void UpdateLastLogin(int userId)
+    public string UpdateLastLogin(int userId)
     {
         string now = System.DateTime.Now.ToString("dd/MM/yyyy");
         userRepository.UpdateLastLogin(userId, now);
+        return now;
     }
 
     /// <summary>

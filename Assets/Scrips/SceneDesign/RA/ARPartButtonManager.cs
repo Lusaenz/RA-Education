@@ -35,12 +35,30 @@ public class ARPartButtonManager : MonoBehaviour
     [Tooltip("Punto del viewport de la camara AR (0..1) donde se centra la parte seleccionada. Y=0.68 apunta al centro del area libre superior, ya que el panel de info ocupa la franja inferior de la pantalla.")]
     public Vector2 focusViewportTarget = new Vector2(0.5f, 0.68f);
     [Tooltip("Multiplicador de escala aplicado sobre la escala actual del modelo al enfocar una parte (se recorta entre minScale/maxScale de ARModelControllerPro).")]
-    public float focusZoomMultiplier = 1.6f;
+    public float focusZoomMultiplier = 2.2f;
+
+    [Header("Tamano / area de toque")]
+    [Tooltip("Lado visual del eye button (y del badge) en unidades de canvas. Sobrescribe el tamano del prefab.")]
+    public float buttonSize = 80f;
+    [Tooltip("Margen invisible (unidades de canvas) que se anade alrededor del boton a la zona tactil, sin cambiar lo que se ve.")]
+    public float touchPadding = 25f;
+    [Tooltip("Tamano de fuente del contador de los badges de cluster.")]
+    public float badgeFontSize = 32f;
+    [Tooltip("Rapidez con la que el boton sigue a su parte en pantalla. Mas bajo = mas suave (filtra el jitter del tracking), mas alto = sigue mas pegado.")]
+    public float followSharpness = 18f;
+
+    [Header("Escala de los botones con el zoom")]
+    [Tooltip("Escala de los eye buttons con el zoom inicial del modelo (1 = buttonSize). Al hacer pinch el boton crece/encoge en la misma proporcion que el modelo.")]
+    public float buttonScaleAtBaseZoom = 0.5f;
+    [Tooltip("Escala minima de los eye buttons (al alejar el zoom).")]
+    public float minButtonScale = 0.4f;
+    [Tooltip("Escala maxima de los eye buttons (al acercar el zoom), para que no tapen el modelo.")]
+    public float maxButtonScale = 1.1f;
 
     [Header("Clustering de eye buttons superpuestos")]
-    [Tooltip("Distancia en pixeles de pantalla por debajo de la cual dos botones se consideran superpuestos y se agrupan en un badge con contador.")]
+    [Tooltip("Distancia en unidades de canvas por debajo de la cual dos botones se consideran superpuestos y se agrupan en un badge con contador. Nunca baja de lo necesario para que dos zonas tactiles no se pisen.")]
     public float clusterRadius = 90f;
-    [Tooltip("Radio en pixeles del abanico donde se distribuyen los botones de un cluster al expandirlo.")]
+    [Tooltip("Radio en unidades de canvas del abanico donde se distribuyen los botones de un cluster al expandirlo. Se agranda solo si hace falta para que los botones no se solapen.")]
     public float clusterExpandRadius = 110f;
     [Tooltip("Color del badge mientras esta colapsado (grupo, toca para expandir).")]
     public Color clusterBadgeColor = new Color(0.15f, 0.40f, 0.65f, 0.9f);
@@ -79,6 +97,8 @@ public class ARPartButtonManager : MonoBehaviour
         public RectTransform rect;
         public Transform part;
         public Button button;
+        public Image image;
+        public Vector2 smoothedPos;
     }
 
     private class ClusterBadge
@@ -87,7 +107,23 @@ public class ARPartButtonManager : MonoBehaviour
         public Button button;
         public TextMeshProUGUI label;
         public Image background;
+        public Vector2 smoothedPos;
     }
+
+    // Botones/badges con el dedo encima ahora mismo (ver EyeButtonPressTracker).
+    // Mientras sea > 0 el layout se congela para que el boton no se escape
+    // de debajo del dedo entre el press y el release.
+    private int _pressedCount;
+    private Canvas _canvas;
+
+    // Escala de 3DModels al arrancar (antes de cualquier pinch): referencia
+    // para saber cuanto zoom lleva el usuario. _buttonScale es la escala que
+    // se aplica este frame a botones y badges (ver UpdateButtonScale).
+    private float _baseModelScale = 1f;
+    private float _buttonScale = 1f;
+    // Rects reproduciendo el pop de aparicion: mientras dure, la coroutine
+    // controla su localScale y PlaceButton no la pisa.
+    private readonly HashSet<RectTransform> _popping = new HashSet<RectTransform>();
 
     private readonly List<PartButton> _buttons = new List<PartButton>();
     private readonly List<ClusterBadge> _badgePool = new List<ClusterBadge>();
@@ -118,6 +154,9 @@ public class ARPartButtonManager : MonoBehaviour
 
         _arCamera = Camera.main;
         _modelController = GetComponent<ARModelControllerPro>();
+        if (canvasRect != null) _canvas = canvasRect.GetComponentInParent<Canvas>();
+        if (transform.localScale.x > 0f) _baseModelScale = transform.localScale.x;
+        _buttonScale = buttonScaleAtBaseZoom;
 
         if (contentPanel != null)
         {
@@ -163,6 +202,13 @@ public class ARPartButtonManager : MonoBehaviour
             contentPanel.OnSectionChanged -= OnPanelSectionChanged;
         }
         DestroyPooledObjects();
+    }
+
+    // Al desactivarse se detienen las coroutines de pop: sin esto sus rects
+    // quedarian marcados como "popping" y ya no seguirian el zoom.
+    void OnDisable()
+    {
+        _popping.Clear();
     }
 
     void LateUpdate()
@@ -251,14 +297,53 @@ public class ARPartButtonManager : MonoBehaviour
         {
             GameObject btnGO = Instantiate(eyeButtonPrefab, canvasRect);
             btnGO.SetActive(false);
+            SetupTouchTarget(btnGO);
 
             _buttons.Add(new PartButton
             {
                 rect = btnGO.GetComponent<RectTransform>(),
                 part = null,
-                button = btnGO.GetComponent<Button>()
+                button = btnGO.GetComponent<Button>(),
+                image = btnGO.GetComponent<Image>()
             });
         }
+    }
+
+    // Aplica el tamano configurado (buttonSize) y agranda la zona tactil con
+    // raycastPadding negativo, que en uGUI extiende el area de raycast sin
+    // cambiar lo que se dibuja. Tambien engancha el tracker de press para
+    // congelar el layout mientras el dedo esta encima.
+    void SetupTouchTarget(GameObject go)
+    {
+        RectTransform rect = go.GetComponent<RectTransform>();
+        if (rect != null)
+            rect.sizeDelta = new Vector2(buttonSize, buttonSize);
+
+        Image image = go.GetComponent<Image>();
+        // El padding esta en unidades locales del boton, que se escalan con
+        // _buttonScale: se divide para que mida touchPadding en el canvas.
+        if (image != null)
+        {
+            float pad = -touchPadding / Mathf.Max(_buttonScale, 0.01f);
+            image.raycastPadding = new Vector4(pad, pad, pad, pad);
+        }
+
+        EyeButtonPressTracker tracker = go.AddComponent<EyeButtonPressTracker>();
+        tracker.OnPressChanged += pressed =>
+        {
+            _pressedCount = Mathf.Max(0, _pressedCount + (pressed ? 1 : -1));
+        };
+    }
+
+    float CanvasScale => _canvas != null ? _canvas.scaleFactor : 1f;
+
+    // Lleva 'current' hacia 'target' con suavizado exponencial (independiente
+    // del framerate). Filtra el jitter del tracking de Vuforia, que antes hacia
+    // temblar los botones y les quitaba toques.
+    Vector2 Follow(Vector2 current, Vector2 target)
+    {
+        float k = 1f - Mathf.Exp(-followSharpness * Time.deltaTime);
+        return Vector2.Lerp(current, target, k);
     }
 
     // Abre/actualiza el panel de contenido para 'part' y sincroniza el
@@ -504,6 +589,12 @@ public class ARPartButtonManager : MonoBehaviour
             return;
         }
 
+        // Dedo encima de un boton: se congela todo (posiciones y clusters)
+        // hasta que lo suelte, para que el release caiga sobre el mismo boton.
+        if (_pressedCount > 0) return;
+
+        UpdateButtonScale();
+
         _visibleIdx.Clear();
         _screenPos.Clear();
 
@@ -534,10 +625,7 @@ public class ARPartButtonManager : MonoBehaviour
             if (cluster.Count == 1)
             {
                 var pb = _buttons[_visibleIdx[cluster[0]]];
-                bool wasActive = pb.rect.gameObject.activeSelf;
-                pb.rect.gameObject.SetActive(true);
-                pb.rect.position = _screenPos[cluster[0]];
-                if (!wasActive) StartCoroutine(PlaySpawnPop(pb.rect));
+                PlaceButton(pb, _screenPos[cluster[0]]);
                 continue;
             }
 
@@ -552,7 +640,8 @@ public class ARPartButtonManager : MonoBehaviour
             ClusterBadge badge = GetBadge(badgesUsed++);
             bool badgeWasActive = badge.rect.gameObject.activeSelf;
             badge.rect.gameObject.SetActive(true);
-            badge.rect.position = centroid;
+            badge.smoothedPos = badgeWasActive ? Follow(badge.smoothedPos, centroid) : centroid;
+            badge.rect.position = badge.smoothedPos;
             // "x" = toca para volver a agrupar (expandido); numero = cuantas
             // partes agrupa (colapsado). El color refuerza el mismo estado
             // para que no dependa solo de leer el texto.
@@ -561,6 +650,13 @@ public class ARPartButtonManager : MonoBehaviour
             badge.button.onClick.RemoveAllListeners();
             badge.button.onClick.AddListener(() => ToggleCluster(anchor));
             if (!badgeWasActive) StartCoroutine(PlaySpawnPop(badge.rect));
+            else if (!_popping.Contains(badge.rect)) badge.rect.localScale = Vector3.one * _buttonScale;
+
+            // Radio del abanico: el configurado, o el minimo para que los n
+            // botones repartidos en circulo no se solapen (cuerda entre
+            // vecinos = 2·r·sin(pi/n) >= tamano del boton + separacion).
+            float minExpandRadius = (ScaledButtonSize + 16f) / (2f * Mathf.Sin(Mathf.PI / cluster.Count));
+            float expandRadius = Mathf.Max(clusterExpandRadius, minExpandRadius) * CanvasScale;
 
             for (int k = 0; k < cluster.Count; k++)
             {
@@ -573,16 +669,49 @@ public class ARPartButtonManager : MonoBehaviour
                 }
 
                 float angle = (k * Mathf.PI * 2f / cluster.Count) - Mathf.PI / 2f;
-                Vector2 offset = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * clusterExpandRadius;
+                Vector2 offset = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * expandRadius;
 
-                bool wasActive = pb.rect.gameObject.activeSelf;
-                pb.rect.gameObject.SetActive(true);
-                pb.rect.position = centroid + offset;
-                if (!wasActive) StartCoroutine(PlaySpawnPop(pb.rect));
+                PlaceButton(pb, centroid + offset);
             }
         }
 
         DeactivateBadgesFrom(badgesUsed);
+    }
+
+    // Activa el boton y lo lleva suavizado a 'target'. Si acaba de aparecer
+    // se coloca directamente (sin deslizarse desde su posicion anterior) y se
+    // reproduce el pop de aparicion.
+    void PlaceButton(PartButton pb, Vector2 target)
+    {
+        bool wasActive = pb.rect.gameObject.activeSelf;
+        pb.rect.gameObject.SetActive(true);
+        pb.smoothedPos = wasActive ? Follow(pb.smoothedPos, target) : target;
+        pb.rect.position = pb.smoothedPos;
+        if (!wasActive) StartCoroutine(PlaySpawnPop(pb.rect));
+        else if (!_popping.Contains(pb.rect)) pb.rect.localScale = Vector3.one * _buttonScale;
+    }
+
+    float ScaledButtonSize => buttonSize * _buttonScale;
+
+    // Hace que los eye buttons sigan el zoom del modelo: si el pinch duplica
+    // la escala de 3DModels, el boton tambien se duplica (recortado entre
+    // minButtonScale/maxButtonScale). El padding tactil se compensa para que
+    // la zona tactil extra siga midiendo touchPadding en unidades de canvas
+    // y los botones pequenos sigan siendo faciles de tocar.
+    void UpdateButtonScale()
+    {
+        float zoom = transform.localScale.x / _baseModelScale;
+        float scale = Mathf.Clamp(buttonScaleAtBaseZoom * zoom, minButtonScale, maxButtonScale);
+        if (Mathf.Approximately(scale, _buttonScale)) return;
+
+        _buttonScale = scale;
+
+        float pad = -touchPadding / Mathf.Max(scale, 0.01f);
+        Vector4 padding = new Vector4(pad, pad, pad, pad);
+        foreach (var pb in _buttons)
+            if (pb.image != null) pb.image.raycastPadding = padding;
+        foreach (var badge in _badgePool)
+            if (badge.background != null) badge.background.raycastPadding = padding;
     }
 
     // Agrupa por cercania en pantalla (single-linkage simple): cada cluster crece
@@ -595,6 +724,11 @@ public class ARPartButtonManager : MonoBehaviour
         if (_assignedScratch.Length < n) _assignedScratch = new bool[n];
         System.Array.Clear(_assignedScratch, 0, n);
 
+        // _screenPos esta en pixeles de pantalla: se pasa el radio (unidades
+        // de canvas) a pixeles con el scaleFactor. Nunca menor que lo necesario
+        // para que las zonas tactiles de dos botones no se pisen.
+        float radius = Mathf.Max(clusterRadius, ScaledButtonSize + touchPadding * 0.5f) * CanvasScale;
+
         for (int i = 0; i < n; i++)
         {
             if (_assignedScratch[i]) continue;
@@ -606,7 +740,7 @@ public class ARPartButtonManager : MonoBehaviour
             for (int j = i + 1; j < n; j++)
             {
                 if (_assignedScratch[j]) continue;
-                if (Vector2.Distance(centroid, _screenPos[j]) > clusterRadius) continue;
+                if (Vector2.Distance(centroid, _screenPos[j]) > radius) continue;
 
                 cluster.Add(j);
                 _assignedScratch[j] = true;
@@ -638,6 +772,7 @@ public class ARPartButtonManager : MonoBehaviour
     {
         GameObject badgeGO = Instantiate(eyeButtonPrefab, canvasRect);
         badgeGO.name = "EyeBtn_ClusterBadge";
+        SetupTouchTarget(badgeGO);
 
         // Fondo con color propio (ver clusterBadgeColor/clusterBadgeExpandedColor)
         // para que un badge de grupo se distinga a simple vista de un eye
@@ -656,7 +791,7 @@ public class ARPartButtonManager : MonoBehaviour
 
         TextMeshProUGUI label = labelGO.AddComponent<TextMeshProUGUI>();
         label.alignment = TextAlignmentOptions.Center;
-        label.fontSize = 18f;
+        label.fontSize = badgeFontSize;
         label.fontStyle = FontStyles.Bold;
         label.color = Color.white;
         label.raycastTarget = false;
@@ -681,17 +816,21 @@ public class ARPartButtonManager : MonoBehaviour
 
         const float duration = 0.25f;
         float t = 0f;
+        _popping.Add(rect);
         rect.localScale = Vector3.zero;
 
-        while (t < duration)
+        // Se multiplica por _buttonScale en cada frame para que el pop
+        // termine en el tamano que corresponde al zoom actual.
+        while (t < duration && rect != null)
         {
             t += Time.deltaTime;
             float k = EaseOutBack(Mathf.Clamp01(t / duration));
-            rect.localScale = Vector3.one * k;
+            rect.localScale = Vector3.one * (k * _buttonScale);
             yield return null;
         }
 
-        rect.localScale = Vector3.one;
+        _popping.Remove(rect);
+        if (rect != null) rect.localScale = Vector3.one * _buttonScale;
     }
 
     static float EaseOutBack(float x)

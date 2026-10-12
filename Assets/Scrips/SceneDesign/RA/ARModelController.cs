@@ -1,6 +1,8 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 /// <summary>
 /// Gestos de rotacion / zoom para el modelo 3D de la escena RAScreen.
@@ -25,7 +27,7 @@ public class ARModelControllerPro : MonoBehaviour
     [Tooltip("Escala minima permitida al hacer zoom out.")]
     public float minScale = 0.05f;
     [Tooltip("Escala maxima permitida al hacer zoom in.")]
-    public float maxScale = 1f;
+    public float maxScale = 2f;
 
     [Header("Vertical Rotation Limits")]
     public float minRotationX = -80f;
@@ -37,7 +39,7 @@ public class ARModelControllerPro : MonoBehaviour
     [Tooltip("Sensibilidad de zoom aplicada a la parte mientras esta enfocada/aislada.")]
     public float partZoomSpeed = 0.5f;
     public float partMinScaleMultiplier = 0.6f;
-    public float partMaxScaleMultiplier = 2.5f;
+    public float partMaxScaleMultiplier = 4f;
     public float partMinRotationX = -80f;
     public float partMaxRotationX = 80f;
 
@@ -88,6 +90,15 @@ public class ARModelControllerPro : MonoBehaviour
     // genera un salto brusco de rotacion/zoom; se descarta el input de ese
     // unico frame de transicion en vez de aplicarlo.
     private int _previousTouchCount = -1;
+
+    // El gesto actual empezo sobre UI (eye button, badge, panel...): se
+    // ignora entero hasta que se levanten todos los dedos. Se decide al inicio
+    // del toque y no frame a frame, porque si el boton se desplaza bajo el dedo
+    // (jitter del tracking) el resto del tap se colaba como rotacion.
+    private bool _gestureStartedOnUI;
+    private PointerEventData _uiPointerData;
+    private EventSystem _uiPointerEventSystem;
+    private readonly List<RaycastResult> _uiRaycastResults = new List<RaycastResult>();
 
     // Modelo que actualmente recibe los gestos de rotacion/zoom. Con varios
     // ImageTargets a la vista solo uno responde a los gestos, para que un
@@ -161,9 +172,11 @@ public class ARModelControllerPro : MonoBehaviour
 
     void Update()
     {
+        UpdateUILatch();
+
         if (!_canInteract) return;
         if (ActiveController != null && ActiveController != this) return;
-        if (IsTouchOverUI()) return;
+        if (_gestureStartedOnUI) return;
 
         bool touchCountChanged = Input.touchCount != _previousTouchCount;
         _previousTouchCount = Input.touchCount;
@@ -525,24 +538,57 @@ public class ARModelControllerPro : MonoBehaviour
         return angle;
     }
 
-    bool IsTouchOverUI()
+    // Activa _gestureStartedOnUI cuando un dedo (o el clic) empieza sobre UI y
+    // lo libera cuando ya no queda nada pulsado. Se usa un raycast de UI
+    // propio en vez de IsPointerOverGameObject(fingerId): la escena usa
+    // InputSystemUIInputModule, cuyos ids de puntero no coinciden con el
+    // fingerId del Input legacy, asi que esa comprobacion fallaba en movil.
+    void UpdateUILatch()
     {
-        // Mouse
-        if (Input.GetMouseButton(0))
+        if (_gestureStartedOnUI && Input.touchCount == 0 && !Input.GetMouseButton(0))
+            _gestureStartedOnUI = false;
+
+        if (_gestureStartedOnUI) return;
+
+        if (Input.GetMouseButtonDown(0) && IsScreenPointOverUI(Input.mousePosition))
         {
-            if (EventSystem.current.IsPointerOverGameObject())
-                return true;
+            _gestureStartedOnUI = true;
+            return;
         }
 
-        // Touch
-        if (Input.touchCount > 0)
+        for (int i = 0; i < Input.touchCount; i++)
         {
-            Touch t = Input.GetTouch(0);
+            Touch t = Input.GetTouch(i);
+            if (t.phase == TouchPhase.Began && IsScreenPointOverUI(t.position))
+            {
+                _gestureStartedOnUI = true;
+                return;
+            }
+        }
+    }
 
-            if (EventSystem.current.IsPointerOverGameObject(t.fingerId))
-                return true;
+    bool IsScreenPointOverUI(Vector2 screenPosition)
+    {
+        EventSystem eventSystem = EventSystem.current;
+        if (eventSystem == null) return false;
+
+        if (_uiPointerData == null || _uiPointerEventSystem != eventSystem)
+        {
+            _uiPointerData = new PointerEventData(eventSystem);
+            _uiPointerEventSystem = eventSystem;
         }
 
+        _uiPointerData.position = screenPosition;
+        _uiRaycastResults.Clear();
+        eventSystem.RaycastAll(_uiPointerData, _uiRaycastResults);
+
+        // Solo cuenta UI de canvas: si hubiera un PhysicsRaycaster en la
+        // camara, tocar el propio modelo 3D no debe bloquear sus gestos.
+        foreach (var result in _uiRaycastResults)
+        {
+            if (result.module is GraphicRaycaster)
+                return true;
+        }
         return false;
     }
 }

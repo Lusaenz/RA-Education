@@ -101,6 +101,16 @@ public class SessionBootstrapper : MonoBehaviour
             // Auto-login exitoso: cargar usuario en sesión y navegar
             Debug.Log($"SessionBootstrapper: Auto-login exitoso para {autoLoginUser.name}");
 
+            // Registrar la conexión también en auto-login (no bloquea si falla)
+            try
+            {
+                autoLoginUser.last_login = new AuthService(userRepository).UpdateLastLogin(autoLoginUser.id_user);
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError($"SessionBootstrapper: Error al actualizar último login: {ex.Message}");
+            }
+
             if (UserSessionManager.Instance != null)
             {
                 UserSessionManager.Instance.SetCurrentUser(autoLoginUser);

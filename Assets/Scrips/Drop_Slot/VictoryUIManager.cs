@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 /// 
@@ -40,12 +41,50 @@ public class VictoryUIManager : MonoBehaviour
     {
         if (Instance != null && Instance != this)
         {
+            // Se desactiva antes de destruir para que el duplicado no llegue a renderizarse
+            gameObject.SetActive(false);
             Destroy(gameObject);
             return;
         }
 
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        // El objeto raíz debe quedar activo en la escena para que exista la instancia,
+        // pero el panel de victoria arranca siempre oculto
+        HideVictory();
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDestroy()
+    {
+        if (Instance == this)
+        {
+            SceneManager.sceneLoaded -= OnSceneLoaded;
+            Instance = null;
+        }
+    }
+
+    ///
+    /// Al cambiar de escena (p. ej. volver a GameSelection) el panel no debe seguir visible
+    ///
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        HideVictory();
+    }
+
+    ///
+    /// Oculta el panel, detiene el confeti y cancela una victoria pendiente.
+    /// No toca 'info' porque pertenece al minijuego y lo gestiona ResetUI.
+    ///
+    private void HideVictory()
+    {
+        StopAllCoroutines();
+        if (winPanel != null) winPanel.SetActive(false);
+        if (confettiFX != null) confettiFX.Stop(true, ParticleSystemStopBehavior.StopEmittingAndClear);
+        Clear();
+
+        BackNavigationManager.PopOverride(HandleBackOverride);
     }
 
     /// 
@@ -61,11 +100,8 @@ public class VictoryUIManager : MonoBehaviour
     /// 
     public void ResetUI()
     {
-        if (winPanel != null) winPanel.SetActive(false);
+        HideVictory();
         if (info != null) info.SetActive(true);
-        Clear();
-
-        BackNavigationManager.PopOverride(HandleBackOverride);
     }
 
     private bool HandleBackOverride()
